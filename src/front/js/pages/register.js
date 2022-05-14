@@ -7,14 +7,17 @@ export const Register = () => {
 
   const sendUserInfo = async () => {
     const response = await fetch(
-      "https://3000-georgelion-finalproject-v1hglk0kvbi.ws-eu45.gitpod.io/register",
+      "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu45.gitpod.io/api/register",
       {
         method: "POST",
-        headers: { "Content-Type": "appplication/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       }
     );
     const data = await response.json();
+    if (data.created) {
+      history.push("/login");
+    }
   };
 
   return (
