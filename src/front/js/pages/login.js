@@ -23,7 +23,6 @@ export const Login = () => {
       if (data.logged == false) {
         setError("Bad info");
       } else if (data.logged == true) {
-        localStorage.setItem("token", data.token);
         actions.setStoreUser(data.user);
         history.push("/");
       }
