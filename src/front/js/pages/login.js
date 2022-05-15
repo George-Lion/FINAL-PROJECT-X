@@ -26,7 +26,7 @@ export const Login = () => {
           setError(null);
         }, 2000);
       } else if (data.logged == true) {
-        actions.setStoreUser(data.user);
+        actions.setUser(data.user);
         history.push("/");
       }
     } else {
