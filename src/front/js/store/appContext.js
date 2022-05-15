@@ -22,7 +22,7 @@ const injectContext = (PassedComponent) => {
     );
 
     useEffect(() => {
-      state.actions.verify();
+      state.actions.verify(); //Para cuando hay un token activo, cuando refresques la página, se mantiene en la vista privada, sin tener que iniciar sesion nuevamente
     }, []);
 
     return (
