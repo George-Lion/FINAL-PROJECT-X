@@ -5,11 +5,6 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
-import { Perfil } from "./pages/perfil";
-import { Private } from "./pages/private";
-import { Ruta } from "./pages/ruta";
-import { Rutas } from "./pages/rutas";
-import { Ayuda } from "./pages/ayuda";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -35,21 +30,6 @@ const Layout = () => {
             </Route>
             <Route exact path="/register">
               <Register />
-            </Route>
-            <Route exact path="/perfil">
-              <Perfil />
-            </Route>
-            <Route exact path="/private">
-              <Private />
-            </Route>
-            <Route exact path="/ruta">
-              <Ruta />
-            </Route>
-            <Route exact path="/rutas">
-              <Rutas />
-            </Route>
-            <Route exact path="/ayuda">
-              <Ayuda />
             </Route>
             <Route>
               <h1>Not found!</h1>
