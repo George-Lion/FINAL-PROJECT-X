@@ -22,6 +22,9 @@ export const Login = () => {
       const data = await response.json();
       if (data.logged == false) {
         setError("Bad info");
+        setTimeout(() => {
+          setError(null);
+        }, 2000);
       } else if (data.logged == true) {
         actions.setStoreUser(data.user);
         history.push("/");
@@ -56,7 +59,10 @@ export const Login = () => {
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         ></input>
         <br />
-        <button className="col-1 mt-3 btn-dark" onClick={() => sendUserInfo()}>
+        <button
+          className="col-1 mt-3 btn-primary"
+          onClick={() => sendUserInfo()}
+        >
           Login
         </button>
       </div>
