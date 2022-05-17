@@ -1,12 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-
-		},
-		actions: {
-
-		}
-	};
+  return {
+    store: {},
+    actions: {},
+  };
 };
 
 export default getState;
