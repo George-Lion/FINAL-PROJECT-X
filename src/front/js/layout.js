@@ -2,9 +2,14 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-import { Home } from "./pages/home";
+import { Feed } from "./pages/feed";
+import { Trip } from "./pages/trip";
 import { Login } from "./pages/login";
+import { Profile } from "./pages/profile";
 import { Register } from "./pages/register";
+import { Message } from "./pages/message";
+import { Help } from "./pages/help";
+
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -23,13 +28,31 @@ const Layout = () => {
           <Navbar />
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Login />
             </Route>
             <Route exact path="/login">
               <Login />
             </Route>
             <Route exact path="/register">
               <Register />
+            </Route>
+            <Route exact path="/feed">
+              <Feed />
+            </Route>
+            <Route exact path="/home">
+              <Feed />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route exact path="/trip">
+              <Trip />
+            </Route>
+            <Route exact path="/message">
+              <Message />
+            </Route>
+            <Route exact path="/help">
+              <Help />
             </Route>
             <Route>
               <h1>Not found!</h1>

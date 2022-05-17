@@ -27,7 +27,7 @@ export const Login = () => {
         }, 2000);
       } else if (data.logged == true) {
         actions.setUser(data.user);
-        history.push("/");
+        history.push("/feed");
       }
     } else {
       setError("Bad info");
