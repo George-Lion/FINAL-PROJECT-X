@@ -2,7 +2,6 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       logged: null,
-      user: null,
     },
     actions: {
       verify: async () => {

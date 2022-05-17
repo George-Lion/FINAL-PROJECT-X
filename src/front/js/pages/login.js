@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
+/* import "../../styles/login.css"; */
 
 export const Login = () => {
   const history = useHistory();
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
   const [user, setUser] = useState({});
-  const [error, setError] = useState(null);
 
-  const sendUserInfo = async () => {
-    if (user.email != null && user.email.trim() != "") {
-      setError(null);
-      const response = await fetch(
+  const loginUser = async () => {
+    try {
+      const resp = await fetch(
         "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/login",
         {
           method: "POST",
@@ -19,54 +18,55 @@ export const Login = () => {
           body: JSON.stringify(user),
         }
       );
-      const data = await response.json();
-      if (data.logged == false) {
-        setError("Bad info");
-        setTimeout(() => {
-          setError(null);
-        }, 2000);
-      } else if (data.logged == true) {
-        actions.setUser(data.user);
+      const data = await resp.json();
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        actions.verify();
         history.push("/feed");
+      } else {
+        alert("ERROR");
       }
-    } else {
-      setError("Bad info");
-      setTimeout(() => {
-        setError(null);
-      }, 2000);
+    } catch (e) {
+      alert("ERROR");
     }
   };
 
   return (
-    <div className="text-center mt-5">
-      <h1 className="m-5">LOGIN</h1>
-      <div className="">
-        <h5 htmlFor="email" className="m-2">
-          Email
-        </h5>
-        <input
-          id="email"
-          className="col-2 mb-3"
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-        ></input>
-        <br />
-        <h5 htmlFor="password" className="">
-          Password
-        </h5>
-        <input
-          id="password"
-          className="col-2"
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        ></input>
-        <br />
+    <div className="bg">
+      <br></br>
+      <div className="text-center mx-auto">
+        <h1 className="mb-5 pt-4 text-light">LOGIN</h1>
+        <div className="row mx-auto w-75">
+          <label htmlFor="email" className="text-light">
+            Email
+          </label>
+          <input
+            id="email"
+            onChange={(e) => {
+              setUser({ ...user, email: e.target.value });
+            }}
+          ></input>
+          <label htmlFor="password" className="text-light">
+            Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            onChange={(e) => {
+              setUser({ ...user, password: e.target.value });
+            }}
+          ></input>
+        </div>
         <button
-          className="col-1 mt-3 btn-primary"
-          onClick={() => sendUserInfo()}
+          className="btn btn-light mt-3 pb-1"
+          onClick={() => {
+            loginUser();
+          }}
         >
+          {" "}
           Login
         </button>
       </div>
-      {error != null ? <h3 className="text-danger">{error}</h3> : null}
     </div>
   );
 };

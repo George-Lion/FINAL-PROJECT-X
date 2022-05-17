@@ -6,33 +6,38 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <nav className="navbar navbar-light bg-light">
+    <nav className="navbar navbar-light bg-dark">
       {store.logged != null ? (
         <div className="container">
-          <Link to="/">
-            <span className="navbar-brand mb-0 h1">HOME</span>
+          <Link to="/feed">
+            <span className="navbar-brand mb-0 h1 text-light">HOME</span>
           </Link>
-          <div className="ml-auto">
-            {store.logged == true ? (
-              <Link
-                to="/"
-                onClick={() => {
-                  actions.logout();
-                }}
-              >
-                <button className="btn btn-primary">Logout</button>
+          {store.logged == true ? (
+            <Link to="/private" className="m-3">
+              <button className="btn btn-light">Private</button>
+            </Link>
+          ) : null}
+          {store.logged == true ? (
+            <div>
+              <Link to="/login">
+                <button
+                  className="btn btn-light"
+                  onClick={() => actions.logout()}
+                >
+                  Logout
+                </button>
               </Link>
-            ) : (
-              <>
-                <Link to="/login">
-                  <button className="btn btn-primary">LOGIN</button>
-                </Link>
-                <Link to="/register">
-                  <button className="btn btn-primary">SIGN UP</button>
-                </Link>
-              </>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div>
+              <Link to="/login" className="me-3">
+                <button className="btn btn-light">Login</button>
+              </Link>
+              <Link to="/register">
+                <button className="btn btn-light">Register</button>
+              </Link>
+            </div>
+          )}
         </div>
       ) : null}
     </nav>

@@ -34,3 +34,13 @@ def register_user():
         return jsonify({"created": True, "user": new_user.serialize()}), 200
     else:
         return jsonify({"created": False, "msg": "Falta información"}), 200
+    
+@api.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        return jsonify({"logged_in": True}), 200
+    else:
+        return jsonify({"logged_in": False}), 400
