@@ -1,7 +1,8 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
+import { Context } from "./store/appContext";
 import { Feed } from "./pages/feed";
 import { Trip } from "./pages/trip";
 import { Login } from "./pages/login";
@@ -20,7 +21,7 @@ const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
   // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
   const basename = process.env.BASENAME || "";
-
+  const { store } = useContext(Context);
   return (
     <div>
       <BrowserRouter basename={basename}>
@@ -37,7 +38,11 @@ const Layout = () => {
               <Register />
             </Route>
             <Route exact path="/feed">
-              <Feed />
+              {store.logged == true ? (
+                <Feed />
+              ) : (
+                <Redirect to="/feed"></Redirect>
+              )}
             </Route>
             <Route exact path="/home">
               <Feed />

@@ -13,7 +13,7 @@ export const Navbar = () => {
             <span className="navbar-brand mb-0 h1 text-light">HOME</span>
           </Link>
           {store.logged == true ? (
-            <Link to="/private" className="m-3">
+            <Link to="/feed" className="m-3">
               <button className="btn btn-light">Private</button>
             </Link>
           ) : null}
