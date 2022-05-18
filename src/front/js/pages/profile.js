@@ -48,56 +48,69 @@ export const Profile = () => {
   ];
 
   return (
-    <div className="container">
+    <div>
       <img
-        src="https://as01.epimg.net/meristation/imagenes/2021/03/15/noticias/1615808713_039343_1615808762_noticia_normal.jpg"
-        style={{ height: "10rem", width: "12rem" }}
-        className="card-img-top"
-        alt="..."
-      />
-      <h1>Andrea Village</h1>
-      <h1>Username</h1>
-      <p>
-        I like meeting new people, going out and have a good time, forget about
-        the day to day and live the moment, I love the sea.
-      </p>
-      <br />
-      <h1>My Rutes</h1>
-      <br />
-      <div className="row justify-content-center">
-        {rutes.map((e) => {
-          return (
-            <Link key={e.id} to="/trip">
-              <div className="card" style={{ height: "24rem", width: "18rem" }}>
-                <img src={e.image} className="card-img-top" alt="..." />
-                <div className="card-body">
-                  <h5 className="card-title">{e.name}</h5>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-
-      <br />
-      <h1>Estas personas ya han viajado con {profiles.fullname}</h1>
-      <br />
-
+        src="https://i.pinimg.com/originals/1f/37/f4/1f37f4a57453aa29dc17deb798ac9d58.jpg"
+        style={{ width: "100%" }}
+      ></img>
       <div className="container">
-        <div className="align-items-start">
-          {profiles.map((x) => {
+        <img
+          src="https://as01.epimg.net/meristation/imagenes/2021/03/15/noticias/1615808713_039343_1615808762_noticia_normal.jpg"
+          style={{ width: "18rem" }}
+          className="card-img-top"
+          alt="..."
+        />
+        <h1>Andrea Village</h1>
+        <h1>Username</h1>
+        <p>
+          I like meeting new people, going out and have a good time, forget
+          about the day to day and live the moment, I love the sea.
+        </p>
+        <br />
+        <h1>My Rutes</h1>
+        <br />
+        <div className="row justify-content-center">
+          {rutes.map((e) => {
             return (
-              <Link key={x.name_id} to="/profile">
-                <div className="card" style={{ width: "18rem" }}>
-                  <img src={x.user_image} className="card-img-left" alt="..." />
+              <Link key={e.id} to="/trip">
+                <div
+                  className="card"
+                  style={{ height: "24rem", width: "18rem" }}
+                >
+                  <img src={e.image} className="card-img-top" alt="..." />
                   <div className="card-body">
-                    <h5 className="card-title">{x.fullname}</h5>
+                    <h5 className="card-title">{e.name}</h5>
                   </div>
-                  <p className="card-body">{x.descrip}</p>
                 </div>
               </Link>
             );
           })}
+        </div>
+
+        <br />
+        <h1>Estas personas ya han viajado con {profiles.fullname}</h1>
+        <br />
+
+        <div className="container">
+          <div className="align-items-start">
+            {profiles.map((x) => {
+              return (
+                <Link key={x.name_id} to="/profile">
+                  <div className="card" style={{ width: "18rem" }}>
+                    <img
+                      src={x.user_image}
+                      className="card-img-left"
+                      alt="..."
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{x.fullname}</h5>
+                    </div>
+                    <p className="card-body">{x.descrip}</p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
