@@ -27,22 +27,22 @@ export const Profile = () => {
     {
       name_id: 1,
       user_image:
-        "https://www.shareicon.net/data/512x512/2017/01/06/868320_people_512x512.png",
+        "https://a.wattpad.com/useravatar/JeniferNLuna.256.346438.jpg",
       fullname: "Amanda Lon",
       descrip: "Excelente persona, vivimos muchas aventuras juntas.",
     },
     {
       name_id: 2,
       user_image:
-        "https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png",
-      fullname: "Amanda Lon",
+        "https://a.wattpad.com/useravatar/JeniferNLuna.256.346438.jpg",
+      fullname: "Mauro Stiapa",
       descrip: "Excelente persona, vivimos muchas aventuras juntas.",
     },
     {
       name_id: 3,
       user_image:
-        "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png",
-      fullname: "Amanda Lon",
+        "https://a.wattpad.com/useravatar/JeniferNLuna.256.346438.jpg",
+      fullname: "Lina Terekipa",
       descrip: "Excelente persona, vivimos muchas aventuras juntas.",
     },
   ];
@@ -53,36 +53,60 @@ export const Profile = () => {
         src="https://i.pinimg.com/originals/1f/37/f4/1f37f4a57453aa29dc17deb798ac9d58.jpg"
         style={{ width: "100%" }}
       ></img>
+
       <div className="container">
-        <img
-          src="https://as01.epimg.net/meristation/imagenes/2021/03/15/noticias/1615808713_039343_1615808762_noticia_normal.jpg"
-          style={{ width: "18rem" }}
-          className="card-img-top"
-          alt="..."
-        />
+        <div className="avatar">
+          <img
+            src="https://as01.epimg.net/meristation/imagenes/2021/03/15/noticias/1615808713_039343_1615808762_noticia_normal.jpg"
+            style={{ width: "18rem" }}
+            className="card-img-top"
+            alt="..."
+          />
+        </div>
+
         <h1>Andrea Village</h1>
         <h1>Username</h1>
         <p>
           I like meeting new people, going out and have a good time, forget
           about the day to day and live the moment, I love the sea.
         </p>
+
         <br />
         <h1>My Rutes</h1>
         <br />
-        <div className="row justify-content-center">
+
+        {/*rutes*/}
+        <div className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
           {rutes.map((e) => {
             return (
-              <Link key={e.id} to="/trip">
-                <div
-                  className="card"
-                  style={{ height: "24rem", width: "18rem" }}
-                >
-                  <img src={e.image} className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <h5 className="card-title">{e.name}</h5>
+              <div key={e.id} className="col">
+                <Link style={{ textDecoration: "none" }} to="/trip">
+                  <div
+                    className="d-flex text-white bg-dark align-items-end"
+                    style={{
+                      minHeight: "400px",
+                      backgroundImage: "url(" + e.image + ")",
+                    }}
+                  >
+                    <div className="d-flex flex-column p-5 pb-3 text-white text-shadow-1">
+                      <ul className="d-flex list-unstyled mt-auto">
+                        <li className="me-auto">
+                          <img
+                            src="https://github.com/twbs.png"
+                            alt="Bootstrap"
+                            width="32"
+                            height="32"
+                            className="rounded-circle border border-white"
+                          />
+                        </li>
+                        <li className="ms-2">
+                          <h2>{e.name}</h2>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             );
           })}
         </div>
@@ -91,26 +115,40 @@ export const Profile = () => {
         <h1>Estas personas ya han viajado con {profiles.fullname}</h1>
         <br />
 
-        <div className="container">
-          <div className="align-items-start">
-            {profiles.map((x) => {
-              return (
-                <Link key={x.name_id} to="/profile">
-                  <div className="card" style={{ width: "18rem" }}>
+        {/*Profiles*/}
+        <div className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+          {profiles.map((e) => {
+            return (
+              <div
+                className="card p-3"
+                style={{ backgroundColor: "#D7D7D7", maxWidth: "400px" }}
+              >
+                <div className="row g-0">
+                  <div className="col-md-5">
                     <img
-                      src={x.user_image}
-                      className="card-img-left"
-                      alt="..."
+                      src={e.user_image}
+                      className="img-fluid rounded-start"
+                      alt="Imagenes Avatar"
+                      style={{ maxWidth: "150px" }}
                     />
-                    <div className="card-body">
-                      <h5 className="card-title">{x.fullname}</h5>
-                    </div>
-                    <p className="card-body">{x.descrip}</p>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
+                  <div className="col-md-6 ">
+                    <div className="card-body">
+                      <h5 className="card-title">{e.fullname}</h5>
+                      <p className="card-text">
+                        Exelente persona, vivimos muchas aventuras juntas.
+                      </p>
+                      <Link style={{ textDecoration: "none" }} to={"/profile"}>
+                        <p className="card-text">
+                          <small className="text-muted">Ver perfil</small>
+                        </p>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
