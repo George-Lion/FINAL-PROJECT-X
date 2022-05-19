@@ -1,6 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      user: {
+        name: "Stefany",
+        lastname: "Tozz",
+        username: "Tozzigh",
+      },
       logged: null,
     },
     actions: {

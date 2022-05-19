@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
+import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/profile.css";
 
 export const Profile = () => {
+  const { store } = useContext(Context);
   const rutes = [
     {
       id: 1,
@@ -25,21 +27,21 @@ export const Profile = () => {
   ];
   const profiles = [
     {
-      name_id: 1,
+      id: 1,
       user_image:
         "https://a.wattpad.com/useravatar/JeniferNLuna.256.346438.jpg",
       fullname: "Amanda Lon",
       descrip: "Excelente persona, vivimos muchas aventuras juntas.",
     },
     {
-      name_id: 2,
+      id: 2,
       user_image:
         "https://a.wattpad.com/useravatar/JeniferNLuna.256.346438.jpg",
       fullname: "Mauro Stiapa",
       descrip: "Excelente persona, vivimos muchas aventuras juntas.",
     },
     {
-      name_id: 3,
+      id: 3,
       user_image:
         "https://a.wattpad.com/useravatar/JeniferNLuna.256.346438.jpg",
       fullname: "Lina Terekipa",
@@ -62,7 +64,7 @@ export const Profile = () => {
           alt="..."
         />
 
-        <h1>Andrea Village</h1>
+        <h1>{store.user.name + " " + store.user.lastname}</h1>
         <h1>Username</h1>
         <p>
           I like meeting new people, going out and have a good time, forget
@@ -118,6 +120,7 @@ export const Profile = () => {
           {profiles.map((e) => {
             return (
               <div
+                key={e.id}
                 className="card p-3"
                 style={{ backgroundColor: "#D7D7D7", maxWidth: "400px" }}
               >
