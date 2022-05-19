@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       verify: async () => {
         try {
           const resp = await fetch(
-            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/protected",
+            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu45.gitpod.io/api/protected",
             {
               method: "GET",
               headers: {

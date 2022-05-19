@@ -1,0 +1,26 @@
+.placeDescription {
+  display: flex;
+  justify-content: center;
+}
+
+.icon {
+  font-size: 25px;
+  margin-right: 10px;
+}
+.features {
+  margin-right: 120px;
+  font-size: 20px;
+}
+
+.box {
+  background-color: rgb(229, 229, 229);
+}
+
+.textDescription {
+  width: 50rem;
+}
+
+.heaven2 {
+  width: 10rem;
+  height: 20rem;
+}
