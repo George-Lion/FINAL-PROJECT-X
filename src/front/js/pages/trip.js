@@ -4,7 +4,7 @@ import "../../styles/trip.css";
 export const Trip = () => {
   return (
     <>
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img src="https://cdn2.civitatis.com/zonas/madeira/madeira.jpg" className="d-block w-100" alt="..." />
@@ -45,12 +45,12 @@ export const Trip = () => {
             <p className="features"><i className="icon fas fa-coins"></i> 600€</p>
           </div>
           {/* información de viaje */}
-          <div className="box position-static d-block  py-3" tabindex="-1" role="dialog" id="modalChoice">
+          <div className="box position-static d-block  py-3" tabIndex="-1" role="dialog" id="modalChoice">
             <h3>travel buddys</h3>
             {/*   card 2 */}
             <div className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
               <div className="col">
-                <div className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style={{ "background-image": "url('unsplash-photo-1.jpg')" }}>
+                <div className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style={{ "backgroundImage": "url('https://images.pexels.com/photos/2050979/pexels-photo-2050979.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=200')" }}>
                   <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                     <h2 className="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h2>
                     <ul className="d-flex list-unstyled mt-auto">
@@ -71,7 +71,7 @@ export const Trip = () => {
               </div>
 
               <div className="col">
-                <div className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style={{ "background-image": "url('unsplash-photo-2.jpg')" }}>
+                <div className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style={{ "backgroundImage": "url('https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')" }}>
                   <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                     <h2 className="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Much longer title that wraps to multiple lines</h2>
                     <ul className="d-flex list-unstyled mt-auto">
@@ -92,7 +92,7 @@ export const Trip = () => {
               </div>
 
               <div className="col">
-                <div className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style={{ "background-image": "url('unsplash-photo-3.jpg')" }}>
+                <div className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style={{ "backgroundImage": "url('https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')" }}>
                   <div className="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
                     <h2 className="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Another longer title belongs here</h2>
                     <ul className="d-flex list-unstyled mt-auto">
@@ -149,3 +149,7 @@ export const Trip = () => {
     </>
   );
 };
+
+
+
+
