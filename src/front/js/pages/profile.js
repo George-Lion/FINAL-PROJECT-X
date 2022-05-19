@@ -55,14 +55,12 @@ export const Profile = () => {
       ></img>
 
       <div className="container">
-        <div className="avatar">
-          <img
-            src="https://as01.epimg.net/meristation/imagenes/2021/03/15/noticias/1615808713_039343_1615808762_noticia_normal.jpg"
-            style={{ width: "18rem" }}
-            className="card-img-top"
-            alt="..."
-          />
-        </div>
+        <img
+          src="https://as01.epimg.net/meristation/imagenes/2021/03/15/noticias/1615808713_039343_1615808762_noticia_normal.jpg"
+          style={{ width: "18rem" }}
+          className="card-img-top"
+          alt="..."
+        />
 
         <h1>Andrea Village</h1>
         <h1>Username</h1>
