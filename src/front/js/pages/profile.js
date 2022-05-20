@@ -10,7 +10,7 @@ export const Profile = () => {
       id: 1,
       name: "Hawaii",
       image:
-        "https://haciendofotos.com/wp-content/uploads/las-mejores-fotos-de-paisajes-2020.jpg",
+        "https://p4.wallpaperbetter.com/wallpaper/738/177/106/space-galaxy-vertical-portrait-display-wallpaper-preview.jpg",
     },
     {
       id: 2,
@@ -22,7 +22,25 @@ export const Profile = () => {
       id: 3,
       name: "Ibiza",
       image:
+        "https://www.xtrafondos.com/wallpapers/vertical/atardecer-en-la-montanas-ilustracion-6348.jpg",
+    },
+    {
+      id: 4,
+      name: "Valencia",
+      image:
+        "https://www.xtrafondos.com/wallpapers/vertical/paisaje-digital-en-atardecer-5846.jpg",
+    },
+    {
+      id: 5,
+      name: "Burriana",
+      image:
         "https://static3.leonoticias.com/www/multimedia/202107/06/media/MM-senderismo-asturias/oddle-1-ksRC--1350x900@El%20Comercio.jpg",
+    },
+    {
+      id: 6,
+      name: "Alicante",
+      image:
+        "https://i.pinimg.com/originals/8a/d1/90/8ad1907008c01385d53aeb3108eb1630.jpg",
     },
   ];
   const profiles = [
@@ -64,51 +82,62 @@ export const Profile = () => {
           alt="..."
         />
 
-        <h1>{store.user.name + " " + store.user.lastname}</h1>
-        <h1>Username</h1>
-        <p>
-          I like meeting new people, going out and have a good time, forget
-          about the day to day and live the moment, I love the sea.
-        </p>
+        <div className="container">
+          <h1 className="">{store.user.name + " " + store.user.lastname}</h1>
+          <h1 className="">{store.user.username}</h1>
+          <h1 className="">{store.user.city + " - " + store.user.country}</h1>
+          <p style={{ fontSize: "24px" }}>
+            I like meeting new people, going out and have a good time, forget
+            about the day to day and live the moment, I love the sea.
+          </p>
+        </div>
 
         <br />
         <h1>My Rutes</h1>
         <br />
 
         {/*rutes*/}
-        <div className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-          {rutes.map((e) => {
-            return (
-              <div key={e.id} className="col">
-                <Link style={{ textDecoration: "none" }} to="/trip">
-                  <div
-                    className="d-flex text-white bg-dark align-items-end"
-                    style={{
-                      minHeight: "400px",
-                      backgroundImage: "url(" + e.image + ")",
-                    }}
-                  >
-                    <div className="d-flex flex-column p-5 pb-3 text-white text-shadow-1">
-                      <ul className="d-flex list-unstyled mt-auto">
-                        <li className="me-auto">
-                          <img
-                            src="https://github.com/twbs.png"
-                            alt="Bootstrap"
-                            width="32"
-                            height="32"
-                            className="rounded-circle border border-white"
-                          />
-                        </li>
-                        <li className="ms-2">
-                          <h2>{e.name}</h2>
-                        </li>
-                      </ul>
+        <div className="row row-cols-1 align-items-stretch g-4 py-5">
+          <div className="d-flex overflow-auto">
+            {rutes.map((e) => {
+              return (
+                <div
+                  key={e.id}
+                  className="col container"
+                  style={{ width: "800px" }}
+                >
+                  <Link style={{ textDecoration: "none" }} to="/trip">
+                    <div
+                      className="d-flex text-white bg-dark align-items-end"
+                      style={{
+                        minHeight: "400px",
+                        minWidth: "300px",
+                        display: "block",
+                        backgroundImage: "url(" + e.image + ")",
+                      }}
+                    >
+                      <div className="d-flex flex-column p-5 pb-3 text-white text-shadow-1">
+                        <ul className="d-flex list-unstyled mt-auto">
+                          <li className="me-auto">
+                            <img
+                              src="https://github.com/twbs.png"
+                              alt="Bootstrap"
+                              width="32"
+                              height="32"
+                              className="rounded-circle border border-white"
+                            />
+                          </li>
+                          <li className="ms-2">
+                            <h2>{e.name}</h2>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <br />
@@ -121,8 +150,12 @@ export const Profile = () => {
             return (
               <div
                 key={e.id}
-                className="card p-3"
-                style={{ backgroundColor: "#D7D7D7", maxWidth: "400px" }}
+                className="card m-2"
+                style={{
+                  backgroundColor: "#D7D7D7",
+                  maxWidth: "400px",
+                  maxHeight: "400px",
+                }}
               >
                 <div className="row g-0">
                   <div className="col-md-5">

@@ -5,6 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         name: "Stefany",
         lastname: "Tozz",
         username: "Tozzigh",
+        country: "England",
+        city: "London",
       },
       logged: null,
     },
