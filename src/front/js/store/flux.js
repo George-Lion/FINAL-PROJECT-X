@@ -36,6 +36,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
       },
+
+      editUser: async () => {
+        setStore({ user: user });
+      },
     },
   };
 };
