@@ -11,7 +11,7 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=False)
     profilePicture = db.Column(db.String(120), unique=False, nullable=False)
-    # createdTrip = db.relationship("Trip", backref="User")
+    createdTrip = db.relationship("Trip", backref="User")
 
     def serialize(self):
         return {
@@ -25,8 +25,7 @@ class User(db.Model):
 
 
 class Trip(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    # acceptedTripList = db.Column(db.Boolean, unique=False, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)s
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     destination = db.Column(db.String(120), unique=False, nullable=False)
     date = db.Column(db.Integer, unique=False, nullable=False)
