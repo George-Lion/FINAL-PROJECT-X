@@ -70,119 +70,147 @@ export const Profile = () => {
   return (
     <div>
       <img
-        src="https://i.pinimg.com/originals/1f/37/f4/1f37f4a57453aa29dc17deb798ac9d58.jpg"
+        src="https://wallpaperaccess.com/full/6584451.jpg"
         style={{ width: "100%" }}
       ></img>
 
       <div className="container">
-        <img
-          src="https://as01.epimg.net/meristation/imagenes/2021/03/15/noticias/1615808713_039343_1615808762_noticia_normal.jpg"
-          style={{ width: "18rem" }}
-          className="card-img-top"
-          alt="..."
-        />
-
         <div className="container">
-          <h1 className="">{store.user.name + " " + store.user.lastname}</h1>
-          <h1 className="">{store.user.username}</h1>
-          <h1 className="">{store.user.city + " - " + store.user.country}</h1>
-          <p style={{ fontSize: "24px" }}>
-            I like meeting new people, going out and have a good time, forget
-            about the day to day and live the moment, I love the sea.
-          </p>
-        </div>
+          <div className="position-relative">
+            <div className="position-absolute" style={{ bottom: "-150px" }}>
+              <img
+                src="https://as01.epimg.net/meristation/imagenes/2021/03/15/noticias/1615808713_039343_1615808762_noticia_normal.jpg"
+                style={{
+                  width: "250px",
+                  height: "250px",
+                }}
+                className="card-img-top rounded-circle border border-white border border-5"
+                alt="..."
+              />
+              <h1 style={{ fontSize: "30px" }}>
+                {store.user.city + " - " + store.user.country}
+              </h1>
+            </div>
+          </div>
 
-        <br />
-        <h1>My Rutes</h1>
-        <br />
+          <div className="position-relative">
+            <div
+              className="position-absolute"
+              style={{ left: "340px", bottom: "-250px" }}
+            >
+              <h1 className="text-start" style={{ fontSize: "80px" }}>
+                {store.user.name + " " + store.user.lastname}
+              </h1>
 
-        {/*rutes*/}
-        <div className="row row-cols-1 align-items-stretch g-4 py-5">
-          <div className="d-flex overflow-auto">
-            {rutes.map((e) => {
-              return (
-                <div
-                  key={e.id}
-                  className="col container"
-                  style={{ width: "800px" }}
-                >
-                  <Link style={{ textDecoration: "none" }} to="/trip">
-                    <div
-                      className="d-flex text-white bg-dark align-items-end"
-                      style={{
-                        minHeight: "400px",
-                        minWidth: "300px",
-                        display: "block",
-                        backgroundImage: "url(" + e.image + ")",
-                      }}
-                    >
-                      <div className="d-flex flex-column p-5 pb-3 text-white text-shadow-1">
-                        <ul className="d-flex list-unstyled mt-auto">
-                          <li className="me-auto">
-                            <img
-                              src="https://github.com/twbs.png"
-                              alt="Bootstrap"
-                              width="32"
-                              height="32"
-                              className="rounded-circle border border-white"
-                            />
-                          </li>
-                          <li className="ms-2">
-                            <h2>{e.name}</h2>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              );
-            })}
+              <h1 className="text-start" style={{ fontSize: "60px" }}>
+                {store.user.username}
+              </h1>
+
+              <p className="text-start" style={{ fontSize: "34px" }}>
+                I like meeting new people, going out and have a good time,
+                forget about the day to day and live the moment, I love the sea.
+              </p>
+            </div>
           </div>
         </div>
 
         <br />
-        <h1>Estas personas ya han viajado con {profiles.fullname}</h1>
-        <br />
+        <div style={{ marginTop: "300px" }}>
+          <h1>My Rutes</h1>
 
-        {/*Profiles*/}
-        <div className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-          {profiles.map((e) => {
-            return (
-              <div
-                key={e.id}
-                className="card m-2"
-                style={{
-                  backgroundColor: "#D7D7D7",
-                  maxWidth: "400px",
-                  maxHeight: "400px",
-                }}
-              >
-                <div className="row g-0">
-                  <div className="col-md-5">
-                    <img
-                      src={e.user_image}
-                      className="img-fluid rounded-start"
-                      alt="Imagenes Avatar"
-                      style={{ maxWidth: "150px" }}
-                    />
+          <br />
+
+          {/*rutes*/}
+          <div className="row row-cols-1 align-items-stretch g-4 py-5">
+            <div className="d-flex overflow-auto">
+              {rutes.map((e) => {
+                return (
+                  <div
+                    key={e.id}
+                    className="col container"
+                    style={{ width: "800px" }}
+                  >
+                    <Link style={{ textDecoration: "none" }} to="/trip">
+                      <div
+                        className="d-flex text-white bg-dark align-items-end"
+                        style={{
+                          minHeight: "400px",
+                          minWidth: "300px",
+                          display: "block",
+                          backgroundImage: "url(" + e.image + ")",
+                        }}
+                      >
+                        <div className="d-flex flex-column p-5 pb-3 text-white text-shadow-1">
+                          <ul className="d-flex list-unstyled mt-auto">
+                            <li className="me-auto">
+                              <img
+                                src="https://github.com/twbs.png"
+                                alt="Bootstrap"
+                                width="32"
+                                height="32"
+                                className="rounded-circle border border-white"
+                              />
+                            </li>
+                            <li className="ms-2">
+                              <h2>{e.name}</h2>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
-                  <div className="col-md-6 ">
-                    <div className="card-body">
-                      <h5 className="card-title">{e.fullname}</h5>
-                      <p className="card-text">
-                        Exelente persona, vivimos muchas aventuras juntas.
-                      </p>
-                      <Link style={{ textDecoration: "none" }} to={"/profile"}>
+                );
+              })}
+            </div>
+          </div>
+
+          <br />
+          <h1>Estas personas ya han viajado con {profiles.fullname}</h1>
+          <br />
+
+          {/*Profiles*/}
+          <div className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+            {profiles.map((e) => {
+              return (
+                <div
+                  key={e.id}
+                  className="card m-2"
+                  style={{
+                    backgroundColor: "#D7D7D7",
+                    maxWidth: "400px",
+                    maxHeight: "400px",
+                  }}
+                >
+                  <div className="row g-0">
+                    <div className="col-md-5">
+                      <img
+                        src={e.user_image}
+                        className="img-fluid rounded-start"
+                        alt="Imagenes Avatar"
+                        style={{ maxWidth: "150px" }}
+                      />
+                    </div>
+                    <div className="col-md-6 ">
+                      <div className="card-body">
+                        <h5 className="card-title">{e.fullname}</h5>
                         <p className="card-text">
-                          <small className="text-muted">Ver perfil</small>
+                          Exelente persona, vivimos muchas aventuras juntas.
                         </p>
-                      </Link>
+                        <Link
+                          style={{ textDecoration: "none" }}
+                          to={"/profile"}
+                        >
+                          <p className="card-text">
+                            <small className="text-muted">Ver perfil</small>
+                          </p>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
