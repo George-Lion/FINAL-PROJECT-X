@@ -28,9 +28,9 @@ class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     acceptedTripList = db.Column(db.Boolean, unique=False, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-
+    TripInFeed = db.relationship("Feed", backref="Trip")
     destination = db.Column(db.String(120), unique=False, nullable=False)
-    date = db.Column(db.String(120), unique=False, nullable=False)
+    date = db.Column(db.Integer, unique=False, nullable=False)
     people = db.Column(db.Integer, unique=False, nullable=False)
     transport = db.Column(db.String(120), unique=False, nullable=False)
     cost = db.Column(db.Integer, unique=False, nullable=False)
@@ -51,6 +51,7 @@ class Trip(db.Model):
 class Feed(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    trip_id = db.Column(db.Integer, db.ForeignKey("trip.id"))
 
     def serialize(self):
         return {
