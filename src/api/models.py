@@ -4,11 +4,37 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(120), unique=True, nullable=False)
+    fullname = db.Column(db.String(120), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    city = db.Column(db.String(120), unique=False, nullable=False)
+    profilePicture = db.Column(db.String(120), unique=False, nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
+            "username": self.username,
+            "fullname": self.fullname,
             "email": self.email,
+            "city": self.city,
+            "profilePicture": self.profilePicture,
+        }
+        
+class Trip(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    destination = db.Column(db.String(120), unique=True, nullable=False)
+    date = db.Column(db.String(120), unique=False, nullable=False)
+    people = db.Column(db.String(120), unique=True, nullable=False)
+    transport = db.Column(db.String(120), unique=False, nullable=False)
+    cost = db.Column(db.String(120), unique=False, nullable=False)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "destination": self.destination,
+            "date": self.date,
+            "people": self.people,
+            "transport": self.transport,
+            "cost": self.cost,
         }
