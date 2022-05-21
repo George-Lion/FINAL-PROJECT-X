@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
@@ -10,6 +11,7 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=False)
     profilePicture = db.Column(db.String(120), unique=False, nullable=False)
+    createdTrip = db.relationship("Trip", backref="User")
 
     def serialize(self):
         return {
@@ -20,21 +22,38 @@ class User(db.Model):
             "city": self.city,
             "profilePicture": self.profilePicture,
         }
-        
+
+
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    destination = db.Column(db.String(120), unique=True, nullable=False)
+    acceptedTripList = db.Column(db.Boolean, unique=False, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    destination = db.Column(db.String(120), unique=False, nullable=False)
     date = db.Column(db.String(120), unique=False, nullable=False)
-    people = db.Column(db.String(120), unique=True, nullable=False)
+    people = db.Column(db.Integer, unique=False, nullable=False)
     transport = db.Column(db.String(120), unique=False, nullable=False)
-    cost = db.Column(db.String(120), unique=False, nullable=False)
+    cost = db.Column(db.Integer, unique=False, nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
+            "user_id": self.user_id,
+            "accepted_Trip_List": self.acceptedTripList,
             "destination": self.destination,
             "date": self.date,
             "people": self.people,
             "transport": self.transport,
             "cost": self.cost,
+        }
+
+
+class Feed(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    # user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    def serialize(self):
+        return {
+            "id": self.id,
+
         }
