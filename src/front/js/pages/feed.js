@@ -4,7 +4,6 @@ import "../../styles/feed.css";
 import { Link } from "react-router-dom";
 
 export const Feed = () => {
-  const { store } = useContext(Context);
   const trips = [
     {
       id: 1,
@@ -57,12 +56,12 @@ export const Feed = () => {
 
   return (
     <>
-      <div className="container position-relative">
+      <div className="container ">
         {trips.map((e) => {
           return (
             <div
               key={e.id}
-              className="my-5 justify-content-center card"
+              className="my-5 card position-relative"
               style={{
                 backgroundImage: "url(" + e.imageDestination + ")",
               }}
@@ -72,10 +71,10 @@ export const Feed = () => {
                   <i className="fas fa-map-marker"></i> {e.destination}
                 </h3>
               </div>
-              <img className="card-img-top" src="" alt="&#8205;" />
+              <></>
               <div className="card-body little-profile">
                 <div className="position-absolute top-50 start-0 translate-middle-y pro-img">
-                  <Link to="/profile">
+                  <Link to="/profile" style={{ textDecoration: "none" }}>
                     <img
                       className="ms-3"
                       src={"https://" + e.organizerPic}
@@ -83,12 +82,10 @@ export const Feed = () => {
                     />
                   </Link>
                 </div>
-                <div className="container">
-                  <div className="position-absolute bottom-0 start-50 translate-middle-x mb-5">
-                    <Link to="/profile">
-                      <h3 className="">{e.organizer}</h3>
-                    </Link>
-                  </div>
+                <div className="container position-absolute bottom-0 start-50 translate-middle-x mb-3">
+                  <Link to="/profile" style={{ textDecoration: "none" }}>
+                    <h3 className="ms-2">{e.organizer}</h3>
+                  </Link>
 
                   <div className="d-flex justify-content-around">
                     <span className="">&#8205;</span>
