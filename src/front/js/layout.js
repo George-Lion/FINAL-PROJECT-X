@@ -7,6 +7,7 @@ import { Feed } from "./pages/feed";
 import { Trip } from "./pages/trip";
 import { Login } from "./pages/login";
 import { Profile } from "./pages/profile";
+import { ProfilePrivate } from "./pages/profilePrivate";
 import { Register } from "./pages/register";
 import { Message } from "./pages/message";
 import { Help } from "./pages/help";
@@ -49,6 +50,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/profile">
               <Profile />
+            </Route>
+            <Route exact path="/profilePrivate">
+              <ProfilePrivate />
             </Route>
             <Route exact path="/trip">
               <Trip />
