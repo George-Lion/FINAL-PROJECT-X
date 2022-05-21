@@ -143,13 +143,7 @@ export const Profile = () => {
                         <div className="d-flex flex-column p-5 pb-3 text-white text-shadow-1">
                           <ul className="d-flex list-unstyled mt-auto">
                             <li className="me-auto">
-                              <img
-                                src="https://github.com/twbs.png"
-                                alt="Bootstrap"
-                                width="32"
-                                height="32"
-                                className="rounded-circle border border-white"
-                              />
+                              <i className="fas fa-map-marker-alt fs-3 m-2"></i>
                             </li>
                             <li className="ms-2">
                               <h2>{e.name}</h2>
@@ -169,7 +163,7 @@ export const Profile = () => {
           <br />
 
           {/*Profiles*/}
-          <div className="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+          <div className="row row-cols-1 row-cols-lg-3 d-flex justify-content-between g-4 py-5">
             {profiles.map((e) => {
               return (
                 <div
@@ -177,8 +171,8 @@ export const Profile = () => {
                   className="card m-2"
                   style={{
                     backgroundColor: "#D7D7D7",
-                    maxWidth: "400px",
-                    maxHeight: "400px",
+                    width: "400px",
+                    height: "180px",
                   }}
                 >
                   <div className="row g-0">
