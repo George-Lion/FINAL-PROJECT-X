@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/feed.css";
+import { Link } from "react-router-dom";
 
 export const Feed = () => {
   const { store } = useContext(Context);
@@ -74,15 +75,19 @@ export const Feed = () => {
               <img className="card-img-top" src="" alt="&#8205;" />
               <div className="card-body little-profile">
                 <div className="position-absolute top-50 start-0 translate-middle-y pro-img">
-                  <img
-                    className="ms-3"
-                    src={"https://" + e.organizerPic}
-                    alt="user"
-                  />
+                  <Link to="/profile">
+                    <img
+                      className="ms-3"
+                      src={"https://" + e.organizerPic}
+                      alt="user"
+                    />
+                  </Link>
                 </div>
                 <div className="container">
                   <div className="position-absolute bottom-0 start-50 translate-middle-x mb-5">
-                    <h3 className="">{e.organizer}</h3>
+                    <Link to="/profile">
+                      <h3 className="">{e.organizer}</h3>
+                    </Link>
                   </div>
 
                   <div className="d-flex justify-content-around">
@@ -91,7 +96,7 @@ export const Feed = () => {
                       <i className="fas fa-clock"></i> {e.dates}
                     </span>
                     <span className="">
-                      <i class="fas fa-user-friends"></i> {e.participants}{" "}
+                      <i className="fas fa-user-friends"></i> {e.participants}{" "}
                     </span>
                     <span className="">
                       <i className="fas fa-heart"></i> {e.likes}{" "}
