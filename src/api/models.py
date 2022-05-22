@@ -70,3 +70,12 @@ class Favorite(db.Model):
         return {
             "id": self.id,
         }
+
+
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+        }
