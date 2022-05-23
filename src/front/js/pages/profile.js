@@ -119,35 +119,67 @@ export const Profile = () => {
                     }
                   ></input>
                 </div>
-                <label htmlFor="name" className="col-2">
-                  Name
-                </label>
-                <input
-                  defaultValue={store.user.name}
-                  id="name"
-                  className="col-10"
-                  onChange={(e) => setUser({ ...user, name: e.target.value })}
-                ></input>
-                <label htmlFor="lastname" className="col-1">
-                  Lastname
-                </label>
-                <input
-                  defaultValue={store.user.lastname}
-                  id="lastname"
-                  className="col-3"
-                  onChange={(e) =>
-                    setUser({ ...user, lastname: e.target.value })
-                  }
-                ></input>
-                <label htmlFor="email" className="col-1">
-                  Email
-                </label>
-                <input
-                  defaultValue={store.user.email}
-                  id="email"
-                  className="col-3"
-                  onChange={(e) => setUser({ ...user, email: e.target.value })}
-                ></input>
+                <div className="row text-center">
+                  <label htmlFor="name" className="col-4">
+                    Name
+                  </label>
+                  <input
+                    defaultValue={store.user.name}
+                    id="name"
+                    className="col-5"
+                    onChange={(e) => setUser({ ...user, name: e.target.value })}
+                  ></input>
+                </div>
+                <div className="row text-center">
+                  <label htmlFor="lastname" className="col-4">
+                    Lastname
+                  </label>
+                  <input
+                    defaultValue={store.user.lastname}
+                    id="lastname"
+                    className="col-5"
+                    onChange={(e) =>
+                      setUser({ ...user, lastname: e.target.value })
+                    }
+                  ></input>
+                </div>
+                <div className="row text-center">
+                  <label htmlFor="description" className="col-4">
+                    Description
+                  </label>
+                  <input
+                    defaultValue={store.user.description}
+                    id="description"
+                    className="col-5"
+                    onChange={(e) =>
+                      setUser({ ...user, description: e.target.value })
+                    }
+                  ></input>
+                </div>
+                <div className="row text-center">
+                  <label htmlFor="country" className="col-4">
+                    Country
+                  </label>
+                  <input
+                    defaultValue={store.user.country}
+                    id="country"
+                    className="col-5"
+                    onChange={(e) =>
+                      setUser({ ...user, country: e.target.value })
+                    }
+                  ></input>
+                </div>
+                <div className="row text-center">
+                  <label htmlFor="city" className="col-4">
+                    City
+                  </label>
+                  <input
+                    defaultValue={store.user.city}
+                    id="city"
+                    className="col-5"
+                    onChange={(e) => setUser({ ...user, city: e.target.value })}
+                  ></input>
+                </div>
               </div>
               <div className="modal-footer">
                 <button
