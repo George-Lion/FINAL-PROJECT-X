@@ -23,11 +23,6 @@ export const Navbar = () => {
             </Link>
           ) : null}
           {store.logged == true ? (
-            <Link to="/profilePrivate" className="m-3">
-              <button className="btn btn-light">Profile Private</button>
-            </Link>
-          ) : null}
-          {store.logged == true ? (
             <div>
               <Link to="/login">
                 <button

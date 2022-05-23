@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/profile.css";
 
 export const Profile = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
+  const [showEdit, setShowEdit] = useState(false);
+  const [user, setUser] = useState();
+
   const rutes = [
     {
       id: 1,
@@ -71,8 +74,96 @@ export const Profile = () => {
     <div>
       <img
         src="https://wallpaperaccess.com/full/6584451.jpg"
-        style={{ width: "100%" }}
+        style={{ width: "100%", height: "300px" }}
       ></img>
+      {showEdit ? (
+        <div
+          className="modal fade show "
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-modal="true"
+          style={{
+            display: "block",
+            backdropFilter: "brightness(20%)",
+          }}
+        >
+          <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="staticBackdropLabel">
+                  Edit user
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  aria-label="Close"
+                  onClick={() => {
+                    setShowEdit(false);
+                  }}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="row text-center">
+                  <label htmlFor="username" className="col-4">
+                    Username
+                  </label>
+                  <input
+                    defaultValue={store.user.username}
+                    id="username"
+                    className="col-5"
+                    onChange={(e) =>
+                      setUser({ ...user, username: e.target.value })
+                    }
+                  ></input>
+                </div>
+                <label htmlFor="name" className="col-2">
+                  Name
+                </label>
+                <input
+                  defaultValue={store.user.name}
+                  id="name"
+                  className="col-10"
+                  onChange={(e) => setUser({ ...user, name: e.target.value })}
+                ></input>
+                <label htmlFor="lastname" className="col-1">
+                  Lastname
+                </label>
+                <input
+                  defaultValue={store.user.lastname}
+                  id="lastname"
+                  className="col-3"
+                  onChange={(e) =>
+                    setUser({ ...user, lastname: e.target.value })
+                  }
+                ></input>
+                <label htmlFor="email" className="col-1">
+                  Email
+                </label>
+                <input
+                  defaultValue={store.user.email}
+                  id="email"
+                  className="col-3"
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                ></input>
+              </div>
+              <div className="modal-footer">
+                <button
+                  className="col-2 offset-1 btn btn-primary"
+                  onClick={() => {
+                    actions.editUser(user);
+                    setShowEdit(false);
+                  }}
+                >
+                  Change
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       <div className="container">
         <div className="container">
@@ -107,9 +198,16 @@ export const Profile = () => {
               </h1>
 
               <p className="text-start" style={{ fontSize: "34px" }}>
-                I like meeting new people, going out and have a good time,
-                forget about the day to day and live the moment, I love the sea.
+                {store.user.description}
               </p>
+
+              <i
+                className="fas fa-pen"
+                onClick={(e) => {
+                  setShowEdit(true);
+                  setUser(store.user);
+                }}
+              ></i>
             </div>
           </div>
         </div>
