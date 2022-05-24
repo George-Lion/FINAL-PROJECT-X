@@ -1,9 +1,18 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-
+      user: {
+        name: "Stefany",
+        lastname: "Tozz",
+        username: "Tozzigh",
+        country: "England",
+        city: "London",
+        description:
+          "I like meeting new people, going out and have a good time, forget about the day to day and live the moment, I love the sea.",
+      },
       logged: null,
     },
+    
     actions: {
       verify: async () => {
         try {
@@ -29,6 +38,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
+      },
+
+      editUser: async (user) => {
+        //Aquí agregamos el fetch cuando tengamos la BBDD
+        setStore({ user: user });
       },
     },
   };
