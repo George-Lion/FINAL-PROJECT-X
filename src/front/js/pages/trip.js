@@ -28,40 +28,38 @@ export const Trip = () => {
   ];
 
   return (
+
     <>
-      <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="https://cdn2.civitatis.com/zonas/madeira/madeira.jpg" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://cdn2.civitatis.com/zonas/madeira/madeira.jpg" className="d-block w-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src="https://cdn2.civitatis.com/zonas/madeira/madeira.jpg" className="d-block w-100" alt="..." />
-          </div>
 
-
+      <section className="user-perfil">
+        <div className="contenedor-perfil">
+          <div className="portada-perfil" style={{ backgroundImage: "url(" + "https://images.pexels.com/photos/889930/pexels-photo-889930.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" + ")" }}>
+            <div className="sombra"></div>
+            <div className="avatar-perfil">
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" alt="img" />
+            </div>
+            <div className="datos-perfil">
+              <h4 className="titulo-usuario"><i className="rute fas fa-map-marker-alt"></i>ISLAS TIKI TIKI</h4>
+            </div>
+            <div className="datos-button">
+              <ul className="lista-perfil">
+                <li><button type="button" className="mach-button btn btn-light ">
+                  I'm in</button></li>
+              </ul>
+            </div>
+            <div className="datos-like">
+              <ul className="lista-perfil">
+                <li>34 <i className="fas fa-heart" ></i></li>
+              </ul>
+            </div>
+            <div className="opcciones-perfil">
+              <button type="">change image</button>
+            </div>
+          </div>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
-
-      </div>
-
-
-      <div className="d-flex justify-content-center ">
-        <img className="rounded-circle z-depth-2 card-img-top" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" style={{ "width": "18rem" }} data-holder-rendered="true" />
-      </div>
-
-
+      </section>
       <div className="text-center">
-        <h4 >Andrea Village</h4>
+        <h3><b>Andrea Village</b></h3>
         <h5 >@LaAndre</h5>
         <h5 >London - England</h5>
         <div className="container">
@@ -77,6 +75,12 @@ export const Trip = () => {
           {/* información de viaje */}
           <div className="box position-static d-block py-3" tabIndex="-1" role="dialog" id="modalChoice">
             <h3 className="mt-2">travel buddys</h3>
+
+
+
+
+
+
 
             {/*   CARDS */}
             <div className="mt-3 d-flex justify-content-center">
