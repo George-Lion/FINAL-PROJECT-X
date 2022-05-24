@@ -65,3 +65,16 @@ class MatchTrip(db.Model):
             "accepted": self.accepted,
             "rejected": self.rejected,
         }
+
+
+class Help(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    faq = db.Column(db.Text, unique=False, nullable=False)
+    recomendations = db.Column(db.Text, unique=False, nullable=True)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "faq": self.faq,
+            "recomendations": self.recomendations,
+        }
