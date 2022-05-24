@@ -1,7 +1,36 @@
-/*
-    home.css: This website contains selectors only used in home.css
+.card-img-top {
+  height: 300px;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.card {
+  border-color: #d7dfe3;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+  height: 352px;
+}
+
+.little-profile .pro-img img {
+  width: 158px;
+  height: 158px;
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+}
+
+h3 {
+  line-height: 30px;
+  font-size: 31px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
