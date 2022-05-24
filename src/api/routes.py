@@ -53,3 +53,5 @@ def protected():
         return jsonify({"logged_in": True}), 200
     else:
         return jsonify({"logged_in": False}), 400
+
+# @api.route("/user", methods=["PUT"]) FALTA ESTO

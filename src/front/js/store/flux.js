@@ -42,7 +42,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       editUser: async (user) => {
         //Aquí agregamos el fetch cuando tengamos la BBDD
-        setStore({ user: user });
+        try {
+          const resp = await fetch(
+            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/user/",
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+              body: JSON.stringify(user),
+            }
+          );
+        } catch (e) {}
+        // setStore({ user: user });
       },
     },
   };
