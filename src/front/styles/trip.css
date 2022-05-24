@@ -25,3 +25,313 @@
   width: 10rem;
   height: 20rem;
 }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  line-height: 1.4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  color: #404040;
+  font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
+}
+
+/*=====================================
+estilos de la utilidad
+Copiar esto
+=====================================*/
+.user-perfil {
+  background: linear-gradient(#ffffff, transparent);
+  color: #333;
+}
+.user-perfil .sombra {
+  position: absolute;
+  display: block;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  left: 0;
+}
+.user-perfil .portada-perfil,
+.user-perfil .sombra {
+  border-radius: 0 0 20px 20px;
+}
+.user-perfil img {
+  width: 100%;
+}
+.contenedor-perfil {
+  max-width: 1440px;
+  height: 570px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.user-perfil .contenedor-perfil {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+.user-perfil .portada-perfil {
+  display: block;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 30rem;
+  margin-bottom: 0.5rem;
+}
+.user-perfil .avatar-perfil {
+  display: block;
+  width: 200px;
+  height: 200px;
+  background-color: #d9dcf1;
+  position: absolute;
+  bottom: -85px;
+  left: 39rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 8px solid #ffffff;
+  box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
+}
+
+.user-perfil .datos-perfil {
+  position: absolute;
+  display: block;
+  width: calc(100% - 0px - 9rem);
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+}
+.rute {
+  margin-right: 10px;
+}
+
+.mach-button {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.datos-button {
+  position: absolute;
+  display: block;
+  width: calc(40% - 20px - 3rem);
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+}
+.datos-like {
+  position: absolute;
+  display: block;
+  width: calc(40% - 20px - 19rem);
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  font-size: 25px;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+}
+.user-perfil .titulo-usuario {
+  font-size: 2.3rem;
+  white-space: nowrap;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-perfil .lista-perfil {
+  list-style: none;
+}
+.user-perfil .lista-perfil li {
+  display: inline-block;
+  font-size: 1em;
+  margin-right: 1rem;
+}
+.user-perfil .opcciones-perfil {
+  display: block;
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+}
+.user-perfil .opcciones-perfil button {
+  border: 0;
+  padding: 8px 20px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 1550px) {
+  .user-perfil .contenedor-perfil {
+    width: 100%;
+  }
+  .user-perfil .avatar-perfil {
+    left: calc(50% - 105px);
+  }
+  .user-perfil .datos-perfil {
+    bottom: 100px;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+  }
+  .datos-button {
+    bottom: -350px;
+    left: 0;
+    margin: 10px auto 0;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    width: 30%;
+    float: left;
+    color: #ffffff;
+    font-size: 25px;
+  }
+
+  .mach-button {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .datos-like {
+    bottom: -350px;
+    left: 0;
+    margin: 10px auto 0;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    width: 30%;
+    float: right;
+    color: #ffffff;
+    font-size: 25px;
+  }
+  .user-perfil .bio-usuario {
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .user-perfil .titulo-usuario {
+    font-size: 2.1rem;
+  }
+  .user-perfil .portada-perfil {
+    height: 28rem;
+  }
+  .user-perfil .menu-perfil ul {
+    flex-direction: column;
+  }
+  .user-perfil .lista-perfil {
+    display: block;
+  }
+  .user-perfil .menu-perfil {
+    margin-top: 2rem;
+  }
+  .user-perfil .menu-perfil ul {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2.5rem;
+    width: 70%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.1);
+  }
+  .user-perfil .icono-perfil {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 780px) {
+  .user-perfil .contenedor-perfil {
+    width: 100%;
+  }
+  .user-perfil .avatar-perfil {
+    left: calc(50% - 105px);
+  }
+  .user-perfil .datos-perfil {
+    bottom: 100px;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+  }
+  .datos-button {
+    bottom: -350px;
+    left: 0;
+    margin: 10px auto 0;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    width: 30%;
+    float: left;
+    color: #ffffff;
+    font-size: 25px;
+  }
+
+  .mach-button {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .datos-like {
+    bottom: -350px;
+    left: 0;
+    margin: 10px auto 0;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    width: 30%;
+    float: right;
+    color: #ffffff;
+    font-size: 25px;
+  }
+  .user-perfil .titulo-usuario {
+    font-size: 2.1rem;
+  }
+  .user-perfil .portada-perfil {
+    height: 28rem;
+  }
+  .user-perfil .menu-perfil ul {
+    flex-direction: column;
+  }
+  .user-perfil .lista-perfil {
+    display: block;
+  }
+  .user-perfil .menu-perfil {
+    margin-top: 2rem;
+  }
+  .user-perfil .menu-perfil ul {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2.5rem;
+    width: 70%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.1);
+  }
+  .user-perfil .icono-perfil {
+    display: inline-block;
+  }
+}
