@@ -15,9 +15,11 @@ export const Navbar = () => {
           {store.logged == true ? (
             <Link to="/feed" className="m-3">
               <button className="btn btn-light">Private</button>
-              <Link to="/trip" className="me-3">
-                <button className="btn btn-light">Trip</button>
-              </Link>
+            </Link>
+          ) : null}
+          {store.logged == true ? (
+            <Link to="/profile" className="m-3">
+              <button className="btn btn-light">Profile</button>
             </Link>
           ) : null}
           {store.logged == true ? (

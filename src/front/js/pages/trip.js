@@ -79,6 +79,7 @@ export const Trip = () => {
             <div className="mt-3 d-flex justify-content-center">
               {peopleCards.map((e) => {
                 return (
+
                   <div className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg m-3" style={{ backgroundImage: "url(" + e.image + ")" }}>
                     <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                       <h2 className="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Much longer title that wraps to multiple lines</h2>
@@ -91,11 +92,14 @@ export const Trip = () => {
                           <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" className="rounded-circle border border-white" />
                         </li>
                       </ul>
+
                     </div>
                   </div>
                 );
               })}
+
             </div>
+
             {/* API RUTE */}
             <h3>route</h3>
             <div className="m-3 d-flex justify-content-center">
