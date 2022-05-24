@@ -2,22 +2,22 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       user: {
-        name: "Stefany",
-        lastname: "Tozz",
-        username: "Tozzigh",
+        username: " ",
+        firstname: " ",
+        lastname: " ",
         country: "England",
-        city: "London",
+        city_of_residence: " ",
         description:
           "I like meeting new people, going out and have a good time, forget about the day to day and live the moment, I love the sea.",
       },
       logged: null,
     },
-    
+
     actions: {
       verify: async () => {
         try {
           const resp = await fetch(
-            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu45.gitpod.io/api/protected",
+            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/protected",
             {
               method: "GET",
               headers: {

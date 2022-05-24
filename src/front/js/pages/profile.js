@@ -121,13 +121,15 @@ export const Profile = () => {
                 </div>
                 <div className="row text-center">
                   <label htmlFor="name" className="col-4">
-                    Name
+                    First Name
                   </label>
                   <input
-                    defaultValue={store.user.name}
-                    id="name"
+                    defaultValue={store.user.firstname}
+                    id="firstname"
                     className="col-5"
-                    onChange={(e) => setUser({ ...user, name: e.target.value })}
+                    onChange={(e) =>
+                      setUser({ ...user, firstname: e.target.value })
+                    }
                   ></input>
                 </div>
                 <div className="row text-center">
@@ -170,14 +172,16 @@ export const Profile = () => {
                   ></input>
                 </div>
                 <div className="row text-center">
-                  <label htmlFor="city" className="col-4">
-                    City
+                  <label htmlFor="city_of_residence" className="col-4">
+                    city_of_residence
                   </label>
                   <input
-                    defaultValue={store.user.city}
-                    id="city"
+                    defaultValue={store.user.city_of_residence}
+                    id="city_of_residence"
                     className="col-5"
-                    onChange={(e) => setUser({ ...user, city: e.target.value })}
+                    onChange={(e) =>
+                      setUser({ ...user, city_of_residence: e.target.value })
+                    }
                   ></input>
                 </div>
               </div>
@@ -211,7 +215,7 @@ export const Profile = () => {
                 alt="..."
               />
               <h1 style={{ fontSize: "30px" }}>
-                {store.user.city + " - " + store.user.country}
+                {store.user.city_of_residence + " - " + store.user.country}
               </h1>
             </div>
           </div>
@@ -222,7 +226,7 @@ export const Profile = () => {
               style={{ left: "340px", bottom: "-250px" }}
             >
               <h1 className="text-start" style={{ fontSize: "80px" }}>
-                {store.user.name + " " + store.user.lastname}
+                {store.user.firstname + " " + store.user.lastname}
               </h1>
 
               <h1 className="text-start" style={{ fontSize: "60px" }}>

@@ -5,19 +5,21 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(120), unique=True, nullable=False)
-    fullname = db.Column(db.String(120), unique=False, nullable=False)
+    username = db.Column(db.String(120), unique=True, nullable=True)
+    firstname = db.Column(db.String(120), unique=False, nullable=True)
+    lastname = db.Column(db.String(120), unique=False, nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    city_of_residence = db.Column(db.String(120), unique=False, nullable=False)
-    profile_picture = db.Column(db.String(120), unique=False, nullable=False)
+    city_of_residence = db.Column(db.String(120), unique=False, nullable=True)
+    profile_picture = db.Column(db.String(120), unique=False, nullable=True)
     created_trip = db.relationship("Trip", backref="User")
 
     def serialize(self):
         return {
             "id": self.id,
             "username": self.username,
-            "fullname": self.fullname,
+            "firstname": self.firstname,
+            "lastname": self.lastname,
             "email": self.email,
             "city_of_residence": self.city_of_residence,
             "profile_picture": self.profile_picture,
