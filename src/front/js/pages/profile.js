@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/profile.css";
@@ -7,6 +7,12 @@ export const Profile = () => {
   const { store, actions } = useContext(Context);
   const [showEdit, setShowEdit] = useState(false);
   const [user, setUser] = useState();
+
+  useEffect(() => {
+    actions.getUser();
+    actions.getUserTrips();
+    actions.getUserProfiles();
+  }, []);
 
   const rutes = [
     {
@@ -257,7 +263,7 @@ export const Profile = () => {
           {/*rutes*/}
           <div className="row row-cols-1 align-items-stretch g-4 py-5">
             <div className="d-flex overflow-auto">
-              {rutes.map((e) => {
+              {store.userTrips.map((e) => {
                 return (
                   <div
                     key={e.id}
@@ -293,12 +299,15 @@ export const Profile = () => {
           </div>
 
           <br />
-          <h1>Estas personas ya han viajado con {profiles.fullname}</h1>
+          <h1>
+            Estas personas ya han viajado con
+            {store.user.firstname + " " + store.user.lastname}
+          </h1>
           <br />
 
           {/*Profiles*/}
           <div className="row row-cols-1 row-cols-lg-3 d-flex justify-content-between g-4 py-5">
-            {profiles.map((e) => {
+            {store.userProfiles.map((e) => {
               return (
                 <div
                   key={e.id}

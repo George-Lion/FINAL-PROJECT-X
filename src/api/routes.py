@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, MatchTrip
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 
@@ -55,3 +55,59 @@ def protected():
         return jsonify({"logged_in": False}), 400
 
 # @api.route("/user", methods=["PUT"]) FALTA ESTO
+
+@api.route("/user", methods=["GET"])
+@jwt_required()
+def getUser():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        return jsonify({"user": user.serialize()}), 200
+    else:
+        return jsonify({"error": "Usuario no encontrado"}), 400
+
+@api.route("/user", methods=["PUT"])
+@jwt_required()
+def editUser():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    body_username = request.json.get("username")
+    body_firstname = request.json.get("firstname")
+    body_lastname = request.json.get("lastname")
+    body_city_of_residence = request.json.get("city_of_residence")
+    body_description = request.json.get("description")
+    body_country = request.json.get("country")
+
+    if body_username and body_firstname and body_lastname and body_city_of_residence and body_description and body_country:
+        user.username = body_username
+        user.firstname = body_firstname
+        user.lastname = body_lastname
+        user.city_of_residence = body_city_of_residence
+        user.description = body_description
+        user.country = body_country
+        db.session.commit()
+        return jsonify({"edited": True, "user": user.serialize()}), 200
+    else:
+        return jsonify({"edited": False, "msg": "Falta información"}), 200
+
+@api.route("/trips", methods=["GET"])
+@jwt_required()
+def get_user_trips():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        return jsonify({"trips": list(map(lambda trip: trip.serialize(), user.created_trip))}), 200
+    else:
+        return jsonify({"error": "Usuario no encontrado"}), 400
+
+@api.route("/user/profiles", methods=["GET"])
+@jwt_required()
+def get_user_profiles():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        #Esto no funciona por ahora --------------------------------------------
+        user_profiles = MatchTrip.query.filter_by(user_id = current_id).filter_by(accepted = True)
+        return jsonify({"profiles": list(map(lambda profile: profile.serialize(), user_profiles))}), 200
+    else:
+        return jsonify({"error": "Usuario no encontrado"}), 400

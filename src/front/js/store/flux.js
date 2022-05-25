@@ -1,15 +1,9 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      user: {
-        username: " ",
-        firstname: " ",
-        lastname: " ",
-        country: "England",
-        city_of_residence: " ",
-        description:
-          "I like meeting new people, going out and have a good time, forget about the day to day and live the moment, I love the sea.",
-      },
+      user: {},
+      userProfiles: [],
+      userTrips: [],
       logged: null,
     },
 
@@ -17,7 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       verify: async () => {
         try {
           const resp = await fetch(
-            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/protected",
+            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu45.gitpod.io/api/protected",
             {
               method: "GET",
               headers: {
@@ -40,11 +34,63 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ user: loggedUser });
       },
 
+      getUser: async () => {
+        try {
+          const resp = await fetch(
+            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu45.gitpod.io/api/user/",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          );
+          const data = await resp.json();
+          setStore({ user: data.user });
+        } catch (e) {}
+      },
+
+      getUserTrips: async () => {
+        try {
+          const resp = await fetch(
+            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu45.gitpod.io/api/trips/",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          );
+          const data = await resp.json();
+          console.log(data);
+          setStore({ userTrips: data.trips });
+        } catch (e) {}
+      },
+
+      getUserProfiles: async () => {
+        try {
+          const resp = await fetch(
+            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu45.gitpod.io/api/user/profiles",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          );
+          const data = await resp.json();
+          setStore({ userProfiles: data.profiles });
+        } catch (e) {}
+      },
+
       editUser: async (user) => {
         //Aquí agregamos el fetch cuando tengamos la BBDD
         try {
           const resp = await fetch(
-            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/user/",
+            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu45.gitpod.io/api/user/",
             {
               method: "PUT",
               headers: {
@@ -54,6 +100,8 @@ const getState = ({ getStore, getActions, setStore }) => {
               body: JSON.stringify(user),
             }
           );
+          const data = await resp.json();
+          setStore({ user: data.user });
         } catch (e) {}
         // setStore({ user: user });
       },
