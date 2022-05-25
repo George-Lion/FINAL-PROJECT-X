@@ -1,8 +1,12 @@
 .placeDescription {
   display: flex;
-  justify-content: center;
+  width: auto;
+  font-size: 25px;
 }
 
+.texto {
+  width: 900px;
+}
 .icon {
   font-size: 25px;
   margin-right: 10px;
@@ -178,6 +182,53 @@ Copiar esto
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   cursor: pointer;
+}
+
+/* wrapper */
+
+.wrapper {
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 40px;
+  margin-top: 25px;
+  z-index: 1;
+}
+
+.wrapper::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.wrapper::-webkit-scrollbar-button:increment,
+.contenedor::-webkit-scrollbar-button {
+  display: none;
+}
+.wrapper::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(
+    to right,
+    #cecece 0%,
+    #313131 51%,
+    #535353 100%
+  );
+  border-radius: 30px;
+  border: 2px solid #f1f2f3;
+}
+.wrapper .img1 {
+  width: 100%;
+}
+
+.wrapper .card1 {
+  width: 320px;
+  border: 30px;
+  flex: 0 0 auto;
+  background: rgb(143, 143, 143);
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 30px;
+}
+
+.card1:hover {
+  background: rgb(65, 130, 173);
 }
 
 @media (max-width: 1550px) {
