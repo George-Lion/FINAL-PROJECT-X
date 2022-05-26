@@ -18,7 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       verify: async () => {
         try {
           const resp = await fetch(
-            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/protected",
+            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/protected",
             {
               method: "GET",
               headers: {
@@ -47,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       getTrips: async () => {
         try {
           const resp = await fetch(
-            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/trips",
+            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/trips",
             {
               method: "GET",
               headers: {
