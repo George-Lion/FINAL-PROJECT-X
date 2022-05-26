@@ -31,11 +31,13 @@ export const Navbar = () => {
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <Link to="/profile" className="">
-                    <li><a className="dropdown-item" href="#">Profile</a></li>
+                    <li>Profile</li>
                   </Link>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <Link to="/help" className="">
+                    <li> Ayuda</li>
+                  </Link>
                   <Link to="/login">
-                    <li onClick={() => actions.logout()}><a className="dropdown-item" href="#">Logout</a></li>
+                    <li onClick={() => actions.logout()}>Logout</li>
                   </Link>
                 </ul>
               </div>

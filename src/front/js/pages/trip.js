@@ -1,13 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-
-
-
 import "../../styles/trip.css";
-
-
-
 export const Trip = () => {
   const { store, actions } = useContext(Context)
   useEffect(() => {
@@ -81,24 +75,28 @@ export const Trip = () => {
         </div>
       </section>
       <div>
-        <h3 className="text-center"><b><Link to="/profile" className="text-dark" style={{ textDecoration: 'none' }}>{store.trip.firstname} {store.trip.lastname}</Link></b></h3>
-        <h5 className="text-center"><Link to="/profile" className="text-dark" style={{ textDecoration: 'none' }}>{store.trip.username}</Link></h5>
+        <h3 className="text-center"><b><Link id="RouterNavLink" to="/profile" className="text-dark" style={{ textDecoration: 'none' }}>{store.trip.firstname} {store.trip.lastname}</Link></b></h3>
+        <h5 className="text-center"><Link id="RouterNavLink" to="/profile" className="text-dark" style={{ textDecoration: 'none' }}>{store.trip.username}</Link></h5>
         <h5 className="text-dark text-center" >London - England</h5>
         <div className="container">
           <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
-            <p className="texto">Lorem ipsum odor amet, consectetuer adipiscing elit. Ac purus in massa egestas mollis varius;
+            <p className="text-description">Lorem ipsum odor amet, consectetuer adipiscing elit. Ac purus in massa egestas mollis varius;
               dignissim elementum. Mollis tincidunt mattis hendrerit dolor eros enim, nisi ligula ornare.
               Hendrerit parturient habitant pharetra rutrum gravida porttitor eros feugiat.</p>
           </div>
-          <div className="d-flex justify-content-center">
-            <p className="features" ><i className="icon fas fa-clock"></i> August 12 - August 17</p>
-            <p className="features"><i className="icon fas fa-user-friends"> </i>0/{store.trip.people}</p>
-            <p className="features"><i className="icon fas fa-route"></i> {store.trip.transport}</p>
-            <p className="features"><i className="icon fas fa-coins"></i> {store.trip.cost} €</p>
+
+          {/* Features */}
+
+          <div className="features-box">
+            <p className="features" ><i className="icon-image icon fas fa-clock"></i> August 12 - August 17</p>
+            <p className="features"><i className="icon-image icon fas fa-user-friends"> </i>0/{store.trip.people}</p>
+            <p className="features"><i className="icon-image icon fas fa-route"></i> {store.trip.transport}</p>
+            <p className="features"><i className="icon-image icon fas fa-coins"></i> {store.trip.cost} €</p>
           </div>
 
-          {/* información de viaje */}
-          <div className="box position-static d-block py-3" tabIndex="-1" role="dialog" id="modalChoice">
+          {/* Información de viaje */}
+
+          <div className="box mt-3 position-static d-block py-3" tabIndex="-1" role="dialog" id="modalChoice">
             <h3 className="mt-2 text-dark text-center"><b>Travel buddys</b></h3>
 
             {/* CARDS */}
@@ -106,11 +104,11 @@ export const Trip = () => {
             <div className="wrapper">
               {peopleCards.map((e) => {
                 return (
-                  <div className="card1 rounded ">
+                  <div key={e.id} className="card1 rounded ">
                     <img
                       src={e.image}
                       className="img1 card-img-top"
-                      alt="..."
+                      alt="people"
                     />
                     <ul className="d-flex list-unstyled mt-auto">
                       <li className="me-auto">
@@ -118,7 +116,7 @@ export const Trip = () => {
                         <b>{e.name}</b>
                       </li>
                       <li className=" d-flex align-items-center me-3">
-                        <i class="fas fa-heart"></i>
+                        <i className="fas fa-heart"></i>
                       </li>
                     </ul>
                   </div>
@@ -127,16 +125,18 @@ export const Trip = () => {
             </div>
 
             {/* API RUTE */}
-            <h3 className="m-3 text-dark text-center">route</h3>
-            <div className="m-3 d-flex justify-content-center">
-              <div className="card m-3" style={{ "width": "60rem" }}>
-                <img src="https://previews.123rf.com/images/ihorbiliavskyi/ihorbiliavskyi2003/ihorbiliavskyi200300220/142866914-city-map-navigation-gps-navigator-distance-point-marker-icon-top-view-view-from-above-abstract-backg.jpg" className="card-img-top" alt="..." />
+
+            <h3 className="mt-5 text-dark text-center"><b>Rute</b></h3>
+            <div className="card bg-dark text-white m-5 mb-1 border border-primary border-3 " >
+              <img src="https://img.olhardigital.com.br/wp-content/uploads/2019/03/20190301101226-1238x450.jpg" className="card-img-top" alt="map" />
+              <div className="card-img-overlay">
               </div>
             </div>
 
-            {/* información extendida del viaje */}
-            <h3>more information</h3>
+            {/* Información extendida del viaje */}
+
             <div className="container px-4 py-5" id="featured-3">
+              <h3 className="mt-1 text-dark text-center"><b>More information</b></h3>
               <div className="row g-4 py-5 row-cols-1 row-cols-lg-3">
                 <div className="feature col">
                   <div className="feature-icon bg-primary bg-gradient">

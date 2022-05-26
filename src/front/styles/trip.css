@@ -1,15 +1,19 @@
 .placeDescription {
   display: flex;
   width: auto;
-  font-size: 25px;
+  font-size: 20px;
 }
 
-.texto {
+.text-description {
   width: 900px;
 }
 .icon {
   font-size: 25px;
   margin-right: 10px;
+}
+.features-box {
+  display: flex;
+  justify-content: center;
 }
 .features {
   margin-right: 120px;
@@ -231,6 +235,8 @@ Copiar esto
   background: rgb(65, 130, 173);
 }
 
+/* RESOLUTION 1550px */
+
 @media (max-width: 1550px) {
   .user-perfil .contenedor-perfil {
     width: 100%;
@@ -310,7 +316,22 @@ Copiar esto
   .user-perfil .icono-perfil {
     display: inline-block;
   }
+
+  .features-box {
+    display: flex;
+    justify-content: center;
+    padding-left: 50px;
+  }
+  .features {
+    font-size: 15px;
+  }
+
+  .icon-image {
+    font-size: 20px;
+  }
 }
+
+/* RESOLUTION 780px */
 
 @media (max-width: 780px) {
   .user-perfil .contenedor-perfil {
@@ -384,5 +405,19 @@ Copiar esto
   }
   .user-perfil .icono-perfil {
     display: inline-block;
+  }
+  .features-box {
+    display: inline;
+    background: red;
+  }
+  .features {
+    font-size: 18px;
+    margin-right: 20px;
+    background: red;
+  }
+  .icon-image {
+    background: red;
+    margin-left: 100px;
+    font-size: 20px;
   }
 }
