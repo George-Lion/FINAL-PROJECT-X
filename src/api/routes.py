@@ -4,6 +4,8 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, MatchTrip, Trip
 from api.utils import generate_sitemap, APIException
+import cloudinary
+import cloudinary.uploader
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 
 api = Blueprint('api', __name__)
@@ -77,14 +79,17 @@ def editUser():
     body_firstname = request.json.get("firstname")
     body_lastname = request.json.get("lastname")
     body_city_of_residence = request.json.get("city_of_residence")
+    body_profile_picture = cloudinary.uploader.upload(
+        request.files['profile_image'])
     body_description = request.json.get("description")
     body_country = request.json.get("country")
 
-    if body_username and body_firstname and body_lastname and body_city_of_residence and body_description and body_country:
+    if body_username and body_firstname and body_lastname and body_city_of_residence and body_profile_picture and body_description and body_country:
         user.username = body_username
         user.firstname = body_firstname
         user.lastname = body_lastname
         user.city_of_residence = body_city_of_residence
+        user.profile_picture = result['secure_url']
         user.description = body_description
         user.country = body_country
         db.session.commit()

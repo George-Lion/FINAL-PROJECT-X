@@ -87,7 +87,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       editUser: async (user) => {
-        //Aquí agregamos el fetch cuando tengamos la BBDD
         try {
           const resp = await fetch(
             "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/user/",
@@ -103,11 +102,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           setStore({ user: data.user });
         } catch (e) {}
-        // setStore({ user: user });
       },
 
       createTrip: async (trip) => {
-        //Aquí agregamos el fetch cuando tengamos la BBDD
         try {
           const resp = await fetch(
             "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/create/trip",
@@ -123,7 +120,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           getActions().getUserTrips();
         } catch (e) {}
-        // setStore({ user: user });
       },
     },
   };

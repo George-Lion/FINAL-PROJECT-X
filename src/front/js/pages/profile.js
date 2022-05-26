@@ -53,7 +53,7 @@ export const Profile = () => {
           <div className="position-relative">
             <div className="position-absolute" style={{ bottom: "-150px" }}>
               <img
-                src="https://as01.epimg.net/meristation/imagenes/2021/03/15/noticias/1615808713_039343_1615808762_noticia_normal.jpg"
+                src="https://res.cloudinary.com/ddskbfm6u/image/upload/v1653587306/samples/animals/cat.jpg"
                 style={{
                   width: "250px",
                   height: "250px",
