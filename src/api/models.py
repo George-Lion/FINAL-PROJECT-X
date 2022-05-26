@@ -36,7 +36,7 @@ class Trip(db.Model):
     transport = db.Column(db.String(120), unique=False, nullable=False)
     cost = db.Column(db.Integer, unique=False, nullable=False)
     destination_picture = db.Column(
-        db.String(120), unique=False, nullable=True)
+    db.String(120), unique=False, nullable=True)
     trip_in_match = db.relationship("MatchTrip")
 
     def serialize(self):
