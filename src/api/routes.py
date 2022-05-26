@@ -59,4 +59,7 @@ def protected():
 @jwt_required()
 def trip(trip_id):
     trip = Trip.query.get(trip_id)
-    return jsonify({"trip": trip.serialize()}), 200
+    if trip:    
+        return jsonify({"trip": trip.serialize()}), 200
+    else:
+        return jsonify({"error": "error"}), 400

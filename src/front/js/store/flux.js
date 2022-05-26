@@ -59,10 +59,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           );
           const data = await resp.json();
-          console.log(data.trip)
-          setStore({ trip: data.trip })
+          if (resp.status == 200) {
+            console.log("###################")
+            return data.trip
+          }
+          else {
+            console.log("@@@@@@@@@@@")
+            return false
+          }
         } catch (e) {
-
+          return false
         }
       },
     },
