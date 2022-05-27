@@ -65,20 +65,12 @@ export const Trip = () => {
               <div
                 className="portada-perfil"
                 style={{
-                  backgroundImage:
-                    "url(" +
-                    trip.destination_picture +
-                    ")",
+                  backgroundImage: "url(" + trip.destination_picture + ")",
                 }}
               >
                 <div className="sombra"></div>
                 <div className="avatar-perfil">
-                  <img
-                    src={trip.
-                      profile_picture
-                    }
-                    alt="img"
-                  />
+                  <img src={trip.profile_picture} alt="img" />
                 </div>
                 <div className="datos-perfil">
                   <h4 className="titulo-usuario">
@@ -106,7 +98,9 @@ export const Trip = () => {
                   </ul>
                 </div>
                 <div className="opcciones-perfil">
-                  <button type="">change image</button>
+                  <button type="button">
+                    <i class="fas fa-pencil"></i>
+                  </button>
                 </div>
               </div>
             </div>

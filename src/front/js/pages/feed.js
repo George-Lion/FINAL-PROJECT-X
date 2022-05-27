@@ -13,7 +13,7 @@ export const Feed = () => {
 
   return (
     <>
-      <nav className="navbar bg-light mt-2">
+      <nav className="navbar mt-2">
         <div className="container-fluid justify-content-center">
           <form className="d-flex" role="search">
             <input
