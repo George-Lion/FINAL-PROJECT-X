@@ -79,6 +79,7 @@
 		"react": "^16.8.4",
 		"react-bootstrap": "^2.4.0",
 		"react-dom": "^16.8.4",
+		"react-lorem-ipsum": "^1.4.10",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^5.2.0"
 	}

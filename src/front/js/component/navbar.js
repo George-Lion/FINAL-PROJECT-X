@@ -1,37 +1,46 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+/* import "../../styles/navbar.css"; */
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <nav className="navbar navbar-light bg-dark">
+    <nav className="navbar navbar-light bg-dark ">
       {store.logged != null ? (
         <div className="container">
           <Link to="/feed">
             <span className="navbar-brand mb-0 h1 text-light">HOME</span>
           </Link>
           {store.logged == true ? (
-            <Link to="/feed" className="m-3">
-              <button className="btn btn-light">Private</button>
+            <Link to="/feed" className="h2 text-light ">
+              <i className="fas fa-suitcase-rolling"></i>
             </Link>
           ) : null}
           {store.logged == true ? (
-            <Link to="/profile" className="m-3">
-              <button className="btn btn-light">Profile</button>
+            <Link to="/trip" className="h2 text-light ">
+              <i className="fas fa-map-marker-alt"></i>
             </Link>
           ) : null}
           {store.logged == true ? (
             <div>
-              <Link to="/login">
-                <button
-                  className="btn btn-light"
-                  onClick={() => actions.logout()}
-                >
-                  Logout
-                </button>
-              </Link>
+              <div className="dropdown">
+                <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i className="fas fa-user-alt"></i>
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <Link to="/profile" className="">
+                    <li>Profile</li>
+                  </Link>
+                  <Link to="/help" className="">
+                    <li> Ayuda</li>
+                  </Link>
+                  <Link to="/login">
+                    <li onClick={() => actions.logout()}>Logout</li>
+                  </Link>
+                </ul>
+              </div>
             </div>
           ) : (
             <div>
@@ -43,6 +52,7 @@ export const Navbar = () => {
               </Link>
             </div>
           )}
+
         </div>
       ) : null}
     </nav>

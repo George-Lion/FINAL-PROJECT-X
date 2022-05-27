@@ -55,6 +55,14 @@ def protected():
         return jsonify({"logged_in": False}), 400
 
 
+@api.route("/trip/<int:trip_id>", methods=["GET"])
+@jwt_required()
+def trip(trip_id):
+    trip = Trip.query.get(trip_id)
+    if trip:
+        return jsonify({"trip": trip.serialize()}), 200
+
+
 @api.route("/trips", methods=["GET"])
 @jwt_required()
 def get_trips():

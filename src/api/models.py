@@ -43,6 +43,8 @@ class Trip(db.Model):
         user = User.query.get(self.user_id_of_trip_creator)
         return {
             "username": user.username,
+            "user_firstname": user.firstname,
+            "user_lastname": user.lastname,
             "profile_picture": user.profile_picture,
             "id": self.id,
             "user_id_of_trip_creator": self.user_id_of_trip_creator,
