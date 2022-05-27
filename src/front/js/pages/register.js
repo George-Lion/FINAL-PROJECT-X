@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 
 export const Register = () => {
   const [user, setUser] = useState({});
+  const { store } = useContext(Context);
   const history = useHistory();
 
   const sendUserInfo = async () => {
     const response = await fetch(
-      "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu45.gitpod.io/api/register",
+      store.url + "register",
 
       {
         method: "POST",

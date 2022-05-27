@@ -5,19 +5,16 @@ import { useHistory } from "react-router-dom";
 
 export const Login = () => {
   const history = useHistory();
-  const { actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [user, setUser] = useState({});
 
   const loginUser = async () => {
     try {
-      const resp = await fetch(
-        "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(user),
-        }
-      );
+      const resp = await fetch(store.url + "login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
       const data = await resp.json();
       if (data.token) {
         localStorage.setItem("token", data.token);

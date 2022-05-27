@@ -56,8 +56,6 @@ def protected():
     else:
         return jsonify({"logged_in": False}), 400
 
-# @api.route("/user", methods=["PUT"]) FALTA ESTO
-
 
 @api.route("/user", methods=["GET"])
 @jwt_required()
@@ -115,7 +113,6 @@ def get_user_profiles():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     if user:
-        # Esto no funciona por ahora --------------------------------------------
         user_profiles = MatchTrip.query.filter_by(
             user_id=current_id).filter_by(accepted=True)
         return jsonify({"profiles": list(map(lambda profile: profile.serialize(), user_profiles))}), 200

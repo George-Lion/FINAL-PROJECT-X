@@ -5,21 +5,19 @@ const getState = ({ getStore, getActions, setStore }) => {
       userProfiles: [],
       userTrips: [],
       logged: null,
+      url: "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/",
     },
 
     actions: {
       verify: async () => {
         try {
-          const resp = await fetch(
-            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/protected",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          );
+          const resp = await fetch(getStore().url + "protected", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
           const data = await resp.json();
           setStore({ logged: data.logged_in || false });
         } catch (e) {
@@ -36,16 +34,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       getUser: async () => {
         try {
-          const resp = await fetch(
-            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/user/",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          );
+          const resp = await fetch(getStore().url + "user", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
           const data = await resp.json();
           setStore({ user: data.user });
         } catch (e) {}
@@ -53,16 +48,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       getUserTrips: async () => {
         try {
-          const resp = await fetch(
-            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/trips/",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          );
+          const resp = await fetch(getStore().url + "trips", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
           const data = await resp.json();
           console.log(data);
           setStore({ userTrips: data.trips });
@@ -71,16 +63,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       getUserProfiles: async () => {
         try {
-          const resp = await fetch(
-            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/user/profiles",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          );
+          const resp = await fetch(getStore().url + "user/profiles", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
           const data = await resp.json();
           setStore({ userProfiles: data.profiles });
         } catch (e) {}
@@ -88,17 +77,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       editUser: async (user) => {
         try {
-          const resp = await fetch(
-            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/user/",
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-              body: JSON.stringify(user),
-            }
-          );
+          const resp = await fetch(getStore().url + "user", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify(user),
+          });
           const data = await resp.json();
           setStore({ user: data.user });
         } catch (e) {}
@@ -106,17 +92,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       createTrip: async (trip) => {
         try {
-          const resp = await fetch(
-            "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/create/trip",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-              body: JSON.stringify(trip),
-            }
-          );
+          const resp = await fetch(getStore().url + "create/trip", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify(trip),
+          });
           const data = await resp.json();
           getActions().getUserTrips();
         } catch (e) {}
