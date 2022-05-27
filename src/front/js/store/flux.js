@@ -10,14 +10,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         description:
           "I like meeting new people, going out and have a good time, forget about the day to day and live the moment, I love the sea.",
       },
+      trips: [],
       logged: null,
+      trip: []
     },
 
     actions: {
       verify: async () => {
         try {
           const resp = await fetch(
-            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/protected",
+            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/protected",
             {
               method: "GET",
               headers: {
@@ -39,10 +41,52 @@ const getState = ({ getStore, getActions, setStore }) => {
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
       },
-
       editUser: async (user) => {
         //Aquí agregamos el fetch cuando tengamos la BBDD
         setStore({ user: user });
+      },
+
+      getTrip: async (id) => {
+        try {
+          const resp = await fetch(
+            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip/" + id,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          );
+          const data = await resp.json();
+          if (resp.status == 200) {
+            console.log("###################")
+            return data.trip
+          }
+          else {
+            console.log("@@@@@@@@@@@")
+            return false
+          }
+        } catch (e) {
+          return false
+        }
+      },
+
+      getTrips: async () => {
+        try {
+          const resp = await fetch(
+            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trips",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          );
+          const data = await resp.json();
+          setStore({ trips: data.trips });
+        } catch (e) { }
       },
     },
   };
