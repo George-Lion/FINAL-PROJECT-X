@@ -59,7 +59,17 @@ def protected():
 @jwt_required()
 def trip(trip_id):
     trip = Trip.query.get(trip_id)
-    if trip:    
+    if trip:
         return jsonify({"trip": trip.serialize()}), 200
+
+
+@api.route("/trips", methods=["GET"])
+@jwt_required()
+def get_trips():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        trips = Trip.query.all()
+        return jsonify({"trips": list(map(lambda trip: trip.serialize(), trips))}), 200
     else:
         return jsonify({"error": "error"}), 400

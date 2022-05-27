@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         description:
           "I like meeting new people, going out and have a good time, forget about the day to day and live the moment, I love the sea.",
       },
+      trips: [],
       logged: null,
       trip: []
     },
@@ -40,7 +41,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
       },
-
       editUser: async (user) => {
         //Aquí agregamos el fetch cuando tengamos la BBDD
         setStore({ user: user });
