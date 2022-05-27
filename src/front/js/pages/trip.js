@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
+
 import "../../styles/trip.css";
 export const Trip = () => {
   const { store, actions } = useContext(Context);
+  const { id } = useParams();
+
   const history = useHistory();
   const [trip, setTrip] = useState(null);
   useEffect(() => {
@@ -12,7 +14,7 @@ export const Trip = () => {
   }, []);
 
   const getTrip = async () => {
-    const trip = await actions.getTrip(1);
+    const trip = await actions.getTrip(id);
     if (!trip) {
       history.push("/feed");
     } else {
@@ -65,14 +67,16 @@ export const Trip = () => {
                 style={{
                   backgroundImage:
                     "url(" +
-                    "https://images.pexels.com/photos/161878/sydney-opera-house-harbor-city-sunset-161878.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" +
+                    trip.destination_picture +
                     ")",
                 }}
               >
                 <div className="sombra"></div>
                 <div className="avatar-perfil">
                   <img
-                    src="https://images.pexels.com/photos/654696/pexels-photo-654696.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                    src={trip.
+                      profile_picture
+                    }
                     alt="img"
                   />
                 </div>
@@ -116,20 +120,11 @@ export const Trip = () => {
                   className="text-dark"
                   style={{ textDecoration: "none" }}
                 >
-                  {trip.firstname} {trip.lastname}
+                  {trip.user_firstname} {trip.user_lastname}
                 </Link>
               </b>
             </h3>
-            <h5 className="text-center">
-              <Link
-                id="RouterNavLink"
-                to="/profile"
-                className="text-dark"
-                style={{ textDecoration: "none" }}
-              >
-                {trip.username}
-              </Link>
-            </h5>
+
             <h5 className="text-dark text-center">London - England</h5>
             <div className="container">
               <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
@@ -171,7 +166,7 @@ export const Trip = () => {
                 id="modalChoice"
               >
                 <h3 className="mt-2 text-dark text-center">
-                  <b>Travel buddys</b>
+                  <b>Travel buddies</b>
                 </h3>
 
                 {/* CARDS */}

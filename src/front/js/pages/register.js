@@ -7,7 +7,7 @@ export const Register = () => {
 
   const sendUserInfo = async () => {
     const response = await fetch(
-      "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/register",
+      "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/register",
 
       {
         method: "POST",

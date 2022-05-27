@@ -36,7 +36,7 @@ export const Feed = () => {
       <div className="container ">
         {store.trips.map((e) => {
           return (
-            <Link to="/trip" key={e.id}>
+            <Link to={"/trip/" + e.id} key={e.id}>
               <div
                 className="my-5 cardprueba position-relative"
                 style={{

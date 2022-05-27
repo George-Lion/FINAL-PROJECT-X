@@ -71,6 +71,23 @@ const getState = ({ getStore, getActions, setStore }) => {
           return false
         }
       },
+
+      getTrips: async () => {
+        try {
+          const resp = await fetch(
+            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trips",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          );
+          const data = await resp.json();
+          setStore({ trips: data.trips });
+        } catch (e) { }
+      },
     },
   };
 };
