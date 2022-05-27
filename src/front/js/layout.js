@@ -23,50 +23,52 @@ const Layout = () => {
   const basename = process.env.BASENAME || "";
   const { store } = useContext(Context);
   return (
-    <BrowserRouter basename={basename}>
-      <ScrollToTop>
-        <Navbar />
-        <div style={{ padding: "70px", minHeight: "calc(100vh - 70px)" }}>
-          <Switch>
-            <Route exact path="/">
-              <Login />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/register">
-              <Register />
-            </Route>
-            <Route exact path="/feed">
-              {store.logged == true ? (
+    <div>
+      <BrowserRouter basename={basename}>
+        <ScrollToTop>
+          <Navbar />
+          <div style={{ padding: "70px", minHeight: "calc(100vh-70px)" }}>
+            <Switch>
+              <Route exact path="/">
+                <Login />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/register">
+                <Register />
+              </Route>
+              <Route exact path="/feed">
+                {store.logged == true ? (
+                  <Feed />
+                ) : (
+                  <Redirect to="/feed"></Redirect>
+                )}
+              </Route>
+              <Route exact path="/home">
                 <Feed />
-              ) : (
-                <Redirect to="/feed"></Redirect>
-              )}
-            </Route>
-            <Route exact path="/home">
-              <Feed />
-            </Route>
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
-            <Route exact path="/trip/:id">
-              <Trip />
-            </Route>
-            <Route exact path="/message">
-              <Message />
-            </Route>
-            <Route exact path="/help">
-              <Help />
-            </Route>
-            <Route>
-              <h1>Not found!</h1>
-            </Route>
-          </Switch>
-        </div>
-        <Footer />
-      </ScrollToTop>
-    </BrowserRouter>
+              </Route>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+              <Route exact path="/trip/:id">
+                <Trip />
+              </Route>
+              <Route exact path="/message">
+                <Message />
+              </Route>
+              <Route exact path="/help">
+                <Help />
+              </Route>
+              <Route>
+                <h1>Not found!</h1>
+              </Route>
+            </Switch>
+          </div>
+          <Footer />
+        </ScrollToTop>
+      </BrowserRouter>
+    </div>
   );
 };
 
