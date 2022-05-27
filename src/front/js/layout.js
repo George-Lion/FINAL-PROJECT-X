@@ -23,10 +23,10 @@ const Layout = () => {
   const basename = process.env.BASENAME || "";
   const { store } = useContext(Context);
   return (
-    <div>
-      <BrowserRouter basename={basename}>
-        <ScrollToTop>
-          <Navbar />
+    <BrowserRouter basename={basename}>
+      <ScrollToTop>
+        <Navbar />
+        <div style={{ padding: "70px", minHeight: "calc(100vh - 70px)" }}>
           <Switch>
             <Route exact path="/">
               <Login />
@@ -63,10 +63,10 @@ const Layout = () => {
               <h1>Not found!</h1>
             </Route>
           </Switch>
-          <Footer />
-        </ScrollToTop>
-      </BrowserRouter>
-    </div>
+        </div>
+        <Footer />
+      </ScrollToTop>
+    </BrowserRouter>
   );
 };
 

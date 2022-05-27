@@ -106,7 +106,7 @@ export const Trip = () => {
                   </ul>
                 </div>
                 <div className="opcciones-perfil">
-                  <button type="">change image</button>
+                  <button type=""><i class="fas fa-pencil"></i></button>
                 </div>
               </div>
             </div>
