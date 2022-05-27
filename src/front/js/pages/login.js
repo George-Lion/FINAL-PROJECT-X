@@ -11,7 +11,7 @@ export const Login = () => {
   const loginUser = async () => {
     try {
       const resp = await fetch(
-        "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu45.gitpod.io/api/login",
+        "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
