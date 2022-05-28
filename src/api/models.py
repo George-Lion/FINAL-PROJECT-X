@@ -46,6 +46,7 @@ class Trip(db.Model):
             "user_firstname": user.firstname,
             "user_lastname": user.lastname,
             "profile_picture": user.profile_picture,
+            "user_city_of_residence": user.city_of_residence,
             "id": self.id,
             "user_id_of_trip_creator": self.user_id_of_trip_creator,
             "destination": self.destination,

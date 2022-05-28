@@ -1,20 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useHistory, useParams, Link } from "react-router-dom";
-
+import { SendMessageModal } from "../component/sendMessageModal";
+import { EditTripModal } from "../component/editTripModal";
+import moment from "moment";
 import "../../styles/trip.css";
+
 export const Trip = () => {
   const { store, actions } = useContext(Context);
   const { id } = useParams();
-
+  const [modalMessage, setModalMessage] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
   const history = useHistory();
+  const [trip, setTrip] = useState({});
 
   useEffect(() => {
     actions.getTrip(id);
     if (!store.trip) {
       history.push("/feed");
     }
+
   }, []);
+
   const peopleCards = [
     {
       id: 1,
@@ -53,6 +60,14 @@ export const Trip = () => {
       {/*Banner*/}
       {store.trip ? (
         <>
+          {modalMessage ? <SendMessageModal closeModal={() => {
+            setModalMessage(false);
+          }} /> : null
+          }
+          {modalEdit ? <EditTripModal closeModal={() => {
+            setModalEdit(false);
+          }} /> : null
+          }
           <section className="user-perfil">
             <div className="contenedor-perfil">
               <div
@@ -71,13 +86,17 @@ export const Trip = () => {
                     {store.trip.destination}
                   </h4>
                 </div>
+
                 <div className="datos-button">
                   <ul className="lista-perfil">
                     <li>
                       <button
                         type="button"
                         className="mach-button btn btn-light "
-                      >
+                        onClick={() => {
+                          console.log('Modal Click');
+                          setModalMessage(true);
+                        }}>
                         I'm in
                       </button>
                     </li>
@@ -90,8 +109,12 @@ export const Trip = () => {
                     </li>
                   </ul>
                 </div>
+
                 <div className="opcciones-perfil">
-                  <button type="button">
+                  <button type="button" onClick={() => {
+                    console.log('Edit Click');
+                    setModalEdit(true);
+                  }}>
                     <i className="fas fa-pencil"></i>
                   </button>
                 </div>
@@ -112,7 +135,7 @@ export const Trip = () => {
               </b>
             </h3>
 
-            <h5 className="text-dark text-center">London - England</h5>
+            <h5 className="text-dark text-center">{store.trip.user_city_of_residence}</h5>
             <div className="container">
               <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
                 <p className="text-description">
@@ -128,8 +151,9 @@ export const Trip = () => {
 
               <div className="features-box">
                 <p className="features">
-                  <i className="icon-image icon fas fa-clock"></i> August 12 -
-                  August 17
+                  <i className="icon-image icon fas fa-clock"></i>
+                  {moment(store.trip.start_of_the_trip).format("LL")} -{" "}
+                  {moment(store.trip.end_of_the_trip).format("LL")}
                 </p>
                 <p className="features">
                   <i className="icon-image icon fas fa-user-friends"> </i>0/

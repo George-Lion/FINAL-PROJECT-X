@@ -88,6 +88,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ trips: data.trips });
         } catch (e) { }
       },
+
+      editTrip: async (trip) => {
+        try {
+          let body = new FormData();
+          for (let key in trip) {
+            body.append(key, trip[key]);
+          }
+          const resp = await fetch("https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip/" + id, {
+            method: "PUT",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: body,
+          });
+          const data = await resp.json();
+          setStore({ trip: data.trip });
+        } catch (e) { }
+      },
     },
   };
 };
