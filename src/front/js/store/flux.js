@@ -61,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           if (resp.status == 200) {
             console.log("###################")
-            return data.trip
+            setStore({ trip: data.trip });
           }
           else {
             console.log("@@@@@@@@@@@")

@@ -8,20 +8,13 @@ export const Trip = () => {
   const { id } = useParams();
 
   const history = useHistory();
-  const [trip, setTrip] = useState(null);
+
   useEffect(() => {
-    getTrip();
-  }, []);
-
-  const getTrip = async () => {
-    const trip = await actions.getTrip(id);
-    if (!trip) {
+    actions.getTrip(id);
+    if (!store.trip) {
       history.push("/feed");
-    } else {
-      setTrip(trip);
     }
-  };
-
+  }, []);
   const peopleCards = [
     {
       id: 1,
@@ -58,24 +51,24 @@ export const Trip = () => {
   return (
     <>
       {/*Banner*/}
-      {trip ? (
+      {store.trip ? (
         <>
           <section className="user-perfil">
             <div className="contenedor-perfil">
               <div
                 className="portada-perfil"
                 style={{
-                  backgroundImage: "url(" + trip.destination_picture + ")",
+                  backgroundImage: "url(" + store.trip.destination_picture + ")",
                 }}
               >
                 <div className="sombra"></div>
                 <div className="avatar-perfil">
-                  <img src={trip.profile_picture} alt="img" />
+                  <img src={store.trip.profile_picture} alt="img" />
                 </div>
                 <div className="datos-perfil">
                   <h4 className="titulo-usuario">
                     <i className="rute fas fa-map-marker-alt"></i>
-                    {trip.destination}
+                    {store.trip.destination}
                   </h4>
                 </div>
                 <div className="datos-button">
@@ -99,7 +92,7 @@ export const Trip = () => {
                 </div>
                 <div className="opcciones-perfil">
                   <button type="button">
-                    <i class="fas fa-pencil"></i>
+                    <i className="fas fa-pencil"></i>
                   </button>
                 </div>
               </div>
@@ -114,7 +107,7 @@ export const Trip = () => {
                   className="text-dark"
                   style={{ textDecoration: "none" }}
                 >
-                  {trip.user_firstname} {trip.user_lastname}
+                  {store.trip.user_firstname} {store.trip.user_lastname}
                 </Link>
               </b>
             </h3>
@@ -140,14 +133,14 @@ export const Trip = () => {
                 </p>
                 <p className="features">
                   <i className="icon-image icon fas fa-user-friends"> </i>0/
-                  {trip.people}
+                  {store.trip.people}
                 </p>
                 <p className="features">
                   <i className="icon-image icon fas fa-route"></i>{" "}
-                  {trip.transport}
+                  {store.trip.transport}
                 </p>
                 <p className="features">
-                  <i className="icon-image icon fas fa-coins"></i> {trip.cost} €
+                  <i className="icon-image icon fas fa-coins"></i> {store.trip.cost} €
                 </p>
               </div>
 

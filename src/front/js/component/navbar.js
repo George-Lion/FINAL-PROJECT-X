@@ -45,7 +45,7 @@ export const Navbar = () => {
               {store.logged == true ? (
                 <li>
                   <div className="dropdown text-end ">
-                    <a
+                    <p
                       href="#"
                       className="d-block link-light text-decoration-none dropdown-toggle"
                       id="dropdownUser1"
@@ -59,28 +59,28 @@ export const Navbar = () => {
                         height="45"
                         className="rounded-circle"
                       />
-                    </a>
+                    </p>
                     <ul
                       className="dropdown-menu text-small"
                       aria-labelledby="dropdownUser1"
                     >
                       <li>
-                        <a className="dropdown-item " href="#">
+                        <p className="dropdown-item " href="#">
                           Create Trip
-                        </a>
+                        </p>
                       </li>
                       <Link to="/help">
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <p className="dropdown-item" href="#">
                             Help
-                          </a>
+                          </p>
                         </li>
                       </Link>
                       <Link to="/profile">
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <p className="dropdown-item" href="#">
                             Profile
-                          </a>
+                          </p>
                         </li>
                       </Link>
                       <li>
@@ -88,12 +88,12 @@ export const Navbar = () => {
                       </li>
                       <Link to="/login">
                         <li>
-                          <a
+                          <p
                             className="dropdown-item"
                             onClick={() => actions.logout()}
                           >
                             Sign out
-                          </a>
+                          </p>
                         </li>
                       </Link>
                     </ul>
