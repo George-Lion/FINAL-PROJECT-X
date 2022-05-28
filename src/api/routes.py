@@ -73,27 +73,28 @@ def getUser():
 def editUser():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
-    body_username = request.json.get("username")
-    body_firstname = request.json.get("firstname")
-    body_lastname = request.json.get("lastname")
-    body_city_of_residence = request.json.get("city_of_residence")
-    body_profile_picture = cloudinary.uploader.upload(
-        request.files['profile_image'])
-    body_description = request.json.get("description")
-    body_country = request.json.get("country")
+    body_username = request.form.get("username", None)
+    body_firstname = request.form.get("firstname", None)
+    body_lastname = request.form.get("lastname", None)
+    body_city_of_residence = request.form.get("city_of_residence", None)
+    body_description = request.form.get("description", None)
+    body_country = request.form.get("country", None)
 
-    if body_username and body_firstname and body_lastname and body_city_of_residence and body_profile_picture and body_description and body_country:
+    if body_username != "" and body_firstname != "" and body_lastname != "" and body_city_of_residence != "" and body_description != "" and body_country != "":
+        if "profile_picture" in request.files:
+            body_profile_picture = cloudinary.uploader.upload(
+                request.files['profile_picture'])
+            user.profile_picture = body_profile_picture['secure_url']
         user.username = body_username
         user.firstname = body_firstname
         user.lastname = body_lastname
         user.city_of_residence = body_city_of_residence
-        user.profile_picture = result['secure_url']
         user.description = body_description
         user.country = body_country
         db.session.commit()
         return jsonify({"edited": True, "user": user.serialize()}), 200
     else:
-        return jsonify({"edited": False, "msg": "Falta información"}), 200
+        return jsonify({"edited": False, "msg": "Falta información"}), 400
 
 
 @api.route("/trips", methods=["GET"])

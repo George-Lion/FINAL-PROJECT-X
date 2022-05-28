@@ -52,15 +52,27 @@ export const Profile = () => {
         <div className="container">
           <div className="position-relative">
             <div className="position-absolute" style={{ bottom: "-150px" }}>
-              <img
-                src="https://res.cloudinary.com/ddskbfm6u/image/upload/v1653587306/samples/animals/cat.jpg"
-                style={{
-                  width: "250px",
-                  height: "250px",
-                }}
-                className="card-img-top rounded-circle border border-white border border-5"
-                alt="..."
-              />
+              {!store.user.profile_picture ? (
+                <img
+                  src="https://svgsilh.com/svg_v2/2098873.svg"
+                  style={{
+                    width: "250px",
+                    height: "250px",
+                  }}
+                  className="card-img-top rounded-circle border border-white border border-5"
+                  alt="..."
+                />
+              ) : (
+                <img
+                  src={store.user.profile_picture}
+                  style={{
+                    width: "250px",
+                    height: "250px",
+                  }}
+                  className="card-img-top rounded-circle border border-white border border-5"
+                  alt="..."
+                />
+              )}
               <h1 style={{ fontSize: "30px" }}>
                 {store.user.city_of_residence + " - " + store.user.country}
               </h1>

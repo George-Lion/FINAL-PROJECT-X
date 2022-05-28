@@ -1,14 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const EditProfileModal = ({ closeModal, editUser, user }) => {
   const { store, actions } = useContext(Context);
-  const [files, setFiles] = useState(null);
-
-  editUser = () => {
-    user.append("files", files);
-    actions.editUser(user);
-  };
 
   return (
     <div
@@ -41,10 +35,12 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
           </div>
           <div className="modal-body">
             <div className="row text-center">
-              <form>
-                <input type="file" onChange={(e) => setFiles(e.target.files)} />
-                <button>Upload</button>
-              </form>
+              <input
+                type="file"
+                onChange={(e) =>
+                  editUser({ ...user, profile_picture: e.target.files[0] })
+                }
+              />
               <label htmlFor="username" className="col-4">
                 Username
               </label>
@@ -124,8 +120,8 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
           <div className="modal-footer">
             <button
               className="col-2 offset-1 btn btn-primary"
-              onClick={() => {
-                editUser(user);
+              onClick={async () => {
+                await actions.editUser(user);
                 closeModal();
               }}
             >

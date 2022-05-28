@@ -56,7 +56,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const data = await resp.json();
-          console.log(data);
           setStore({ userTrips: data.trips });
         } catch (e) {}
       },
@@ -77,13 +76,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       editUser: async (user) => {
         try {
+          let body = new FormData();
+          for (let key in user) {
+            body.append(key, user[key]);
+          }
           const resp = await fetch(getStore().url + "user", {
             method: "PUT",
             headers: {
-              "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("token"),
             },
-            body: JSON.stringify(user),
+            body: body,
           });
           const data = await resp.json();
           setStore({ user: data.user });
