@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/feed.css";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
 export const Feed = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const { actions, store } = useContext(Context);
 
   useEffect(() => {
@@ -17,10 +18,13 @@ export const Feed = () => {
         <div className="container-fluid justify-content-center">
           <form className="d-flex" role="search">
             <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Destination"
+              className="form-control me-2 search_input"
+              type="text"
+              placeholder="Search estination"
               aria-label="Search"
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
             />
             <input
               className="form-control me-2"
@@ -32,8 +36,21 @@ export const Feed = () => {
             </button>
           </form>
         </div>
+        {store.trips
+          .filter((val) => {
+            if (searchTerm == "") {
+              return val;
+            } else if (
+              val.destination.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return val;
+            }
+          })
+          .map((val, key) => {
+            return <span className="search_results">{val.destination}</span>;
+          })}
       </nav>
-      <div className="container ">
+      <div className="container">
         {store.trips.map((e) => {
           return (
             <Link to={"/trip/" + e.id} key={e.id}>
