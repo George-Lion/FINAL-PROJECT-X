@@ -73,3 +73,16 @@ def get_trips():
         return jsonify({"trips": list(map(lambda trip: trip.serialize(), trips))}), 200
     else:
         return jsonify({"error": "error"}), 400
+
+
+@api.route("/search", methods=["GET", "POST"])
+def get_trips_search():
+    requested_destination = request.json.get("destination")
+    requested_date = request.json.get("date")
+    if requested_destination:
+        destination_match = Trip.query.filter_by(
+            destination=requested_destination).filter_by(
+            start_of_the_trip=requested_date).first()
+        return jsonify({"trip": destination_match.serialize()}), 200
+    else:
+        return jsonify({"msg": "Missing info"}), 400

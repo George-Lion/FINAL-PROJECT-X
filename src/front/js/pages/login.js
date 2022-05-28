@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
-/* import "../../styles/login.css"; */
 
 export const Login = () => {
   const history = useHistory();
@@ -35,9 +34,9 @@ export const Login = () => {
     <div className="bg">
       <br></br>
       <div className="text-center mx-auto">
-        <h1 className="mb-5 pt-4 text-light">LOGIN</h1>
+        <h1 className="mb-5 pt-4">LOGIN</h1>
         <div className="row mx-auto w-75">
-          <label htmlFor="email" className="text-light">
+          <label htmlFor="email" className="">
             Email
           </label>
           <input
@@ -46,7 +45,7 @@ export const Login = () => {
               setUser({ ...user, email: e.target.value });
             }}
           ></input>
-          <label htmlFor="password" className="text-light">
+          <label htmlFor="password" className="">
             Password
           </label>
           <input
