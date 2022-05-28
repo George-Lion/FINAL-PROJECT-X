@@ -65,22 +65,22 @@ export const Navbar = () => {
                       aria-labelledby="dropdownUser1"
                     >
                       <li>
-                        <a className="dropdown-item " href="#">
+                        <p className="dropdown-item " href="#">
                           Create Trip
-                        </a>
+                        </p>
                       </li>
                       <Link to="/help">
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <p className="dropdown-item" href="#">
                             Help
-                          </a>
+                          </p>
                         </li>
                       </Link>
                       <Link to="/profile">
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <p className="dropdown-item" href="#">
                             Profile
-                          </a>
+                          </p>
                         </li>
                       </Link>
                       <li>
@@ -88,12 +88,12 @@ export const Navbar = () => {
                       </li>
                       <Link to="/login">
                         <li>
-                          <a
+                          <p
                             className="dropdown-item"
                             onClick={() => actions.logout()}
                           >
                             Sign out
-                          </a>
+                          </p>
                         </li>
                       </Link>
                     </ul>
