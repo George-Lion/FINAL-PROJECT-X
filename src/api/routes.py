@@ -79,7 +79,7 @@ def get_trips():
 def get_trips_search():
     requested_destination = request.json.get("destination")
     requested_date = request.json.get("date")
-    if requested_destination:
+    if requested_destination and requested_date:
         destination_match = Trip.query.filter_by(
             destination=requested_destination).filter_by(
             start_of_the_trip=requested_date).first()

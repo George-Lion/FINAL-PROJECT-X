@@ -18,6 +18,7 @@ export const Login = () => {
         }
       );
       const data = await resp.json();
+      console.log(user);
       if (data.token) {
         localStorage.setItem("token", data.token);
         actions.verify();
