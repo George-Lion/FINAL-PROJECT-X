@@ -5,14 +5,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         username: " ",
         firstname: " ",
         lastname: " ",
-        country: "England",
         city_of_residence: " ",
         description:
           "I like meeting new people, going out and have a good time, forget about the day to day and live the moment, I love the sea.",
       },
       trips: [],
       logged: null,
-      trip: []
+      trip: {}
     },
 
     actions: {
@@ -95,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           for (let key in trip) {
             body.append(key, trip[key]);
           }
-          const resp = await fetch("https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip/" + id, {
+          const resp = await fetch("https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip", {
             method: "PUT",
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),

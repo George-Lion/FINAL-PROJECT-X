@@ -24,7 +24,7 @@ const Layout = () => {
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Navbar />
-          <div style={{ padding: "70px", minHeight: "calc(100vh-70px)" }}>
+          <div>
             <Switch>
               <Route exact path="/">
                 <Login />

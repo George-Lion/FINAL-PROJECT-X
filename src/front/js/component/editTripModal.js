@@ -61,9 +61,9 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                             </label>
                             <input
                                 defaultValue={store.trip.start_of_the_trip}
-                                id="startTrip"
+                                id="startTrip" type="date"
                                 className="col-5" onChange={(e) =>
-                                    editTrip({ ...trip, destination: e.target.value })
+                                    editTrip({ ...trip, start_of_the_trip: e.target.value })
                                 }
                             ></input>
                         </div>
@@ -74,8 +74,10 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                             </label>
                             <input
                                 defaultValue={store.trip.end_of_the_trip}
-                                id="endTrip"
-                                className="col-5"
+                                id="endTrip" type="date"
+                                className="col-5" onChange={(e) =>
+                                    editTrip({ ...trip, end_of_the_trip: e.target.value })
+                                }
                             ></input>
                         </div>
                         {/* people */}

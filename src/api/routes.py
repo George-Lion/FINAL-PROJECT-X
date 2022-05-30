@@ -67,7 +67,7 @@ def trip(trip_id):
         return jsonify({"error": "no trip"}), 400
 
 
-@api.route("/trip/<int:trip_id>", methods=["PUT"])
+@api.route("/trip", methods=["PUT"])
 @jwt_required()
 def editTrip():
     current_id = get_jwt_identity()
@@ -81,7 +81,7 @@ def editTrip():
 
     if body_destination != "" and body_start_of_the_trip != "" and body_end_of_the_trip != "" and body_people != "" and body_transport != "" and body_cost != "":
         if "destination_picture" in request.files:
-            body_profile_picture = cloudinary.uploader.upload(
+            body_destination_picture = cloudinary.uploader.upload(
                 request.files['destination_picture'])
         trip.destination_picture = body_destination_picture['secure_url']
         trip.destination = body_destination

@@ -9,9 +9,7 @@ export const Navbar = () => {
   return (
     <header>
       <div
-        className="px-3 py-2 bg-dark text-white fixed-top"
-        style={{ height: "70px" }}
-      >
+        className="px-3 py-2 bg-dark text-white ">
         <div className="container">
           <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <Link
@@ -30,7 +28,7 @@ export const Navbar = () => {
               ) : null}
               {store.logged == true ? (
                 <li>
-                  <Link to="/trip" className="navbar-icon me-4 text-light ">
+                  <Link to="/trip/" className="navbar-icon me-4 text-light ">
                     <i className="fas fa-map-marker-alt"></i>
                   </Link>
                 </li>

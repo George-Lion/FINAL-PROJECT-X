@@ -66,8 +66,12 @@ export const Trip = () => {
           }
           {modalEdit ? <EditTripModal closeModal={() => {
             setModalEdit(false);
-          }} /> : null
+          }} editTrip={(trip) => {
+            setTrip(trip);
+          }}
+            trip={trip} /> : null
           }
+
           <section className="user-perfil">
             <div className="contenedor-perfil">
               <div
