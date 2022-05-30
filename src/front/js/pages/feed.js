@@ -20,8 +20,7 @@ export const Feed = () => {
         }
       );
       const dataSearched = await resp.json();
-      setResponse([]);
-      setResponse([...response, dataSearched.trip]);
+      setResponse([dataSearched.trip]);
     } catch (e) {
       alert("ERROR");
     }

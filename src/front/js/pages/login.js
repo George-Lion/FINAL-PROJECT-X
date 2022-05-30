@@ -24,7 +24,7 @@ export const Login = () => {
         actions.verify();
         history.push("/feed");
       } else {
-        alert("ERROR");
+        alert("Email o contraseña incorrectos.");
       }
     } catch (e) {
       alert("ERROR");
