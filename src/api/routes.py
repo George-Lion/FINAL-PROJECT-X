@@ -79,10 +79,28 @@ def get_trips():
 def get_trips_search():
     requested_destination = request.json.get("destination")
     requested_date = request.json.get("date")
+    # requested_date_2 = request.json.get("date")
     if requested_destination and requested_date:
         destination_match = Trip.query.filter_by(
             destination=requested_destination).filter_by(
             start_of_the_trip=requested_date).first()
         return jsonify({"trip": destination_match.serialize()}), 200
+    elif requested_destination:
+        destination_match = Trip.query.filter_by(
+            destination=requested_destination).first()
+        return jsonify({"trip": destination_match.serialize()}), 200
+    elif requested_date:
+        destination_match = Trip.query.filter_by(
+            start_of_the_trip=requested_date).first()
+        return jsonify({"trip": destination_match.serialize()}), 200
+    # elif requested_date_2:
+    #     destination_match = Trip.query.filter_by(
+    #         end_of_the_trip=requested_date_2).first()
+    #     return jsonify({"trip": destination_match.serialize()}), 200
     else:
         return jsonify({"msg": "Missing info"}), 400
+
+# Arreglar la busqueda cuando se da search sin informacion
+# Arreglar la busqueda cuando la fecha coincide con la de regreso
+# Poner el filtro en el React
+# agregar a la tabla, el pais de origen del usuario
