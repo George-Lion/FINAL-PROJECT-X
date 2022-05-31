@@ -20,7 +20,7 @@ export const Feed = () => {
         }
       );
       const dataSearched = await resp.json();
-      setResponse([dataSearched.trip]);
+      setResponse(dataSearched.trip);
     } catch (e) {
       alert("ERROR");
     }
@@ -50,6 +50,14 @@ export const Feed = () => {
               aria-label="Search"
               onChange={(e) => {
                 setSearchTerm({ ...searchTerm, date: e.target.value });
+              }}
+            />
+            <input
+              className="form-control me-2"
+              type="date"
+              aria-label="Search"
+              onChange={(e) => {
+                setSearchTerm({ ...searchTerm, end_date: e.target.value });
               }}
             />
             <button
