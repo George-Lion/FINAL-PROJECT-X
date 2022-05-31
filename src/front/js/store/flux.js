@@ -13,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       trips: [],
       logged: null,
       trip: [],
+      searchedTrip: [],
     },
 
     actions: {
