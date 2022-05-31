@@ -89,6 +89,3 @@ def get_trips_search():
         queries.append(Trip.end_of_the_trip == requested_end_date)
     destination_match = Trip.query.filter(*queries)
     return jsonify({"trip": list(map(lambda trip: trip.serialize(), destination_match))}), 200
-
-
-# Poner el filtro en el React

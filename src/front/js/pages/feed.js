@@ -41,7 +41,12 @@ export const Feed = () => {
               placeholder="Search destination"
               aria-label="Search"
               onChange={(e) => {
-                setSearchTerm({ ...searchTerm, destination: e.target.value });
+                setSearchTerm({
+                  ...searchTerm,
+                  destination:
+                    e.target.value.charAt(0).toUpperCase() +
+                    e.target.value.slice(1),
+                });
               }}
             />
             <input
