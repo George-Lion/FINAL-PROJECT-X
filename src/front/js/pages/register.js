@@ -8,11 +8,13 @@ export const Register = () => {
   const history = useHistory();
 
   const sendUserInfo = async () => {
+
     const response = await fetch(store.url + "register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     });
+    
     const data = await response.json();
     if (data.created) {
       history.push("/login");

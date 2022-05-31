@@ -34,21 +34,31 @@ class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id_of_trip_creator = db.Column(db.Integer, db.ForeignKey("user.id"))
     destination = db.Column(db.String(120), unique=False, nullable=False)
-    date_of_the_trip = db.Column(db.Date(), unique=False, nullable=False)
+    start_of_the_trip = db.Column(db.Date(), unique=False, nullable=False)
+    end_of_the_trip = db.Column(db.Date(), unique=False, nullable=False)
     people = db.Column(db.Integer, unique=False, nullable=False)
     transport = db.Column(db.String(120), unique=False, nullable=False)
     cost = db.Column(db.Integer, unique=False, nullable=False)
+    destination_picture = db.Column(
+        db.String(120), unique=False, nullable=True)
     trip_in_match = db.relationship("MatchTrip")
 
     def serialize(self):
+        user = User.query.get(self.user_id_of_trip_creator)
         return {
+            "username": user.username,
+            "user_firstname": user.firstname,
+            "user_lastname": user.lastname,
+            "profile_picture": user.profile_picture,
             "id": self.id,
             "user_id_of_trip_creator": self.user_id_of_trip_creator,
             "destination": self.destination,
-            "date_of_the_trip": self.date_of_the_trip,
+            "start_of_the_trip": self.start_of_the_trip,
+            "end_of_the_trip": self.end_of_the_trip,
             "people": self.people,
             "transport": self.transport,
             "cost": self.cost,
+            "destination_picture": self.destination_picture,
         }
 
 

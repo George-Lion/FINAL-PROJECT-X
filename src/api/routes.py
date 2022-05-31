@@ -4,6 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, MatchTrip, Trip
 from api.utils import generate_sitemap, APIException
+
 import cloudinary
 import cloudinary.uploader
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
@@ -55,6 +56,7 @@ def protected():
         return jsonify({"logged_in": True}), 200
     else:
         return jsonify({"logged_in": False}), 400
+
 
 
 @api.route("/user", methods=["GET"])

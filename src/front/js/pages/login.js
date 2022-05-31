@@ -10,11 +10,13 @@ export const Login = () => {
 
   const loginUser = async () => {
     try {
+
       const resp = await fetch(store.url + "login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       });
+      
       const data = await resp.json();
       if (data.token) {
         localStorage.setItem("token", data.token);

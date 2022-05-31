@@ -18,6 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               Authorization: "Bearer " + localStorage.getItem("token"),
             },
           });
+          
           const data = await resp.json();
           setStore({ logged: data.logged_in || false });
         } catch (e) {
@@ -73,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ userProfiles: data.profiles });
         } catch (e) {}
       },
-
+        
       editUser: async (user) => {
         try {
           let body = new FormData();
@@ -104,6 +105,49 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           getActions().getUserTrips();
+        } catch (e) {}
+      },
+
+      getTrip: async (id) => {
+        try {
+          const resp = await fetch(
+            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/trip/" +
+              id,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          );
+          const data = await resp.json();
+          if (resp.status == 200) {
+            console.log("###################");
+            return data.trip;
+          } else {
+            console.log("@@@@@@@@@@@");
+            return false;
+          }
+        } catch (e) {
+          return false;
+        }
+      },
+
+      getTrips: async () => {
+        try {
+          const resp = await fetch(
+            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/trips",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          );
+          const data = await resp.json();
+          setStore({ trips: data.trips });
         } catch (e) {}
       },
     },

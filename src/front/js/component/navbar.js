@@ -1,50 +1,118 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import image from "./img/traveland.png";
+import "../../styles/navbar.css";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
-
   return (
-    <nav className="navbar navbar-light bg-dark">
-      {store.logged != null ? (
+    <header>
+      <div
+        className="px-3 py-2 bg-dark text-white fixed-top"
+        style={{ height: "70px" }}
+      >
         <div className="container">
-          <Link to="/feed">
-            <span className="navbar-brand mb-0 h1 text-light">HOME</span>
-          </Link>
-          {store.logged == true ? (
-            <Link to="/feed" className="m-3">
-              <button className="btn btn-light">Private</button>
+          <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <Link
+              to="/feed"
+              className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
+            >
+              <img src={image} alt="logo" className="logo" />
             </Link>
-          ) : null}
-          {store.logged == true ? (
-            <Link to="/profile" className="m-3">
-              <button className="btn btn-light">Profile</button>
-            </Link>
-          ) : null}
-          {store.logged == true ? (
-            <div>
-              <Link to="/login">
-                <button
-                  className="btn btn-light"
-                  onClick={() => actions.logout()}
-                >
-                  Logout
-                </button>
-              </Link>
-            </div>
-          ) : (
-            <div>
-              <Link to="/login" className="me-3">
-                <button className="btn btn-light">Login</button>
-              </Link>
-              <Link to="/register">
-                <button className="btn btn-light">Register</button>
-              </Link>
-            </div>
-          )}
+            <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+              {store.logged == true ? (
+                <li>
+                  <Link to="/feed" className="navbar-icon me-4 text-light ">
+                    <i className="fas fa-suitcase-rolling"></i>
+                  </Link>
+                </li>
+              ) : null}
+              {store.logged == true ? (
+                <li>
+                  <Link to="/trip" className="navbar-icon me-4 text-light ">
+                    <i className="fas fa-map-marker-alt"></i>
+                  </Link>
+                </li>
+              ) : null}
+              {store.logged == true ? (
+                <li>
+                  <Link to="/message" className="navbar-icon me-4 text-light ">
+                    <i className="fas fa-envelope"></i>
+                  </Link>
+                </li>
+              ) : null}
+              {store.logged == true ? (
+                <li>
+                  <div className="dropdown text-end ">
+                    <a
+                      href="#"
+                      className="d-block link-light text-decoration-none dropdown-toggle"
+                      id="dropdownUser1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src="https://images.pexels.com/photos/3579181/pexels-photo-3579181.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                        alt="mdo"
+                        width="45"
+                        height="45"
+                        className="rounded-circle"
+                      />
+                    </a>
+                    <ul
+                      className="dropdown-menu text-small"
+                      aria-labelledby="dropdownUser1"
+                    >
+                      <li>
+                        <p className="dropdown-item " href="#">
+                          Create Trip
+                        </p>
+                      </li>
+                      <Link to="/help">
+                        <li>
+                          <p className="dropdown-item" href="#">
+                            Help
+                          </p>
+                        </li>
+                      </Link>
+                      <Link to="/profile">
+                        <li>
+                          <p className="dropdown-item" href="#">
+                            Profile
+                          </p>
+                        </li>
+                      </Link>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <Link to="/login">
+                        <li>
+                          <p
+                            className="dropdown-item"
+                            onClick={() => actions.logout()}
+                          >
+                            Sign out
+                          </p>
+                        </li>
+                      </Link>
+                    </ul>
+                  </div>
+                </li>
+              ) : (
+                <div>
+                  <Link to="/login" className="me-3">
+                    <button className="btn btn-light">Login</button>
+                  </Link>
+                  <Link to="/register">
+                    <button className="btn btn-light">Register</button>
+                  </Link>
+                </div>
+              )}
+            </ul>
+          </div>
         </div>
-      ) : null}
-    </nav>
+      </div>
+    </header>
   );
 };
