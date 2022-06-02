@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/admin/api/",
+      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
