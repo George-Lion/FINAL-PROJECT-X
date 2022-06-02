@@ -29,7 +29,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           setStore({ logged: data.logged_in || false });
         } catch (e) {
-          console.log(e);
           setStore({ logged: false });
         }
       },
@@ -40,7 +39,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
       },
-
       getUser: async () => {
         try {
           const resp = await fetch(getStore().url + "user", {
@@ -118,17 +116,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       getTrip: async (id) => {
         try {
-          const resp = await fetch(
-            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip/" +
-              id,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          );
+          const resp = await fetch(getStore().url + "trip/" + id, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
           const data = await resp.json();
           data.trip.start_of_the_trip = new Date(data.trip.start_of_the_trip)
             .toISOString()
@@ -148,16 +142,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       getTrips: async () => {
         try {
-          const resp = await fetch(
-            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/allTrips",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          );
+          const resp = await fetch(getStore().url + "allTrips", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
           const data = await resp.json();
           setStore({ trips: data.trips });
         } catch (e) {}
@@ -171,17 +162,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             //Iteramos trip en su index.
             body.append(key, trip[key]);
           }
-          const resp = await fetch(
-            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip",
-            {
-              //acceso a la base de datos.
-              method: "PUT", //Metodo PUT para modificar la base de datos. si el metodo no se especifica por default es un metodo GET.
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-              body: body,
-            }
-          );
+          const resp = await fetch(getStore().url + "trip", {
+            //acceso a la base de datos.
+            method: "PUT", //Metodo PUT para modificar la base de datos. si el metodo no se especifica por default es un metodo GET.
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: body,
+          });
           const data = await resp.json();
           setStore({ trip: data.trip });
         } catch (e) {}
