@@ -11,9 +11,9 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     city_of_residence = db.Column(db.String(120), unique=False, nullable=True)
+    country = db.Column(db.String(120), unique=False, nullable=True)
     profile_picture = db.Column(db.String(120), unique=False, nullable=True)
     description = db.Column(db.Text, unique=False, nullable=True)
-    country = db.Column(db.String(120), unique=False, nullable=True)
     created_trip = db.relationship("Trip", backref="User")
 
     def serialize(self):

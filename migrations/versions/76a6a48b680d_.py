@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 5ba2ea0c85ea
+Revision ID: 76a6a48b680d
 Revises: 
-Create Date: 2022-05-25 14:18:46.678380
+Create Date: 2022-06-02 20:34:32.241173
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5ba2ea0c85ea'
+revision = '76a6a48b680d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,6 +33,8 @@ def upgrade():
     sa.Column('password', sa.String(length=80), nullable=False),
     sa.Column('city_of_residence', sa.String(length=120), nullable=True),
     sa.Column('profile_picture', sa.String(length=120), nullable=True),
+    sa.Column('description', sa.Text(), nullable=True),
+    sa.Column('country', sa.String(length=120), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -40,11 +42,14 @@ def upgrade():
     op.create_table('trip',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id_of_trip_creator', sa.Integer(), nullable=True),
-    sa.Column('destination', sa.String(length=120), nullable=False),
-    sa.Column('date_of_the_trip', sa.Date(), nullable=False),
-    sa.Column('people', sa.Integer(), nullable=False),
-    sa.Column('transport', sa.String(length=120), nullable=False),
-    sa.Column('cost', sa.Integer(), nullable=False),
+    sa.Column('destination', sa.String(length=120), nullable=True),
+    sa.Column('start_of_the_trip', sa.Date(), nullable=True),
+    sa.Column('end_of_the_trip', sa.Date(), nullable=True),
+    sa.Column('people', sa.Integer(), nullable=True),
+    sa.Column('transport', sa.String(length=120), nullable=True),
+    sa.Column('cost', sa.Integer(), nullable=True),
+    sa.Column('text', sa.String(length=120), nullable=True),
+    sa.Column('destination_picture', sa.String(length=300), nullable=True),
     sa.ForeignKeyConstraint(['user_id_of_trip_creator'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
