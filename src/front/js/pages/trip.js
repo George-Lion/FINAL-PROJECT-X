@@ -1,26 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useHistory, useParams, Link } from "react-router-dom";
-
+import { SendMessageModal } from "../component/sendMessageModal";
+import { EditTripModal } from "../component/editTripModal";
+import moment from "moment";
 import "../../styles/trip.css";
+
 export const Trip = () => {
   const { store, actions } = useContext(Context);
   const { id } = useParams();
-
+  const [modalMessage, setModalMessage] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
   const history = useHistory();
-  const [trip, setTrip] = useState(null);
+  const [trip, setTrip] = useState({});
+
   useEffect(() => {
-    getTrip();
+    actions.getTrip(id);
+    if (!store.trip) {
+      history.push("/feed");
+    }
+
   }, []);
 
-  const getTrip = async () => {
-    const trip = await actions.getTrip(id);
-    if (!trip) {
-      history.push("/feed");
-    } else {
-      setTrip(trip);
-    }
-  };
+  useEffect(() => {
+    setTrip(store.trip)
+  }, [store.trip]);
 
   const peopleCards = [
     {
@@ -58,24 +62,35 @@ export const Trip = () => {
   return (
     <>
       {/*Banner*/}
-      {trip ? (
+      {store.trip ? (
         <>
+          {modalMessage ? <SendMessageModal closeModal={() => {
+            setModalMessage(false);
+          }} /> : null
+          }
+          {modalEdit ? (<EditTripModal closeModal={() => {
+            setModalEdit(false);
+          }} editTrip={(trip) => {
+            setTrip(trip);
+          }}
+            trip={trip} />) : null
+          }
           <section className="user-perfil">
             <div className="contenedor-perfil">
               <div
                 className="portada-perfil"
                 style={{
-                  backgroundImage: "url(" + trip.destination_picture + ")",
+                  backgroundImage: "url(" + store.trip.destination_picture + ")",
                 }}
               >
                 <div className="sombra"></div>
                 <div className="avatar-perfil">
-                  <img src={trip.profile_picture} alt="img" />
+                  <img src={store.trip.profile_picture} alt="img" />
                 </div>
                 <div className="datos-perfil">
                   <h4 className="titulo-usuario">
                     <i className="rute fas fa-map-marker-alt"></i>
-                    {trip.destination}
+                    {store.trip.destination}
                   </h4>
                 </div>
                 <div className="datos-button">
@@ -84,7 +99,10 @@ export const Trip = () => {
                       <button
                         type="button"
                         className="mach-button btn btn-light "
-                      >
+                        onClick={() => {
+                          console.log('Modal Click');
+                          setModalMessage(true);
+                        }}>
                         I'm in
                       </button>
                     </li>
@@ -97,11 +115,14 @@ export const Trip = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="opcciones-perfil">
-                  <button type="button">
-                    <i class="fas fa-pencil"></i>
-                  </button>
-                </div>
+                {store.user_id == store.trip.id ? (
+                  <div className="opcciones-perfil">
+                    <button type="button" onClick={() => {
+                      setModalEdit(true);
+                    }}>
+                      <i className="fas fa-pencil"></i>
+                    </button>
+                  </div>) : null}
               </div>
             </div>
           </section>
@@ -114,20 +135,15 @@ export const Trip = () => {
                   className="text-dark"
                   style={{ textDecoration: "none" }}
                 >
-                  {trip.user_firstname} {trip.user_lastname}
+                  {store.trip.user_firstname} {store.trip.user_lastname}
                 </Link>
               </b>
             </h3>
-
-            <h5 className="text-dark text-center">London - England</h5>
+            <h5 className="text-dark text-center">{store.trip.user_city_of_residence + " - " + store.trip.user_country}</h5>
             <div className="container">
               <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
-                <p className="text-description">
-                  Lorem ipsum odor amet, consectetuer adipiscing elit. Ac purus
-                  in massa egestas mollis varius; dignissim elementum. Mollis
-                  tincidunt mattis hendrerit dolor eros enim, nisi ligula
-                  ornare. Hendrerit parturient habitant pharetra rutrum gravida
-                  porttitor eros feugiat.
+                <p className="text-description text-break">
+                  {store.trip.text}
                 </p>
               </div>
 
@@ -135,19 +151,20 @@ export const Trip = () => {
 
               <div className="features-box">
                 <p className="features">
-                  <i className="icon-image icon fas fa-clock"></i> August 12 -
-                  August 17
+                  <i className="icon-image icon fas fa-clock"></i>
+                  {moment(store.trip.start_of_the_trip).format("LL")} -{" "}
+                  {moment(store.trip.end_of_the_trip).format("LL")}
                 </p>
                 <p className="features">
                   <i className="icon-image icon fas fa-user-friends"> </i>0/
-                  {trip.people}
+                  {store.trip.people}
                 </p>
                 <p className="features">
                   <i className="icon-image icon fas fa-route"></i>{" "}
-                  {trip.transport}
+                  {store.trip.transport}
                 </p>
                 <p className="features">
-                  <i className="icon-image icon fas fa-coins"></i> {trip.cost} €
+                  <i className="icon-image icon fas fa-coins"></i> {store.trip.cost} €
                 </p>
               </div>
 

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
-
 import { Context } from "./store/appContext";
 import { Feed } from "./pages/feed";
 import { Trip } from "./pages/trip";
@@ -10,9 +9,7 @@ import { Profile } from "./pages/profile";
 import { Register } from "./pages/register";
 import { Message } from "./pages/message";
 import { Help } from "./pages/help";
-
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -27,7 +24,7 @@ const Layout = () => {
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Navbar />
-          <div style={{ padding: "70px", minHeight: "calc(100vh-70px)" }}>
+          <div>
             <Switch>
               <Route exact path="/">
                 <Login />

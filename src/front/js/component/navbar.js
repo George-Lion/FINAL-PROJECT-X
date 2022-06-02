@@ -9,9 +9,7 @@ export const Navbar = () => {
   return (
     <header>
       <div
-        className="px-3 py-2 bg-dark text-white fixed-top"
-        style={{ height: "70px" }}
-      >
+        className="px-3 py-2 bg-dark text-white ">
         <div className="container">
           <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <Link
@@ -30,7 +28,7 @@ export const Navbar = () => {
               ) : null}
               {store.logged == true ? (
                 <li>
-                  <Link to="/trip" className="navbar-icon me-4 text-light ">
+                  <Link to="/trip/" className="navbar-icon me-4 text-light ">
                     <i className="fas fa-map-marker-alt"></i>
                   </Link>
                 </li>
@@ -45,7 +43,7 @@ export const Navbar = () => {
               {store.logged == true ? (
                 <li>
                   <div className="dropdown text-end ">
-                    <a
+                    <p
                       href="#"
                       className="d-block link-light text-decoration-none dropdown-toggle"
                       id="dropdownUser1"
@@ -59,7 +57,7 @@ export const Navbar = () => {
                         height="45"
                         className="rounded-circle"
                       />
-                    </a>
+                    </p>
                     <ul
                       className="dropdown-menu text-small"
                       aria-labelledby="dropdownUser1"
