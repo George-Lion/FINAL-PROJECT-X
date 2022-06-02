@@ -64,7 +64,12 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
                 className="col-5"
                 placeholder="First Name"
                 onChange={(e) =>
-                  editUser({ ...user, firstname: e.target.value })
+                  editUser({
+                    ...user,
+                    firstname:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
                 }
               ></input>
             </div>
@@ -78,7 +83,50 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
                 className="col-5"
                 placeholder="Last Name"
                 onChange={(e) =>
-                  editUser({ ...user, lastname: e.target.value })
+                  editUser({
+                    ...user,
+                    lastname:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
+                }
+              ></input>
+            </div>
+            <div className="row text-center">
+              <label htmlFor="city_of_residence" className="col-4">
+                City
+              </label>
+              <input
+                defaultValue={store.user.city_of_residence}
+                id="city_of_residence"
+                className="col-5"
+                placeholder="City of residence"
+                onChange={(e) =>
+                  editUser({
+                    ...user,
+                    city_of_residence:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
+                }
+              ></input>
+            </div>
+            <div className="row text-center">
+              <label htmlFor="country" className="col-4">
+                Country
+              </label>
+              <input
+                defaultValue={store.user.country}
+                id="country"
+                className="col-5"
+                placeholder="Country"
+                onChange={(e) =>
+                  editUser({
+                    ...user,
+                    country:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
                 }
               ></input>
             </div>
@@ -93,32 +141,6 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
                 placeholder="Description"
                 onChange={(e) =>
                   editUser({ ...user, description: e.target.value })
-                }
-              ></input>
-            </div>
-            <div className="row text-center">
-              <label htmlFor="country" className="col-4">
-                Country
-              </label>
-              <input
-                defaultValue={store.user.country}
-                id="country"
-                className="col-5"
-                placeholder="Country"
-                onChange={(e) => editUser({ ...user, country: e.target.value })}
-              ></input>
-            </div>
-            <div className="row text-center">
-              <label htmlFor="city_of_residence" className="col-4">
-                city_of_residence
-              </label>
-              <input
-                defaultValue={store.user.city_of_residence}
-                id="city_of_residence"
-                className="col-5"
-                placeholder="City of residence"
-                onChange={(e) =>
-                  editUser({ ...user, city_of_residence: e.target.value })
                 }
               ></input>
             </div>
