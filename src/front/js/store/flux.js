@@ -2,26 +2,28 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       user: {},
+      userProfiles: [],
+      userTrips: [],
+      url: "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
       trip: {},
       searchedTrip: [],
+
     },
 
     actions: {
       verify: async () => {
         try {
-          const resp = await fetch(
-            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/protected",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          );
+          const resp = await fetch(getStore().url + "protected", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          
           const data = await resp.json();
           if (data.user_id) {
             setStore({ user_id: data.user_id });
@@ -38,9 +40,80 @@ const getState = ({ getStore, getActions, setStore }) => {
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
       },
+
+      getUser: async () => {
+        try {
+          const resp = await fetch(getStore().url + "user", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ user: data.user });
+        } catch (e) {}
+      },
+
+      getUserTrips: async () => {
+        try {
+          const resp = await fetch(getStore().url + "trips", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ userTrips: data.trips });
+        } catch (e) {}
+      },
+
+      getUserProfiles: async () => {
+        try {
+          const resp = await fetch(getStore().url + "user/profiles", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ userProfiles: data.profiles });
+        } catch (e) {}
+      },
+        
       editUser: async (user) => {
-        //Aquí agregamos el fetch cuando tengamos la BBDD
-        setStore({ user: user });
+        try {
+          let body = new FormData();
+          for (let key in user) {
+            body.append(key, user[key]);
+          }
+          const resp = await fetch(getStore().url + "user", {
+            method: "PUT",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: body,
+          });
+          const data = await resp.json();
+          setStore({ user: data.user });
+        } catch (e) {}
+      },
+
+      createTrip: async (trip) => {
+        try {
+          const resp = await fetch(getStore().url + "create/trip", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify(trip),
+          });
+          const data = await resp.json();
+          getActions().getUserTrips();
+        } catch (e) {}
       },
 
       getTrip: async (id) => {

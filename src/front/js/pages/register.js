@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 
 export const Register = () => {
   const [user, setUser] = useState({});
+  const { store } = useContext(Context);
   const history = useHistory();
 
   const sendUserInfo = async () => {
-    const response = await fetch(
-      "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/register",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      }
-    );
+
+    const response = await fetch(store.url + "register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    });
+
     const data = await response.json();
     if (data.created) {
       history.push("/login");

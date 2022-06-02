@@ -57,6 +57,42 @@ def protected():
         return jsonify({"logged_in": False}), 400
 
 
+
+@api.route("/user", methods=["GET"])
+@jwt_required()
+def getUser():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        return jsonify({"user": user.serialize()}), 200
+    else:
+        return jsonify({"error": "Usuario no encontrado"}), 400
+
+@api.route("/user", methods=["PUT"])
+@jwt_required()
+def editUser():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    body_username = request.form.get("username", None)
+    body_firstname = request.form.get("firstname", None)
+    body_lastname = request.form.get("lastname", None)
+    body_city_of_residence = request.form.get("city_of_residence", None)
+    body_description = request.form.get("description", None)
+    body_country = request.form.get("country", None)
+    if body_username != "" and body_firstname != "" and body_lastname != "" and body_city_of_residence != "" and body_description != "" and body_country != "":
+        if "profile_picture" in request.files:
+            body_profile_picture = cloudinary.uploader.upload(
+                request.files['profile_picture'])
+            user.profile_picture = body_profile_picture['secure_url']
+        user.username = body_username
+        user.firstname = body_firstname
+        user.lastname = body_lastname
+        user.city_of_residence = body_city_of_residence
+        user.description = body_description
+        user.country = body_country
+        db.session.commit()
+        return jsonify({"edited": True, "user": user.serialize()}), 200
+
 @api.route("/trip/<int:trip_id>", methods=["GET"])
 @jwt_required()
 def trip(trip_id):
@@ -65,7 +101,6 @@ def trip(trip_id):
         return jsonify({"trip": trip.serialize()}), 200
     else:
         return jsonify({"error": "no trip"}), 400
-
 
 @api.route("/trip", methods=["PUT"])
 @jwt_required()
@@ -99,6 +134,46 @@ def editTrip():
 
 @api.route("/trips", methods=["GET"])
 @jwt_required()
+def get_user_trips():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        return jsonify({"trips": list(map(lambda trip: trip.serialize(), user.created_trip))}), 200
+    else:
+        return jsonify({"error": "Usuario no encontrado"}), 400
+
+@api.route("/user/profiles", methods=["GET"])
+@jwt_required()
+def get_user_profiles():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        user_profiles = MatchTrip.query.filter_by(
+            user_id=current_id).filter_by(accepted=True)
+        return jsonify({"profiles": list(map(lambda profile: profile.serialize(), user_profiles))}), 200
+    else:
+        return jsonify({"error": "Usuario no encontrado"}), 400
+
+@api.route("/create/trip", methods=["POST"])
+@jwt_required()
+def create_trip():
+    current_id = get_jwt_identity()
+    body_destination = request.json.get("destination")
+    body_date_of_the_trip = request.json.get("date_of_the_trip")
+    body_people = request.json.get("people")
+    body_transport = request.json.get("transport")
+    body_cost = request.json.get("cost")
+    if body_destination and body_date_of_the_trip and body_people and body_transport and body_cost:
+        new_trip = Trip(user_id_of_trip_creator=current_id, destination=body_destination, date_of_the_trip=body_date_of_the_trip, people=body_people,
+                        transport=body_transport, cost=body_cost)
+        db.session.add(new_trip)
+        db.session.commit()
+        return jsonify({"created": True, "trip": new_trip.serialize()}), 200
+    else:
+        return jsonify({"created": False, "msg": "Falta información"}), 200
+
+@api.route("/trips", methods=["GET"])
+@jwt_required()
 def get_trips():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
@@ -107,7 +182,6 @@ def get_trips():
         return jsonify({"trips": list(map(lambda trip: trip.serialize(), trips))}), 200
     else:
         return jsonify({"error": "error"}), 400
-
 
 @api.route("/search", methods=["GET", "POST"])
 def get_trips_search():
@@ -123,3 +197,4 @@ def get_trips_search():
         queries.append(Trip.end_of_the_trip == requested_end_date)
     destination_match = Trip.query.filter(*queries)
     return jsonify({"trip": list(map(lambda trip: trip.serialize(), destination_match))}), 200
+
