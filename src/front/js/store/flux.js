@@ -116,7 +116,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       getTrip: async (id) => {
         try {
-          const resp = await fetch(getStore().url + "user/id", {
+          const resp = await fetch(getStore().url + "trip/" + id, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

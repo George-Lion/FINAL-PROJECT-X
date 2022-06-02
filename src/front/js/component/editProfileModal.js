@@ -47,7 +47,8 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
               <input
                 defaultValue={store.user.username}
                 id="username"
-                className="col-5" placeholder="Username"
+                className="col-5"
+                placeholder="Username"
                 onChange={(e) =>
                   editUser({ ...user, username: e.target.value })
                 }
@@ -60,7 +61,8 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
               <input
                 defaultValue={store.user.firstname}
                 id="firstname"
-                className="col-5" placeholder="First Name"
+                className="col-5"
+                placeholder="First Name"
                 onChange={(e) =>
                   editUser({ ...user, firstname: e.target.value })
                 }
@@ -68,12 +70,13 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
             </div>
             <div className="row text-center">
               <label htmlFor="lastname" className="col-4">
-                Lastname
+                Last name
               </label>
               <input
                 defaultValue={store.user.lastname}
                 id="lastname"
-                className="col-5" placeholder="Last Name"
+                className="col-5"
+                placeholder="Last Name"
                 onChange={(e) =>
                   editUser({ ...user, lastname: e.target.value })
                 }
@@ -86,7 +89,8 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
               <input
                 defaultValue={store.user.description}
                 id="description"
-                className="col-5" placeholder="Description"
+                className="col-5"
+                placeholder="Description"
                 onChange={(e) =>
                   editUser({ ...user, description: e.target.value })
                 }
@@ -99,7 +103,8 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
               <input
                 defaultValue={store.user.country}
                 id="country"
-                className="col-5" placeholder="Country"
+                className="col-5"
+                placeholder="Country"
                 onChange={(e) => editUser({ ...user, country: e.target.value })}
               ></input>
             </div>
@@ -110,7 +115,8 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
               <input
                 defaultValue={store.user.city_of_residence}
                 id="city_of_residence"
-                className="col-5" placeholder="City of residence"
+                className="col-5"
+                placeholder="City of residence"
                 onChange={(e) =>
                   editUser({ ...user, city_of_residence: e.target.value })
                 }
