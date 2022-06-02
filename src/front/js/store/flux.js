@@ -99,7 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             body.append(key, trip[key]);
           }
           const resp = await fetch(
-            "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip",
+            "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/trip",
             {
               //acceso a la base de datos.
               method: "PUT", //Metodo PUT para modificar la base de datos. si el metodo no se especifica por default es un metodo GET.
