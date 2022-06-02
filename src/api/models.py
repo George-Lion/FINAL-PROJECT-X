@@ -11,6 +11,8 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     city_of_residence = db.Column(db.String(120), unique=False, nullable=True)
+    country_of_residence = db.Column(
+        db.String(120), unique=False, nullable=True)
     profile_picture = db.Column(db.String(120), unique=False, nullable=True)
     country = db.Column(db.String(120), unique=False, nullable=True)
     created_trip = db.relationship("Trip", backref="User")
@@ -23,7 +25,9 @@ class User(db.Model):
             "lastname": self.lastname,
             "email": self.email,
             "city_of_residence": self.city_of_residence,
+
             "country": self.country,
+
             "profile_picture": self.profile_picture,
         }
 
