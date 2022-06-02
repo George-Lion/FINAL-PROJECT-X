@@ -4,13 +4,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/admin/api/",
       user_id: null,
       trips: [],
       logged: null,
       trip: {},
       searchedTrip: [],
-
     },
 
     actions: {
@@ -30,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           setStore({ logged: data.logged_in || false });
         } catch (e) {
-          console.log(e)
+          console.log(e);
           setStore({ logged: false });
         }
       },
@@ -53,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getUserTrips: async () => {
@@ -67,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userTrips: data.trips });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getUserProfiles: async () => {
@@ -81,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userProfiles: data.profiles });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       editUser: async (user) => {
@@ -99,7 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       createTrip: async (trip) => {
@@ -114,14 +113,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           getActions().getUserTrips();
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getTrip: async (id) => {
         try {
           const resp = await fetch(
             "https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip/" +
-            id,
+              id,
             {
               method: "GET",
               headers: {
@@ -161,7 +160,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const data = await resp.json();
           setStore({ trips: data.trips });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       editTrip: async (trip) => {
@@ -185,7 +184,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const data = await resp.json();
           setStore({ trip: data.trip });
-        } catch (e) { }
+        } catch (e) {}
       },
     },
   };

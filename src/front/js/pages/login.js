@@ -9,7 +9,6 @@ export const Login = () => {
 
   const loginUser = async () => {
     try {
-
       const resp = await fetch(store.url + "login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -17,7 +16,6 @@ export const Login = () => {
       });
 
       const data = await resp.json();
-      console.log(user);
       if (data.token) {
         localStorage.setItem("token", data.token);
         await actions.verify();
@@ -26,7 +24,7 @@ export const Login = () => {
         alert("Email o contraseña incorrectos.");
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
       alert("ERROR");
     }
   };

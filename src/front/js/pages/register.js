@@ -8,7 +8,6 @@ export const Register = () => {
   const history = useHistory();
 
   const sendUserInfo = async () => {
-
     const response = await fetch(store.url + "register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,7 +24,7 @@ export const Register = () => {
     <div className="text-center mt-5">
       <div className="row">
         <label htmlFor="email" className="col-1">
-          username
+          Username
         </label>
         <input
           id="username"
@@ -33,7 +32,7 @@ export const Register = () => {
           onChange={(e) => setUser({ ...user, username: e.target.value })}
         ></input>
         <label htmlFor="firstname" className="col-1">
-          firstname
+          First name
         </label>
         <input
           id="firstname"
@@ -41,7 +40,7 @@ export const Register = () => {
           onChange={(e) => setUser({ ...user, firstname: e.target.value })}
         ></input>
         <label htmlFor="lastname" className="col-1">
-          lastname
+          Last name
         </label>
         <input
           id="lastname"
@@ -65,7 +64,7 @@ export const Register = () => {
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         ></input>
         <label htmlFor="city_of_residence" className="col-1">
-          city_of_residence
+          City of residence
         </label>
         <input
           id="city_of_residence"
