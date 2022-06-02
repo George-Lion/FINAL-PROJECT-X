@@ -51,7 +51,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               <input
                 defaultValue={trip.destination}
                 id="place"
-                className="col-5"
+                className="col-5" placeholder="Destination"
                 maxLength={25}
                 onChange={(e) =>
                   editTrip({
@@ -72,7 +72,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 defaultValue={trip.start_of_the_trip}
                 id="startTrip"
                 type="date"
-                className="col-5"
+                className="col-5" placeholder="Start"
                 onChange={(e) =>
                   editTrip({ ...trip, start_of_the_trip: e.target.value })
                 }
@@ -88,7 +88,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 id="endTrip"
                 type="date"
                 required
-                className="col-5"
+                className="col-5" placeholder="End"
                 onChange={(e) =>
                   editTrip({ ...trip, end_of_the_trip: e.target.value })
                 }
@@ -103,7 +103,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 type="number"
                 defaultValue={trip.people}
                 id="people"
-                className="col-5"
+                className="col-5" placeholder="Travel buddies"
                 onChange={(e) => editTrip({ ...trip, people: e.target.value })}
               ></input>
             </div>
@@ -114,7 +114,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               </label>
               <select
                 name="transporte"
-                className="col-5"
+                className="col-5" placeholder="none"
                 defaultValue={trip.transport}
                 onChange={(e) =>
                   editTrip({ ...trip, transport: e.target.value })
@@ -136,7 +136,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 type="number"
                 max="9999"
                 id="cost"
-                className="col-5"
+                className="col-5" placeholder="Cost"
                 onChange={(e) => editTrip({ ...trip, cost: e.target.value })}
               ></input>
             </div>
@@ -149,7 +149,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 id="contador"
                 className="form-control"
                 aria-label="With textarea"
-                maxLength={120}
+                maxLength={120} placeholder="Text"
                 onChange={(e) => editTrip({ ...trip, text: e.target.value })}
               ></textarea>
             </div>

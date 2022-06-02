@@ -57,7 +57,6 @@ def protected():
         return jsonify({"logged_in": False}), 400
 
 
-
 @api.route("/user", methods=["GET"])
 @jwt_required()
 def getUser():
@@ -68,22 +67,36 @@ def getUser():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
+
 @api.route("/user", methods=["PUT"])
 @jwt_required()
 def editUser():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     body_username = request.form.get("username", None)
+    if body_username == "" or body_username == None:
+        body_username = "Username"
     body_firstname = request.form.get("firstname", None)
+    if body_firstname == "" or body_firstname == None:
+        body_firstname = "First Name"
     body_lastname = request.form.get("lastname", None)
+    if body_lastname == "" or body_lastname == None:
+        body_lastname = "Last Name"
     body_city_of_residence = request.form.get("city_of_residence", None)
+    if body_city_of_residence == "" or body_city_of_residence == None:
+        body_city_of_residence = "city of residence"
     body_description = request.form.get("description", None)
+    if body_description == "" or body_description == None:
+        body_description = "Description"
     body_country = request.form.get("country", None)
-    if body_username != "" and body_firstname != "" and body_lastname != "" and body_city_of_residence != "" and body_description != "" and body_country != "":
+    if body_country == "" or body_country == None:
+        body_country = "Country"
         if "profile_picture" in request.files:
             body_profile_picture = cloudinary.uploader.upload(
                 request.files['profile_picture'])
             user.profile_picture = body_profile_picture['secure_url']
+        else:
+            user.profile_picture = "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         user.username = body_username
         user.firstname = body_firstname
         user.lastname = body_lastname
@@ -92,6 +105,7 @@ def editUser():
         user.country = body_country
         db.session.commit()
         return jsonify({"edited": True, "user": user.serialize()}), 200
+
 
 @api.route("/trip/<int:trip_id>", methods=["GET"])
 @jwt_required()
@@ -102,18 +116,33 @@ def trip(trip_id):
     else:
         return jsonify({"error": "no trip"}), 400
 
+
 @api.route("/trip", methods=["PUT"])
 @jwt_required()
 def editTrip():
     current_id = get_jwt_identity()
     trip = Trip.query.get(current_id)
     body_destination = request.form.get("destination", None)
+    if body_destination == "" or body_destination == None:
+        body_destination = "Destination"
     body_start_of_the_trip = request.form.get("start_of_the_trip", None)
+    if body_start_of_the_trip == "" or body_start_of_the_trip == None:
+        body_start_of_the_trip = "Start"
     body_end_of_the_trip = request.form.get("end_of_the_trip", None)
+    if body_end_of_the_trip == "" or body_end_of_the_trip == None:
+        body_end_of_the_trip = "End"
     body_people = request.form.get("people", None)
+    if body_people == "" or body_people == None:
+        body_people = "Travel Buddies"
     body_transport = request.form.get("transport", None)
+    if body_transport == "" or body_transport == None:
+        body_transport = "Transport"
     body_cost = request.form.get("cost", None)
+    if body_cost == "" or body_cost == None:
+        body_cost = "0"
     body_text = request.form.get("text", None)
+    if body_text == "" or body_text == None:
+        body_text = "Text"
     if body_destination != "" and body_start_of_the_trip != "" and body_end_of_the_trip != "" and body_people != "" and body_transport != "" and body_cost != "" and body_text != "":
         if "destination_picture" in request.files:
             body_destination_picture = cloudinary.uploader.upload(
@@ -142,6 +171,7 @@ def get_user_trips():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
+
 @api.route("/user/profiles", methods=["GET"])
 @jwt_required()
 def get_user_profiles():
@@ -153,6 +183,7 @@ def get_user_profiles():
         return jsonify({"profiles": list(map(lambda profile: profile.serialize(), user_profiles))}), 200
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
+
 
 @api.route("/create/trip", methods=["POST"])
 @jwt_required()
@@ -172,7 +203,8 @@ def create_trip():
     else:
         return jsonify({"created": False, "msg": "Falta información"}), 200
 
-@api.route("/trips", methods=["GET"])
+
+@api.route("/allTrips", methods=["GET"])
 @jwt_required()
 def get_trips():
     current_id = get_jwt_identity()
@@ -182,6 +214,7 @@ def get_trips():
         return jsonify({"trips": list(map(lambda trip: trip.serialize(), trips))}), 200
     else:
         return jsonify({"error": "error"}), 400
+
 
 @api.route("/search", methods=["GET", "POST"])
 def get_trips_search():
@@ -197,4 +230,3 @@ def get_trips_search():
         queries.append(Trip.end_of_the_trip == requested_end_date)
     destination_match = Trip.query.filter(*queries)
     return jsonify({"trip": list(map(lambda trip: trip.serialize(), destination_match))}), 200
-

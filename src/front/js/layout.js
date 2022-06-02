@@ -39,14 +39,18 @@ const Layout = () => {
                 {store.logged == true ? (
                   <Feed />
                 ) : (
-                  <Redirect to="/feed"></Redirect>
+                  <Redirect to="/login"></Redirect>
                 )}
               </Route>
               <Route exact path="/home">
                 <Feed />
               </Route>
               <Route exact path="/profile">
-                <Profile />
+                {store.logged == true ? (
+                  <Profile />
+                ) : (
+                  <Redirect to="/login"></Redirect>
+                )}
               </Route>
               <Route exact path="/trip/:id">
                 <Trip />

@@ -15,17 +15,18 @@ export const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       });
-      
+
       const data = await resp.json();
       console.log(user);
       if (data.token) {
         localStorage.setItem("token", data.token);
-        actions.verify();
+        await actions.verify();
         history.push("/feed");
       } else {
         alert("Email o contraseña incorrectos.");
       }
     } catch (e) {
+      console.log(e)
       alert("ERROR");
     }
   };
