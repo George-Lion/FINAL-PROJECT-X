@@ -37,7 +37,14 @@ export const Register = () => {
         <input
           id="firstname"
           className="col-3"
-          onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              firstname:
+                e.target.value.charAt(0).toUpperCase() +
+                e.target.value.slice(1).toLowerCase(),
+            })
+          }
         ></input>
         <label htmlFor="lastname" className="col-1">
           Last name
@@ -45,7 +52,14 @@ export const Register = () => {
         <input
           id="lastname"
           className="col-3"
-          onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              lastname:
+                e.target.value.charAt(0).toUpperCase() +
+                e.target.value.slice(1).toLowerCase(),
+            })
+          }
         ></input>
         <label htmlFor="email" className="col-1">
           Email
@@ -70,7 +84,12 @@ export const Register = () => {
           id="city_of_residence"
           className="col-3"
           onChange={(e) =>
-            setUser({ ...user, city_of_residence: e.target.value })
+            setUser({
+              ...user,
+              city_of_residence:
+                e.target.value.charAt(0).toUpperCase() +
+                e.target.value.slice(1).toLowerCase(),
+            })
           }
         ></input>
 

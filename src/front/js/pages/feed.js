@@ -42,7 +42,7 @@ export const Feed = () => {
                   ...searchTerm,
                   destination:
                     e.target.value.charAt(0).toUpperCase() +
-                    e.target.value.slice(1),
+                    e.target.value.slice(1).toLowerCase(),
                 });
               }}
             />
