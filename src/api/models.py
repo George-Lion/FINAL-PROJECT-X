@@ -14,6 +14,7 @@ class User(db.Model):
     country_of_residence = db.Column(
         db.String(120), unique=False, nullable=True)
     profile_picture = db.Column(db.String(120), unique=False, nullable=True)
+    country = db.Column(db.String(120), unique=False, nullable=True)
     created_trip = db.relationship("Trip", backref="User")
 
     def serialize(self):
@@ -24,7 +25,9 @@ class User(db.Model):
             "lastname": self.lastname,
             "email": self.email,
             "city_of_residence": self.city_of_residence,
-            "country_of_residence": self.country_of_residence,
+
+            "country": self.country,
+
             "profile_picture": self.profile_picture,
         }
 
@@ -32,14 +35,15 @@ class User(db.Model):
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id_of_trip_creator = db.Column(db.Integer, db.ForeignKey("user.id"))
-    destination = db.Column(db.String(120), unique=False, nullable=False)
-    start_of_the_trip = db.Column(db.Date(), unique=False, nullable=False)
-    end_of_the_trip = db.Column(db.Date(), unique=False, nullable=False)
-    people = db.Column(db.Integer, unique=False, nullable=False)
-    transport = db.Column(db.String(120), unique=False, nullable=False)
-    cost = db.Column(db.Integer, unique=False, nullable=False)
+    destination = db.Column(db.String(120), unique=False, nullable=True)
+    start_of_the_trip = db.Column(db.Date, unique=False, nullable=True)
+    end_of_the_trip = db.Column(db.Date, unique=False, nullable=True)
+    people = db.Column(db.Integer, unique=False, nullable=True)
+    transport = db.Column(db.String(120), unique=False, nullable=True)
+    cost = db.Column(db.Integer, unique=False, nullable=True)
+    text = db.Column(db.String(120), unique=False, nullable=True)
     destination_picture = db.Column(
-        db.String(120), unique=False, nullable=True)
+        db.String(300), unique=False, nullable=True)
     trip_in_match = db.relationship("MatchTrip")
 
     def serialize(self):
@@ -49,6 +53,8 @@ class Trip(db.Model):
             "user_firstname": user.firstname,
             "user_lastname": user.lastname,
             "profile_picture": user.profile_picture,
+            "user_city_of_residence": user.city_of_residence,
+            "user_country": user.country,
             "id": self.id,
             "user_id_of_trip_creator": self.user_id_of_trip_creator,
             "destination": self.destination,
@@ -57,6 +63,7 @@ class Trip(db.Model):
             "people": self.people,
             "transport": self.transport,
             "cost": self.cost,
+            "text": self.text,
             "destination_picture": self.destination_picture,
         }
 
