@@ -22,6 +22,10 @@ export const Trip = () => {
 
   }, []);
 
+  useEffect(() => {
+    setTrip(store.trip)
+  }, [store.trip]);
+
   const peopleCards = [
     {
       id: 1,
@@ -64,14 +68,13 @@ export const Trip = () => {
             setModalMessage(false);
           }} /> : null
           }
-          {modalEdit ? <EditTripModal closeModal={() => {
+          {modalEdit ? (<EditTripModal closeModal={() => {
             setModalEdit(false);
           }} editTrip={(trip) => {
             setTrip(trip);
           }}
-            trip={trip} /> : null
+            trip={trip} />) : null
           }
-
           <section className="user-perfil">
             <div className="contenedor-perfil">
               <div
@@ -90,7 +93,6 @@ export const Trip = () => {
                     {store.trip.destination}
                   </h4>
                 </div>
-
                 <div className="datos-button">
                   <ul className="lista-perfil">
                     <li>
@@ -113,15 +115,14 @@ export const Trip = () => {
                     </li>
                   </ul>
                 </div>
-
-                <div className="opcciones-perfil">
-                  <button type="button" onClick={() => {
-                    console.log('Edit Click');
-                    setModalEdit(true);
-                  }}>
-                    <i className="fas fa-pencil"></i>
-                  </button>
-                </div>
+                {store.user_id == store.trip.id ? (
+                  <div className="opcciones-perfil">
+                    <button type="button" onClick={() => {
+                      setModalEdit(true);
+                    }}>
+                      <i className="fas fa-pencil"></i>
+                    </button>
+                  </div>) : null}
               </div>
             </div>
           </section>
@@ -138,16 +139,11 @@ export const Trip = () => {
                 </Link>
               </b>
             </h3>
-
-            <h5 className="text-dark text-center">{store.trip.user_city_of_residence}</h5>
+            <h5 className="text-dark text-center">{store.trip.user_city_of_residence + " - " + store.trip.user_country}</h5>
             <div className="container">
               <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
-                <p className="text-description">
-                  Lorem ipsum odor amet, consectetuer adipiscing elit. Ac purus
-                  in massa egestas mollis varius; dignissim elementum. Mollis
-                  tincidunt mattis hendrerit dolor eros enim, nisi ligula
-                  ornare. Hendrerit parturient habitant pharetra rutrum gravida
-                  porttitor eros feugiat.
+                <p className="text-description text-break">
+                  {store.trip.text}
                 </p>
               </div>
 

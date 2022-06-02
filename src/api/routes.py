@@ -52,7 +52,7 @@ def protected():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     if user:
-        return jsonify({"logged_in": True}), 200
+        return jsonify({"logged_in": True, "user_id": current_id}), 200
     else:
         return jsonify({"logged_in": False}), 400
 
@@ -78,18 +78,19 @@ def editTrip():
     body_people = request.form.get("people", None)
     body_transport = request.form.get("transport", None)
     body_cost = request.form.get("cost", None)
-
-    if body_destination != "" and body_start_of_the_trip != "" and body_end_of_the_trip != "" and body_people != "" and body_transport != "" and body_cost != "":
+    body_text = request.form.get("text", None)
+    if body_destination != "" and body_start_of_the_trip != "" and body_end_of_the_trip != "" and body_people != "" and body_transport != "" and body_cost != "" and body_text != "":
         if "destination_picture" in request.files:
             body_destination_picture = cloudinary.uploader.upload(
                 request.files['destination_picture'])
-        trip.destination_picture = body_destination_picture['secure_url']
+            trip.destination_picture = body_destination_picture['secure_url']
         trip.destination = body_destination
         trip.start_of_the_trip = body_start_of_the_trip
         trip.end_of_the_trip = body_end_of_the_trip
         trip.people = body_people
         trip.transport = body_transport
         trip.cost = body_cost
+        trip.text = body_text
         db.session.commit()
         return jsonify({"edited": True, "trip": trip.serialize()}), 200
     else:

@@ -2,13 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       user: {
-        username: " ",
-        firstname: " ",
-        lastname: " ",
-        city_of_residence: " ",
-        description:
-          "I like meeting new people, going out and have a good time, forget about the day to day and live the moment, I love the sea.",
+
       },
+      user_id: null,
       trips: [],
       logged: null,
       trip: {}
@@ -28,6 +24,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           );
           const data = await resp.json();
+          if (data.user_id) {
+            setStore({ user_id: data.user_id })
+          }
           setStore({ logged: data.logged_in || false });
         } catch (e) {
           setStore({ logged: false });
@@ -35,7 +34,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       logout: async () => {
         localStorage.clear();
-        setStore({ logged: false });
+        setStore({ logged: false, user_id: null });
       },
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
@@ -58,12 +57,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           );
           const data = await resp.json();
+          data.trip.start_of_the_trip = new Date(data.trip.start_of_the_trip).toISOString().split('T')[0] //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
+          data.trip.end_of_the_trip = new Date(data.trip.end_of_the_trip).toISOString().split('T')[0] //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
           if (resp.status == 200) {
-            console.log("###################")
             setStore({ trip: data.trip });
           }
+
           else {
-            console.log("@@@@@@@@@@@")
             return false
           }
         } catch (e) {
@@ -88,14 +88,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (e) { }
       },
 
-      editTrip: async (trip) => {
+      editTrip: async (trip) => { //función para editar el viaje.
         try {
           let body = new FormData();
-          for (let key in trip) {
+          for (let key in trip) { //Iteramos trip en su index.
             body.append(key, trip[key]);
           }
-          const resp = await fetch("https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip", {
-            method: "PUT",
+          const resp = await fetch("https://3001-4geeksacade-reactflaskh-8j57e2606na.ws-eu46.gitpod.io/api/trip", { //acceso a la base de datos.
+            method: "PUT", //Metodo PUT para modificar la base de datos. si el metodo no se especifica por default es un metodo GET.
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
             },
