@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Logo from "../component/img/traveland.png";
 
 export const Register = () => {
   const [user, setUser] = useState({});
@@ -22,84 +23,111 @@ export const Register = () => {
   };
 
   return (
-    <div className="text-center mt-5">
-      <h1 className="mb-5 pt-4">Register</h1>
-      <div className="row">
-        <label htmlFor="email" className="col-1">
-          Username
-        </label>
-        <input
-          id="username"
-          className="col-3"
-          onChange={(e) => setUser({ ...user, username: e.target.value })}
-        ></input>
-        <label htmlFor="firstname" className="col-1">
-          First name
-        </label>
-        <input
-          id="firstname"
-          className="col-3"
-          onChange={(e) =>
-            setUser({
-              ...user,
-              firstname:
-                e.target.value.charAt(0).toUpperCase() +
-                e.target.value.slice(1).toLowerCase(),
-            })
-          }
-        ></input>
-        <label htmlFor="lastname" className="col-1">
-          Last name
-        </label>
-        <input
-          id="lastname"
-          className="col-3"
-          onChange={(e) =>
-            setUser({
-              ...user,
-              lastname:
-                e.target.value.charAt(0).toUpperCase() +
-                e.target.value.slice(1).toLowerCase(),
-            })
-          }
-        ></input>
-        <label htmlFor="email" className="col-1">
-          Email
-        </label>
-        <input
-          id="email"
-          className="col-3"
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-        ></input>
-        <label htmlFor="password" className="col-1">
-          Password
-        </label>
-        <input
-          id="password"
-          className="col-3"
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        ></input>
-        <label htmlFor="city_of_residence" className="col-1">
-          City of residence
-        </label>
-        <input
-          id="city_of_residence"
-          className="col-3"
-          onChange={(e) =>
-            setUser({
-              ...user,
-              city_of_residence:
-                e.target.value.charAt(0).toUpperCase() +
-                e.target.value.slice(1).toLowerCase(),
-            })
-          }
-        ></input>
-
-        <button className="col-2 offset-1 mb-3" onClick={() => sendUserInfo()}>
-          Register new user
-        </button>
-        <p>You have an account?? <Link to="/login" className="">Login</Link></p>
+    <>
+      <div className="d-flex justify-content-center mt-5">
+        <img
+          className="row me-3"
+          src="https://images.pexels.com/photos/2679814/pexels-photo-2679814.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        />
+        <div className="text-center" style={{ width: "500px" }}>
+          <main className="for-signin">
+            <form className="">
+              <div className="rounded border border-secondary p-4">
+                <div className="p-4">
+                  <img className="mb-4 col-9 " src={Logo} alt="Logo"></img>
+                </div>
+                <div className="form-floating">
+                  <input
+                    className="form-control mb-3"
+                    id="floatingInput"
+                    type="text"
+                    placeholder="username"
+                    onChange={(e) =>
+                      setUser({ ...user, username: e.target.value })
+                    }
+                  />
+                  <label htmlFor="floatingInput">Username</label>
+                </div>
+                <div className="form-floating">
+                  <input
+                    className="form-control mb-3"
+                    id="floatingFirstName"
+                    type="text"
+                    placeholder="firstname"
+                    onChange={(e) =>
+                      setUser({ ...user, firstname: e.target.value })
+                    }
+                  />
+                  <label htmlFor="floatingFirstName">First name</label>
+                </div>
+                <div className="form-floating">
+                  <input
+                    className="form-control mb-3"
+                    id="floatingLastName"
+                    type="text"
+                    placeholder="lastname"
+                    onChange={(e) =>
+                      setUser({ ...user, lastname: e.target.value })
+                    }
+                  />
+                  <label htmlFor="floatingLastName">Last name</label>
+                </div>
+                <div className="form-floating">
+                  <input
+                    className="form-control mb-3"
+                    id="floatingEmail"
+                    type="email"
+                    placeholder="email"
+                    onChange={(e) =>
+                      setUser({ ...user, email: e.target.value })
+                    }
+                  />
+                  <label htmlFor="floatingEmail">Email</label>
+                </div>
+                <div className="form-floating">
+                  <input
+                    className="form-control mb-3"
+                    id="floatingPassword"
+                    type="password"
+                    placeholder="password"
+                    onChange={(e) =>
+                      setUser({ ...user, password: e.target.value })
+                    }
+                  />
+                  <label htmlFor="floatingPassword">Password</label>
+                </div>
+                <Link to="/login">
+                  <button
+                    className="w-50 btn btn-primary mt-3"
+                    onClick={() => {
+                      sendUserInfo();
+                    }}
+                  >
+                    Sign up
+                  </button>
+                </Link>
+                <p className="mt-2 text-center pt-3">
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit
+                </p>
+              </div>
+              <div className="rounded border border-secondary mt-4">
+                <p className="text-center pb-1 p-3">
+                  Do you have an account?{" "}
+                  <strong>
+                    <Link
+                      className=""
+                      to="/login"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Login
+                    </Link>
+                  </strong>
+                </p>
+              </div>
+            </form>
+          </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
