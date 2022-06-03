@@ -19,6 +19,7 @@ def login_user():
         user = User.query.filter_by(email=body_email).filter_by(
             password=body_password).first()
         if user:
+            # identity es un parametro de la libreria de token JWT. Aca dentro de todo el token se encuentra el parametro que yo desee. EN este caso, user.id
             token = create_access_token(identity=user.id)
             return jsonify({"logged": True, "token": token, "user": user.serialize()}), 200
         else:
@@ -210,6 +211,7 @@ def get_trips():
     user = User.query.get(current_id)
     if user:
         trips = Trip.query.all()
+        # aca me hace un mapeo de una lista de instancia de clases.
         return jsonify({"trips": list(map(lambda trip: trip.serialize(), trips))}), 200
     else:
         return jsonify({"error": "error"}), 400
