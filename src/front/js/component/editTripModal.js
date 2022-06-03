@@ -125,10 +125,13 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                   editTrip({ ...trip, transport: e.target.value })
                 }
               >
+                <option>None</option>
                 <option>Car</option>
                 <option>Airplane</option>
                 <option>Train</option>
                 <option>Boat</option>
+                <option>Bike</option>
+                <option>Motorcycle</option>
               </select>
             </div>
             {/* Cost */}

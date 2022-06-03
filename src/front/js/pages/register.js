@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const [user, setUser] = useState({});
@@ -22,6 +23,7 @@ export const Register = () => {
 
   return (
     <div className="text-center mt-5">
+      <h1 className="mb-5 pt-4">Register</h1>
       <div className="row">
         <label htmlFor="email" className="col-1">
           Username
@@ -93,9 +95,10 @@ export const Register = () => {
           }
         ></input>
 
-        <button className="col-2 offset-1" onClick={() => sendUserInfo()}>
+        <button className="col-2 offset-1 mb-3" onClick={() => sendUserInfo()}>
           Register new user
         </button>
+        <p>You have an account?? <Link to="/login" className="">Login</Link></p>
       </div>
     </div>
   );

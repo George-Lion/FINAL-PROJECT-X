@@ -42,7 +42,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 id="destination"
                 className="col-5"
                 onChange={(e) =>
-                  createTrip({ ...trip, destination: e.target.value })
+                  createTrip({
+                    ...trip, destination: e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
                 }
               ></input>
             </div>

@@ -23,7 +23,7 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          <Navbar />
+          {store.logged == true ? (<Navbar />) : (null)}
           <div>
             <Switch>
               <Route exact path="/">

@@ -84,27 +84,28 @@ def editUser():
         body_lastname = "Last Name"
     body_city_of_residence = request.form.get("city_of_residence", None)
     if body_city_of_residence == "" or body_city_of_residence == None:
-        body_city_of_residence = "city of residence"
+        body_city_of_residence = "City"
     body_description = request.form.get("description", None)
     if body_description == "" or body_description == None:
         body_description = "Description"
     body_country = request.form.get("country", None)
     if body_country == "" or body_country == None:
         body_country = "Country"
-        if "profile_picture" in request.files:
-            body_profile_picture = cloudinary.uploader.upload(
-                request.files['profile_picture'])
-            user.profile_picture = body_profile_picture['secure_url']
-        else:
-            user.profile_picture = "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        user.username = body_username
-        user.firstname = body_firstname
-        user.lastname = body_lastname
-        user.city_of_residence = body_city_of_residence
-        user.description = body_description
-        user.country = body_country
-        db.session.commit()
-        return jsonify({"edited": True, "user": user.serialize()}), 200
+
+    if "profile_picture" in request.files:
+        body_profile_picture = cloudinary.uploader.upload(
+            request.files['profile_picture'])
+        user.profile_picture = body_profile_picture['secure_url']
+    else:
+        user.profile_picture = "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    user.username = body_username
+    user.firstname = body_firstname
+    user.lastname = body_lastname
+    user.city_of_residence = body_city_of_residence
+    user.description = body_description
+    user.country = body_country
+    db.session.commit()
+    return jsonify({"edited": True, "user": user.serialize()}), 200
 
 
 @api.route("/trip/<int:trip_id>", methods=["GET"])
@@ -133,32 +134,30 @@ def editTrip():
         body_end_of_the_trip = "End"
     body_people = request.form.get("people", None)
     if body_people == "" or body_people == None:
-        body_people = "Travel Buddies"
+        body_people = "0"
     body_transport = request.form.get("transport", None)
     if body_transport == "" or body_transport == None:
-        body_transport = "Transport"
+        body_transport = "None"
     body_cost = request.form.get("cost", None)
     if body_cost == "" or body_cost == None:
         body_cost = "0"
     body_text = request.form.get("text", None)
     if body_text == "" or body_text == None:
         body_text = "Text"
-    if body_destination != "" and body_start_of_the_trip != "" and body_end_of_the_trip != "" and body_people != "" and body_transport != "" and body_cost != "" and body_text != "":
-        if "destination_picture" in request.files:
-            body_destination_picture = cloudinary.uploader.upload(
-                request.files['destination_picture'])
-            trip.destination_picture = body_destination_picture['secure_url']
-        trip.destination = body_destination
-        trip.start_of_the_trip = body_start_of_the_trip
-        trip.end_of_the_trip = body_end_of_the_trip
-        trip.people = body_people
-        trip.transport = body_transport
-        trip.cost = body_cost
-        trip.text = body_text
-        db.session.commit()
-        return jsonify({"edited": True, "trip": trip.serialize()}), 200
-    else:
-        return jsonify({"edited": False, "msg": "Falta información"}), 400
+
+    if "destination_picture" in request.files:
+        body_destination_picture = cloudinary.uploader.upload(
+            request.files['destination_picture'])
+        trip.destination_picture = body_destination_picture['secure_url']
+    trip.destination = body_destination
+    trip.start_of_the_trip = body_start_of_the_trip
+    trip.end_of_the_trip = body_end_of_the_trip
+    trip.people = body_people
+    trip.transport = body_transport
+    trip.cost = body_cost
+    trip.text = body_text
+    db.session.commit()
+    return jsonify({"edited": True, "trip": trip.serialize()}), 200
 
 
 @api.route("/trips", methods=["GET"])

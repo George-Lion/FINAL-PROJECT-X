@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const history = useHistory();
@@ -31,8 +32,7 @@ export const Login = () => {
 
   return (
     <div className="bg">
-      <br></br>
-      <div className="text-center mx-auto">
+      <div className="text-center mx-auto mt-5">
         <h1 className="mb-5 pt-4">LOGIN</h1>
         <div className="row mx-auto w-75">
           <label htmlFor="email" className="">
@@ -56,13 +56,14 @@ export const Login = () => {
           ></input>
         </div>
         <button
-          className="btn btn-light mt-3 pb-1"
+          className="btn btn-light mt-3 pb-1 mb-3"
           onClick={() => {
             loginUser();
           }}
         >
           Login
         </button>
+        <p>You do not have an account? <Link to="/register" className="">Sign up</Link></p>
       </div>
     </div>
   );

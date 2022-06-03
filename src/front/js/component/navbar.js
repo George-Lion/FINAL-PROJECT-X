@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import image from "./img/traveland.png";
@@ -6,6 +6,10 @@ import "../../styles/navbar.css";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  useEffect(() => {
+    actions.getUser();
+  }, []);
+
   return (
     <header>
       <div
@@ -51,7 +55,7 @@ export const Navbar = () => {
                       aria-expanded="false"
                     >
                       <img
-                        src="https://images.pexels.com/photos/3579181/pexels-photo-3579181.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                        src={store.user.profile_picture}
                         alt="mdo"
                         width="45"
                         height="45"
@@ -62,26 +66,23 @@ export const Navbar = () => {
                       className="dropdown-menu text-small"
                       aria-labelledby="dropdownUser1"
                     >
-                      <li>
-                        <p className="dropdown-item " href="#">
-                          Create Trip
-                        </p>
+                      <li className="ps-3 pb-1">
+                        Hola <b>{store.user.firstname}</b>
+                      </li>
+                      <li className="ps-3">
+                        Create Trip
                       </li>
                       <Link to="/help">
-                        <li>
-                          <p className="dropdown-item" href="#">
-                            Help
-                          </p>
+                        <li className="ps-3">
+                          Help
                         </li>
                       </Link>
                       <Link to="/profile">
-                        <li>
-                          <p className="dropdown-item" href="#">
-                            Profile
-                          </p>
+                        <li className="ps-3">
+                          Profile
                         </li>
                       </Link>
-                      <li>
+                      <li className="ps-3">
                         <hr className="dropdown-divider" />
                       </li>
                       <Link to="/login">
