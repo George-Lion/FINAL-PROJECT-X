@@ -30,6 +30,14 @@ class User(db.Model):
         }
 
 
+likes = db.Table('like',
+                 db.Column('user_id', db.Integer, db.ForeignKey(
+                     'user.id'), primary_key=True),
+                 db.Column('trip_id', db.Integer, db.ForeignKey(
+                     'trip.id'), primary_key=True)
+                 )
+
+
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id_of_trip_creator = db.Column(db.Integer, db.ForeignKey("user.id"))
@@ -42,6 +50,8 @@ class Trip(db.Model):
     text = db.Column(db.String(120), unique=False, nullable=True)
     destination_picture = db.Column(
         db.String(300), unique=False, nullable=True)
+    likes = db.relationship('User', secondary=likes, lazy='subquery',
+                            backref=db.backref('users', lazy=True))
     trip_in_match = db.relationship("MatchTrip")
 
     def serialize(self):
@@ -63,6 +73,7 @@ class Trip(db.Model):
             "cost": self.cost,
             "text": self.text,
             "destination_picture": self.destination_picture,
+            "likes":  list(map(lambda like: like.id, self.likes))
         }
 
 

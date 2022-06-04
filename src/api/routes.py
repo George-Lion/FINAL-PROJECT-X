@@ -171,6 +171,21 @@ def get_user_trips():
         return jsonify({"error": "Usuario no encontrado"}), 400
 
 
+""" empezar por aqui """
+
+
+@api.route("/tripLikes", methods=["GET"])
+@jwt_required()
+def add_like_trip():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        trips = Trip.query.all()
+        return jsonify({"trips": list(map(lambda trip: trip.serialize(), trips))}), 200
+    else:
+        return jsonify({"error": "error"}), 400
+
+
 @api.route("/user/profiles", methods=["GET"])
 @jwt_required()
 def get_user_profiles():
