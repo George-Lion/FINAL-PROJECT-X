@@ -3,12 +3,10 @@
 `npm install moment --save`
 https://momentjs.com/
 
-`npm i @react-google-maps/api`
+Google Maps
+Google Maps JavaScript API →`npm i @react-google-maps/api`
 Google Maps JavaScript API React Wrapper on NPM → `npm i @googlemaps/react-wrapper`
-use-places-autocomplete by wellyshen on NPM → `npm i use-places-autocomplete`
-Reach combobox on NPM → `npm i @reach/combobox`
-
-googlemaps
+npm install --save react-geocode
 
 # WebApp boilerplate with React JS and Flask API
 

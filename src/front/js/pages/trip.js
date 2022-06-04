@@ -4,7 +4,6 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import { SendMessageModal } from "../component/sendMessageModal";
 import { EditTripModal } from "../component/editTripModal";
 import { GoogleMapsApi } from "../component/googleMapsApi";
-
 import moment from "moment";
 import "../../styles/trip.css";
 
