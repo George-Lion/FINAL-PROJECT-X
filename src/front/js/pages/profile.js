@@ -192,7 +192,7 @@ export const Profile = () => {
                       <div className="card-body">
                         <h5 className="card-title">{e.fullname}</h5>
                         <p className="card-text">
-                          Exelente persona, vivimos muchas aventuras juntas.
+                          Excelente persona, vivimos muchas aventuras juntas.
                         </p>
                         <Link
                           style={{ textDecoration: "none" }}
