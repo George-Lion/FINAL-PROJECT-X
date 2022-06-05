@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import "../../styles/createTripModal.css";
 
 export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
   const { store, actions } = useContext(Context);
@@ -35,21 +36,22 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
             ></button>
           </div>
 
-          {/* Banner */}
+          {/* BANNER */}
 
           <div className="modal-body m-5">
             <div className="row text-center">
               <input
                 type="file"
+                className="custom-file-input3"
                 onChange={(e) =>
                   createTrip({ ...trip, destination_picture: e.target.files[0] })
                 }
               />
             </div>
 
-            {/* Destination */}
+            {/* DESTINATION */}
 
-            <div className="row text-center mb-2 mt-4">
+            <div className="row mb-2 mt-4">
               <label htmlFor="place" className="col-6">
                 Destination
               </label>
@@ -67,9 +69,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               ></input>
             </div>
 
-            {/* start trip */}
+            {/* START TRIP */}
 
-            <div className="row text-center mb-2">
+            <div className="row  mb-2">
               <label htmlFor="startTrip" className="col-6">
                 Start of the trip
               </label>
@@ -87,9 +89,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               ></input>
             </div>
 
-            {/* end trip */}
+            {/* END TRIP */}
 
-            <div className="row text-center mb-2">
+            <div className="row  mb-2">
               <label htmlFor="endTrip" className="col-6">
                 End of the trip
               </label>
@@ -108,9 +110,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               ></input>
             </div>
 
-            {/* people */}
+            {/* PEOPLE */}
 
-            <div className="row text-center mb-2">
+            <div className="row  mb-2">
               <label htmlFor="people" className="col-6">
                 Travel buddies
               </label>
@@ -130,7 +132,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
 
             {/* Transport */}
 
-            <div className="row text-center mb-2">
+            <div className="row  mb-2">
               <label htmlFor="transport" className="col-6">
                 Transport
               </label>
@@ -155,9 +157,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               </select>
             </div>
 
-            {/* Cost */}
+            {/* COST */}
 
-            <div className="row text-center mb-2">
+            <div className="row  mb-2">
               <label htmlFor="cost" className="col-6">
                 Cost
               </label>
@@ -176,9 +178,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               ></input>
             </div>
 
-            {/* Text */}
+            {/* TEXT */}
 
-            <h4>Write a text</h4>
+            <h5>write a text</h5>
             <div className="input-group">
               <textarea
                 name="contador"

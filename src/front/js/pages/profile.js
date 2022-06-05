@@ -34,9 +34,12 @@ export const Profile = () => {
             <div className="shadow-banner"></div>
             <div className="avatar-picture-profile">
               <img src={store.user.profile_picture} alt="img" />
-              <a href="#" className="cambiar-foto" >
+              <a href="#" className="cambiar-foto" onClick={(e) => {
+                setShowEdit(true);
+                setUser(store.user);
+              }}>
                 <i className="fas fa-camera"></i>
-                <span>Cambiar foto</span>
+                <span>change photo</span>
               </a>
 
               <label htmlFor="inputTag" className="label-style">
@@ -68,7 +71,7 @@ export const Profile = () => {
             </div>
           </div>
           <div className="information-box pt-1">
-            <h4 className="information"><b>{store.user.firstname + " " + store.user.lastname}</b></h4>
+            <h3 className="information"><b>{store.user.firstname + " " + store.user.lastname}</b></h3>
             <h5 className="information">
               {store.user.city_of_residence + " - " + store.user.country}
             </h5>
@@ -208,7 +211,7 @@ export const Profile = () => {
             <div className="card mb-3 mt-4" style={{ "maxWidth": "540px" }}>
               <div className="row g-0">
                 <div className="col-md-4">
-                  <img src="..." className="img-fluid rounded-start" alt="..." />
+                  <img src="https://images.pexels.com/photos/5794559/pexels-photo-5794559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="img-fluid rounded-start" alt="..." />
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">

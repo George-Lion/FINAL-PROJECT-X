@@ -146,7 +146,7 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
               {/* COVER & PROFILE PICTURE*/}
 
               <div className="row ">
-                <label htmlFor="file">
+                <label htmlFor="file" className="mx-auto">
                   <input
                     type="file" name="file" id="file" className="custom-file-input"
                     onChange={(e) =>
@@ -201,11 +201,6 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
           </div>
         </div>
       </div>
-
-
-      {/*  NUEVO */}
-
-
     </div>
   );
 };
