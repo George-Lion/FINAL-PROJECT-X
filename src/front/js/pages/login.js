@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import logo from "../component/img/traveland.png";
 
 export const Login = () => {
   const history = useHistory();
@@ -31,40 +32,69 @@ export const Login = () => {
   };
 
   return (
-    <div className="bg">
-      <div className="text-center mx-auto mt-5">
-        <h1 className="mb-5 pt-4">LOGIN</h1>
-        <div className="row mx-auto w-75">
-          <label htmlFor="email" className="">
-            Email
-          </label>
-          <input
-            id="email"
-            onChange={(e) => {
-              setUser({ ...user, email: e.target.value });
-            }}
-          ></input>
-          <label htmlFor="password" className="">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            onChange={(e) => {
-              setUser({ ...user, password: e.target.value });
-            }}
-          ></input>
+    <Fragment>
+      <div className="mt-5 row justify-content-center align-items-center"></div>
+      <div className="mt-5 mb-5 row justify-content-center align-items-center ">
+        <div className="col-auto bg-ganger p-5 text-center" style={{ width: "500px" }}>
+          <main className="form-signin">
+            <form className="">
+              <div className="border border-1 p-4 rounded">
+                <div className="p-5 pb-0 pt-0">
+                  <img className="mb-4 pb-4 pt-4 col-12" src={logo} alt="" />
+                </div>
+                <div className="form-floating mb-2 ">
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="floatingInput"
+                    placeholder="name@example.com" onChange={(e) => {
+                      setUser({ ...user, email: e.target.value });
+                    }}
+                  />
+                  <label htmlFor="floatingInput">Email address</label>
+                </div>
+                <div className="form-floating mb-2">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="floatingPassword"
+                    placeholder="Password" onChange={(e) => {
+                      setUser({ ...user, password: e.target.value });
+                    }}
+                  />
+                  <label htmlFor="floatingPassword">Password</label>
+                </div>
+                <button
+                  className="w-100 btn btn-lg btn-primary mb-4 mt-2"
+                  type="submit" onClick={() => {
+                    loginUser();
+                  }}
+                >
+                  Login
+                </button>
+                <div className="checkbox mb-2 mx-center">
+                  <label>
+                    <input type="checkbox" value="remember-me" /> Remember me
+                  </label>
+                </div>
+              </div>
+              <div className="border border-1 mt-4 pt-3 pb-2 rounded">
+                <p className="text-center">
+                  You do not have an account?
+                  <Link
+                    className="text-primary"
+                    to="/register"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <strong> Sign up</strong>
+                  </Link>
+                </p>
+              </div>
+            </form>
+          </main>
         </div>
-        <button
-          className="btn btn-light mt-3 pb-1 mb-3"
-          onClick={() => {
-            loginUser();
-          }}
-        >
-          Login
-        </button>
-        <p>You do not have an account? <Link to="/register" className="">Sign up</Link></p>
       </div>
-    </div>
+      <div className="row justify-content-center align-items-center" style={{ height: "220px" }}></div>
+    </Fragment>
   );
 };
