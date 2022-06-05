@@ -110,7 +110,6 @@ export const Profile = () => {
         <br />
         <div style={{ marginTop: "300px" }}>
           <h1>My Rutes</h1>
-
           <br />
 
           {/*rutes*/}
@@ -128,7 +127,7 @@ export const Profile = () => {
                 return (
                   <div
                     key={e.id}
-                    className="col container"
+                    className="col container rounded"
                     style={{ width: "800px" }}
                   >
                     <Link style={{ textDecoration: "none" }} to="/trip">
