@@ -26,6 +26,7 @@ export const Trip = () => {
     setTrip(store.trip)
   }, [store.trip]);
 
+
   const peopleCards = [
     {
       id: 1,
@@ -115,7 +116,7 @@ export const Trip = () => {
                     </li>
                   </ul>
                 </div>
-                {store.user_id == store.trip.id ? (
+                {store.user_id == store.trip.user_id_of_trip_creator ? (
                   <div className="opcciones-perfil">
                     <button type="button" onClick={() => {
                       setModalEdit(true);
