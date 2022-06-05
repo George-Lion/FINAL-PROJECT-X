@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       trips: [],
       logged: null,
       trip: {},
+      googleMapTrip: {},
       searchedTrip: [],
     },
 
@@ -132,6 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             .split("T")[0]; //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
           if (resp.status == 200) {
             setStore({ trip: data.trip });
+            setStore({ googleMapTrip: data.trip });
           } else {
             return false;
           }
