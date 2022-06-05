@@ -12,8 +12,7 @@ export const Navbar = () => {
 
   return (
     <header>
-      <div
-        className="px-3 py-2 bg-dark text-white ">
+      <div className="px-3 py-2 bg-dark text-white ">
         <div className="container">
           <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <Link
@@ -69,18 +68,12 @@ export const Navbar = () => {
                       <li className="ps-3 pb-1">
                         Hola <b>{store.user.firstname}</b>
                       </li>
-                      <li className="ps-3">
-                        Create Trip
-                      </li>
-                      <Link to="/help">
-                        <li className="ps-3">
-                          Help
-                        </li>
-                      </Link>
+                      <li className="ps-3">Create Trip</li>
                       <Link to="/profile">
-                        <li className="ps-3">
-                          Profile
-                        </li>
+                        <li className="ps-3">Profile</li>
+                      </Link>
+                      <Link to="/help">
+                        <li className="ps-3">Help</li>
                       </Link>
                       <li className="ps-3">
                         <hr className="dropdown-divider" />

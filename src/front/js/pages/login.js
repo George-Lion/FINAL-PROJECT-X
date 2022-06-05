@@ -35,7 +35,10 @@ export const Login = () => {
     <Fragment>
       <div className="mt-5 row justify-content-center align-items-center"></div>
       <div className="mt-5 mb-5 row justify-content-center align-items-center ">
-        <div className="col-auto bg-ganger p-5 text-center" style={{ width: "500px" }}>
+        <div
+          className="col-auto bg-ganger p-5 text-center"
+          style={{ width: "500px" }}
+        >
           <main className="form-signin">
             <form className="">
               <div className="border border-1 p-4 rounded">
@@ -47,7 +50,8 @@ export const Login = () => {
                     type="email"
                     className="form-control"
                     id="floatingInput"
-                    placeholder="name@example.com" onChange={(e) => {
+                    placeholder="name@example.com"
+                    onChange={(e) => {
                       setUser({ ...user, email: e.target.value });
                     }}
                   />
@@ -58,7 +62,8 @@ export const Login = () => {
                     type="password"
                     className="form-control"
                     id="floatingPassword"
-                    placeholder="Password" onChange={(e) => {
+                    placeholder="Password"
+                    onChange={(e) => {
                       setUser({ ...user, password: e.target.value });
                     }}
                   />
@@ -66,7 +71,8 @@ export const Login = () => {
                 </div>
                 <button
                   className="w-100 btn btn-lg btn-primary mb-4 mt-2"
-                  type="submit" onClick={() => {
+                  type="submit"
+                  onClick={() => {
                     loginUser();
                   }}
                 >
@@ -94,7 +100,10 @@ export const Login = () => {
           </main>
         </div>
       </div>
-      <div className="row justify-content-center align-items-center" style={{ height: "220px" }}></div>
+      <div
+        className="row justify-content-center align-items-center"
+        style={{ height: "220px" }}
+      ></div>
     </Fragment>
   );
 };
