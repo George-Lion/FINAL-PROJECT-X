@@ -19,28 +19,45 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
       }}
     >
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div className="modal-content">
-          <div className="modal-header">
+        <div className="modal-content bg-dark text-light">
+          <div className="modal-header ">
             <h5 className="modal-title" id="staticBackdropLabel">
-              Edit user
+              Create Trip
             </h5>
+            {/* close buttom */}
             <button
               type="button"
-              className="btn-close"
+              className="btn-close bg-light"
               aria-label="Close"
               onClick={() => {
                 closeModal();
               }}
             ></button>
           </div>
-          <div className="modal-body">
+
+          {/* Banner */}
+
+          <div className="modal-body m-5">
             <div className="row text-center">
-              <label htmlFor="destination" className="col-4">
+              <input
+                type="file"
+                onChange={(e) =>
+                  createTrip({ ...trip, destination_picture: e.target.files[0] })
+                }
+              />
+            </div>
+
+            {/* Destination */}
+
+            <div className="row text-center mb-2 mt-4">
+              <label htmlFor="place" className="col-6">
                 Destination
               </label>
               <input
-                id="destination"
+                id="place"
                 className="col-5"
+                placeholder="Destination"
+                maxLength={25}
                 onChange={(e) =>
                   createTrip({
                     ...trip, destination: e.target.value.charAt(0).toUpperCase() +
@@ -49,63 +66,149 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 }
               ></input>
             </div>
-            <div className="row text-center">
-              <label htmlFor="date_of_the_trip" className="col-4">
-                Date of the Trip
+
+            {/* start trip */}
+
+            <div className="row text-center mb-2">
+              <label htmlFor="startTrip" className="col-6">
+                Start of the trip
               </label>
               <input
+                id="startTrip"
                 type="date"
-                id="date_of_the_trip"
                 className="col-5"
+                placeholder="Start"
                 onChange={(e) =>
-                  createTrip({ ...trip, date_of_the_trip: e.target.value })
+                  createTrip({
+                    ...trip, start_of_the_trip: e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
                 }
               ></input>
             </div>
-            <div className="row text-center">
-              <label htmlFor="people" className="col-4">
-                People
+
+            {/* end trip */}
+
+            <div className="row text-center mb-2">
+              <label htmlFor="endTrip" className="col-6">
+                End of the trip
               </label>
               <input
+                id="endTrip"
+                type="date"
+                required
+                className="col-5"
+                placeholder="End"
+                onChange={(e) =>
+                  createTrip({
+                    ...trip, end_of_the_trip: e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
+                }
+              ></input>
+            </div>
+
+            {/* people */}
+
+            <div className="row text-center mb-2">
+              <label htmlFor="people" className="col-6">
+                Travel buddies
+              </label>
+              <input
+                type="number"
                 id="people"
                 className="col-5"
+                placeholder="Travel buddies"
                 onChange={(e) =>
-                  createTrip({ ...trip, people: e.target.value })
+                  createTrip({
+                    ...trip, people: e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
                 }
               ></input>
             </div>
-            <div className="row text-center">
-              <label htmlFor="transport" className="col-4">
+
+            {/* Transport */}
+
+            <div className="row text-center mb-2">
+              <label htmlFor="transport" className="col-6">
                 Transport
               </label>
-              <input
-                id="transport"
+              <select
+                name="transporte"
                 className="col-5"
+                placeholder="none"
                 onChange={(e) =>
-                  createTrip({ ...trip, transport: e.target.value })
+                  createTrip({
+                    ...trip, transport: e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
                 }
-              ></input>
+              >
+                <option>None</option>
+                <option>Car</option>
+                <option>Airplane</option>
+                <option>Train</option>
+                <option>Boat</option>
+                <option>Bike</option>
+                <option>Motorcycle</option>
+              </select>
             </div>
-            <div className="row text-center">
-              <label htmlFor="cost" className="col-4">
+
+            {/* Cost */}
+
+            <div className="row text-center mb-2">
+              <label htmlFor="cost" className="col-6">
                 Cost
               </label>
               <input
+                type="number"
+                max="9999"
                 id="cost"
                 className="col-5"
-                onChange={(e) => createTrip({ ...trip, cost: e.target.value })}
+                placeholder="Cost"
+                onChange={(e) =>
+                  createTrip({
+                    ...trip, cost: e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
+                }
               ></input>
             </div>
+
+            {/* Text */}
+
+            <h4>Write a text</h4>
+            <div className="input-group">
+              <textarea
+                name="contador"
+                id="contador"
+                className="form-control"
+                aria-label="With textarea"
+                maxLength={120}
+                placeholder="Text"
+                onChange={(e) =>
+                  createTrip({
+                    ...trip, text: e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
+                }
+              ></textarea>
+            </div>
+            {/* <p>{user.description.length}/120</p> */}
           </div>
+
+          {/* Save buttom */}
+
           <div className="modal-footer">
             <button
-              className="col-2 offset-1 btn btn-primary"
+              className="col-2 offset-1 btn btn-light"
               onClick={() => {
                 actions.createTrip(trip);
                 closeModal();
               }}
             >
-              Change
+              Save
             </button>
           </div>
         </div>

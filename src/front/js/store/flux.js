@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-nah4r194rpj.ws-eu46.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -50,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       getUserTrips: async () => {
@@ -64,7 +64,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userTrips: data.trips });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       getUserProfiles: async () => {
@@ -78,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userProfiles: data.profiles });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       editUser: async (user) => {
@@ -96,22 +96,25 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       createTrip: async (trip) => {
         try {
+          let body = new FormData();
+          for (let key in trip) {
+            body.append(key, trip[key]);
+          }
           const resp = await fetch(getStore().url + "create/trip", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("token"),
             },
-            body: JSON.stringify(trip),
+            body: body,
           });
           const data = await resp.json();
           getActions().getUserTrips();
-        } catch (e) {}
+        } catch (e) { }
       },
 
       getTrip: async (id) => {
@@ -151,7 +154,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trips: data.trips });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       editTrip: async (trip) => {
@@ -172,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trip: data.trip });
-        } catch (e) {}
+        } catch (e) { }
       },
     },
   };

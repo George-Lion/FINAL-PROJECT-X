@@ -13,6 +13,8 @@ class User(db.Model):
     city_of_residence = db.Column(db.String(120), unique=False, nullable=True)
     country = db.Column(db.String(120), unique=False, nullable=True)
     profile_picture = db.Column(db.String(120), unique=False, nullable=True)
+    banner_picture = db.Column(
+        db.String(300), unique=False, nullable=True)
     description = db.Column(db.Text, unique=False, nullable=True)
     created_trip = db.relationship("Trip", backref="User")
 
@@ -26,6 +28,7 @@ class User(db.Model):
             "city_of_residence": self.city_of_residence,
             "country": self.country,
             "profile_picture": self.profile_picture,
+            "banner_picture": self.banner_picture,
             "description": self.description
         }
 
