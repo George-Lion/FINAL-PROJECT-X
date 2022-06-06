@@ -1,4 +1,4 @@
-/* COVER */
+/* BANNER */
 
 .user-profile {
   background: linear-gradient(#ffffff, transparent);
@@ -138,8 +138,8 @@
 }
 
 .information-bio {
-  font-size: 23px;
-  padding-top: 20px;
+  font-size: 21px;
+  padding-top: 19px;
   padding-left: 90px;
   margin-left: 80px;
 }
@@ -229,6 +229,16 @@
   border-radius: 20px;
 }
 
+/* RESOLUTION 1270px */
+
+@media (max-width: 1270px) {
+  .information-bio {
+    font-size: 18px;
+    padding: 15px;
+    margin-left: 15px;
+  }
+}
+
 /* RESOLUTION 780px */
 
 @media (max-width: 780px) {
@@ -275,7 +285,7 @@
   }
 
   .information-bio {
-    font-size: 16px;
+    font-size: 15px;
     padding: 15px;
     margin-left: 15px;
   }

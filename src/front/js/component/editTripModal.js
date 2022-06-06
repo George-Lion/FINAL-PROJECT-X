@@ -150,7 +150,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               ></input>
             </div>
             {/* Text */}
-            <h4>Write a text</h4>
+            <p>Description of the trip:</p>
             <div className="input-group">
               <textarea
                 defaultValue={trip.text}
@@ -159,7 +159,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 className="form-control"
                 aria-label="With textarea"
                 maxLength={220}
-                placeholder="Insert a description of the trip"
+                placeholder="Text"
                 onChange={(e) => editTrip({ ...trip, text: e.target.value })}
               ></textarea>
             </div>
