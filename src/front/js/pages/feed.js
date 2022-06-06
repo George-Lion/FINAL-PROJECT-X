@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/feed.css";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import "../../styles/feed.css";
 
 export const Feed = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,7 +28,7 @@ export const Feed = () => {
   }, []);
 
   return (
-    <>
+    <Fragment>
       <nav className="navbar mt-2">
         <div className="container-fluid justify-content-center">
           <form className="d-flex" role="search">
@@ -183,6 +183,6 @@ export const Feed = () => {
             );
           })}
       </div>
-    </>
+    </Fragment>
   );
 };
