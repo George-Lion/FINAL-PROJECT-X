@@ -19,11 +19,10 @@ export const Trip = () => {
     if (!store.trip) {
       history.push("/feed");
     }
-
   }, []);
 
   useEffect(() => {
-    setTrip(store.trip)
+    setTrip(store.trip);
   }, [store.trip]);
 
 
@@ -65,23 +64,31 @@ export const Trip = () => {
       {/*Banner*/}
       {store.trip ? (
         <>
-          {modalMessage ? <SendMessageModal closeModal={() => {
-            setModalMessage(false);
-          }} /> : null
-          }
-          {modalEdit ? (<EditTripModal closeModal={() => {
-            setModalEdit(false);
-          }} editTrip={(trip) => {
-            setTrip(trip);
-          }}
-            trip={trip} />) : null
-          }
+          {modalMessage ? (
+            <SendMessageModal
+              closeModal={() => {
+                setModalMessage(false);
+              }}
+            />
+          ) : null}
+          {modalEdit ? (
+            <EditTripModal
+              closeModal={() => {
+                setModalEdit(false);
+              }}
+              editTrip={(trip) => {
+                setTrip(trip);
+              }}
+              trip={trip}
+            />
+          ) : null}
           <section className="user-perfil">
             <div className="contenedor-perfil">
               <div
                 className="portada-perfil"
                 style={{
-                  backgroundImage: "url(" + store.trip.destination_picture + ")",
+                  backgroundImage:
+                    "url(" + store.trip.destination_picture + ")",
                 }}
               >
                 <div className="sombra"></div>
@@ -101,9 +108,10 @@ export const Trip = () => {
                         type="button"
                         className="mach-button btn btn-light "
                         onClick={() => {
-                          console.log('Modal Click');
+                          console.log("Modal Click");
                           setModalMessage(true);
-                        }}>
+                        }}
+                      >
                         I'm in
                       </button>
                     </li>
@@ -112,18 +120,23 @@ export const Trip = () => {
                 <div className="datos-like">
                   <ul className="lista-perfil">
                     <li>
-                      36 <i className="fas fa-heart"></i>
+                      <i className="fas fa-heart"></i>
+                      {store.trip.likes ? store.trip.likes.length : 0}
                     </li>
                   </ul>
                 </div>
                 {store.user_id == store.trip.user_id_of_trip_creator ? (
                   <div className="opcciones-perfil">
-                    <button type="button" onClick={() => {
-                      setModalEdit(true);
-                    }}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModalEdit(true);
+                      }}
+                    >
                       <i className="fas fa-pencil"></i>
                     </button>
-                  </div>) : null}
+                  </div>
+                ) : null}
               </div>
             </div>
           </section>
@@ -140,12 +153,14 @@ export const Trip = () => {
                 </Link>
               </b>
             </h3>
-            <h5 className="text-dark text-center">{store.trip.user_city_of_residence + " - " + store.trip.user_country}</h5>
+            <h5 className="text-dark text-center">
+              {store.trip.user_city_of_residence +
+                " - " +
+                store.trip.user_country}
+            </h5>
             <div className="container">
               <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
-                <p className="text-description text-break">
-                  {store.trip.text}
-                </p>
+                <p className="text-description text-break">{store.trip.text}</p>
               </div>
 
               {/* Features */}
@@ -165,7 +180,8 @@ export const Trip = () => {
                   {store.trip.transport}
                 </p>
                 <p className="features">
-                  <i className="icon-image icon fas fa-coins"></i> {store.trip.cost} €
+                  <i className="icon-image icon fas fa-coins"></i>{" "}
+                  {store.trip.cost} €
                 </p>
               </div>
 

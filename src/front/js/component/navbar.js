@@ -31,7 +31,7 @@ export const Navbar = () => {
               ) : null}
               {store.logged == true ? (
                 <li>
-                  <Link to="/trip/" className="navbar-icon me-4 text-light ">
+                  <Link to="/myTrips/" className="navbar-icon me-4 text-light ">
                     <i className="fas fa-map-marker-alt"></i>
                   </Link>
                 </li>
@@ -74,6 +74,7 @@ export const Navbar = () => {
                       </Link>
                       <Link to="/help">
                         <li className="ps-3">Help</li>
+
                       </Link>
                       <li className="ps-3">
                         <hr className="dropdown-divider" />

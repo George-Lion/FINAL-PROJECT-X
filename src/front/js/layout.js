@@ -8,6 +8,7 @@ import { Login } from "./pages/login";
 import { Profile } from "./pages/profile";
 import { Register } from "./pages/register";
 import { Message } from "./pages/message";
+import { MyTrips } from "./pages/myTrips";
 import { Help } from "./pages/help";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
@@ -23,7 +24,7 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          {store.logged == true ? (<Navbar />) : (null)}
+          {store.logged == true ? <Navbar /> : null}
           <div>
             <Switch>
               <Route exact path="/">
@@ -57,6 +58,9 @@ const Layout = () => {
               </Route>
               <Route exact path="/message">
                 <Message />
+              </Route>
+              <Route exact path="/mytrips">
+                <MyTrips />
               </Route>
               <Route exact path="/help">
                 <Help />

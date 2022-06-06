@@ -9,6 +9,7 @@ export const Profile = () => {
   const { store, actions } = useContext(Context);
   const [showEdit, setShowEdit] = useState(false);
   const [showCreateTrip, setShowCreateTrip] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
   const [user, setUser] = useState();
   const [trip, setTrip] = useState({});
 
@@ -20,10 +21,66 @@ export const Profile = () => {
 
   return (
     <div>
-      <img
-        src="https://wallpaperaccess.com/full/6584451.jpg"
-        style={{ width: "100%", height: "300px" }}
-      ></img>
+      <section className="user-perfil">
+        <div className="contenedor-perfil">
+          <div
+            className="portada-perfil"
+            style={{
+              backgroundImage:
+                "url(" + /* store.trip.destination_picture */ +")",
+            }}
+          >
+            <div className="sombra"></div>
+            <div className="avatar-perfil">
+              <img src={store.user.profile_picture} alt="img" />
+            </div>
+            <div className="datos-perfil">
+              <h4 className="titulo-usuario">
+                {store.user.firstname + " " + store.user.lastname}
+              </h4>
+              <h4 className="titulo-usuario">@{store.user.username}</h4>
+            </div>
+            <div className="datos-button">
+              <ul className="lista-perfil">
+                <li>
+                  <button
+                    type="button"
+                    className="mach-button btn btn-light "
+                    onClick={(e) => {
+                      setShowEdit(true);
+                      setUser(store.user);
+                    }}
+                  >
+                    <i className="fas fa-pen"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div className="datos-like">
+              <ul className="lista-perfil"></ul>
+            </div>
+            {store.user_id == store.trip.id ? (
+              <div className="opcciones-perfil">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setModalEdit(true);
+                  }}
+                >
+                  <i className="fas fa-pencil"></i>
+                </button>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </section>
+      <h1 style={{ fontSize: "30px" }}>
+        {store.user.city_of_residence + " - " + store.user.country}
+      </h1>
+      <p className="text-start" style={{ fontSize: "34px" }}>
+        {store.user.description}
+      </p>
+
       {showEdit ? (
         <EditProfileModal
           closeModal={() => {
@@ -33,6 +90,18 @@ export const Profile = () => {
             setUser(user);
           }}
           user={user}
+        />
+      ) : null}
+
+      {modalEdit ? (
+        <EditTripModal
+          closeModal={() => {
+            setModalEdit(false);
+          }}
+          editTrip={(trip) => {
+            setTrip(trip);
+          }}
+          trip={trip}
         />
       ) : null}
 
@@ -47,6 +116,12 @@ export const Profile = () => {
           trip={trip}
         />
       ) : null}
+
+      {/* Esto es lo mio */}
+      <img
+        src="https://wallpaperaccess.com/full/6584451.jpg"
+        style={{ width: "100%", height: "300px" }}
+      ></img>
 
       <div className="container">
         <div className="container">
