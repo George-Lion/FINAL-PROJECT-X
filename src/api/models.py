@@ -69,8 +69,8 @@ class Trip(db.Model):
             "id": self.id,
             "user_id_of_trip_creator": self.user_id_of_trip_creator,
             "destination": self.destination,
-            "start_of_the_trip": self.start_of_the_trip,
-            "end_of_the_trip": self.end_of_the_trip,
+            "start_of_the_trip": self.start_of_the_trip.strftime("%Y-%m-%d"),
+            "end_of_the_trip": self.end_of_the_trip.strftime("%Y-%m-%d"),
             "people": self.people,
             "transport": self.transport,
             "cost": self.cost,
@@ -92,6 +92,7 @@ class MatchTrip(db.Model):
     rejected = db.Column(db.Boolean, unique=False,
                          nullable=True, default=False)
 
+    # aca el serialize me transforma toda la informacion de la base de datos, toda la instancia de clases en una libreria.
     def serialize(self):
         return {
             "id": self.id,

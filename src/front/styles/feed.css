@@ -5,7 +5,6 @@
 .cardprueba {
   border-color: #d7dfe3;
   border-radius: 4px;
-  -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
   height: 352px;
 }
@@ -13,7 +12,6 @@
 .little-profile .pro-img .prueba3 {
   width: 158px;
   height: 158px;
-  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 100%;
 }
@@ -25,6 +23,6 @@
 
 .fontprueba {
   color: white;
-  font-family: "Poppins", sans-serif;
+
   font-weight: 400;
 }

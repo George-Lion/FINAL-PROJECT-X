@@ -25,6 +25,7 @@ export const Trip = () => {
     setTrip(store.trip);
   }, [store.trip]);
 
+
   const peopleCards = [
     {
       id: 1,

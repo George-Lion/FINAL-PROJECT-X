@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu46.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu46.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -124,12 +124,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const data = await resp.json();
-          data.trip.start_of_the_trip = new Date(data.trip.start_of_the_trip)
-            .toISOString()
-            .split("T")[0]; //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
-          data.trip.end_of_the_trip = new Date(data.trip.end_of_the_trip)
-            .toISOString()
-            .split("T")[0]; //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
+          /*   data.trip.start_of_the_trip = new Date(data.trip.start_of_the_trip)
+              .toISOString()
+              .split("T")[0]; */ //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
+          /*  data.trip.end_of_the_trip = new Date(data.trip.end_of_the_trip)
+             .toISOString()
+             .split("T")[0]; */ //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
           if (resp.status == 200) {
             setStore({ trip: data.trip });
           } else {

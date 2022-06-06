@@ -33,7 +33,7 @@ export const Feed = () => {
         <div className="container-fluid justify-content-center">
           <form className="d-flex" role="search">
             <input
-              className="form-control me-2 search_input"
+              className="form-control me-2"
               type="text"
               placeholder="Search destination"
               aria-label="Search"
