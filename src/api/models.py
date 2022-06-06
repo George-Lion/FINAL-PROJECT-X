@@ -3,6 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
+likes = db.Table('like',
+                 db.Column('user_id', db.Integer, db.ForeignKey(
+                     'user.id'), primary_key=True),
+                 db.Column('trip_id', db.Integer, db.ForeignKey(
+                     'trip.id'), primary_key=True)
+                 )
+
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=True)
@@ -14,6 +22,8 @@ class User(db.Model):
     country = db.Column(db.String(120), unique=False, nullable=True)
     profile_picture = db.Column(db.String(120), unique=False, nullable=True)
     description = db.Column(db.Text, unique=False, nullable=True)
+    likes = db.relationship('Trip', secondary=likes, lazy='subquery',
+                            backref=db.backref('trips', lazy=True))
     created_trip = db.relationship("Trip", backref="User")
 
     def serialize(self):
@@ -26,7 +36,8 @@ class User(db.Model):
             "city_of_residence": self.city_of_residence,
             "country": self.country,
             "profile_picture": self.profile_picture,
-            "description": self.description
+            "description": self.description,
+            "likes":  list(map(lambda like: like.id, self.likes))
         }
 
 
@@ -42,6 +53,8 @@ class Trip(db.Model):
     text = db.Column(db.String(120), unique=False, nullable=True)
     destination_picture = db.Column(
         db.String(300), unique=False, nullable=True)
+    likes = db.relationship('User', secondary=likes, lazy='subquery',
+                            backref=db.backref('users', lazy=True))
     trip_in_match = db.relationship("MatchTrip")
 
     def serialize(self):
@@ -56,13 +69,14 @@ class Trip(db.Model):
             "id": self.id,
             "user_id_of_trip_creator": self.user_id_of_trip_creator,
             "destination": self.destination,
-            "start_of_the_trip": self.start_of_the_trip,
-            "end_of_the_trip": self.end_of_the_trip,
+            "start_of_the_trip": self.start_of_the_trip.strftime("%Y-%m-%d"),
+            "end_of_the_trip": self.end_of_the_trip.strftime("%Y-%m-%d"),
             "people": self.people,
             "transport": self.transport,
             "cost": self.cost,
             "text": self.text,
             "destination_picture": self.destination_picture,
+            "likes":  list(map(lambda like: like.id, self.likes))
         }
 
 

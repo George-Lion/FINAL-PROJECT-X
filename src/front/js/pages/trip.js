@@ -26,6 +26,7 @@ export const Trip = () => {
     setTrip(store.trip);
   }, [store.trip]);
 
+
   const peopleCards = [
     {
       id: 1,
@@ -120,11 +121,12 @@ export const Trip = () => {
                 <div className="datos-like">
                   <ul className="lista-perfil">
                     <li>
-                      36 <i className="fas fa-heart"></i>
+                      <i className="fas fa-heart"></i>
+                      {store.trip.likes ? store.trip.likes.length : 0}
                     </li>
                   </ul>
                 </div>
-                {store.user_id == store.trip.id ? (
+                {store.user_id == store.trip.user_id_of_trip_creator ? (
                   <div className="opcciones-perfil">
                     <button
                       type="button"

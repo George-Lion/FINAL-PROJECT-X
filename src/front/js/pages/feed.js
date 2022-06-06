@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/feed.css";
 import { Link } from "react-router-dom";
@@ -33,7 +33,7 @@ export const Feed = () => {
         <div className="container-fluid justify-content-center">
           <form className="d-flex" role="search">
             <input
-              className="form-control me-2 search_input"
+              className="form-control me-2"
               type="text"
               placeholder="Search destination"
               aria-label="Search"
@@ -118,9 +118,28 @@ export const Feed = () => {
                           <span className="fontprueba">
                             <i className="fas fa-user-friends"></i> {e.people}{" "}
                           </span>
-                          <span className="fontprueba">
-                            <i className="fas fa-heart"></i> {e.likes}{" "}
-                          </span>
+                          {!e.likes.includes(store.user_id) ? (
+                            <span className="fontprueba">
+                              <i
+                                className="fas fa-heart text-dark"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          ) : (
+                            //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
+                            <span className="fontprueba text-danger">
+                              <i
+                                className="fas fa-heart"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -170,9 +189,28 @@ export const Feed = () => {
                           <span className="fontprueba">
                             <i className="fas fa-user-friends"></i> {e.people}{" "}
                           </span>
-                          <span className="fontprueba">
-                            <i className="fas fa-heart"></i> {e.likes}{" "}
-                          </span>
+                          {!e.likes.includes(store.user_id) ? (
+                            <span className="fontprueba">
+                              <i
+                                className="fas fa-heart text-dark"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          ) : (
+                            //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
+                            <span className="fontprueba text-danger">
+                              <i
+                                className="fas fa-heart"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>

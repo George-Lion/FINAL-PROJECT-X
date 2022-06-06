@@ -172,6 +172,25 @@ def get_user_trips():
         return jsonify({"error": "Usuario no encontrado"}), 400
 
 
+@api.route("/tripLikes", methods=["POST"])
+@jwt_required()
+def add_like_trip():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    print(user.likes)
+    body_trip_id = request.json.get("trip_id", None)
+    if user:
+        trip = Trip.query.get(body_trip_id)
+        if user.id != trip.user_id_of_trip_creator:
+            trip.likes.append(user)
+            db.session.commit()
+            return jsonify({"likeAdded": True}), 200
+        else:
+            return jsonify({"error": "error"}), 400
+    else:
+        return jsonify({"error": "error"}), 400
+
+
 @api.route("/user/profiles", methods=["GET"])
 @jwt_required()
 def get_user_profiles():
