@@ -14,7 +14,6 @@ export const Trip = () => {
   const [modalEdit, setModalEdit] = useState(false);
   const history = useHistory();
   const [trip, setTrip] = useState({});
-  const [googleMapTrip, setGoogleMapTrip] = useState();
 
   useEffect(() => {
     actions.getTrip(id);
@@ -25,7 +24,6 @@ export const Trip = () => {
 
   useEffect(() => {
     setTrip(store.trip);
-    setGoogleMapTrip(store.trip);
   }, [store.trip]);
 
   const peopleCards = [
