@@ -2,6 +2,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+likes = db.Table('like',
+                 db.Column('user_id', db.Integer, db.ForeignKey(
+                     'user.id'), primary_key=True),
+                 db.Column('trip_id', db.Integer, db.ForeignKey(
+                     'trip.id'), primary_key=True)
+                 )
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,6 +22,8 @@ class User(db.Model):
     banner_picture = db.Column(
         db.String(300), unique=False, nullable=True, default="https://images.pexels.com/photos/2233992/pexels-photo-2233992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
     description = db.Column(db.String(220), unique=False, nullable=True, default="About me")
+    likes = db.relationship('Trip', secondary=likes, lazy='subquery',
+                            backref=db.backref('trips', lazy=True))
     created_trip = db.relationship("Trip", backref="User")
 
     def serialize(self):
@@ -30,8 +38,8 @@ class User(db.Model):
             "profile_picture": self.profile_picture,
             "banner_picture": self.banner_picture,
             "description": self.description
+            "likes":  list(map(lambda like: like.id, self.likes))
         }
-
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -45,6 +53,8 @@ class Trip(db.Model):
     text = db.Column(db.String(220), unique=False, nullable=True, default="Description of the destination")
     destination_picture = db.Column(
         db.String(300), unique=False, nullable=True)
+    likes = db.relationship('User', secondary=likes, lazy='subquery',
+                            backref=db.backref('users', lazy=True))
     trip_in_match = db.relationship("MatchTrip")
 
     def serialize(self):
@@ -59,15 +69,15 @@ class Trip(db.Model):
             "id": self.id,
             "user_id_of_trip_creator": self.user_id_of_trip_creator,
             "destination": self.destination,
-            "start_of_the_trip": self.start_of_the_trip,
-            "end_of_the_trip": self.end_of_the_trip,
+            "start_of_the_trip": self.start_of_the_trip.strftime("%Y-%m-%d"),
+            "end_of_the_trip": self.end_of_the_trip.strftime("%Y-%m-%d"),
             "people": self.people,
             "transport": self.transport,
             "cost": self.cost,
             "text": self.text,
             "destination_picture": self.destination_picture,
+            "likes":  list(map(lambda like: like.id, self.likes))
         }
-
 
 class MatchTrip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -81,6 +91,7 @@ class MatchTrip(db.Model):
     rejected = db.Column(db.Boolean, unique=False,
                          nullable=True, default=False)
 
+    # aca el serialize me transforma toda la informacion de la base de datos, toda la instancia de clases en una libreria.
     def serialize(self):
         return {
             "id": self.id,

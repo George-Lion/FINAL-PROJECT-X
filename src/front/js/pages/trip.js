@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { SendMessageModal } from "../component/sendMessageModal";
 import { EditTripModal } from "../component/editTripModal";
+import { GoogleMapsApi } from "../component/googleMapsApi";
 import moment from "moment";
 import "../../styles/trip.css";
 
@@ -24,6 +25,7 @@ export const Trip = () => {
   useEffect(() => {
     setTrip(store.trip);
   }, [store.trip]);
+
 
   const peopleCards = [
     {
@@ -119,7 +121,8 @@ export const Trip = () => {
                 <div className="datos-like">
                   <ul className="lista-perfil">
                     <li>
-                      36 <i className="fas fa-heart"></i>
+                      <i className="fas fa-heart"></i>
+                      {store.trip.likes ? store.trip.likes.length : 0}
                     </li>
                   </ul>
                 </div>
@@ -250,11 +253,7 @@ export const Trip = () => {
                   <b>Rute</b>
                 </h3>
                 <div className="card bg-dark text-white m-5 mb-1 border border-primary border-3 ">
-                  <img
-                    src="https://img.olhardigital.com.br/wp-content/uploads/2019/03/20190301101226-1238x450.jpg"
-                    className="card-img-top"
-                    alt="map"
-                  />
+                  <GoogleMapsApi></GoogleMapsApi>
                   <div className="card-img-overlay"></div>
                 </div>
 

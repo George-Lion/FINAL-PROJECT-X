@@ -118,6 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       getTrip: async (id) => {
+        setStore({ trip: {} });
         try {
           const resp = await fetch(getStore().url + "trip/" + id, {
             method: "GET",
@@ -127,12 +128,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const data = await resp.json();
-          data.trip.start_of_the_trip = new Date(data.trip.start_of_the_trip)
-            .toISOString()
-            .split("T")[0]; //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
-          data.trip.end_of_the_trip = new Date(data.trip.end_of_the_trip)
-            .toISOString()
-            .split("T")[0]; //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
+          /*   data.trip.start_of_the_trip = new Date(data.trip.start_of_the_trip)
+              .toISOString()
+              .split("T")[0]; */ //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
+          /*  data.trip.end_of_the_trip = new Date(data.trip.end_of_the_trip)
+             .toISOString()
+             .split("T")[0]; */ //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
           if (resp.status == 200) {
             setStore({ trip: data.trip });
           } else {
@@ -176,6 +177,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           setStore({ trip: data.trip });
         } catch (e) { }
+      },
+      addToFavorite: async () => {
+        const resp = await fetch(getStore().url + "tripLikes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          body: JSON.stringify({ trip_id: 1 }),
+        });
       },
     },
   };

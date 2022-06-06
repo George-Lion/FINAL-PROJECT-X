@@ -19,6 +19,7 @@ def login_user():
         user = User.query.filter_by(email=body_email).filter_by(
             password=body_password).first()
         if user:
+            # identity es un parametro de la libreria de token JWT. Aca dentro de todo el token se encuentra el parametro que yo desee. EN este caso, user.id
             token = create_access_token(identity=user.id)
             return jsonify({"logged": True, "token": token, "user": user.serialize()}), 200
         else:
@@ -175,6 +176,25 @@ def get_user_trips():
         return jsonify({"error": "Usuario no encontrado"}), 400
 
 
+@api.route("/tripLikes", methods=["POST"])
+@jwt_required()
+def add_like_trip():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    print(user.likes)
+    body_trip_id = request.json.get("trip_id", None)
+    if user:
+        trip = Trip.query.get(body_trip_id)
+        if user.id != trip.user_id_of_trip_creator:
+            trip.likes.append(user)
+            db.session.commit()
+            return jsonify({"likeAdded": True}), 200
+        else:
+            return jsonify({"error": "error"}), 400
+    else:
+        return jsonify({"error": "error"}), 400
+
+
 @api.route("/user/profiles", methods=["GET"])
 @jwt_required()
 def get_user_profiles():
@@ -221,6 +241,7 @@ def get_trips():
     user = User.query.get(current_id)
     if user:
         trips = Trip.query.all()
+        # aca me hace un mapeo de una lista de instancia de clases.
         return jsonify({"trips": list(map(lambda trip: trip.serialize(), trips))}), 200
     else:
         return jsonify({"error": "error"}), 400
