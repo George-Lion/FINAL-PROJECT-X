@@ -115,6 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       getTrip: async (id) => {
+        setStore({ trip: {} });
         try {
           const resp = await fetch(getStore().url + "trip/" + id, {
             method: "GET",
@@ -173,6 +174,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           setStore({ trip: data.trip });
         } catch (e) { }
+      },
+      addToFavorite: async () => {
+        const resp = await fetch(getStore().url + "tripLikes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          body: JSON.stringify({ trip_id: 1 }),
+        });
       },
     },
   };

@@ -120,9 +120,28 @@ export const Feed = () => {
                           <span className="">
                             <i className="fas fa-user-friends"></i> {e.people}{" "}
                           </span>
-                          <span className="">
-                            <i className="fas fa-heart"></i> {e.likes}{" "}
-                          </span>
+                          {!e.likes.includes(store.user_id) ? (
+                            <span className="fontprueba">
+                              <i
+                                className="fas fa-heart text-dark"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          ) : (
+                            //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
+                            <span className="fontprueba text-danger">
+                              <i
+                                className="fas fa-heart"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -156,6 +175,7 @@ export const Feed = () => {
                         />
                       </Link>
                     </div>
+
                     <div className="container position-absolute bottom-0 start-50 translate-middle-x mb-3">
                       <Link to="/profile" style={{ textDecoration: "none" }}>
                         <h3 className="fontprueba prueba2 ms-2">
@@ -172,9 +192,29 @@ export const Feed = () => {
                         <span className="fontprueba">
                           <i className="fas fa-user-friends"></i> {e.people}{" "}
                         </span>
-                        <span className="fontprueba">
-                          <i className="fas fa-heart"></i> {e.likes}{" "}
-                        </span>
+                          {!e.likes.includes(store.user_id) ? (
+                            <span className="fontprueba">
+                              <i
+                                className="fas fa-heart text-dark"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          ) : (
+                            //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
+                            <span className="fontprueba text-danger">
+                              <i
+                                className="fas fa-heart"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
