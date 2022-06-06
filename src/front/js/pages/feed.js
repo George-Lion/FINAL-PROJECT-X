@@ -100,7 +100,10 @@ export const Feed = () => {
           ? store.trips.map((e) => {
               return (
                 <div className="pepe" key={e.id}>
-                  <Link to="/profile" style={{ textDecoration: "none" }}>
+                  <Link
+                    to={"/profile/" + e.user_id_of_trip_creator}
+                    style={{ textDecoration: "none" }}
+                  >
                     <img
                       className="avatar-picture ms-3"
                       src={e.profile_picture}
@@ -170,7 +173,10 @@ export const Feed = () => {
           : response.map((e) => {
               return (
                 <div className="pepe" key={e.id}>
-                  <Link to="/profile" style={{ textDecoration: "none" }}>
+                  <Link
+                    to={"/profile/" + e.user_id_of_trip_creator}
+                    style={{ textDecoration: "none" }}
+                  >
                     <img
                       className="avatar-picture ms-3"
                       src={e.profile_picture}

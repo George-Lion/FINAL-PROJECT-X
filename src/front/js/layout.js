@@ -46,7 +46,7 @@ const Layout = () => {
               <Route exact path="/home">
                 <Feed />
               </Route>
-              <Route exact path="/profile">
+              <Route exact path="/profile/:id">
                 {store.logged == true ? (
                   <Profile />
                 ) : (

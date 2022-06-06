@@ -26,7 +26,6 @@ export const Trip = () => {
     setTrip(store.trip);
   }, [store.trip]);
 
-
   const peopleCards = [
     {
       id: 1,
@@ -94,7 +93,9 @@ export const Trip = () => {
               >
                 <div className="sombra"></div>
                 <div className="avatar-perfil">
-                  <img src={store.trip.profile_picture} alt="img" />
+                  <Link to={"/profile/" + store.trip.user_id_of_trip_creator}>
+                    <img src={store.trip.profile_picture} alt="img" />
+                  </Link>
                 </div>
                 <div className="datos-perfil">
                   <h4 className="titulo-usuario">
@@ -200,7 +201,7 @@ export const Trip = () => {
 
                 {/* CARDS */}
 
-                <div >
+                <div>
                   <div className="row row-cols-1 align-items-stretch g-4 pt-1">
                     <div className="d-flex overflow-auto">
                       <div className="wrapper">
@@ -211,8 +212,10 @@ export const Trip = () => {
                               className="col container "
                               style={{ width: "290px" }}
                             >
-                              <Link style={{ textDecoration: "none" }} to="/user">
-
+                              <Link
+                                style={{ textDecoration: "none" }}
+                                to="/user"
+                              >
                                 <div
                                   className="card-image-box d-flex text-white bg-dark align-items-end "
                                   style={{
@@ -222,11 +225,14 @@ export const Trip = () => {
                                     backgroundImage: "url(" + e.image + ")",
                                   }}
                                 >
-                                  <div className="d-flex flex-column text-white " style={{
-                                    minHeight: "50px",
-                                    minWidth: "230px",
-                                    display: "block",
-                                  }} >
+                                  <div
+                                    className="d-flex flex-column text-white "
+                                    style={{
+                                      minHeight: "50px",
+                                      minWidth: "230px",
+                                      display: "block",
+                                    }}
+                                  >
                                     <ul className="card-text-box list-unstyled ms-3">
                                       <li className="mb-1">
                                         <h2>{e.name}</h2>
@@ -242,10 +248,8 @@ export const Trip = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="py-2 border-top mt-4 text-left justify-content-center">
-                  </div>
+                  <div className="py-2 border-top mt-4 text-left justify-content-center"></div>
                 </div>
-
 
                 {/* API RUTE */}
 
