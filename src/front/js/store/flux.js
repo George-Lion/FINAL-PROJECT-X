@@ -115,6 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       getTrip: async (id) => {
+        setStore({ trip: {} });
         try {
           const resp = await fetch(getStore().url + "trip/" + id, {
             method: "GET",
