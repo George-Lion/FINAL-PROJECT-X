@@ -50,7 +50,7 @@ export const Trip = () => {
       id: 4,
       name: "Andre Rush",
       image:
-        "https://images.pexels.com/photos/1220757/pexels-photo-1220757.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "https://images.pexels.com/photos/886285/pexels-photo-886285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       id: 5,
@@ -200,30 +200,52 @@ export const Trip = () => {
 
                 {/* CARDS */}
 
-                <div className="wrapper">
-                  {peopleCards.map((e) => {
-                    return (
-                      <div key={e.id} className="card1 rounded ">
-                        <img
-                          src={e.image}
-                          className="img1 card-img-top"
-                          alt="people"
-                        />
-                        <ul className="d-flex list-unstyled mt-auto">
-                          <li className="me-auto">
-                            <svg className="bi me-2" width="1em" height="1em">
-                              <use xlinkHref="#geo-fill"></use>
-                            </svg>
-                            <b>{e.name}</b>
-                          </li>
-                          <li className=" d-flex align-items-center me-3">
-                            <i className="fas fa-heart"></i>
-                          </li>
-                        </ul>
+                <div >
+                  <div className="row row-cols-1 align-items-stretch g-4 pt-1">
+                    <div className="d-flex overflow-auto">
+                      <div className="wrapper">
+                        {peopleCards.map((e) => {
+                          return (
+                            <div
+                              key={e.id}
+                              className="col container "
+                              style={{ width: "290px" }}
+                            >
+                              <Link style={{ textDecoration: "none" }} to="/user">
+
+                                <div
+                                  className="card-image-box d-flex text-white bg-dark align-items-end "
+                                  style={{
+                                    minHeight: "350px",
+                                    minWidth: "280px",
+                                    display: "block",
+                                    backgroundImage: "url(" + e.image + ")",
+                                  }}
+                                >
+                                  <div className="d-flex flex-column text-white " style={{
+                                    minHeight: "50px",
+                                    minWidth: "230px",
+                                    display: "block",
+                                  }} >
+                                    <ul className="card-text-box list-unstyled ms-3">
+                                      <li className="mb-1">
+                                        <h2>{e.name}</h2>
+                                      </li>
+                                    </ul>
+                                    <div className="shadow-card-image"></div>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                          );
+                        })}
                       </div>
-                    );
-                  })}
+                    </div>
+                  </div>
+                  <div className="py-2 border-top mt-4 text-left justify-content-center">
+                  </div>
                 </div>
+
 
                 {/* API RUTE */}
 

@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { EditProfileModal } from "../component/editProfileModal";
-import "../../styles/profile.css";
 import { CreateTripModal } from "../component/createTripModal";
+import moment from "moment";
+import "../../styles/profile.css";
 
 export const Profile = () => {
   const { store, actions } = useContext(Context);
@@ -21,65 +22,65 @@ export const Profile = () => {
 
   return (
     <div>
-      <section className="user-perfil">
-        <div className="contenedor-perfil">
+      <section className="user-profile">
+        <div className="content-profile">
           <div
             className="portada-perfil"
             style={{
               backgroundImage:
-                "url(" + /* store.trip.destination_picture */ +")",
+                "url(" + store.user.banner_picture + ")",
             }}
           >
-            <div className="sombra"></div>
-            <div className="avatar-perfil">
+            <div className="shadow-banner"></div>
+            <div className="avatar-picture-profile">
               <img src={store.user.profile_picture} alt="img" />
+              <a href="#" className="cambiar-foto" onClick={(e) => {
+                setShowEdit(true);
+                setUser(store.user);
+              }}>
+                <i className="fas fa-camera"></i>
+                <span>change photo</span>
+              </a>
+
+              <label htmlFor="inputTag" className="label-style">
+                cover image <br />
+                <i className="fa fa-2x fa-camera"></i>
+                <input
+                  id="inputTag" className="input-style "
+                  type="file"
+                  name="ratata"
+
+                />
+              </label>
             </div>
-            <div className="datos-perfil">
-              <h4 className="titulo-usuario">
-                {store.user.firstname + " " + store.user.lastname}
+            <div className="data-profile">
+              <h4 className="user-title">
+                @{store.user.username}
               </h4>
-              <h4 className="titulo-usuario">@{store.user.username}</h4>
             </div>
-            <div className="datos-button">
-              <ul className="lista-perfil">
-                <li>
-                  <button
-                    type="button"
-                    className="mach-button btn btn-light "
-                    onClick={(e) => {
-                      setShowEdit(true);
-                      setUser(store.user);
-                    }}
-                  >
-                    <i className="fas fa-pen"></i>
-                  </button>
-                </li>
-              </ul>
+            <div className="options-profile">
+              <button
+                type="button"
+                onClick={(e) => {
+                  setShowEdit(true);
+                  setUser(store.user);
+                }}
+              >
+                <i className="fas fa-pencil"></i>
+              </button>
             </div>
-            <div className="datos-like">
-              <ul className="lista-perfil"></ul>
-            </div>
-            {store.user_id == store.trip.id ? (
-              <div className="opcciones-perfil">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setModalEdit(true);
-                  }}
-                >
-                  <i className="fas fa-pencil"></i>
-                </button>
-              </div>
-            ) : null}
+          </div>
+          <div className="information-box pt-1">
+            <h3 className="information"><b>{store.user.firstname + " " + store.user.lastname}</b></h3>
+            <h5 className="information">
+              {store.user.city_of_residence + " - " + store.user.country}
+            </h5>
+            <p className="information-bio text-break" >
+              {store.user.description}
+            </p>
           </div>
         </div>
       </section>
-      <h1 style={{ fontSize: "30px" }}>
-        {store.user.city_of_residence + " - " + store.user.country}
-      </h1>
-      <p className="text-start" style={{ fontSize: "34px" }}>
-        {store.user.description}
-      </p>
 
       {showEdit ? (
         <EditProfileModal
@@ -117,131 +118,109 @@ export const Profile = () => {
         />
       ) : null}
 
-      {/* Esto es lo mio */}
-      <img
-        src="https://wallpaperaccess.com/full/6584451.jpg"
-        style={{ width: "100%", height: "300px" }}
-      ></img>
-
-      <div className="container">
-        <div className="container">
-          <div className="position-relative">
-            <div className="position-absolute" style={{ bottom: "-150px" }}>
-              {!store.user.profile_picture ? (
-                <img
-                  src="https://svgsilh.com/svg_v2/2098873.svg"
-                  style={{
-                    width: "250px",
-                    height: "250px",
-                  }}
-                  className="card-img-top rounded-circle border border-white border border-5"
-                  alt="..."
-                />
-              ) : (
-                <img
-                  src={store.user.profile_picture}
-                  style={{
-                    width: "250px",
-                    height: "250px",
-                  }}
-                  className="card-img-top rounded-circle border border-white border border-5"
-                  alt="..."
-                />
-              )}
-              <h1 style={{ fontSize: "30px" }}>
-                {store.user.city_of_residence + " - " + store.user.country}
-              </h1>
-            </div>
-          </div>
-
-          <div className="position-relative">
-            <div
-              className="position-absolute"
-              style={{ left: "340px", bottom: "-250px" }}
-            >
-              <h1 className="text-start" style={{ fontSize: "80px" }}>
-                {store.user.firstname + " " + store.user.lastname}
-              </h1>
-
-              <h1 className="text-start" style={{ fontSize: "60px" }}>
-                {store.user.username}
-              </h1>
-
-              <p className="text-start" style={{ fontSize: "34px" }}>
-                {store.user.description}
-              </p>
-
-              <i
-                className="fas fa-pen"
-                onClick={(e) => {
-                  setShowEdit(true);
-                  setUser(store.user);
-                }}
-              ></i>
-            </div>
-          </div>
+      <div className="container mt-2">
+        <div className="py-2 border-top text-left justify-content-center">
         </div>
+      </div>
 
-        <br />
-        <div style={{ marginTop: "300px" }}>
-          <h1>My Rutes</h1>
-          <br />
+      {/*MY TRIPS*/}
 
-          {/*rutes*/}
-          <div className="row row-cols-1 align-items-stretch g-4 py-5">
+      <div className="content-trip-box container p-4 pt-1 mt-2">
+        <div >
+          <div className="text-center">
+            <h2><b>My Trips</b></h2>
+          </div>
+          <div className="row row-cols-1 align-items-stretch g-4 ">
             <div className="d-flex overflow-auto">
               <button
-                className="btn btn-primary"
+                className="btn btn-dark text-light mt-4" style={{ "height": "350px" }}
                 onClick={() => {
                   setShowCreateTrip(true);
                 }}
               >
-                ADD TRIP
+                <b>ADD TRIP</b>
               </button>
-              {store.userTrips.map((e) => {
-                return (
-                  <div
-                    key={e.id}
-                    className="col container rounded"
-                    style={{ width: "800px" }}
-                  >
-                    <Link style={{ textDecoration: "none" }} to="/trip">
-                      <div
-                        className="d-flex text-white bg-dark align-items-end"
-                        style={{
-                          minHeight: "400px",
-                          minWidth: "300px",
-                          display: "block",
-                          backgroundImage: "url(" + e.image + ")",
-                        }}
-                      >
-                        <div className="d-flex flex-column p-5 pb-3 text-white text-shadow-1">
-                          <ul className="d-flex list-unstyled mt-auto">
-                            <li className="me-auto">
-                              <i className="fas fa-map-marker-alt fs-3 m-2"></i>
-                            </li>
-                            <li className="ms-2">
-                              <h2>{e.name}</h2>
-                            </li>
-                          </ul>
+              <div className="wrapper-trips">
+                {store.userTrips.map((e) => {
+                  return (
+                    <div
+                      key={e.id}
+                      className="col container "
+                      style={{ width: "280px" }}
+                    >
+                      <Link style={{ textDecoration: "none" }} to="/trip">
+
+                        <div
+                          className="card-image-box d-flex text-white bg-dark align-items-end "
+                          style={{
+                            minHeight: "350px",
+                            minWidth: "270px",
+                            display: "block",
+                            backgroundImage: "url(" + e.destination_picture + ")",
+                          }}
+                        >
+                          <div className="d-flex flex-column text-white " style={{
+                            minHeight: "50px",
+                            minWidth: "230px",
+                            display: "block",
+                          }} >
+                            <div className="card-title-area ms-3 ">
+                              <h3 className=""><i className="rute fas fa-map-marker-alt"></i>{e.destination}</h3>
+                            </div>
+                            <ul className="card-text-box list-unstyled ms-3">
+                              <li className="mb-1">
+                                <i className="icon fas fa-user-friends" style={{ fontSize: "16px" }}> </i>
+                                {e.people}
+                              </li>
+                              <li className="mb-1">
+                                <i className="icon fas fa-route" style={{ fontSize: "16px" }}></i>
+                                {e.transport}
+                              </li>
+                              <li className="mb-1">
+                                <i className="icon fas fa-coins" style={{ fontSize: "16px" }}></i>
+                                {e.cost} €
+                              </li>
+                              <li className="mb-1">
+                                <i className="icon fas fa-clock" style={{ fontSize: "16px" }}></i>
+                                {moment(store.trip.start_of_the_trip).format("LL")} -{" "}
+                                {moment(store.trip.end_of_the_trip).format("LL")}
+                              </li>
+                            </ul>
+                            <div className="shadow-card-image"></div>
+                            <div className="shadow-card-image2"></div>
+                          </div>
                         </div>
-                      </div>
-                    </Link>
-                  </div>
-                );
-              })}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
+        </div>
+        <div className="py-2 border-top mt-4 text-left justify-content-center">
+        </div>
 
-          <br />
-          <h1>
-            Estas personas ya han viajado con
-            {store.user.firstname + " " + store.user.lastname}
-          </h1>
-          <br />
+        {/*TESTIMONIALS*/}
 
-          {/*Profiles*/}
-          <div className="row row-cols-1 row-cols-lg-3 d-flex justify-content-between g-4 py-5">
+        <div>
+          <div className="mt-2 mb-5">
+            <h3>
+              Estas personas ya han viajado con <b>{store.user.firstname + " " + store.user.lastname}</b>:
+            </h3>
+
+            <div className="card mb-3 mt-4" style={{ "maxWidth": "540px" }}>
+              <div className="row g-0">
+                <div className="col-md-4">
+                  <img src="https://images.pexels.com/photos/5794559/pexels-photo-5794559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="img-fluid rounded-start" alt="..." />
+                </div>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title">Card title</h5>
+                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+          {/*Profiles SERGI MAP*/}
+/*          <div className="row row-cols-1 row-cols-lg-3 d-flex justify-content-between g-4 py-5">
             {store.userProfiles.map((e) => {
               return (
                 <div
@@ -277,11 +256,11 @@ export const Profile = () => {
                           </p>
                         </Link>
                       </div>
-                    </div>
+                    </div>*/
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
