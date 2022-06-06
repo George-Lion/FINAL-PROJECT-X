@@ -153,7 +153,10 @@ export const Profile = () => {
                       className="col container "
                       style={{ width: "280px" }}
                     >
-                      <Link style={{ textDecoration: "none" }} to="/trip">
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        to={"/trip/" + e.id}
+                      >
                         <div
                           className="card-image-box d-flex text-white bg-dark align-items-end "
                           style={{

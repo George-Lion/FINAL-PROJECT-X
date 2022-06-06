@@ -68,13 +68,11 @@ export const Navbar = () => {
                       <li className="ps-3 pb-1">
                         Hola <b>{store.user.firstname}</b>
                       </li>
-                      <li className="ps-3">Create Trip</li>
                       <Link to="/profile">
                         <li className="ps-3">Profile</li>
                       </Link>
                       <Link to="/help">
                         <li className="ps-3">Help</li>
-
                       </Link>
                       <li className="ps-3">
                         <hr className="dropdown-divider" />
