@@ -119,7 +119,8 @@ export const Trip = () => {
                 <div className="datos-like">
                   <ul className="lista-perfil">
                     <li>
-                      36 <i className="fas fa-heart"></i>
+                      <i className="fas fa-heart"></i>
+                      {store.trip.likes ? store.trip.likes.length : 0}
                     </li>
                   </ul>
                 </div>

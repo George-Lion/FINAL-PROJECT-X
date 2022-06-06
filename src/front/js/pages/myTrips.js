@@ -43,9 +43,8 @@ export const MyTrips = () => {
 
                     <div className="col">
                       <span className="text-white">
-                        <i className="fas fa-user-friends mt-2 me-2"></i>
-                        {/* EJERCICIO DESDE AQUI */}
-                        LIKES
+                        <i className="fa-solid fa-heart mt-2 me-2"></i>
+                        {trip.likes.length}
                       </span>
                     </div>
 
