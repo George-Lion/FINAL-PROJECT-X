@@ -6,16 +6,16 @@ db = SQLAlchemy()
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=True)
-    firstname = db.Column(db.String(120), unique=False, nullable=True)
-    lastname = db.Column(db.String(120), unique=False, nullable=True)
+    firstname = db.Column(db.String(120), unique=False, nullable=True, default="Firt name")
+    lastname = db.Column(db.String(120), unique=False, nullable=True, default="Last name")
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    city_of_residence = db.Column(db.String(120), unique=False, nullable=True)
-    country = db.Column(db.String(120), unique=False, nullable=True)
-    profile_picture = db.Column(db.String(120), unique=False, nullable=True)
+    city_of_residence = db.Column(db.String(120), unique=False, nullable=True, default="City")
+    country = db.Column(db.String(120), unique=False, nullable=True, default="Country")
+    profile_picture = db.Column(db.String(120), unique=False, nullable=True, default="https://images.assetsdelivery.com/compings_v2/tuktukdesign/tuktukdesign1805/tuktukdesign180500039.jpg")
     banner_picture = db.Column(
-        db.String(300), unique=False, nullable=True)
-    description = db.Column(db.Text, unique=False, nullable=True)
+        db.String(300), unique=False, nullable=True, default="https://images.pexels.com/photos/2233992/pexels-photo-2233992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+    description = db.Column(db.String(220), unique=False, nullable=True, default="About me")
     created_trip = db.relationship("Trip", backref="User")
 
     def serialize(self):
@@ -42,7 +42,7 @@ class Trip(db.Model):
     people = db.Column(db.Integer, unique=False, nullable=True)
     transport = db.Column(db.String(120), unique=False, nullable=True)
     cost = db.Column(db.Integer, unique=False, nullable=True)
-    text = db.Column(db.String(120), unique=False, nullable=True)
+    text = db.Column(db.String(220), unique=False, nullable=True, default="Description of the destination")
     destination_picture = db.Column(
         db.String(300), unique=False, nullable=True)
     trip_in_match = db.relationship("MatchTrip")

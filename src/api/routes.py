@@ -87,7 +87,7 @@ def editUser():
         body_city_of_residence = "City"
     body_description = request.form.get("description", None)
     if body_description == "" or body_description == None:
-        body_description = "Description"
+        body_description = ""
     body_country = request.form.get("country", None)
     if body_country == "" or body_country == None:
         body_country = "Country"
@@ -100,8 +100,7 @@ def editUser():
         body_profile_picture = cloudinary.uploader.upload(
             request.files['profile_picture'])
         user.profile_picture = body_profile_picture['secure_url']
-    else:
-        user.profile_picture = "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        
     user.username = body_username
     user.firstname = body_firstname
     user.lastname = body_lastname
@@ -126,7 +125,8 @@ def trip(trip_id):
 @jwt_required()
 def editTrip():
     current_id = get_jwt_identity()
-    trip = Trip.query.get(current_id)
+    body_trip_id=request.form.get("id")
+    trip = Trip.query.get(body_trip_id)
     body_destination = request.form.get("destination", None)
     if body_destination == "" or body_destination == None:
         body_destination = "Destination"
@@ -147,9 +147,9 @@ def editTrip():
         body_cost = "0"
     body_text = request.form.get("text", None)
     if body_text == "" or body_text == None:
-        body_text = "Text"
+        body_text = ""
 
-    if "destination_picture" in request.files:
+    if "destination_picture" in request.files:  
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])
         trip.destination_picture = body_destination_picture['secure_url']
@@ -192,21 +192,13 @@ def get_user_profiles():
 @jwt_required()
 def create_trip():
     current_id = get_jwt_identity()
-    print("@@@@@@@@@@@@@@@@@@@")
     body_destination = request.form.get("destination")
-    body_start_of_the_trip = request.form.get("start_of_the_trip", None)
-    body_end_of_the_trip = request.form.get("end_of_the_trip", None)
+    body_start_of_the_trip = request.form.get("start_of_the_trip")
+    body_end_of_the_trip = request.form.get("end_of_the_trip")
     body_people = request.form.get("people")
     body_transport = request.form.get("transport")
     body_cost = request.form.get("cost")
     body_destination_picture="https://images.pexels.com/photos/358482/pexels-photo-358482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    print(body_destination)
-    print(body_start_of_the_trip)
-    print(body_end_of_the_trip)
-    print(body_people)
-    print(body_transport)
-    print(body_cost)
-    print(body_destination_picture)
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])['secure_url']

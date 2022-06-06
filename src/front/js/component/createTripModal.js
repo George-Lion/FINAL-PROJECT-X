@@ -38,7 +38,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
 
           {/* BANNER */}
 
-          <div className="modal-body m-5">
+          <div className="modal-body m-4">
             <div className="row text-center">
               <input
                 type="file"
@@ -159,7 +159,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
 
             {/* COST */}
 
-            <div className="row  mb-2">
+            <div className="row mb-4">
               <label htmlFor="cost" className="col-6">
                 Cost
               </label>
@@ -180,14 +180,14 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
 
             {/* TEXT */}
 
-            <h5>write a text</h5>
+            <p>Description of the trip:</p>
             <div className="input-group">
               <textarea
                 name="contador"
                 id="contador"
                 className="form-control"
                 aria-label="With textarea"
-                maxLength={120}
+                maxLength={220}
                 placeholder="Text"
                 onChange={(e) =>
                   createTrip({
@@ -197,7 +197,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 }
               ></textarea>
             </div>
-            {/* <p>{user.description.length}/120</p> */}
+            <p>{trip.text ? trip.text.length : 0}/220</p>
           </div>
 
           {/* Save buttom */}
