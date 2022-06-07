@@ -68,7 +68,7 @@ export const Navbar = () => {
                       <li className="ps-3 pb-1">
                         Hola <b>{store.user.firstname}</b>
                       </li>
-                      <Link to="/profile">
+                      <Link to="/profile/:id">
                         <li className="ps-3">Profile</li>
                       </Link>
                       <Link to="/help">
