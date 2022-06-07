@@ -113,30 +113,6 @@ export const Feed = () => {
                       <h2 className="">{e.username}</h2>
                     </div>
                   </Link>
-                  <div className="corazon-like">
-                    {!e.likes.includes(store.user_id) ? (
-                      <span className="fontprueba">
-                        <i
-                          className="fas fa-heart"
-                          onClick={() => {
-                            actions.addToFavorite(store.trips);
-                          }}
-                        ></i>{" "}
-                        {e.likes.length}{" "}
-                      </span>
-                    ) : (
-                      //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
-                      <span className="fontprueba text-danger">
-                        <i
-                          className="fas fa-heart"
-                          onClick={() => {
-                            actions.addToFavorite(store.trips);
-                          }}
-                        ></i>{" "}
-                        {e.likes.length}{" "}
-                      </span>
-                    )}
-                  </div>
                   <Link to={"/trip/" + e.id}>
                     <div
                       className="feed-card-image my-5 cardprueba position-relative"
@@ -164,6 +140,27 @@ export const Feed = () => {
                             <span className="">
                               <i className="fas fa-user-friends"></i> {e.people}{" "}
                             </span>
+                            {!e.likes.includes(store.user_id) ? (
+                              <span className="fontprueba">
+                                <i
+                                  className="fas fa-heart"
+                                  onClick={() => {
+                                    actions.addToFavorite(store.trips);
+                                  }}
+                                ></i>{" "}
+                                {e.likes.length}{" "}
+                              </span>
+                            ) : (
+                              <span className="fontprueba text-danger">
+                                <i
+                                  className="fas fa-heart"
+                                  onClick={() => {
+                                    actions.addToFavorite(store.trips);
+                                  }}
+                                ></i>{" "}
+                                {e.likes.length}{" "}
+                              </span>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -226,7 +223,6 @@ export const Feed = () => {
                                 {e.likes.length}{" "}
                               </span>
                             ) : (
-                              //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
                               <span className="fontprueba text-danger">
                                 <i
                                   className="fas fa-heart"
