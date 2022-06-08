@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Logo from "../component/img/traveland.png";
+import "../../styles/register.css";
 
 export const Register = () => {
   const [user, setUser] = useState({});
@@ -23,16 +24,16 @@ export const Register = () => {
   };
 
   return (
-    <>
-      <div className="d-flex justify-content-center mt-5">
+    <Fragment>
+      <div className="d-flex justify-content-center mt-2">
         <img
-          className="row me-3"
-          src="https://images.pexels.com/photos/2679814/pexels-photo-2679814.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          className="image-register row "
+          src="https://images.pexels.com/photos/11248224/pexels-photo-11248224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         />
-        <div className="text-center" style={{ width: "500px" }}>
+        <div className="col-auto bg-ganger p-5 text-center" style={{ width: "500px" }}>
           <main className="for-signin">
             <form className="">
-              <div className="rounded border border-secondary p-4">
+              <div className="rounded border border-1 p-4">
                 <div className="p-4">
                   <img className="mb-4 col-9 " src={Logo} alt="Logo"></img>
                 </div>
@@ -128,6 +129,6 @@ export const Register = () => {
           </main>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 };

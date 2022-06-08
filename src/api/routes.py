@@ -195,6 +195,16 @@ def add_like_trip():
         return jsonify({"error": "error"}), 400
 
 
+@api.route("/match", methods=["GET"])
+@jwt_required()
+def getMatch(trip_id):
+    match = MatchTrip.query.get(trip_id)
+    if match:
+        return jsonify({"trip": match.serialize()}), 200
+    else:
+        return jsonify({"error": "no trip"}), 400
+
+
 @api.route("/user/profiles", methods=["GET"])
 @jwt_required()
 def get_user_profiles():

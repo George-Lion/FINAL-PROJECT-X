@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       logged: null,
       trip: {},
       searchedTrip: [],
+      matchTrip: [],
     },
 
     actions: {
@@ -161,6 +162,20 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trips: data.trips });
+        } catch (e) { }
+      },
+
+      getMatch: async () => {
+        try {
+          const resp = await fetch(getStore().url + "match", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ matchTrip: data.profiles });
         } catch (e) { }
       },
 

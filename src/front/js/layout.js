@@ -7,7 +7,7 @@ import { Trip } from "./pages/trip";
 import { Login } from "./pages/login";
 import { Profile } from "./pages/profile";
 import { Register } from "./pages/register";
-import { Message } from "./pages/message";
+import { Match } from "./pages/match";
 import { MyTrips } from "./pages/myTrips";
 import { Help } from "./pages/help";
 import injectContext from "./store/appContext";
@@ -56,8 +56,8 @@ const Layout = () => {
               <Route exact path="/trip/:id">
                 <Trip />
               </Route>
-              <Route exact path="/message">
-                <Message />
+              <Route exact path="/match">
+                <Match />
               </Route>
               <Route exact path="/mytrips">
                 <MyTrips />

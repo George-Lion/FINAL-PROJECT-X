@@ -98,151 +98,151 @@ export const Feed = () => {
       <div className="container">
         {response == ""
           ? store.trips.map((e) => {
-              return (
-                <div className="pepe" key={e.id}>
-                  <Link
-                    to={"/profile/" + e.user_id_of_trip_creator}
-                    style={{ textDecoration: "none" }}
+            return (
+              <div className="pepe" key={e.id}>
+                <Link
+                  to={"/profile/" + e.user_id_of_trip_creator}
+                  style={{ textDecoration: "none" }}
+                >
+                  <img
+                    className="avatar-picture ms-3"
+                    src={e.profile_picture}
+                    alt="user"
+                  />
+                  <div className="lolo">
+                    <h2 className="">{e.username}</h2>
+                  </div>
+                </Link>
+                <Link to={"/trip/" + e.id}>
+                  <div
+                    className="feed-card-image my-5 cardprueba position-relative"
+                    style={{
+                      backgroundImage: "url(" + e.destination_picture + ")",
+                    }}
                   >
-                    <img
-                      className="avatar-picture ms-3"
-                      src={e.profile_picture}
-                      alt="user"
-                    />
-                    <div className="lolo">
-                      <h2 className="">{e.username}</h2>
+                    <div className="shadow-bottom-image"></div>
+                    <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
+                      <p className="destination-title-font">
+                        <i className="fas fa-map-marker"></i> {e.destination}
+                      </p>
                     </div>
-                  </Link>
-                  <Link to={"/trip/" + e.id}>
-                    <div
-                      className="feed-card-image my-5 cardprueba position-relative"
-                      style={{
-                        backgroundImage: "url(" + e.destination_picture + ")",
-                      }}
-                    >
-                      <div className="shadow-bottom-image"></div>
-                      <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
-                        <p className="destination-title-font">
-                          <i className="fas fa-map-marker"></i> {e.destination}
-                        </p>
-                      </div>
-                      <></>
-                      <div className="card-body little-profile">
-                        <div className="position-absolute top-50 start-0 translate-middle-y pro-img"></div>
-                        <div className="information-user-box container position-absolute bottom-0 start-50 translate-middle-x mb-3">
-                          <div className="d-flex justify-content-around">
-                            <span className="">&#8205;</span>
-                            <span className="a">
-                              <i className="fas fa-clock"></i>{" "}
-                              {moment(e.start_of_the_trip).format("LL")} -{" "}
-                              {moment(e.end_of_the_trip).format("LL")}
+                    <></>
+                    <div className="card-body little-profile">
+                      <div className="position-absolute top-50 start-0 translate-middle-y pro-img"></div>
+                      <div className="information-user-box container position-absolute bottom-0 start-50 translate-middle-x mb-3">
+                        <div className="d-flex justify-content-around">
+                          <span className="">&#8205;</span>
+                          <span className="a">
+                            <i className="fas fa-clock"></i>{" "}
+                            {moment(e.start_of_the_trip).format("LL")} -{" "}
+                            {moment(e.end_of_the_trip).format("LL")}
+                          </span>
+                          <span className="">
+                            <i className="fas fa-user-friends"></i> {e.people}{" "}
+                          </span>
+                          {!e.likes.includes(store.user_id) ? (
+                            <span className="fontprueba">
+                              <i
+                                className="fas fa-heart text-dark"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
                             </span>
-                            <span className="">
-                              <i className="fas fa-user-friends"></i> {e.people}{" "}
+                          ) : (
+                            //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
+                            <span className="fontprueba text-danger">
+                              <i
+                                className="fas fa-heart"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
                             </span>
-                            {!e.likes.includes(store.user_id) ? (
-                              <span className="fontprueba">
-                                <i
-                                  className="fas fa-heart text-dark"
-                                  onClick={() => {
-                                    actions.addToFavorite(store.trips);
-                                  }}
-                                ></i>{" "}
-                                {e.likes.length}{" "}
-                              </span>
-                            ) : (
-                              //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
-                              <span className="fontprueba text-danger">
-                                <i
-                                  className="fas fa-heart"
-                                  onClick={() => {
-                                    actions.addToFavorite(store.trips);
-                                  }}
-                                ></i>{" "}
-                                {e.likes.length}{" "}
-                              </span>
-                            )}
-                          </div>
+                          )}
                         </div>
                       </div>
                     </div>
-                  </Link>
-                </div>
-              );
-            })
+                  </div>
+                </Link>
+              </div>
+            );
+          })
           : response.map((e) => {
-              return (
-                <div className="pepe" key={e.id}>
-                  <Link
-                    to={"/profile/" + e.user_id_of_trip_creator}
-                    style={{ textDecoration: "none" }}
+            return (
+              <div className="pepe" key={e.id}>
+                <Link
+                  to={"/profile/" + e.user_id_of_trip_creator}
+                  style={{ textDecoration: "none" }}
+                >
+                  <img
+                    className="avatar-picture ms-3"
+                    src={e.profile_picture}
+                    alt="user"
+                  />
+                  <div className="lolo">
+                    <h2 className="">{e.username}</h2>
+                  </div>
+                </Link>
+                <Link to={"/trip/" + e.id}>
+                  <div
+                    className="feed-card-image my-5 cardprueba position-relative"
+                    style={{
+                      backgroundImage: "url(" + e.destination_picture + ")",
+                    }}
                   >
-                    <img
-                      className="avatar-picture ms-3"
-                      src={e.profile_picture}
-                      alt="user"
-                    />
-                    <div className="lolo">
-                      <h2 className="">{e.username}</h2>
+                    <div className="shadow-bottom-image"></div>
+                    <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
+                      <p className="destination-title-font">
+                        <i className="fas fa-map-marker"></i> {e.destination}
+                      </p>
                     </div>
-                  </Link>
-                  <Link to={"/trip/" + e.id}>
-                    <div
-                      className="feed-card-image my-5 cardprueba position-relative"
-                      style={{
-                        backgroundImage: "url(" + e.destination_picture + ")",
-                      }}
-                    >
-                      <div className="shadow-bottom-image"></div>
-                      <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
-                        <p className="destination-title-font">
-                          <i className="fas fa-map-marker"></i> {e.destination}
-                        </p>
-                      </div>
-                      <></>
-                      <div className="card-body little-profile">
-                        <div className="position-absolute top-50 start-0 translate-middle-y pro-img"></div>
-                        <div className="information-user-box container position-absolute bottom-0 start-50 translate-middle-x mb-3">
-                          <div className="d-flex justify-content-around">
-                            <span className="">&#8205;</span>
-                            <span className="a">
-                              <i className="fas fa-clock"></i>{" "}
-                              {moment(e.start_of_the_trip).format("LL")} -{" "}
-                              {moment(e.end_of_the_trip).format("LL")}
+                    <></>
+                    <div className="card-body little-profile">
+                      <div className="position-absolute top-50 start-0 translate-middle-y pro-img"></div>
+                      <div className="information-user-box container position-absolute bottom-0 start-50 translate-middle-x mb-3">
+                        <div className="d-flex justify-content-around">
+                          <span className="">&#8205;</span>
+                          <span className="a">
+                            <i className="fas fa-clock"></i>{" "}
+                            {moment(e.start_of_the_trip).format("LL")} -{" "}
+                            {moment(e.end_of_the_trip).format("LL")}
+                          </span>
+                          <span className="">
+                            <i className="fas fa-user-friends"></i> {e.people}{" "}
+                          </span>
+                          {!e.likes.includes(store.user_id) ? (
+                            <span className="fontprueba">
+                              <i
+                                className="fas fa-heart text-dark"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
                             </span>
-                            <span className="">
-                              <i className="fas fa-user-friends"></i> {e.people}{" "}
+                          ) : (
+                            //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
+                            <span className="fontprueba text-danger">
+                              <i
+                                className="fas fa-heart"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
                             </span>
-                            {!e.likes.includes(store.user_id) ? (
-                              <span className="fontprueba">
-                                <i
-                                  className="fas fa-heart text-dark"
-                                  onClick={() => {
-                                    actions.addToFavorite(store.trips);
-                                  }}
-                                ></i>{" "}
-                                {e.likes.length}{" "}
-                              </span>
-                            ) : (
-                              //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
-                              <span className="fontprueba text-danger">
-                                <i
-                                  className="fas fa-heart"
-                                  onClick={() => {
-                                    actions.addToFavorite(store.trips);
-                                  }}
-                                ></i>{" "}
-                                {e.likes.length}{" "}
-                              </span>
-                            )}
-                          </div>
+                          )}
                         </div>
                       </div>
                     </div>
-                  </Link>
-                </div>
-              );
-            })}
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
       </div>
     </Fragment>
   );

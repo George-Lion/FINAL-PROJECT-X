@@ -65,6 +65,7 @@ class Trip(db.Model):
     likes = db.relationship('User', secondary=likes, lazy='subquery',
                             backref=db.backref('users', lazy=True))
     trip_in_match = db.relationship("MatchTrip")
+   
 
     def serialize(self):
         user = User.query.get(self.user_id_of_trip_creator)

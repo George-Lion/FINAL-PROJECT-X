@@ -1,0 +1,13 @@
+.image-register {
+  margin-top: 50px;
+  width: 450px;
+  height: 693px;
+  border-radius: 10px;
+  margin-left: 30px;
+}
+
+@media (max-width: 1000px) {
+  .image-register {
+    display: none !important;
+  }
+}
