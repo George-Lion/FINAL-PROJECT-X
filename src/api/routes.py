@@ -185,9 +185,15 @@ def add_like_trip():
     if user:
         trip = Trip.query.get(body_trip_id)
         if user.id != trip.user_id_of_trip_creator:
-            trip.likes.append(user)
-            db.session.commit()
-            return jsonify({"likeAdded": True}), 200
+            if user not in trip.likes:
+                trip.likes.append(user)
+                db.session.commit()
+                return jsonify({"likeAdded": True}), 200
+            else:
+                trip.likes = list(
+                    filter(lambda x: x.id != user.id, trip.likes))
+                db.session.commit()
+                return jsonify({"likeRemoved": True}), 200
         else:
             return jsonify({"error": "error"}), 400
     else:

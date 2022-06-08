@@ -113,6 +113,27 @@ export const Feed = () => {
                       <h2 className="">{e.username}</h2>
                     </div>
                   </Link>
+                  {!e.likes.includes(store.user_id) ? (
+                    <span className="fontprueba">
+                      <i
+                        className="fas fa-heart text-dark"
+                        onClick={() => {
+                          actions.changeFavorite(e.id, "feed");
+                        }}
+                      ></i>{" "}
+                      {e.likes.length}{" "}
+                    </span>
+                  ) : (
+                    <span className="fontprueba text-danger">
+                      <i
+                        className="fas fa-heart"
+                        onClick={() => {
+                          actions.changeFavorite(e.id, "feed");
+                        }}
+                      ></i>{" "}
+                      {e.likes.length}{" "}
+                    </span>
+                  )}
                   <Link to={"/trip/" + e.id}>
                     <div
                       className="feed-card-image my-5 cardprueba position-relative"
@@ -140,27 +161,6 @@ export const Feed = () => {
                             <span className="">
                               <i className="fas fa-user-friends"></i> {e.people}{" "}
                             </span>
-                            {!e.likes.includes(store.user_id) ? (
-                              <span className="fontprueba">
-                                <i
-                                  className="fas fa-heart"
-                                  onClick={() => {
-                                    actions.addToFavorite(store.trips);
-                                  }}
-                                ></i>{" "}
-                                {e.likes.length}{" "}
-                              </span>
-                            ) : (
-                              <span className="fontprueba text-danger">
-                                <i
-                                  className="fas fa-heart"
-                                  onClick={() => {
-                                    actions.addToFavorite(store.trips);
-                                  }}
-                                ></i>{" "}
-                                {e.likes.length}{" "}
-                              </span>
-                            )}
                           </div>
                         </div>
                       </div>
@@ -185,6 +185,27 @@ export const Feed = () => {
                       <h2 className="">{e.username}</h2>
                     </div>
                   </Link>
+                  {!e.likes.includes(store.user_id) ? (
+                    <span className="fontprueba">
+                      <i
+                        className="fas fa-heart text-dark"
+                        onClick={() => {
+                          actions.changeFavorite(e.id, "feed");
+                        }}
+                      ></i>{" "}
+                      {e.likes.length}{" "}
+                    </span>
+                  ) : (
+                    <span className="fontprueba text-danger">
+                      <i
+                        className="fas fa-heart"
+                        onClick={() => {
+                          actions.changeFavorite(e.id, "feed");
+                        }}
+                      ></i>{" "}
+                      {e.likes.length}{" "}
+                    </span>
+                  )}
                   <Link to={"/trip/" + e.id}>
                     <div
                       className="feed-card-image my-5 cardprueba position-relative"
@@ -212,27 +233,6 @@ export const Feed = () => {
                             <span className="">
                               <i className="fas fa-user-friends"></i> {e.people}{" "}
                             </span>
-                            {!e.likes.includes(store.user_id) ? (
-                              <span className="fontprueba">
-                                <i
-                                  className="fas fa-heart text-dark"
-                                  onClick={() => {
-                                    actions.addToFavorite(store.trips);
-                                  }}
-                                ></i>{" "}
-                                {e.likes.length}{" "}
-                              </span>
-                            ) : (
-                              <span className="fontprueba text-danger">
-                                <i
-                                  className="fas fa-heart"
-                                  onClick={() => {
-                                    actions.addToFavorite(store.trips);
-                                  }}
-                                ></i>{" "}
-                                {e.likes.length}{" "}
-                              </span>
-                            )}
                           </div>
                         </div>
                       </div>

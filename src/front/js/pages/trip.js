@@ -13,7 +13,7 @@ export const Trip = () => {
   const [modalMessage, setModalMessage] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const history = useHistory();
-  const [trip, setTrip] = useState({});
+  const [trip, setTrip] = useState({ likes: [] });
 
   useEffect(() => {
     actions.getTrip(id);
@@ -62,257 +62,259 @@ export const Trip = () => {
   return (
     <>
       {/*Banner*/}
-      {store.trip ? (
-        <>
-          {modalMessage ? (
-            <SendMessageModal
-              closeModal={() => {
-                setModalMessage(false);
+
+      <>
+        {modalMessage ? (
+          <SendMessageModal
+            closeModal={() => {
+              setModalMessage(false);
+            }}
+          />
+        ) : null}
+        {modalEdit ? (
+          <EditTripModal
+            closeModal={() => {
+              setModalEdit(false);
+            }}
+            editTrip={(trip) => {
+              setTrip(trip);
+            }}
+            trip={trip}
+          />
+        ) : null}
+        <section className="user-perfil">
+          <div className="contenedor-perfil">
+            <div
+              className="portada-perfil"
+              style={{
+                backgroundImage: "url(" + store.trip.destination_picture + ")",
               }}
-            />
-          ) : null}
-          {modalEdit ? (
-            <EditTripModal
-              closeModal={() => {
-                setModalEdit(false);
-              }}
-              editTrip={(trip) => {
-                setTrip(trip);
-              }}
-              trip={trip}
-            />
-          ) : null}
-          <section className="user-perfil">
-            <div className="contenedor-perfil">
-              <div
-                className="portada-perfil"
-                style={{
-                  backgroundImage:
-                    "url(" + store.trip.destination_picture + ")",
-                }}
-              >
-                <div className="sombra"></div>
-                <div className="avatar-perfil">
-                  <Link to={"/profile/" + store.trip.user_id_of_trip_creator}>
-                    <img src={store.trip.profile_picture} alt="img" />
-                  </Link>
-                </div>
-                <div className="datos-perfil">
-                  <h4 className="titulo-usuario">
-                    <i className="rute fas fa-map-marker-alt"></i>
-                    {store.trip.destination}
-                  </h4>
-                </div>
-                <div className="datos-button">
-                  <ul className="lista-perfil">
-                    <li>
-                      <button
-                        type="button"
-                        className="mach-button btn btn-light "
-                        onClick={() => {
-                          console.log("Modal Click");
-                          setModalMessage(true);
-                        }}
-                      >
-                        I'm in
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                <div className="datos-like">
-                  <ul className="lista-perfil">
-                    <li>
-                      <i className="fas fa-heart"></i>
-                      {store.trip.likes ? store.trip.likes.length : 0}
-                    </li>
-                  </ul>
-                </div>
-                {store.user_id == store.trip.user_id_of_trip_creator ? (
-                  <div className="opcciones-perfil">
+            >
+              <div className="sombra"></div>
+              <div className="avatar-perfil">
+                <Link to={"/profile/" + store.trip.user_id_of_trip_creator}>
+                  <img src={store.trip.profile_picture} alt="img" />
+                </Link>
+              </div>
+              <div className="datos-perfil">
+                <h4 className="titulo-usuario">
+                  <i className="rute fas fa-map-marker-alt"></i>
+                  {store.trip.destination}
+                </h4>
+              </div>
+              <div className="datos-button">
+                <ul className="lista-perfil">
+                  <li>
                     <button
                       type="button"
+                      className="mach-button btn btn-light "
                       onClick={() => {
-                        setModalEdit(true);
+                        console.log("Modal Click");
+                        setModalMessage(true);
                       }}
                     >
-                      <i className="fas fa-pencil"></i>
+                      I'm in
                     </button>
-                  </div>
-                ) : null}
+                  </li>
+                </ul>
               </div>
+              <div className="datos-like">
+                <ul className="lista-perfil">
+                  <li>
+                    <i
+                      className={
+                        store.trip.likes.includes(store.user_id)
+                          ? "fas fa-heart text-danger"
+                          : "fas fa-heart"
+                      }
+                      onClick={() => {
+                        actions.changeFavorite(store.trip.id, "trip");
+                      }}
+                    ></i>
+                    {store.trip.likes ? store.trip.likes.length : 0}
+                  </li>
+                </ul>
+              </div>
+              {store.user_id == store.trip.user_id_of_trip_creator ? (
+                <div className="opcciones-perfil">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setModalEdit(true);
+                    }}
+                  >
+                    <i className="fas fa-pencil"></i>
+                  </button>
+                </div>
+              ) : null}
             </div>
-          </section>
-          <div>
-            <h3 className="text-center">
-              <b>
-                <Link
-                  id="RouterNavLink"
-                  to="/profile"
-                  className="text-dark"
-                  style={{ textDecoration: "none" }}
-                >
-                  {store.trip.user_firstname} {store.trip.user_lastname}
-                </Link>
-              </b>
-            </h3>
-            <h5 className="text-dark text-center">
-              {store.trip.user_city_of_residence +
-                " - " +
-                store.trip.user_country}
-            </h5>
-            <div className="container">
-              <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
-                <p className="text-description text-break">{store.trip.text}</p>
-              </div>
-
-              {/* Features */}
-
-              <div className="features-box">
-                <p className="features">
-                  <i className="icon-image icon fas fa-clock"></i>
-                  {moment(store.trip.start_of_the_trip).format("LL")} -{" "}
-                  {moment(store.trip.end_of_the_trip).format("LL")}
-                </p>
-                <p className="features">
-                  <i className="icon-image icon fas fa-user-friends"> </i>0/
-                  {store.trip.people}
-                </p>
-                <p className="features">
-                  <i className="icon-image icon fas fa-route"></i>{" "}
-                  {store.trip.transport}
-                </p>
-                <p className="features">
-                  <i className="icon-image icon fas fa-coins"></i>{" "}
-                  {store.trip.cost} €
-                </p>
-              </div>
-
-              {/* Información de viaje */}
-
-              <div
-                className="box mt-3 position-static d-block py-3"
-                tabIndex="-1"
-                role="dialog"
-                id="modalChoice"
+          </div>
+        </section>
+        <div>
+          <h3 className="text-center">
+            <b>
+              <Link
+                id="RouterNavLink"
+                to="/profile"
+                className="text-dark"
+                style={{ textDecoration: "none" }}
               >
-                <h3 className="mt-2 text-dark text-center">
-                  <b>Travel buddies</b>
-                </h3>
+                {store.trip.user_firstname} {store.trip.user_lastname}
+              </Link>
+            </b>
+          </h3>
+          <h5 className="text-dark text-center">
+            {store.trip.user_city_of_residence +
+              " - " +
+              store.trip.user_country}
+          </h5>
+          <div className="container">
+            <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
+              <p className="text-description text-break">{store.trip.text}</p>
+            </div>
 
-                {/* CARDS */}
+            {/* Features */}
 
-                <div>
-                  <div className="row row-cols-1 align-items-stretch g-4 pt-1">
-                    <div className="d-flex overflow-auto">
-                      <div className="wrapper">
-                        {peopleCards.map((e) => {
-                          return (
-                            <div
-                              key={e.id}
-                              className="col container "
-                              style={{ width: "290px" }}
-                            >
-                              <Link
-                                style={{ textDecoration: "none" }}
-                                to="/user"
+            <div className="features-box">
+              <p className="features">
+                <i className="icon-image icon fas fa-clock"></i>
+                {moment(store.trip.start_of_the_trip).format("LL")} -{" "}
+                {moment(store.trip.end_of_the_trip).format("LL")}
+              </p>
+              <p className="features">
+                <i className="icon-image icon fas fa-user-friends"> </i>0/
+                {store.trip.people}
+              </p>
+              <p className="features">
+                <i className="icon-image icon fas fa-route"></i>{" "}
+                {store.trip.transport}
+              </p>
+              <p className="features">
+                <i className="icon-image icon fas fa-coins"></i>{" "}
+                {store.trip.cost} €
+              </p>
+            </div>
+
+            {/* Información de viaje */}
+
+            <div
+              className="box mt-3 position-static d-block py-3"
+              tabIndex="-1"
+              role="dialog"
+              id="modalChoice"
+            >
+              <h3 className="mt-2 text-dark text-center">
+                <b>Travel buddies</b>
+              </h3>
+
+              {/* CARDS */}
+
+              <div>
+                <div className="row row-cols-1 align-items-stretch g-4 pt-1">
+                  <div className="d-flex overflow-auto">
+                    <div className="wrapper">
+                      {peopleCards.map((e) => {
+                        return (
+                          <div
+                            key={e.id}
+                            className="col container "
+                            style={{ width: "290px" }}
+                          >
+                            <Link style={{ textDecoration: "none" }} to="/user">
+                              <div
+                                className="card-image-box d-flex text-white bg-dark align-items-end "
+                                style={{
+                                  minHeight: "350px",
+                                  minWidth: "280px",
+                                  display: "block",
+                                  backgroundImage: "url(" + e.image + ")",
+                                }}
                               >
                                 <div
-                                  className="card-image-box d-flex text-white bg-dark align-items-end "
+                                  className="d-flex flex-column text-white "
                                   style={{
-                                    minHeight: "350px",
-                                    minWidth: "280px",
+                                    minHeight: "50px",
+                                    minWidth: "230px",
                                     display: "block",
-                                    backgroundImage: "url(" + e.image + ")",
                                   }}
                                 >
-                                  <div
-                                    className="d-flex flex-column text-white "
-                                    style={{
-                                      minHeight: "50px",
-                                      minWidth: "230px",
-                                      display: "block",
-                                    }}
-                                  >
-                                    <ul className="card-text-box list-unstyled ms-3">
-                                      <li className="mb-1">
-                                        <h2>{e.name}</h2>
-                                      </li>
-                                    </ul>
-                                    <div className="shadow-card-image"></div>
-                                  </div>
+                                  <ul className="card-text-box list-unstyled ms-3">
+                                    <li className="mb-1">
+                                      <h2>{e.name}</h2>
+                                    </li>
+                                  </ul>
+                                  <div className="shadow-card-image"></div>
                                 </div>
-                              </Link>
-                            </div>
-                          );
-                        })}
-                      </div>
+                              </div>
+                            </Link>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
-                  <div className="py-2 border-top mt-4 text-left justify-content-center"></div>
                 </div>
+                <div className="py-2 border-top mt-4 text-left justify-content-center"></div>
+              </div>
 
-                {/* API RUTE */}
+              {/* API RUTE */}
 
-                <h3 className="mt-5 text-dark text-center">
-                  <b>Rute</b>
+              <h3 className="mt-5 text-dark text-center">
+                <b>Rute</b>
+              </h3>
+              <div className="card bg-dark text-white m-5 mb-1 border border-primary border-3 ">
+                <GoogleMapsApi></GoogleMapsApi>
+                <div className="card-img-overlay"></div>
+              </div>
+
+              {/* Información extendida del viaje */}
+
+              <div className="container px-4 py-5" id="featured-3">
+                <h3 className="mt-1 text-dark text-center">
+                  <b>More information</b>
                 </h3>
-                <div className="card bg-dark text-white m-5 mb-1 border border-primary border-3 ">
-                  <GoogleMapsApi></GoogleMapsApi>
-                  <div className="card-img-overlay"></div>
-                </div>
-
-                {/* Información extendida del viaje */}
-
-                <div className="container px-4 py-5" id="featured-3">
-                  <h3 className="mt-1 text-dark text-center">
-                    <b>More information</b>
-                  </h3>
-                  <div className="row g-4 py-5 row-cols-1 row-cols-lg-3">
-                    <div className="feature col">
-                      <div className="feature-icon bg-primary bg-gradient"></div>
-                      <h2>Featured title</h2>
-                      <p>
-                        Paragraph of text beneath the heading to explain the
-                        heading. We'll add onto it with another sentence and
-                        probably just keep going until we run out of words.
-                      </p>
-                      <a href="#" className="icon-link">
-                        Call to action
-                      </a>
-                    </div>
-                    <div className="feature col">
-                      <div className="feature-icon bg-primary bg-gradient"></div>
-                      <h2>Featured title</h2>
-                      <p>
-                        Paragraph of text beneath the heading to explain the
-                        heading. We'll add onto it with another sentence and
-                        probably just keep going until we run out of words.
-                      </p>
-                      <a href="#" className="icon-link">
-                        Call to action
-                      </a>
-                    </div>
-                    <div className="feature col">
-                      <div className="feature-icon bg-primary bg-gradient"></div>
-                      <h2>Featured title</h2>
-                      <p>
-                        Paragraph of text beneath the heading to explain the
-                        heading. We'll add onto it with another sentence and
-                        probably just keep going until we run out of words.
-                      </p>
-                      <a href="#" className="icon-link">
-                        Call to action
-                      </a>
-                    </div>
+                <div className="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                  <div className="feature col">
+                    <div className="feature-icon bg-primary bg-gradient"></div>
+                    <h2>Featured title</h2>
+                    <p>
+                      Paragraph of text beneath the heading to explain the
+                      heading. We'll add onto it with another sentence and
+                      probably just keep going until we run out of words.
+                    </p>
+                    <a href="#" className="icon-link">
+                      Call to action
+                    </a>
+                  </div>
+                  <div className="feature col">
+                    <div className="feature-icon bg-primary bg-gradient"></div>
+                    <h2>Featured title</h2>
+                    <p>
+                      Paragraph of text beneath the heading to explain the
+                      heading. We'll add onto it with another sentence and
+                      probably just keep going until we run out of words.
+                    </p>
+                    <a href="#" className="icon-link">
+                      Call to action
+                    </a>
+                  </div>
+                  <div className="feature col">
+                    <div className="feature-icon bg-primary bg-gradient"></div>
+                    <h2>Featured title</h2>
+                    <p>
+                      Paragraph of text beneath the heading to explain the
+                      heading. We'll add onto it with another sentence and
+                      probably just keep going until we run out of words.
+                    </p>
+                    <a href="#" className="icon-link">
+                      Call to action
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </>
-      ) : (
-        "loading"
-      )}{" "}
+        </div>
+      </>
     </>
   );
 };
