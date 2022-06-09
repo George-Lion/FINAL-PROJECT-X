@@ -1,64 +1,36 @@
-.card-img-top {
-  height: 300px;
-  z-index: 2;
-}
-
-.cardprueba {
-  border-color: #d7dfe3;
-  border-radius: 4px;
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
-  height: 352px;
-  z-index: 2;
-}
-
-.little-profile .pro-img .prueba3 {
-  width: 158px;
-  height: 158px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border-radius: 100%;
-  z-index: 2;
-}
-
-.avatar-picture {
+.image-user {
   display: block;
-  width: 230px;
-  height: 230px;
+  width: 180px;
+  height: 180px;
   background-color: #d9dcf1;
   position: absolute;
   border-radius: 50%;
   overflow: hidden;
-  border: 8px solid #ffffff;
+  border: 7px solid #ffffff;
   box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
   z-index: 3;
   background-color: aqua;
   margin-top: 60px;
 }
 
-.destination-title-font {
+.destination-title {
   font-size: 60px;
   color: #d7dfe3;
   font-weight: 600;
 }
 
-.fontprueba {
-  color: white;
-  font-weight: 400;
-  z-index: 4;
-}
-
-.feed-card-image {
+.img-content {
   display: block;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  height: 15rem;
   margin-bottom: 0.5rem;
-  height: 25rem;
+  height: 20rem;
   border-radius: 25px;
 }
 
-.feed-card-image .shadow-bottom-image {
+.img-content .shadow-image {
   position: absolute;
   display: block;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
@@ -70,69 +42,64 @@
   z-index: 1;
 }
 
-.information-user-box {
+.information-user {
   color: #d7dfe3;
   font-size: 25px;
   z-index: 3;
 }
 
-.pepe {
+.feed-box {
   z-index: 3;
 }
 
-.lolo {
+.trip-box {
   display: block;
-  width: 290px;
   color: #d7dfe3;
   position: absolute;
   overflow: hidden;
-
   z-index: 3;
-  margin-top: 300px;
-  padding-left: 60px;
+  margin-top: 280px;
+  padding-left: 20px;
+  text-align: center;
 }
 
-@media (max-width: 720px) {
-  .avatar-picture {
+@media (max-width: 500px) {
+  .image-user {
     display: block;
-    width: 200px;
-    height: 200px;
+    width: 130px;
+    height: 130px;
     background-color: #d9dcf1;
     position: absolute;
     border-radius: 50%;
     overflow: hidden;
-    border: 8px solid #ffffff;
+    border: 5px solid #ffffff;
     box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
-    z-index: 3;
-    background-color: aqua;
-    margin-top: 60px;
+    margin-top: 210px;
+    left: 30px;
   }
 
-  .destination-title-font {
-    font-size: 50px;
+  .destination-title {
+    font-size: 40px;
     color: #d7dfe3;
     font-weight: 600;
-  }
-
-  .fontprueba {
-    color: white;
-    font-weight: 400;
+    width: 350px;
     z-index: 4;
   }
 
-  .feed-card-image {
+  .img-content {
     display: block;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    height: 15rem;
     margin-bottom: 0.5rem;
     height: 25rem;
-    border-radius: 25px;
+    width: 90%;
+    border-radius: 10px;
+    margin: auto;
   }
 
-  .feed-card-image .shadow-bottom-image {
+  .img-content .shadow-image {
     position: absolute;
     display: block;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
@@ -140,29 +107,37 @@
     height: 70%;
     bottom: 0;
     left: 0;
-    border-radius: 25px;
+    border-radius: 10px;
     z-index: 1;
   }
 
-  .information-user-box {
+  .information-user {
     color: #d7dfe3;
-    font-size: 20px;
-    width: 500px;
+    font-size: 17px;
+    width: 410px;
+    z-index: 3;
+    padding-left: 0;
+  }
+
+  .feed-box {
     z-index: 3;
   }
 
-  .pepe {
-    z-index: 3;
-  }
-
-  .lolo {
+  .trip-box {
     display: block;
-    width: 290px;
     color: #d7dfe3;
     position: absolute;
     overflow: hidden;
     z-index: 3;
-    margin-top: 270px;
-    padding-left: 50px;
+    margin-top: 290px;
+    left: 195px;
+    padding-left: 0;
+    font-weight: 700;
+    font-size: 20px;
+    height: 40px;
+  }
+
+  .trip-box .name-box {
+    font-size: 30px;
   }
 }
