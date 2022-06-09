@@ -59,7 +59,7 @@ export const Login = () => {
         <div className="content-form mt-5 mb-5 row justify-content-center align-items-center ">
           <div
             className="col-auto bg-ganger p-5 text-center"
-            style={{ width: "500px" }}
+            style={{ width: "480px" }}
           >
             <main className="form-signin">
               <form className="">
@@ -122,7 +122,6 @@ export const Login = () => {
             </main>
           </div>
         </div>
-
       </div>
     </Fragment>
   );

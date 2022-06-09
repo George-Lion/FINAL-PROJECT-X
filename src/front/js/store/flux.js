@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       user: {},
+      profile: {},
       userProfiles: [],
       userTrips: [],
       url: "https://3001-georgelion-finalproject-nah4r194rpj.ws-eu47.gitpod.io/api/",
@@ -10,7 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       logged: null,
       trip: {},
       searchedTrip: [],
-      matchTrip: [],
+      match: [],
     },
 
     actions: {
@@ -57,6 +58,20 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
+        } catch (e) { }
+      },
+
+      getProfile: async (id) => {
+        try {
+          const resp = await fetch(getStore().url + "profile/" + id, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ profile: data.user });
         } catch (e) { }
       },
 
@@ -165,7 +180,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (e) { }
       },
 
-      getMatch: async () => {
+      sendMatch: async (match) => {
+        console.log(match)
+        try {
+          const resp = await fetch(getStore().url + "send/match", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify(match)
+          });
+          const data = await resp.json();
+        } catch (e) { }
+      },
+
+      getMatch: async (user) => {
         try {
           const resp = await fetch(getStore().url + "match", {
             method: "GET",
@@ -175,7 +205,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const data = await resp.json();
-          setStore({ matchTrip: data.profiles });
+          setStore({ match: data.match });
         } catch (e) { }
       },
 
@@ -199,6 +229,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ trip: data.trip });
         } catch (e) { }
       },
+
       addToFavorite: async () => {
         const resp = await fetch(getStore().url + "tripLikes", {
           method: "POST",

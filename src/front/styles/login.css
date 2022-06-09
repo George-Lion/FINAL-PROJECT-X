@@ -9,9 +9,9 @@
   display: block;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
   width: 400px;
-  height: 182px;
+  height: 177px;
   margin-top: 440px;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 5px 5px 5px 5px;
   z-index: 1;
 }
 
@@ -52,8 +52,8 @@
 .image-login {
   margin-top: 95px;
   width: 400px;
-  height: 526px;
-  border-radius: 10px;
+  height: 521px;
+  border-radius: 5px;
   z-index: 1;
   margin-left: 0;
 }

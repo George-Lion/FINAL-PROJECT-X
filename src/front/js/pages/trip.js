@@ -14,6 +14,7 @@ export const Trip = () => {
   const [modalEdit, setModalEdit] = useState(false);
   const history = useHistory();
   const [trip, setTrip] = useState({});
+  const [message, setMessage] = useState({});
 
   useEffect(() => {
     actions.getTrip(id);
@@ -24,6 +25,7 @@ export const Trip = () => {
 
   useEffect(() => {
     setTrip(store.trip);
+    setMessage({ ...message, trip_id: store.trip.user_id_of_trip_creator })
   }, [store.trip]);
 
   const peopleCards = [
@@ -66,6 +68,10 @@ export const Trip = () => {
         <>
           {modalMessage ? (
             <SendMessageModal
+              message={message}
+              setMessage={(x) => {
+                setMessage({ ...message, message: x })
+              }}
               closeModal={() => {
                 setModalMessage(false);
               }}

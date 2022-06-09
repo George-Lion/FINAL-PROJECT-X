@@ -68,6 +68,16 @@ def getUser():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
+@api.route("/profile/<int:id>", methods=["GET"])
+@jwt_required()
+def getProfile(id):
+    current_id = get_jwt_identity()
+    current_user = User.query.get(current_id)
+    if current_user:
+        user = User.query.get(id)
+        return jsonify({"user": user.serialize()}), 200
+    else:
+        return jsonify({"error": "Usuario no encontrado"}), 400
 
 @api.route("/user", methods=["PUT"])
 @jwt_required()
@@ -195,16 +205,6 @@ def add_like_trip():
         return jsonify({"error": "error"}), 400
 
 
-@api.route("/match", methods=["GET"])
-@jwt_required()
-def getMatch(trip_id):
-    match = MatchTrip.query.get(trip_id)
-    if match:
-        return jsonify({"trip": match.serialize()}), 200
-    else:
-        return jsonify({"error": "no trip"}), 400
-
-
 @api.route("/user/profiles", methods=["GET"])
 @jwt_required()
 def get_user_profiles():
@@ -228,6 +228,7 @@ def create_trip():
     body_people = request.form.get("people")
     body_transport = request.form.get("transport")
     body_cost = request.form.get("cost")
+    body_text = request.form.get("text")
     body_destination_picture="https://images.pexels.com/photos/358482/pexels-photo-358482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
@@ -235,14 +236,14 @@ def create_trip():
         
     if body_destination and body_start_of_the_trip and body_end_of_the_trip and body_people and body_transport and body_cost and body_destination_picture:
         new_trip = Trip(user_id_of_trip_creator=current_id, destination=body_destination, start_of_the_trip=body_start_of_the_trip, end_of_the_trip=body_end_of_the_trip, people=body_people,
-                        transport=body_transport, cost=body_cost, destination_picture=body_destination_picture)
-        print (new_trip)
+                        transport=body_transport, text=body_text, cost=body_cost, destination_picture=body_destination_picture)
         db.session.add(new_trip)
         db.session.commit()
         return jsonify({"created": True, "trip": new_trip.serialize()}), 200
+        
     else:
         return jsonify({"created": False, "msg": "Falta información"}), 400
-
+        
 
 @api.route("/allTrips", methods=["GET"])
 @jwt_required()
@@ -271,3 +272,31 @@ def get_trips_search():
         queries.append(Trip.end_of_the_trip == requested_end_date)
     destination_match = Trip.query.filter(*queries)
     return jsonify({"trip": list(map(lambda trip: trip.serialize(), destination_match))}), 200
+
+@api.route("/send/match", methods=["POST"]) #end point de metodo POST
+@jwt_required()
+def send_match(): #nombre de la función
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)  
+    body_trip_id=request.json.get("trip_id")  
+    body_message = request.json.get("message")
+    trip=Trip.query.get(body_trip_id)   
+    if user and trip and user.id != trip.user_id_of_trip_creator: #si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
+        match=MatchTrip(user=user, trip=trip, message=body_message)
+        db.session.add(match)
+        db.session.commit()
+        return jsonify({"send": True}), 200 #si la condición se cumple retorna a la terminal de python send 200.
+    else:
+        return jsonify({"error": "error"}), 400 #si la condición no se cumple retorna a la terminal de python error 400.
+
+
+@api.route("/match", methods=["GET"])
+@jwt_required()
+def get_match(id):
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    match = MatchTrip.query.filter_by(user)
+    if match:
+        return jsonify({"message": match.serialize()}), 200
+    else:
+        return jsonify({"error": "no message"}), 400

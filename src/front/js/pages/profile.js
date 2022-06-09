@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { EditProfileModal } from "../component/editProfileModal";
 import { CreateTripModal } from "../component/createTripModal";
 import moment from "moment";
@@ -13,9 +13,10 @@ export const Profile = () => {
   const [modalEdit, setModalEdit] = useState(false);
   const [user, setUser] = useState();
   const [trip, setTrip] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
-    actions.getUser();
+    actions.getProfile(id);
     actions.getUserTrips();
     actions.getUserProfiles();
   }, []);
@@ -27,18 +28,18 @@ export const Profile = () => {
           <div
             className="portada-perfil"
             style={{
-              backgroundImage: "url(" + store.user.banner_picture + ")",
+              backgroundImage: "url(" + store.profile.banner_picture + ")",
             }}
           >
             <div className="shadow-banner"></div>
             <div className="avatar-picture-profile">
-              <img src={store.user.profile_picture} alt="img" />
+              <img src={store.profile.profile_picture} alt="img" />
               <a
                 href="#"
                 className="cambiar-foto"
                 onClick={(e) => {
                   setShowEdit(true);
-                  setUser(store.user);
+                  setUser(store.profile);
                 }}
               >
                 <i className="fas fa-camera"></i>
@@ -57,14 +58,14 @@ export const Profile = () => {
               </label>
             </div>
             <div className="data-profile">
-              <h4 className="user-title">@{store.user.username}</h4>
+              <h4 className="user-title">@{store.profile.username}</h4>
             </div>
             <div className="options-profile">
               <button
                 type="button"
                 onClick={(e) => {
                   setShowEdit(true);
-                  setUser(store.user);
+                  setUser(store.profile);
                 }}
               >
                 <i className="fas fa-pencil"></i>
@@ -73,13 +74,13 @@ export const Profile = () => {
           </div>
           <div className="information-box pt-1">
             <h3 className="information">
-              <b>{store.user.firstname + " " + store.user.lastname}</b>
+              <b>{store.profile.firstname + " " + store.profile.lastname}</b>
             </h3>
             <h5 className="information">
-              {store.user.city_of_residence + " - " + store.user.country}
+              {store.profile.city_of_residence + " - " + store.profile.country}
             </h5>
             <p className="information-bio text-break">
-              {store.user.description}
+              {store.profile.description}
             </p>
           </div>
         </div>
@@ -121,13 +122,13 @@ export const Profile = () => {
         />
       ) : null}
 
-      <div className="container mt-2">
+      <div className="container mt-1">
         <div className="py-2 border-top text-left justify-content-center"></div>
       </div>
 
       {/*MY TRIPS*/}
 
-      <div className="content-trip-box container p-4 pt-1 mt-2">
+      <div className="content-trip-box container">
         <div>
           <div className="text-center">
             <h2>
@@ -137,7 +138,7 @@ export const Profile = () => {
           <div className="row row-cols-1 align-items-stretch g-4 ">
             <div className="d-flex overflow-auto">
               <button
-                className="btn btn-dark text-light mt-4"
+                className="button-add-trip btn btn-dark text-light mt-4"
                 style={{ height: "350px" }}
                 onClick={() => {
                   setShowCreateTrip(true);
@@ -239,7 +240,7 @@ export const Profile = () => {
           <div className="mt-2 mb-5">
             <h3>
               Estas personas ya han viajado con{" "}
-              <b>{store.user.firstname + " " + store.user.lastname}</b>:
+              <b>{store.profile.firstname + " " + store.profile.lastname}</b>:
             </h3>
 
             <div className="card mb-3 mt-4" style={{ maxWidth: "540px" }}>
@@ -266,7 +267,7 @@ export const Profile = () => {
                     </p>
                     {/*Profiles SERGI MAP*/}
                     {/* <div className="row row-cols-1 row-cols-lg-3 d-flex justify-content-between g-4 py-5">
-            {store.userProfiles.map((e) => {
+            {store.profileProfiles.map((e) => {
               return (
                 <div
                   key={e.id}

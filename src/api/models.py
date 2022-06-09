@@ -32,6 +32,7 @@ class User(db.Model):
     likes = db.relationship('Trip', secondary=likes, lazy='subquery',
                             backref=db.backref('trips', lazy=True))
     created_trip = db.relationship("Trip", backref="User")
+    trip_in_match = db.relationship("MatchTrip")
 
     def serialize(self):
         return {

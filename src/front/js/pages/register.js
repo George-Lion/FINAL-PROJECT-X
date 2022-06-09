@@ -27,10 +27,10 @@ export const Register = () => {
     <Fragment>
       <div className="d-flex justify-content-center mt-2">
         <img
-          className="image-register row "
+          className="image-register row"
           src="https://images.pexels.com/photos/11248224/pexels-photo-11248224.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         />
-        <div className="col-auto bg-ganger p-5 text-center" style={{ width: "500px" }}>
+        <div className="col-auto bg-ganger p-5 text-center" style={{ width: "470px" }}>
           <main className="for-signin">
             <form className="">
               <div className="rounded border border-1 p-4">
