@@ -1,8 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { SendMessageModal } from "../component/sendMessageModal";
 import { EditTripModal } from "../component/editTripModal";
+import { ImageGalery } from "../component/imageGalery";
+import { TravelBuddies } from "../component/travelBuddies";
 import { GoogleMapsApi } from "../component/googleMapsApi";
 import moment from "moment";
 import "../../styles/trip.css";
@@ -28,41 +30,8 @@ export const Trip = () => {
     setMessage({ ...message, trip_id: store.trip.user_id_of_trip_creator })
   }, [store.trip]);
 
-  const peopleCards = [
-    {
-      id: 1,
-      name: "Yan Dupalok",
-      image:
-        "https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    },
-    {
-      id: 2,
-      name: "Amelia Treu",
-      image:
-        "https://images.pexels.com/photos/3435504/pexels-photo-3435504.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    },
-    {
-      id: 3,
-      name: "Dana Silva",
-      image:
-        "https://images.pexels.com/photos/3579181/pexels-photo-3579181.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    },
-    {
-      id: 4,
-      name: "Andre Rush",
-      image:
-        "https://images.pexels.com/photos/886285/pexels-photo-886285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      id: 5,
-      name: "Carlos Blun",
-      image:
-        "https://images.pexels.com/photos/2599510/pexels-photo-2599510.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    },
-  ];
-
   return (
-    <>
+    <Fragment>
       {/*Banner*/}
       {store.trip ? (
         <>
@@ -114,7 +83,7 @@ export const Trip = () => {
                     <li>
                       <button
                         type="button"
-                        className="mach-button btn btn-light "
+                        className="match-button btn btn-light "
                         onClick={() => {
                           console.log("Modal Click");
                           setModalMessage(true);
@@ -167,148 +136,92 @@ export const Trip = () => {
                 store.trip.user_country}
             </h5>
             <div className="container">
-              <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
+              <div className="place-description py-2 my-3 border-top border-bottom text-left justify-content-center mb-4">
                 <p className="text-description text-break">{store.trip.text}</p>
               </div>
 
-              {/* Features */}
+              {/* FEATURES */}
 
               <div className="features-box">
-                <p className="features">
-                  <i className="icon-image icon fas fa-clock"></i>
-                  {moment(store.trip.start_of_the_trip).format("LL")} -{" "}
+                <i className="icon-image fas fa-user-friends"> 0/{store.trip.people} </i>
+                <i className="icon-image fas fa-route"> {store.trip.transport}</i>{" "}
+                <i className="icon-image fas fa-coins"> {store.trip.cost} €</i>{" "}
+                <i className="icon-image fas fa-clock"> {moment(store.trip.start_of_the_trip).format("LL")} -{" "}
                   {moment(store.trip.end_of_the_trip).format("LL")}
-                </p>
-                <p className="features">
-                  <i className="icon-image icon fas fa-user-friends"> </i>0/
-                  {store.trip.people}
-                </p>
-                <p className="features">
-                  <i className="icon-image icon fas fa-route"></i>{" "}
-                  {store.trip.transport}
-                </p>
-                <p className="features">
-                  <i className="icon-image icon fas fa-coins"></i>{" "}
-                  {store.trip.cost} €
-                </p>
+                </i>
               </div>
 
-              {/* Información de viaje */}
+              {/*  TRAVEL BUDDIES */}
+
+              <TravelBuddies />
+
+              {/* TRIP INFORMATION */}
 
               <div
-                className="box mt-3 position-static d-block py-3"
+                className="position-static d-block py-3"
                 tabIndex="-1"
                 role="dialog"
                 id="modalChoice"
               >
-                <h3 className="mt-2 text-dark text-center">
-                  <b>Travel buddies</b>
-                </h3>
 
-                {/* CARDS */}
+                {/* API GOOGLE MAPS */}
 
-                <div>
-                  <div className="row row-cols-1 align-items-stretch g-4 pt-1">
-                    <div className="d-flex overflow-auto">
-                      <div className="wrapper">
-                        {peopleCards.map((e) => {
-                          return (
-                            <div
-                              key={e.id}
-                              className="col container "
-                              style={{ width: "290px" }}
-                            >
-                              <Link
-                                style={{ textDecoration: "none" }}
-                                to="/user"
-                              >
-                                <div
-                                  className="card-image-box d-flex text-white bg-dark align-items-end "
-                                  style={{
-                                    minHeight: "350px",
-                                    minWidth: "280px",
-                                    display: "block",
-                                    backgroundImage: "url(" + e.image + ")",
-                                  }}
-                                >
-                                  <div
-                                    className="d-flex flex-column text-white "
-                                    style={{
-                                      minHeight: "50px",
-                                      minWidth: "230px",
-                                      display: "block",
-                                    }}
-                                  >
-                                    <ul className="card-text-box list-unstyled ms-3">
-                                      <li className="mb-1">
-                                        <h2>{e.name}</h2>
-                                      </li>
-                                    </ul>
-                                    <div className="shadow-card-image"></div>
-                                  </div>
-                                </div>
-                              </Link>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="py-2 border-top mt-4 text-left justify-content-center"></div>
-                </div>
-
-                {/* API RUTE */}
-
-                <h3 className="mt-5 text-dark text-center">
-                  <b>Rute</b>
-                </h3>
-                <div className="card bg-dark text-white m-5 mb-1 border border-primary border-3 ">
-                  <GoogleMapsApi></GoogleMapsApi>
-                  <div className="card-img-overlay"></div>
-                </div>
-
-                {/* Información extendida del viaje */}
-
-                <div className="container px-4 py-5" id="featured-3">
-                  <h3 className="mt-1 text-dark text-center">
-                    <b>More information</b>
+                <div className="mt-5 ">
+                  <h3 className="text-dark text-center">
+                    <b>Rute</b>
                   </h3>
-                  <div className="row g-4 py-5 row-cols-1 row-cols-lg-3">
-                    <div className="feature col">
-                      <div className="feature-icon bg-primary bg-gradient"></div>
-                      <h2>Featured title</h2>
-                      <p>
-                        Paragraph of text beneath the heading to explain the
-                        heading. We'll add onto it with another sentence and
-                        probably just keep going until we run out of words.
-                      </p>
-                      <a href="#" className="icon-link">
-                        Call to action
-                      </a>
-                    </div>
-                    <div className="feature col">
-                      <div className="feature-icon bg-primary bg-gradient"></div>
-                      <h2>Featured title</h2>
-                      <p>
-                        Paragraph of text beneath the heading to explain the
-                        heading. We'll add onto it with another sentence and
-                        probably just keep going until we run out of words.
-                      </p>
-                      <a href="#" className="icon-link">
-                        Call to action
-                      </a>
-                    </div>
-                    <div className="feature col">
-                      <div className="feature-icon bg-primary bg-gradient"></div>
-                      <h2>Featured title</h2>
-                      <p>
-                        Paragraph of text beneath the heading to explain the
-                        heading. We'll add onto it with another sentence and
-                        probably just keep going until we run out of words.
-                      </p>
-                      <a href="#" className="icon-link">
-                        Call to action
-                      </a>
+                  <div className="card bg-dark text-white m-5 mb-1 border border-primary border-3 ">
+                    <GoogleMapsApi></GoogleMapsApi>
+                    <div className="card-img-overlay"></div>
+                  </div>
+
+                  {/* IMAGE GALERY */}
+
+                  <ImageGalery />
+
+                  {/* TRIP INFORMATION */}
+
+                  <div className="container px-4 py-5" id="featured-3">
+                    <h3 className="mt-1 text-dark text-center">
+                      <b>More information</b>
+                    </h3>
+                    <div className="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                      <div className="feature col">
+                        <div className="feature-icon bg-primary bg-gradient"></div>
+                        <h2>Featured title</h2>
+                        <p>
+                          Paragraph of text beneath the heading to explain the
+                          heading. We'll add onto it with another sentence and
+                          probably just keep going until we run out of words.
+                        </p>
+                        <a href="#" className="icon-link">
+                          Call to action
+                        </a>
+                      </div>
+                      <div className="feature col">
+                        <div className="feature-icon bg-primary bg-gradient"></div>
+                        <h2>Featured title</h2>
+                        <p>
+                          Paragraph of text beneath the heading to explain the
+                          heading. We'll add onto it with another sentence and
+                          probably just keep going until we run out of words.
+                        </p>
+                        <a href="#" className="icon-link">
+                          Call to action
+                        </a>
+                      </div>
+                      <div className="feature col">
+                        <div className="feature-icon bg-primary bg-gradient"></div>
+                        <h2>Featured title</h2>
+                        <p>
+                          Paragraph of text beneath the heading to explain the
+                          heading. We'll add onto it with another sentence and
+                          probably just keep going until we run out of words.
+                        </p>
+                        <a href="#" className="icon-link">
+                          Call to action
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -319,6 +232,6 @@ export const Trip = () => {
       ) : (
         "loading"
       )}{" "}
-    </>
+    </Fragment>
   );
 };

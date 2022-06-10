@@ -27,7 +27,7 @@ class User(db.Model):
                                 default="https://images.assetsdelivery.com/compings_v2/tuktukdesign/tuktukdesign1805/tuktukdesign180500039.jpg")
     banner_picture = db.Column(
         db.String(300), unique=False, nullable=True, default="https://images.pexels.com/photos/2233992/pexels-photo-2233992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
-    description = db.Column(db.String(220), unique=False,
+    description = db.Column(db.String(280), unique=False,
                             nullable=True, default="About me")
     likes = db.relationship('Trip', secondary=likes, lazy='subquery',
                             backref=db.backref('trips', lazy=True))
@@ -59,7 +59,7 @@ class Trip(db.Model):
     people = db.Column(db.Integer, unique=False, nullable=True)
     transport = db.Column(db.String(120), unique=False, nullable=True)
     cost = db.Column(db.Integer, unique=False, nullable=True)
-    text = db.Column(db.String(220), unique=False, nullable=True,
+    text = db.Column(db.String(280), unique=False, nullable=True,
                      default="Description of the destination")
     destination_picture = db.Column(
         db.String(300), unique=False, nullable=True)

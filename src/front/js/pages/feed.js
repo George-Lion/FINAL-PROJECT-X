@@ -120,7 +120,8 @@ export const Feed = () => {
                       backgroundImage: "url(" + e.destination_picture + ")",
                     }}
                   >
-                    <div className="shadow-image"></div>
+                    <div className="shadow1-image1"></div>
+                    <div className="shadow2-image2"></div>
                     <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
                       <p className="destination-title">
                         <i class="fas fa-map-marker-alt"></i> {e.destination}
@@ -142,7 +143,7 @@ export const Feed = () => {
                           {!e.likes.includes(store.user_id) ? (
                             <span className="">
                               <i
-                                className="fas fa-heart text-dark"
+                                className="fas fa-heart"
                                 onClick={() => {
                                   actions.addToFavorite(store.trips);
                                 }}
@@ -192,7 +193,8 @@ export const Feed = () => {
                       backgroundImage: "url(" + e.destination_picture + ")",
                     }}
                   >
-                    <div className="shadow-image"></div>
+                    <div className="shadow1-image1"></div>
+                    <div className="shadow2-image2"></div>
                     <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
                       <p className="destination-title">
                         <i className="fas fa-map-marker"></i> {e.destination}
