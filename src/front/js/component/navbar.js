@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import image from "./img/traveland.png";
@@ -6,6 +6,8 @@ import "../../styles/navbar.css";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const [showFavorite, setShowFavorite] = useState(false);
+
   useEffect(() => {
     actions.getUser();
   }, []);
@@ -70,6 +72,9 @@ export const Navbar = () => {
                       </li>
                       <Link to="/profile">
                         <li className="ps-3">Profile</li>
+                      </Link>
+                      <Link to="/favorites">
+                        <li className="ps-3">Favorites</li>
                       </Link>
                       <Link to="/help">
                         <li className="ps-3">Help</li>

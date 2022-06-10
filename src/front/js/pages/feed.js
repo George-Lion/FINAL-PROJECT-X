@@ -114,7 +114,7 @@ export const Feed = () => {
                     </div>
                   </Link>
                   {!e.likes.includes(store.user_id) ? (
-                    <span className="fontprueba">
+                    <span className="fontprueba corazon-like">
                       <i
                         className="fas fa-heart text-dark"
                         onClick={() => {
@@ -124,9 +124,9 @@ export const Feed = () => {
                       {e.likes.length}{" "}
                     </span>
                   ) : (
-                    <span className="fontprueba text-danger">
+                    <span className="fontprueba corazon-like">
                       <i
-                        className="fas fa-heart"
+                        className="fas fa-heart text-danger"
                         onClick={() => {
                           actions.changeFavorite(e.id, "feed");
                         }}
@@ -186,9 +186,9 @@ export const Feed = () => {
                     </div>
                   </Link>
                   {!e.likes.includes(store.user_id) ? (
-                    <span className="fontprueba">
+                    <span className="fontprueba corazon-like">
                       <i
-                        className="fas fa-heart text-dark"
+                        className="fas fa-heart text-dark "
                         onClick={() => {
                           actions.changeFavorite(e.id, "feed");
                         }}
@@ -196,9 +196,9 @@ export const Feed = () => {
                       {e.likes.length}{" "}
                     </span>
                   ) : (
-                    <span className="fontprueba text-danger">
+                    <span className="fontprueba corazon-like">
                       <i
-                        className="fas fa-heart"
+                        className="fas fa-heart text-danger"
                         onClick={() => {
                           actions.changeFavorite(e.id, "feed");
                         }}

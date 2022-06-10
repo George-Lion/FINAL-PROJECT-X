@@ -189,8 +189,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (resp.ok) {
           if (page == "feed") {
             getActions().getTrips();
+            getActions().getUser();
           } else if (page == "trip") {
             getActions().getTrip(id);
+            getActions().getUser();
           }
         }
       },
