@@ -9,6 +9,7 @@ import { Profile } from "./pages/profile";
 import { Register } from "./pages/register";
 import { Message } from "./pages/message";
 import { MyTrips } from "./pages/myTrips";
+import { NoEditProfile } from "./pages/noEditProfile";
 import { Favorites } from "./pages/favorites";
 import { Help } from "./pages/help";
 import injectContext from "./store/appContext";
@@ -53,6 +54,9 @@ const Layout = () => {
                 ) : (
                   <Redirect to="/login"></Redirect>
                 )}
+              </Route>
+              <Route exact path="/noEditProfile/:id">
+                <NoEditProfile />
               </Route>
               <Route exact path="/trip/:id">
                 <Trip />
