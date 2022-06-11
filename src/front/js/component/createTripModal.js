@@ -206,8 +206,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
             <button
               className="col-2 offset-1 btn btn-light"
               onClick={() => {
+
                 actions.createTrip(trip);
                 closeModal();
+
               }}
             >
               Save

@@ -309,3 +309,19 @@ def get_match():
        return jsonify({"match": list(map(lambda match: match.serialize(), match))}), 200
     else:
         return jsonify({"error": "no message"}), 400
+
+
+@api.route("/accept", methods=["POST"]) #end point de metodo POST
+@jwt_required()
+def accept(): #nombre de la función
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)  
+    body_accepted=request.json.get("accepted")  
+    if user:  #si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
+        accepted=MatchTrip(user=user, accepted=body_accepted)
+        print(match)
+        db.session.add(accepted)
+        db.session.commit()
+        return jsonify({"send": True}), 200 #si la condición se cumple retorna a la terminal de python send 200.
+    else:
+        return jsonify({"error": "error"}), 400 #si la condición no se cumple retorna a la terminal de python error 400.

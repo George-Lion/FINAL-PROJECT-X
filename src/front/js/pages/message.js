@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, Fragment } from "react";
+import React, { useEffect, useContext, Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -7,6 +7,7 @@ import { Context } from "../store/appContext";
 export const Message = () => {
   const { actions, store } = useContext(Context);
   const { id } = useParams();
+  const [accept, setAccept] = useState(false);
 
   useEffect(() => {
     if (store.match == "") {
@@ -28,8 +29,10 @@ export const Message = () => {
                   <p className="mb-0">{e.message}</p>
                 </div>
                 <div className="modal-footer flex-nowrap p-0">
-                  <button type="button" className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right"><strong>
-                    accept request</strong></button>
+                  <button type="button" className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right" onClick={() =>
+                    actions.acceptMatch(true)
+                  }><strong>
+                      accept request</strong></button>
                   <button type="button" className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">reject request</button>
                 </div>
               </div>
