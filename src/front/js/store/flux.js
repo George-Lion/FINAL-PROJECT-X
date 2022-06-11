@@ -4,11 +4,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu47.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu47.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
-      trip: {},
+      trip: { likes: [] },
       searchedTrip: [],
     },
 
@@ -124,7 +124,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       getTrip: async (id) => {
-        setStore({ trip: {} });
         try {
           const resp = await fetch(getStore().url + "trip/" + id, {
             method: "GET",
@@ -184,15 +183,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ trip: data.trip });
         } catch (e) {}
       },
-      addToFavorite: async () => {
+      changeFavorite: async (id, page) => {
         const resp = await fetch(getStore().url + "tripLikes", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("token"),
           },
-          body: JSON.stringify({ trip_id: 1 }),
+          body: JSON.stringify({ trip_id: id }),
         });
+        if (resp.ok) {
+          if (page == "feed") {
+            getActions().getTrips();
+            getActions().getUser();
+          } else if (page == "trip") {
+            getActions().getTrip(id);
+            getActions().getUser();
+          }
+        }
       },
     },
   };
