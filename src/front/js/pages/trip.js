@@ -27,7 +27,7 @@ export const Trip = () => {
 
   useEffect(() => {
     setTrip(store.trip);
-    setMessage({ ...message, trip_id: store.trip.id })
+    setMessage({ ...message, trip_id: store.trip.id });
   }, [store.trip]);
 
   return (
@@ -39,13 +39,14 @@ export const Trip = () => {
             <SendMessageModal
               message={message}
               setMessage={(x) => {
-                setMessage({ ...message, message: x })
+                setMessage({ ...message, message: x });
               }}
               closeModal={() => {
                 setModalMessage(false);
               }}
             />
           ) : null}
+
           {modalEdit ? (
             <EditTripModal
               closeModal={() => {
@@ -57,6 +58,7 @@ export const Trip = () => {
               trip={trip}
             />
           ) : null}
+
           <section className="trip-user">
             <div className="trip-content">
               <div
@@ -95,27 +97,22 @@ export const Trip = () => {
                   </ul>
                 </div>
                 <div className="datos-like">
-                  <ul className="list-position">
-                    <Link to="/profile"><li>
-                      <i className="fas fa-heart"></i>
+                  <ul className="lista-perfil">
+                    <li>
+                      <i
+                        className={
+                          store.trip.likes.includes(store.user_id)
+                            ? "fas fa-heart text-danger"
+                            : "fas fa-heart"
+                        }
+                        onClick={() => {
+                          actions.changeFavorite(store.trip.id, "trip");
+                        }}
+                      ></i>
                       {store.trip.likes ? store.trip.likes.length : 0}
-                    </li></Link>
+                    </li>
                   </ul>
                 </div>
-                {store.user_id == store.trip.user_id_of_trip_creator ? (
-                  <div className="edit-options">
-                    <button
-                      type="button"
-                      className="mach-button btn btn-light "
-                      onClick={() => {
-                        console.log("Modal Click");
-                        setModalMessage(true);
-                      }}
-                    >
-                      I'm in
-                    </button>
-                  </li>
-                </ul>
               </div>
             </div>
           </section>
@@ -137,72 +134,32 @@ export const Trip = () => {
                 " - " +
                 store.trip.user_country}
             </h5>
+
             <div className="container">
-              <div className="place-description py-2 my-3 border-top border-bottom text-left justify-content-center mt-4 pt-3 mb-4">
+              <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
                 <p className="text-description text-break">{store.trip.text}</p>
-              <div className="datos-like">
-                <ul className="lista-perfil">
-                  <li>
-                    <i
-                      className={
-                        store.trip.likes.includes(store.user_id)
-                          ? "fas fa-heart text-danger"
-                          : "fas fa-heart"
-                      }
-                      onClick={() => {
-                        actions.changeFavorite(store.trip.id, "trip");
-                      }}
-                    ></i>
-                    {store.trip.likes ? store.trip.likes.length : 0}
-                  </li>
-                </ul>
               </div>
-              {store.user_id == store.trip.user_id_of_trip_creator ? (
-                <div className="opcciones-perfil">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setModalEdit(true);
-                    }}
-                  >
-                    <i className="fas fa-pencil"></i>
-                  </button>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </section>
-        <div>
-          <h3 className="text-center">
-            <b>
-              <Link
-                id="RouterNavLink"
-                to="/profile"
-                className="text-dark"
-                style={{ textDecoration: "none" }}
-              >
-                {store.trip.user_firstname} {store.trip.user_lastname}
-              </Link>
-            </b>
-          </h3>
-          <h5 className="text-dark text-center">
-            {store.trip.user_city_of_residence +
-              " - " +
-              store.trip.user_country}
-          </h5>
-          <div className="container">
-            <div className="placeDescription py-3 my-4 border-top border-bottom text-left justify-content-center">
-              <p className="text-description text-break">{store.trip.text}</p>
-            </div>
 
               {/* FEATURES */}
 
               <div className="icon-box">
-                <li className="li-icon"><i className="icon-options fas fa-user-friends"></i>0/{store.trip.people}</li>
-                <li className="li-icon"><i className="icon-options fas fa-route"> </i>{store.trip.transport}{" "}</li>
-                <li className="li-icon"><i className="icon-options fas fa-coins"> </i>{store.trip.cost} €{" "}</li>
-                <li className="li-icon"><i className="icon-options fas fa-clock"> </i>{moment(store.trip.start_of_the_trip).format("LL")} -{" "}
-                  {moment(store.trip.end_of_the_trip).format("LL")}</li>
+                <li className="li-icon">
+                  <i className="icon-options fas fa-user-friends"></i>0/
+                  {store.trip.people}
+                </li>
+                <li className="li-icon">
+                  <i className="icon-options fas fa-route"> </i>
+                  {store.trip.transport}{" "}
+                </li>
+                <li className="li-icon">
+                  <i className="icon-options fas fa-coins"> </i>
+                  {store.trip.cost} €{" "}
+                </li>
+                <li className="li-icon">
+                  <i className="icon-options fas fa-clock"> </i>
+                  {moment(store.trip.start_of_the_trip).format("LL")} -{" "}
+                  {moment(store.trip.end_of_the_trip).format("LL")}
+                </li>
               </div>
 
               {/*  TRAVEL BUDDIES */}
@@ -217,7 +174,6 @@ export const Trip = () => {
                 role="dialog"
                 id="modalChoice"
               >
-
                 {/* API GOOGLE MAPS */}
 
                 <div className="mt-5 ">
