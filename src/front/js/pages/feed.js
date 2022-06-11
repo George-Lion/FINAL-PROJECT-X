@@ -124,7 +124,7 @@ export const Feed = () => {
                     <div className="shadow2-image2"></div>
                     <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
                       <p className="destination-title">
-                        <i class="fas fa-map-marker-alt"></i> {e.destination}
+                        <i className="fas fa-map-marker-alt"></i> {e.destination}
                       </p>
                     </div>
                     <></>

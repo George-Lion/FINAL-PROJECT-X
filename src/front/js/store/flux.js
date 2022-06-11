@@ -42,6 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           user: {},
           trips: [],
           trip: {},
+          match: [],
         });
       },
       setUser: (loggedUser) => {
@@ -86,6 +87,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userTrips: data.trips });
+          console.log(data.trips)
+          console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@")
+          for (let x = 0; x < data.trips.length; x++) {
+            console.log(data.trips[x].trip_in_match)
+            console.log("#########################")
+            for (let i in data.trips[x].trip_in_match) {
+              console.log(data.trips[x].trip_in_match[i])
+              console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOO")
+              setStore({ match: [...getStore().match, data.trips[x].trip_in_match[i]] })
+            }
+
+          }
         } catch (e) { }
       },
 
@@ -200,12 +213,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           const resp = await fetch(getStore().url + "match", {
             method: "GET",
             headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + localStorage.getItem("token"),
+              "Content-Type": "application/json", /* le dice al fetch que va a traer un JSON */
+              Authorization: "Bearer " + localStorage.getItem("token"), /* para que se ejecute este fetch se necesita en el local storage algo que se llame token */
             },
           });
-          const data = await resp.json();
-          setStore({ match: data.match });
+          const data = await resp.json(); /* establece que la constante data va a guardar la respuesta de la API en formato JSON */
+          setStore({ match: data.match.trip_in_match }); /* setStore busca la key match y la rellena con el contenido de data */
         } catch (e) { }
       },
 

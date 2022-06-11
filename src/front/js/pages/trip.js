@@ -27,7 +27,7 @@ export const Trip = () => {
 
   useEffect(() => {
     setTrip(store.trip);
-    setMessage({ ...message, trip_id: store.trip.user_id_of_trip_creator })
+    setMessage({ ...message, trip_id: store.trip.id })
   }, [store.trip]);
 
   return (
@@ -57,29 +57,29 @@ export const Trip = () => {
               trip={trip}
             />
           ) : null}
-          <section className="user-perfil">
-            <div className="contenedor-perfil">
+          <section className="trip-user">
+            <div className="trip-content">
               <div
-                className="portada-perfil"
+                className="font-page"
                 style={{
                   backgroundImage:
                     "url(" + store.trip.destination_picture + ")",
                 }}
               >
-                <div className="sombra"></div>
-                <div className="avatar-perfil">
+                <div className="shadow-page"></div>
+                <div className="avatar-trip">
                   <Link to={"/profile/" + store.trip.user_id_of_trip_creator}>
                     <img src={store.trip.profile_picture} alt="img" />
                   </Link>
                 </div>
-                <div className="datos-perfil">
-                  <h4 className="titulo-usuario">
+                <div className="trip-data">
+                  <p className="info-user">
                     <i className="rute fas fa-map-marker-alt"></i>
                     {store.trip.destination}
-                  </h4>
+                  </p>
                 </div>
-                <div className="datos-button">
-                  <ul className="lista-perfil">
+                <div className="match-position">
+                  <ul className="list-position">
                     <li>
                       <button
                         type="button"
@@ -95,15 +95,15 @@ export const Trip = () => {
                   </ul>
                 </div>
                 <div className="datos-like">
-                  <ul className="lista-perfil">
-                    <li>
+                  <ul className="list-position">
+                    <Link to="/profile"><li>
                       <i className="fas fa-heart"></i>
                       {store.trip.likes ? store.trip.likes.length : 0}
-                    </li>
+                    </li></Link>
                   </ul>
                 </div>
                 {store.user_id == store.trip.user_id_of_trip_creator ? (
-                  <div className="opcciones-perfil">
+                  <div className="edit-options">
                     <button
                       type="button"
                       onClick={() => {
@@ -117,7 +117,7 @@ export const Trip = () => {
               </div>
             </div>
           </section>
-          <div>
+          <div className="mt-3">
             <h3 className="text-center">
               <b>
                 <Link
@@ -136,19 +136,18 @@ export const Trip = () => {
                 store.trip.user_country}
             </h5>
             <div className="container">
-              <div className="place-description py-2 my-3 border-top border-bottom text-left justify-content-center mb-4">
+              <div className="place-description py-2 my-3 border-top border-bottom text-left justify-content-center mt-4 pt-3 mb-4">
                 <p className="text-description text-break">{store.trip.text}</p>
               </div>
 
               {/* FEATURES */}
 
-              <div className="features-box">
-                <i className="icon-image fas fa-user-friends"> 0/{store.trip.people} </i>
-                <i className="icon-image fas fa-route"> {store.trip.transport}</i>{" "}
-                <i className="icon-image fas fa-coins"> {store.trip.cost} €</i>{" "}
-                <i className="icon-image fas fa-clock"> {moment(store.trip.start_of_the_trip).format("LL")} -{" "}
-                  {moment(store.trip.end_of_the_trip).format("LL")}
-                </i>
+              <div className="icon-box">
+                <li className="li-icon"><i className="icon-options fas fa-user-friends"></i>0/{store.trip.people}</li>
+                <li className="li-icon"><i className="icon-options fas fa-route"> </i>{store.trip.transport}{" "}</li>
+                <li className="li-icon"><i className="icon-options fas fa-coins"> </i>{store.trip.cost} €{" "}</li>
+                <li className="li-icon"><i className="icon-options fas fa-clock"> </i>{moment(store.trip.start_of_the_trip).format("LL")} -{" "}
+                  {moment(store.trip.end_of_the_trip).format("LL")}</li>
               </div>
 
               {/*  TRAVEL BUDDIES */}

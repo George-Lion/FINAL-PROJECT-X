@@ -8,7 +8,9 @@ export const MyTrips = () => {
   const { actions, store } = useContext(Context);
 
   useEffect(() => {
-    actions.getUserTrips();
+    if (store.match == "") {
+      actions.getUserTrips();
+    }
   }, []);
 
   return (

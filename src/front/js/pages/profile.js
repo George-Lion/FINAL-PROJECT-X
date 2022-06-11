@@ -17,9 +17,15 @@ export const Profile = () => {
 
   useEffect(() => {
     actions.getProfile(id);
-    actions.getUserTrips();
+    if (store.match == "") {
+      actions.getUserTrips();
+    }
     actions.getUserProfiles();
   }, []);
+
+  useEffect(() => {
+    actions.getProfile(id);
+  }, [store.user]);
 
   return (
     <div>
@@ -122,7 +128,7 @@ export const Profile = () => {
         />
       ) : null}
 
-      <div className="container mt-1">
+      <div className="container mt-4">
         <div className="py-2 border-top text-left justify-content-center"></div>
       </div>
 

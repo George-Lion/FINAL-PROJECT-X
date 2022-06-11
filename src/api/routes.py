@@ -277,12 +277,18 @@ def get_trips_search():
 @jwt_required()
 def send_match(): #nombre de la función
     current_id = get_jwt_identity()
+    print(current_id)
     user = User.query.get(current_id)  
+    print(user)
     body_trip_id=request.json.get("trip_id")  
+    print(body_trip_id)
     body_message = request.json.get("message")
+    print(body_message)
     trip=Trip.query.get(body_trip_id)   
+    print(trip.serialize())
     if user and trip and user.id != trip.user_id_of_trip_creator: #si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
         match=MatchTrip(user=user, trip=trip, message=body_message)
+        print(match)
         db.session.add(match)
         db.session.commit()
         return jsonify({"send": True}), 200 #si la condición se cumple retorna a la terminal de python send 200.
@@ -292,11 +298,11 @@ def send_match(): #nombre de la función
 
 @api.route("/match", methods=["GET"])
 @jwt_required()
-def get_match(id):
+def get_match():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
-    match = MatchTrip.query.filter_by(user)
+    match = Trip.query.filter_by(user_id_of_trip_creator=current_id)
     if match:
-        return jsonify({"message": match.serialize()}), 200
+       return jsonify({"match": list(map(lambda match: match.serialize(), match))}), 200
     else:
         return jsonify({"error": "no message"}), 400

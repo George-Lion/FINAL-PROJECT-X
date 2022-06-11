@@ -87,7 +87,9 @@ class Trip(db.Model):
             "cost": self.cost,
             "text": self.text,
             "destination_picture": self.destination_picture,
-            "likes":  list(map(lambda like: like.id, self.likes))
+            "likes":  list(map(lambda like: like.id, self.likes)),
+            "trip_in_match":  list(map(lambda trip: trip.serialize(), self.trip_in_match))
+            
         }
 
 
@@ -110,6 +112,7 @@ class MatchTrip(db.Model):
             "message": self.message,
             "accepted": self.accepted,
             "rejected": self.rejected,
+           
         }
 
 

@@ -9,8 +9,12 @@ export const Message = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    /* actions.getMatch(); */
+    if (store.match == "") {
+      actions.getUserTrips();
+    }
+
   }, []);
+
 
   return (
     <Fragment>
@@ -21,7 +25,7 @@ export const Message = () => {
               <div className="modal-content rounded-4 shadow">
                 <div className="modal-body p-4 text-center">
                   <h5 className="mb-0">titulo</h5>
-                  <p className="mb-0">{store.match.message}</p>
+                  <p className="mb-0">{e.message}</p>
                 </div>
                 <div className="modal-footer flex-nowrap p-0">
                   <button type="button" className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right"><strong>
