@@ -46,7 +46,7 @@ class User(db.Model):
             "profile_picture": self.profile_picture,
             "banner_picture": self.banner_picture,
             "description": self.description,
-            "likes":  list(map(lambda like: like.id, self.likes))
+            "likes":  list(map(lambda like: like.serialize(), self.likes))
         }
 
 

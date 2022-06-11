@@ -111,7 +111,7 @@ def editUser():
         body_profile_picture = cloudinary.uploader.upload(
             request.files['profile_picture'])
         user.profile_picture = body_profile_picture['secure_url']
-        
+
     user.username = body_username
     user.firstname = body_firstname
     user.lastname = body_lastname
@@ -136,7 +136,7 @@ def trip(trip_id):
 @jwt_required()
 def editTrip():
     current_id = get_jwt_identity()
-    body_trip_id=request.form.get("id")
+    body_trip_id = request.form.get("id")
     trip = Trip.query.get(body_trip_id)
     body_destination = request.form.get("destination", None)
     if body_destination == "" or body_destination == None:
@@ -160,7 +160,7 @@ def editTrip():
     if body_text == "" or body_text == None:
         body_text = ""
 
-    if "destination_picture" in request.files:  
+    if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])
         trip.destination_picture = body_destination_picture['secure_url']
@@ -191,14 +191,19 @@ def get_user_trips():
 def add_like_trip():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
-    print(user.likes)
     body_trip_id = request.json.get("trip_id", None)
     if user:
         trip = Trip.query.get(body_trip_id)
         if user.id != trip.user_id_of_trip_creator:
-            trip.likes.append(user)
-            db.session.commit()
-            return jsonify({"likeAdded": True}), 200
+            if user not in trip.likes:
+                trip.likes.append(user)
+                db.session.commit()
+                return jsonify({"likeAdded": True}), 200
+            else:
+                trip.likes = list(
+                    filter(lambda x: x.id != user.id, trip.likes))
+                db.session.commit()
+                return jsonify({"likeRemoved": True}), 200
         else:
             return jsonify({"error": "error"}), 400
     else:
@@ -233,14 +238,12 @@ def create_trip():
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])['secure_url']
-        
+
     if body_destination and body_start_of_the_trip and body_end_of_the_trip and body_people and body_transport and body_cost and body_destination_picture:
-        new_trip = Trip(user_id_of_trip_creator=current_id, destination=body_destination, start_of_the_trip=body_start_of_the_trip, end_of_the_trip=body_end_of_the_trip, people=body_people,
-                        transport=body_transport, text=body_text, cost=body_cost, destination_picture=body_destination_picture)
+        new_trip = Trip(user_id_of_trip_creator=current_id, destination=body_destination, start_of_the_trip=body_start_of_the_trip, end_of_the_trip=body_end_of_the_trip, people=body_people, transport=body_transport, text=body_text, cost=body_cost, destination_picture=body_destination_picture)
         db.session.add(new_trip)
         db.session.commit()
         return jsonify({"created": True, "trip": new_trip.serialize()}), 200
-        
     else:
         return jsonify({"created": False, "msg": "Falta información"}), 400
         

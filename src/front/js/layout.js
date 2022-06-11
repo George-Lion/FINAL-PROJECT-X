@@ -9,6 +9,7 @@ import { Profile } from "./pages/profile";
 import { Register } from "./pages/register";
 import { Message } from "./pages/message";
 import { MyTrips } from "./pages/myTrips";
+import { Favorites } from "./pages/favorites";
 import { Help } from "./pages/help";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
@@ -61,6 +62,9 @@ const Layout = () => {
               </Route>
               <Route exact path="/mytrips">
                 <MyTrips />
+              </Route>
+              <Route exact path="/favorites">
+                <Favorites />
               </Route>
               <Route exact path="/help">
                 <Help />
