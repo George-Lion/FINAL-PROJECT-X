@@ -98,20 +98,38 @@ export const Feed = () => {
       <div className="container">
         {response == ""
           ? store.trips.map((e) => {
-              return (
-                <div className="pepe" key={e.id}>
-                  <Link
-                    to={"/profile/" + e.user_id_of_trip_creator}
-                    style={{ textDecoration: "none" }}
+            return (
+              <div className="feed-box" key={e.id}>
+                <Link
+                  to={"/profile/" + e.user_id_of_trip_creator}
+                  style={{ textDecoration: "none" }}
+                >
+                  <img
+                    className="image-user ms-3"
+                    src={e.profile_picture}
+                    alt="user"
+                  />
+                  <div className="trip-box">
+                    <h2 className="">{e.username}</h2>
+                  </div>
+                </Link>
+                <Link to={"/trip/" + e.id}>
+                  <div
+                    className="img-content my-5 position-relative"
+                    style={{
+                      backgroundImage: "url(" + e.destination_picture + ")",
+                    }}
                   >
-                    <img
-                      className="avatar-picture ms-3"
-                      src={e.profile_picture}
-                      alt="user"
-                    />
-                    <div className="lolo">
-                      <h2 className="">{e.username}</h2>
+                    <div className="shadow1-image1"></div>
+                    <div className="shadow2-image2"></div>
+                    <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
+                      <p className="destination-title">
+                        <i className="fas fa-map-marker-alt"></i> {e.destination}
+                      </p>
                     </div>
+                          <span className="">
+                            <i className="fas fa-user-friends"></i> {e.people}{" "}
+                          </span>
                   </Link>
                   {!e.likes.includes(store.user_id) ? (
                     <span className="fontprueba corazon-like">
@@ -159,31 +177,67 @@ export const Feed = () => {
                               {moment(e.end_of_the_trip).format("LL")}
                             </span>
                             <span className="">
-                              <i className="fas fa-user-friends"></i> {e.people}{" "}
+                              <i
+                                className="fas fa-heart"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          ) : (
+                            //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
+                            <span className=" text-danger">
+                              <i
+                                className="fas fa-heart"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
                             </span>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </Link>
-                </div>
-              );
-            })
+                  </div>
+                </Link>
+              </div>
+            );
+          })
           : response.map((e) => {
-              return (
-                <div className="pepe" key={e.id}>
-                  <Link
-                    to={"/profile/" + e.user_id_of_trip_creator}
-                    style={{ textDecoration: "none" }}
+            return (
+              <div className="feed-box" key={e.id}>
+                <Link
+                  to={"/profile/" + e.user_id_of_trip_creator}
+                  style={{ textDecoration: "none" }}
+                >
+                  <img
+                    className="image-user ms-3"
+                    src={e.profile_picture}
+                    alt="user"
+                  />
+                  <div className="trip-box">
+                    <h2 className="">{e.username}</h2>
+                  </div>
+                </Link>
+                <Link to={"/trip/" + e.id}>
+                  <div
+                    className="img-content my-5 position-relative"
+                    style={{
+                      backgroundImage: "url(" + e.destination_picture + ")",
+                    }}
                   >
-                    <img
-                      className="avatar-picture ms-3"
-                      src={e.profile_picture}
-                      alt="user"
-                    />
-                    <div className="lolo">
-                      <h2 className="">{e.username}</h2>
+                    <div className="shadow1-image1"></div>
+                    <div className="shadow2-image2"></div>
+                    <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
+                      <p className="destination-title">
+                        <i className="fas fa-map-marker"></i> {e.destination}
+                      </p>
                     </div>
+                          <span className="">
+                            <i className="fas fa-user-friends"></i> {e.people}{" "}
+                          </span>
                   </Link>
                   {!e.likes.includes(store.user_id) ? (
                     <span className="fontprueba corazon-like">
@@ -231,16 +285,34 @@ export const Feed = () => {
                               {moment(e.end_of_the_trip).format("LL")}
                             </span>
                             <span className="">
-                              <i className="fas fa-user-friends"></i> {e.people}{" "}
+                              <i
+                                className="fas fa-heart text-dark"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
+                            </span>
+                          ) : (
+                            //CAMBIAR TEXT-DANGER PARA EL CORAZÓN
+                            <span className="text-danger">
+                              <i
+                                className="fas fa-heart"
+                                onClick={() => {
+                                  actions.addToFavorite(store.trips);
+                                }}
+                              ></i>{" "}
+                              {e.likes.length}{" "}
                             </span>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </Link>
-                </div>
-              );
-            })}
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
       </div>
     </Fragment>
   );

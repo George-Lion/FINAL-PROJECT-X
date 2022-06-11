@@ -64,13 +64,13 @@ export const Navbar = () => {
                       />
                     </p>
                     <ul
-                      className="dropdown-menu text-small"
+                      className="dropdown-menu text-small mt-2"
                       aria-labelledby="dropdownUser1"
                     >
                       <li className="ps-3 pb-1">
                         Hola <b>{store.user.firstname}</b>
                       </li>
-                      <Link to="/profile/:id">
+                      <Link to={"/profile/" + store.user_id}>
                         <li className="ps-3">Profile</li>
                       </Link>
                       <Link to="/favorites">

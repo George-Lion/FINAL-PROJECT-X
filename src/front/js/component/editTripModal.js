@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 
 export const EditTripModal = ({ closeModal, editTrip, trip }) => {
   const { store, actions } = useContext(Context);
+
   return (
     <div
       className="modal fade show "
@@ -23,17 +24,11 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
             <h5 className="modal-title" id="staticBackdropLabel">
               Edit Trip
             </h5>
-            {/* close buttom */}
-            <button
-              type="button"
-              className="btn-close bg-light"
-              aria-label="Close"
-              onClick={() => {
-                closeModal();
-              }}
-            ></button>
+
           </div>
+
           {/* Banner */}
+
           <div className="modal-body m-5">
             <div className="row text-center">
               <input
@@ -43,7 +38,9 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 }
               />
             </div>
+
             {/* Destination */}
+
             <div className="row text-center mb-2 mt-4">
               <label htmlFor="place" className="col-6">
                 Destination
@@ -51,6 +48,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               <input
                 defaultValue={trip.destination}
                 id="place"
+                type="text"
                 className="col-5"
                 placeholder="Destination"
                 maxLength={25}
@@ -64,7 +62,9 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 }
               ></input>
             </div>
+
             {/* start trip */}
+
             <div className="row text-center mb-2">
               <label htmlFor="startTrip" className="col-6">
                 Start of the trip
@@ -80,7 +80,9 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 }
               ></input>
             </div>
+
             {/* end trip */}
+
             <div className="row text-center mb-2">
               <label htmlFor="endTrip" className="col-6">
                 End of the trip
@@ -97,7 +99,9 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 }
               ></input>
             </div>
+
             {/* people */}
+
             <div className="row text-center mb-2">
               <label htmlFor="people" className="col-6">
                 Travel buddies
@@ -158,20 +162,31 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 id="contador"
                 className="form-control"
                 aria-label="With textarea"
-                maxLength={220}
+                maxLength={280}
                 placeholder="Text"
-                onChange={(e) => editTrip({ ...trip, text: e.target.value })}
+                onChange={(e) => editTrip({
+                  ...trip, text: e.target.value.charAt(0).toUpperCase() +
+                    e.target.value.slice(1).toLowerCase(),
+                })}
               ></textarea>
             </div>
-            <p>{trip.text ? trip.text.length : 0}/220</p>
+            <p>{trip.text ? trip.text.length : 0}/280</p>
           </div>
+
           {/* Save buttom */}
           <div className="modal-footer">
+            <button className="col-2 offset-1 btn btn-light"
+              onClick={() => {
+                closeModal();
+
+              }}>
+              Close
+            </button>
             <button
               className="col-2 offset-1 btn btn-light"
               onClick={async () => {
                 await actions.editTrip(trip);
-                closeModal();
+
               }}
             >
               Save

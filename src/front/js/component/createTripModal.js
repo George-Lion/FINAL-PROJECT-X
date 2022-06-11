@@ -187,7 +187,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 id="contador"
                 className="form-control"
                 aria-label="With textarea"
-                maxLength={220}
+                maxLength={280}
                 placeholder="Text"
                 onChange={(e) =>
                   createTrip({
@@ -197,7 +197,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 }
               ></textarea>
             </div>
-            <p>{trip.text ? trip.text.length : 0}/220</p>
+            <p>{trip.text ? trip.text.length : 0}/280</p>
           </div>
 
           {/* Save buttom */}

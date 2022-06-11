@@ -175,14 +175,14 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
                   className="form-control"
                   defaultValue={store.user.description}
                   aria-label="With textarea"
-                  maxLength={220}
+                  maxLength={280}
                   placeholder="Text"
                   onChange={(e) =>
                     editUser({ ...user, description: e.target.value })
                   }
                 ></textarea>
               </div>
-              <p>{user.description ? user.description.length : 0}/220</p>
+              <p>{user.description ? user.description.length : 0}/280</p>
             </div>
 
             {/* Save buttom */}
