@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-nah4r194rpj.ws-eu47.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu47.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -59,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getProfile: async (id) => {
@@ -73,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ profile: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getUserTrips: async () => {
@@ -100,9 +100,8 @@ const getState = ({ getStore, getActions, setStore }) => {
               });
             }
           }
-        } catch (e) { }
+        } catch (e) {}
       },
-
 
       getUserProfiles: async () => {
         try {
@@ -115,7 +114,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userProfiles: data.profiles });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       editUser: async (user) => {
@@ -133,7 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       createTrip: async (trip) => {
@@ -151,7 +150,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           getActions().getUserTrips();
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getTrip: async (id) => {
@@ -172,6 +171,7 @@ const getState = ({ getStore, getActions, setStore }) => {
              .split("T")[0]; */ //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
           if (resp.status == 200) {
             setStore({ trip: data.trip });
+            console.log("€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€");
           } else {
             return false;
           }
@@ -191,7 +191,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trips: data.trips });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       sendMatch: async (match) => {
@@ -206,7 +206,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(match),
           });
           const data = await resp.json();
-        } catch (e) { }
+        } catch (e) {}
       },
 
       acceptMatch: async (trip) => {
@@ -220,7 +220,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(trip),
           });
           const data = await resp.json();
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getMatch: async (user) => {
@@ -242,7 +242,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({
             match: data.match.trip_in_match,
           }); /* setStore busca la key match y la rellena con el contenido de data */
-        } catch (e) { }
+        } catch (e) {}
       },
 
       editTrip: async (trip) => {
@@ -263,8 +263,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trip: data.trip });
-        } catch (e) { }
+        } catch (e) {}
       },
+
       changeFavorite: async (id, page) => {
         const resp = await fetch(getStore().url + "tripLikes", {
           method: "POST",
