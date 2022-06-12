@@ -10,6 +10,8 @@ export const NoEditProfile = () => {
 
   useEffect(() => {
     actions.getProfile(id);
+
+    actions.getUserTrips(id);
   }, []);
 
   return (

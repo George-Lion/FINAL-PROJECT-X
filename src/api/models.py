@@ -35,6 +35,7 @@ class User(db.Model):
     trip_in_match = db.relationship("MatchTrip")
 
     def serialize(self):
+
         return {
             "id": self.id,
             "username": self.username,

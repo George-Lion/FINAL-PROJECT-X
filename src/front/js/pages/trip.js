@@ -19,6 +19,7 @@ export const Trip = () => {
   const [trip, setTrip] = useState({ likes: [] });
 
   useEffect(() => {
+    actions.getProfile(id);
     actions.getTrip(id);
     if (!store.trip) {
       history.push("/feed");
@@ -70,7 +71,13 @@ export const Trip = () => {
               >
                 <div className="shadow-page"></div>
                 <div className="avatar-trip">
-                  <Link to={"/profile/" + store.trip.user_id_of_trip_creator}>
+                  <Link
+                    to={
+                      store.trip.user_id_of_trip_creator == store.user_id
+                        ? "/profile/" + store.trip.user_id_of_trip_creator
+                        : "/noEditProfile/" + store.trip.user_id_of_trip_creator
+                    }
+                  >
                     <img src={store.trip.profile_picture} alt="img" />
                   </Link>
                 </div>

@@ -24,7 +24,6 @@ const getState = ({ getStore, getActions, setStore }) => {
               Authorization: "Bearer " + localStorage.getItem("token"),
             },
           });
-
           const data = await resp.json();
           if (data.user_id) {
             setStore({ user_id: data.user_id });
@@ -43,6 +42,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           trips: [],
           trip: {},
           match: [],
+          profile: {},
+          userTrips: [],
         });
       },
       setUser: (loggedUser) => {

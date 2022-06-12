@@ -44,7 +44,7 @@ def register_user():
         db.session.commit()
         return jsonify({"created": True, "user": new_user.serialize()}), 200
     else:
-        return jsonify({"created": False, "msg": "Falta información"}), 200
+        return jsonify({"created": False, "msg": "Falta información"}), 400
 
 
 @api.route("/protected", methods=["GET"])
@@ -68,6 +68,7 @@ def getUser():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
+
 @api.route("/profile/<int:id>", methods=["GET"])
 @jwt_required()
 def getProfile(id):
@@ -78,6 +79,7 @@ def getProfile(id):
         return jsonify({"user": user.serialize()}), 200
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
+
 
 @api.route("/user", methods=["PUT"])
 @jwt_required()
@@ -234,19 +236,20 @@ def create_trip():
     body_transport = request.form.get("transport")
     body_cost = request.form.get("cost")
     body_text = request.form.get("text")
-    body_destination_picture="https://images.pexels.com/photos/358482/pexels-photo-358482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    body_destination_picture = "https://images.pexels.com/photos/358482/pexels-photo-358482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])['secure_url']
 
     if body_destination and body_start_of_the_trip and body_end_of_the_trip and body_people and body_transport and body_cost and body_destination_picture:
-        new_trip = Trip(user_id_of_trip_creator=current_id, destination=body_destination, start_of_the_trip=body_start_of_the_trip, end_of_the_trip=body_end_of_the_trip, people=body_people, transport=body_transport, text=body_text, cost=body_cost, destination_picture=body_destination_picture)
+        new_trip = Trip(user_id_of_trip_creator=current_id, destination=body_destination, start_of_the_trip=body_start_of_the_trip, end_of_the_trip=body_end_of_the_trip,
+                        people=body_people, transport=body_transport, text=body_text, cost=body_cost, destination_picture=body_destination_picture)
         db.session.add(new_trip)
         db.session.commit()
         return jsonify({"created": True, "trip": new_trip.serialize()}), 200
     else:
         return jsonify({"created": False, "msg": "Falta información"}), 400
-        
+
 
 @api.route("/allTrips", methods=["GET"])
 @jwt_required()
@@ -276,27 +279,31 @@ def get_trips_search():
     destination_match = Trip.query.filter(*queries)
     return jsonify({"trip": list(map(lambda trip: trip.serialize(), destination_match))}), 200
 
-@api.route("/send/match", methods=["POST"]) #end point de metodo POST
+
+@api.route("/send/match", methods=["POST"])  # end point de metodo POST
 @jwt_required()
-def send_match(): #nombre de la función
+def send_match():  # nombre de la función
     current_id = get_jwt_identity()
     print(current_id)
-    user = User.query.get(current_id)  
+    user = User.query.get(current_id)
     print(user)
-    body_trip_id=request.json.get("trip_id")  
+    body_trip_id = request.json.get("trip_id")
     print(body_trip_id)
     body_message = request.json.get("message")
     print(body_message)
-    trip=Trip.query.get(body_trip_id)   
+    trip = Trip.query.get(body_trip_id)
     print(trip.serialize())
-    if user and trip and user.id != trip.user_id_of_trip_creator: #si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
-        match=MatchTrip(user=user, trip=trip, message=body_message)
+    # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
+    if user and trip and user.id != trip.user_id_of_trip_creator:
+        match = MatchTrip(user=user, trip=trip, message=body_message)
         print(match)
         db.session.add(match)
         db.session.commit()
-        return jsonify({"send": True}), 200 #si la condición se cumple retorna a la terminal de python send 200.
+        # si la condición se cumple retorna a la terminal de python send 200.
+        return jsonify({"send": True}), 200
     else:
-        return jsonify({"error": "error"}), 400 #si la condición no se cumple retorna a la terminal de python error 400.
+        # si la condición no se cumple retorna a la terminal de python error 400.
+        return jsonify({"error": "error"}), 400
 
 
 @api.route("/match", methods=["GET"])
@@ -306,22 +313,24 @@ def get_match():
     user = User.query.get(current_id)
     match = Trip.query.filter_by(user_id_of_trip_creator=current_id)
     if match:
-       return jsonify({"match": list(map(lambda match: match.serialize(), match))}), 200
+        return jsonify({"match": list(map(lambda match: match.serialize(), match))}), 200
     else:
         return jsonify({"error": "no message"}), 400
 
 
-@api.route("/accept", methods=["POST"]) #end point de metodo POST
+@api.route("/accept", methods=["POST"])  # end point de metodo POST
 @jwt_required()
-def accept(): #nombre de la función
+def accept():  # nombre de la función
     current_id = get_jwt_identity()
-    user = User.query.get(current_id)  
-    body_accepted=request.json.get("accepted")  
-    if user:  #si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
-        accepted=MatchTrip(user=user, accepted=body_accepted)
+    user = User.query.get(current_id)
+    body_accepted = request.json.get("accepted")
+    if user:  # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
+        accepted = MatchTrip(user=user, accepted=body_accepted)
         print(match)
         db.session.add(accepted)
         db.session.commit()
-        return jsonify({"send": True}), 200 #si la condición se cumple retorna a la terminal de python send 200.
+        # si la condición se cumple retorna a la terminal de python send 200.
+        return jsonify({"send": True}), 200
     else:
-        return jsonify({"error": "error"}), 400 #si la condición no se cumple retorna a la terminal de python error 400.
+        # si la condición no se cumple retorna a la terminal de python error 400.
+        return jsonify({"error": "error"}), 400
