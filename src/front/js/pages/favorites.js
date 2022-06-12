@@ -13,14 +13,15 @@ export const Favorites = () => {
 
   return (
     <div>
-      <div
-        className="favorites-box position-static d-block py-1 mt-5"
-
-      >
-        {store.user.likes && store.user.likes.length > 0 ?
-          <h3 className="travel-title mt-3 mb-3 text-center" style={{ color: "white" }}>
+      <div className="favorites-box position-static d-block py-1 mt-5">
+        {store.user.likes && store.user.likes.length > 0 ? (
+          <h3
+            className="travel-title mt-3 mb-3 text-center"
+            style={{ color: "white" }}
+          >
             <b>Favorites</b>
-          </h3> : null}
+          </h3>
+        ) : null}
 
         {/* WRAPPER */}
 
@@ -28,8 +29,8 @@ export const Favorites = () => {
           <div className="d-flex overflow-auto">
             <div className="wrapper-favorites">
               <div className="container">
-                {store.user.likes && store.user.likes.length > 0
-                  ? store.user.likes.map((e) => {
+                {store.user.likes && store.user.likes.length > 0 ? (
+                  store.user.likes.map((e) => {
                     return (
                       <div className="favorite-box mb-3" key={e.id}>
                         <div className=""></div>
@@ -49,7 +50,8 @@ export const Favorites = () => {
                                 onClick={() => {
                                   actions.changeFavorite(e.id, "feed");
                                 }}
-                              ></i>{e.likes.length}
+                              ></i>
+                              {e.likes.length}
                             </div>
                           ) : (
                             <div className="favorite-li fontprueba corazon-like text-white">
@@ -58,7 +60,8 @@ export const Favorites = () => {
                                 onClick={() => {
                                   actions.changeFavorite(e.id, "feed");
                                 }}
-                              ></i>{e.likes.length}
+                              ></i>
+                              {e.likes.length}
                             </div>
                           )}
                         </div>
@@ -66,7 +69,11 @@ export const Favorites = () => {
                         {/*  INFORMATION */}
 
                         <Link
-                          to={"/profile/" + e.user_id_of_trip_creator}
+                          to={
+                            e.user_id_of_trip_creator == store.user_id
+                              ? "/profile/" + e.user_id_of_trip_creator
+                              : "/noEditProfile/" + e.user_id_of_trip_creator
+                          }
                           style={{ textDecoration: "none" }}
                         >
                           <img
@@ -83,7 +90,8 @@ export const Favorites = () => {
                           <div
                             className="favorite-destination position-relative"
                             style={{
-                              backgroundImage: "url(" + e.destination_picture + ")",
+                              backgroundImage:
+                                "url(" + e.destination_picture + ")",
                             }}
                           >
                             <div className="shadow-image"></div>
@@ -101,12 +109,14 @@ export const Favorites = () => {
                       </div>
                     );
                   })
-                  : <h5 className="text-center text-white mt-4">No favorites</h5>}
+                ) : (
+                  <h5 className="text-center text-white mt-4">No favorites</h5>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };

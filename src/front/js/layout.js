@@ -46,7 +46,11 @@ const Layout = () => {
                 )}
               </Route>
               <Route exact path="/home">
-                <Feed />
+                {store.logged == true ? (
+                  <Feed />
+                ) : (
+                  <Redirect to="/login"></Redirect>
+                )}
               </Route>
               <Route exact path="/profile/:id">
                 {store.logged == true ? (
@@ -56,19 +60,39 @@ const Layout = () => {
                 )}
               </Route>
               <Route exact path="/noEditProfile/:id">
-                <NoEditProfile />
+                {store.logged == true ? (
+                  <NoEditProfile />
+                ) : (
+                  <Redirect to="/login"></Redirect>
+                )}
               </Route>
               <Route exact path="/trip/:id">
-                <Trip />
+                {store.logged == true ? (
+                  <Trip />
+                ) : (
+                  <Redirect to="/login"></Redirect>
+                )}
               </Route>
               <Route exact path="/message">
-                <Message />
+                {store.logged == true ? (
+                  <Message />
+                ) : (
+                  <Redirect to="/login"></Redirect>
+                )}
               </Route>
               <Route exact path="/mytrips">
-                <MyTrips />
+                {store.logged == true ? (
+                  <MyTrips />
+                ) : (
+                  <Redirect to="/login"></Redirect>
+                )}
               </Route>
               <Route exact path="/favorites">
-                <Favorites />
+                {store.logged == true ? (
+                  <Favorites />
+                ) : (
+                  <Redirect to="/login"></Redirect>
+                )}
               </Route>
               <Route exact path="/help">
                 <Help />
