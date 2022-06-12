@@ -38,16 +38,34 @@ export const Login = () => {
       <div className="d-flex justify-content-center">
         <div className="card-login-image">
           <div className="shadow-card-login"></div>
-          <p className="login-title"><i className="fas fa-map-marker-alt"></i> Petra</p>
+          <p className="login-title">
+            <i className="fas fa-map-marker-alt"></i> Petra
+          </p>
           <div className="box-user-information">
             <ul className="list-unstyled list-group list-group-horizontal">
-              <li><img className="image-user-login" src={photo} /></li>
-              <li className="pt-2"><h3 className="pt-5">Amanda Girona</h3></li>
+              <li>
+                <img className="image-user-login" src={photo} />
+              </li>
+              <li className="pt-2">
+                <h3 className="pt-5">Amanda Girona</h3>
+              </li>
             </ul>
             <ul className="list-unstyled list-group list-group-horizontal ps-2">
-              <li className="me-4"><p className=""><i className="fas fa-clock"></i> July, 23 - August, 3</p></li>
-              <li className="me-4"><p className=""><i className="fas fa-user-friends"></i> 3/4</p></li>
-              <li className="me-4"><p className=""><i className="fas fa-route"></i> Airplane</p></li>
+              <li className="me-4">
+                <p className="">
+                  <i className="fas fa-clock"></i> July, 23 - August, 3
+                </p>
+              </li>
+              <li className="me-4">
+                <p className="">
+                  <i className="fas fa-user-friends"></i> 3/4
+                </p>
+              </li>
+              <li className="me-4">
+                <p className="">
+                  <i className="fas fa-route"></i> Airplane
+                </p>
+              </li>
             </ul>
           </div>
           <img

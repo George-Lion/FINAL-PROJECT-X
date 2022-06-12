@@ -1,16 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import moment from "moment";
 import "../../styles/profile.css";
 
 export const NoEditProfile = () => {
   const { store, actions } = useContext(Context);
+  const { id } = useParams();
 
   useEffect(() => {
-    actions.getUser();
-    actions.getUserTrips();
-    actions.getUserProfiles();
+    actions.getProfile(id);
+
+    actions.getUserTrips(id);
   }, []);
 
   return (
@@ -20,12 +21,12 @@ export const NoEditProfile = () => {
           <div
             className="portada-perfil"
             style={{
-              backgroundImage: "url(" + store.user.banner_picture + ")",
+              backgroundImage: "url(" + store.profile.banner_picture + ")",
             }}
           >
             <div className="shadow-banner"></div>
             <div className="avatar-picture-profile">
-              <img src={store.user.profile_picture} alt="img" />
+              <img src={store.profile.profile_picture} alt="img" />
 
               <label htmlFor="inputTag" className="label-style">
                 cover image <br />
@@ -39,18 +40,18 @@ export const NoEditProfile = () => {
               </label>
             </div>
             <div className="data-profile">
-              <h4 className="user-title">@{store.user.username}</h4>
+              <h4 className="user-title">@{store.profile.username}</h4>
             </div>
           </div>
           <div className="information-box pt-1">
             <h3 className="information">
-              <b>{store.user.firstname + " " + store.user.lastname}</b>
+              <b>{store.profile.firstname + " " + store.profile.lastname}</b>
             </h3>
             <h5 className="information">
-              {store.user.city_of_residence + " - " + store.user.country}
+              {store.profile.city_of_residence + " - " + store.profile.country}
             </h5>
             <p className="information-bio text-break">
-              {store.user.description}
+              {store.profile.description}
             </p>
           </div>
         </div>
@@ -165,7 +166,7 @@ export const NoEditProfile = () => {
           <div className="mt-2 mb-5">
             <h3>
               Estas personas ya han viajado con{" "}
-              <b>{store.user.firstname + " " + store.user.lastname}</b>:
+              <b>{store.profile.firstname + " " + store.profile.lastname}</b>:
             </h3>
 
             <div className="card mb-3 mt-4" style={{ maxWidth: "540px" }}>

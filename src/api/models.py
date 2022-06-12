@@ -14,7 +14,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=True)
     firstname = db.Column(db.String(120), unique=False,
-                          nullable=True, default="Firt name")
+                          nullable=True, default="First name")
     lastname = db.Column(db.String(120), unique=False,
                          nullable=True, default="Last name")
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -35,6 +35,7 @@ class User(db.Model):
     trip_in_match = db.relationship("MatchTrip")
 
     def serialize(self):
+
         return {
             "id": self.id,
             "username": self.username,
@@ -66,7 +67,6 @@ class Trip(db.Model):
     likes = db.relationship('User', secondary=likes, lazy='subquery',
                             backref=db.backref('users', lazy=True))
     trip_in_match = db.relationship("MatchTrip")
-   
 
     def serialize(self):
         user = User.query.get(self.user_id_of_trip_creator)
@@ -89,7 +89,7 @@ class Trip(db.Model):
             "destination_picture": self.destination_picture,
             "likes":  list(map(lambda like: like.id, self.likes)),
             "trip_in_match":  list(map(lambda trip: trip.serialize(), self.trip_in_match))
-            
+
         }
 
 
@@ -112,7 +112,7 @@ class MatchTrip(db.Model):
             "message": self.message,
             "accepted": self.accepted,
             "rejected": self.rejected,
-           
+
         }
 
 
