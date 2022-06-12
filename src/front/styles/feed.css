@@ -1,7 +1,7 @@
 .image-user {
   display: block;
-  width: 180px;
-  height: 180px;
+  width: 155px;
+  height: 155px;
   background-color: #d9dcf1;
   position: absolute;
   border-radius: 50%;
@@ -10,11 +10,11 @@
   box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
   z-index: 3;
   background-color: aqua;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 .destination-title {
-  font-size: 60px;
+  font-size: 55px;
   color: #d7dfe3;
   font-weight: 600;
 }
@@ -59,158 +59,88 @@
   position: absolute;
   overflow: hidden;
   z-index: 3;
-  margin-top: 260px;
-  padding-left: 50px;
+  margin-top: 200px;
+  padding-left: 30px;
   text-align: center;
 }
 
 .ul-feed {
-  width: 700px;
-  margin-left: 545px;
   z-index: 4;
-  font-size: 25px;
+  width: auto;
   position: absolute;
-  overflow: hidden;
+  font-size: 22px;
   margin-top: 260px;
-  list-style: none;
-  justify-content: right;
 }
 
 .il-feed {
-  padding-left: 70px;
+  padding-right: 90px;
+  margin-left: 30px;
 }
 
-@media (max-width: 1400px) {
-  .ul-feed {
-    margin-left: 360px;
-  }
-
-  .il-feed {
-    padding-left: 70px;
-  }
+.il-time {
+  padding-right: 90px;
+  margin-left: 30px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   .ul-feed {
-    margin-left: 180px;
-  }
-
-  .il-feed {
-    padding-left: 70px;
-  }
-}
-
-@media (max-width: 980px) {
-  .ul-feed {
-    margin-left: 40px;
     font-size: 19px;
-    width: 600px;
   }
 
   .il-feed {
-    padding-left: 40px;
+    padding-right: 50px;
+    margin-left: 30px;
   }
 }
 
 @media (max-width: 800px) {
-  .feed-box {
-    margin-bottom: 50px;
+  .il-feed {
+    margin-left: 20px;
+    width: 80px;
+    padding-right: 0px;
+    margin-right: 130px;
   }
+
+  .il-time {
+    padding-right: 30px;
+    margin-left: 30px;
+  }
+}
+
+@media (max-width: 760px) {
   .image-user {
     display: block;
-    width: 120px;
-    height: 120px;
-    background-color: #7a7a7a;
+    width: 128px;
+    height: 128px;
+    background-color: #d9dcf1;
     position: absolute;
     border-radius: 50%;
     overflow: hidden;
     border: 5px solid #ffffff;
     box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
-    margin-top: 185px;
-    right: 59%;
+    z-index: 3;
+    background-color: aqua;
+    margin-top: 65px;
+  }
+
+  .il-feed {
+    width: 100px;
+    padding-right: 0px;
+    margin-right: 0px;
+    font-size: 15px;
+  }
+
+  .il-time {
+    width: 190px;
+    margin-left: 30px;
+    font-size: 15px;
+    font-weight: 600;
   }
 
   .destination-title {
     font-size: 40px;
     color: #d7dfe3;
     font-weight: 600;
-    width: 320px;
-    z-index: 4;
-  }
-
-  .img-content {
-    display: block;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    margin-bottom: 0.5rem;
-    height: 23rem;
-    width: 400px;
-    border-radius: 10px;
-    margin: auto;
-  }
-
-  .img-content .shadow1-image1 {
-    position: absolute;
-    display: block;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    width: 100%;
-    height: 40%;
-    bottom: 0;
-    left: 0;
-    border-radius: 10px;
-    z-index: 1;
-  }
-
-  .img-content .shadow2-image2 {
-    position: absolute;
-    display: block;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-    width: 100%;
-    height: 40%;
-    top: 0;
-    left: 0;
-    border-radius: 10px;
-    z-index: 1;
-    transform: rotate(180deg);
-  }
-
-  .information-user {
-    color: #d7dfe3;
-    font-size: 17px;
-    width: 410px;
-    z-index: 3;
-    padding-left: 0;
-  }
-
-  .trip-box {
-    display: block;
-    color: #d7dfe3;
-    position: absolute;
-    overflow: hidden;
-    z-index: 3;
-    margin-top: 275px;
-    left: 195px;
-    padding-left: 0;
-    font-weight: 700;
-    font-size: 20px;
-    height: 40px;
-  }
-
-  .trip-box .name-box {
-    font-size: 30px;
-  }
-
-  .ul-feed {
-    margin-left: 0px;
-    font-size: 16px;
-    width: 90%;
-    padding-right: 20px;
-    margin-top: 322px;
-  }
-
-  .il-feed {
-    padding-left: 15px;
+    margin-left: 40px;
   }
 }

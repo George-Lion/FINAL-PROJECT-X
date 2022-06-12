@@ -154,6 +154,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (e) { }
       },
 
+      /* GET TRIP */
+
       getTrip: async (id) => {
         try {
           const resp = await fetch(getStore().url + "trip/" + id, {
@@ -194,6 +196,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (e) { }
       },
 
+      /* SEND MATCH */
+
       sendMatch: async (match) => {
         console.log(match);
         try {
@@ -209,6 +213,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (e) { }
       },
 
+      /* ACCEPT MATCH */
+
       acceptMatch: async (trip) => {
         try {
           const resp = await fetch(getStore().url + "accept", {
@@ -222,6 +228,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
         } catch (e) { }
       },
+
+      /* GET MATCH */
 
       getMatch: async (user) => {
         try {
@@ -245,6 +253,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (e) { }
       },
 
+      /* EDIT TRIP */
+
       editTrip: async (trip) => {
         //función para editar el viaje.
         try {
@@ -265,6 +275,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ trip: data.trip });
         } catch (e) { }
       },
+
       changeFavorite: async (id, page) => {
         const resp = await fetch(getStore().url + "tripLikes", {
           method: "POST",
