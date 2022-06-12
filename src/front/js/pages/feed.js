@@ -98,42 +98,40 @@ export const Feed = () => {
       <div className="container">
         {response == ""
           ? store.trips.map((e) => {
-              return (
-                <div className="feed-box" key={e.id}>
-                  <div className=""></div>
-                  <ul className="ul-feed d-flex">
-                    <li className="il-feed text-white">
-                      <i className="fas fa-clock"></i>{" "}
-                      {moment(e.start_of_the_trip).format("LL")} -{" "}
-                      {moment(e.end_of_the_trip).format("LL")}
-                    </li>
-                    <li className="il-feed text-white">
-                      <i className="fas fa-user-friends"></i> {e.people}{" "}
-                    </li>
-                    {!e.likes.includes(store.user_id) ? (
-                      <li className="il-feed text-white">
-                        <i
-                          className="fas fa-heart"
-                          onClick={() => {
-                            actions.changeFavorite(e.id, "feed");
-                          }}
-                        ></i>{" "}
-                        {e.likes.length}{" "}
-                      </li>
-                    ) : (
-                      <li className="fontprueba corazon-like text-white">
-                        <i
-                          className="il-feed fas fa-heart text-danger"
-                          onClick={() => {
-                            actions.changeFavorite(e.id, "feed");
-                          }}
-                        ></i>{" "}
-                        {e.likes.length}{" "}
-                      </li>
-                    )}
-                  </ul>
+            return (
+              <div className="feed-box" key={e.id}>
+                <div className=""></div>
+                <div className="ul-feed d-flex">
+                  <div className="il-time text-white">
+                    <i className="fas fa-clock"></i>{" "}
+                    {moment(e.start_of_the_trip).format("LL")} -{" "}
+                    {moment(e.end_of_the_trip).format("LL")}
+                  </div>
+                  <div className="il-feed text-white">
+                    <i className="fas fa-user-friends"></i> {e.people}{" "}
+                  </div>
+                  {!e.likes.includes(store.user_id) ? (
+                    <div className="il-feed text-white">
+                      <i
+                        className="fas fa-heart"
+                        onClick={() => {
+                          actions.changeFavorite(e.id, "feed");
+                        }}
+                      ></i>{e.likes.length}
+                    </div>
+                  ) : (
+                    <div className="il-feed fontprueba corazon-like text-white">
+                      <i
+                        className="fas fa-heart text-danger"
+                        onClick={() => {
+                          actions.changeFavorite(e.id, "feed");
+                        }}
+                      ></i>{e.likes.length}
+                    </div>
+                  )}
+                </div>
 
-                  {/*  INFORMATION */}
+                {/*  INFORMATION */}
 
                   <Link
                     to={

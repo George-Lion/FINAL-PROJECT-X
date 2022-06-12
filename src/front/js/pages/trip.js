@@ -120,6 +120,18 @@ export const Trip = () => {
                     </li>
                   </ul>
                 </div>
+                {store.user_id == store.trip.user_id_of_trip_creator ? (
+                  <div className="edit-options">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModalEdit(true);
+                      }}
+                    >
+                      <i className="fas fa-pencil"></i>
+                    </button>
+                  </div>
+                ) : null}
               </div>
             </div>
           </section>
