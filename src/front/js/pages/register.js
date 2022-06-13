@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Logo from "../component/img/traveland.png";
 import "../../styles/register.css";
 

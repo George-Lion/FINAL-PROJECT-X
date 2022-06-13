@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/createTripModal.css";
 
@@ -44,7 +44,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 type="file"
                 className="custom-file-input3"
                 onChange={(e) =>
-                  createTrip({ ...trip, destination_picture: e.target.files[0] })
+                  createTrip({
+                    ...trip,
+                    destination_picture: e.target.files[0],
+                  })
                 }
               />
             </div>
@@ -62,7 +65,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 maxLength={25}
                 onChange={(e) =>
                   createTrip({
-                    ...trip, destination: e.target.value.charAt(0).toUpperCase() +
+                    ...trip,
+                    destination:
+                      e.target.value.charAt(0).toUpperCase() +
                       e.target.value.slice(1).toLowerCase(),
                   })
                 }
@@ -82,7 +87,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 placeholder="Start"
                 onChange={(e) =>
                   createTrip({
-                    ...trip, start_of_the_trip: e.target.value.charAt(0).toUpperCase() +
+                    ...trip,
+                    start_of_the_trip:
+                      e.target.value.charAt(0).toUpperCase() +
                       e.target.value.slice(1).toLowerCase(),
                   })
                 }
@@ -103,7 +110,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 placeholder="End"
                 onChange={(e) =>
                   createTrip({
-                    ...trip, end_of_the_trip: e.target.value.charAt(0).toUpperCase() +
+                    ...trip,
+                    end_of_the_trip:
+                      e.target.value.charAt(0).toUpperCase() +
                       e.target.value.slice(1).toLowerCase(),
                   })
                 }
@@ -123,7 +132,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 placeholder="Travel buddies"
                 onChange={(e) =>
                   createTrip({
-                    ...trip, people: e.target.value.charAt(0).toUpperCase() +
+                    ...trip,
+                    people:
+                      e.target.value.charAt(0).toUpperCase() +
                       e.target.value.slice(1).toLowerCase(),
                   })
                 }
@@ -142,7 +153,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 placeholder="none"
                 onChange={(e) =>
                   createTrip({
-                    ...trip, transport: e.target.value.charAt(0).toUpperCase() +
+                    ...trip,
+                    transport:
+                      e.target.value.charAt(0).toUpperCase() +
                       e.target.value.slice(1).toLowerCase(),
                   })
                 }
@@ -171,7 +184,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 placeholder="Cost"
                 onChange={(e) =>
                   createTrip({
-                    ...trip, cost: e.target.value.charAt(0).toUpperCase() +
+                    ...trip,
+                    cost:
+                      e.target.value.charAt(0).toUpperCase() +
                       e.target.value.slice(1).toLowerCase(),
                   })
                 }
@@ -191,7 +206,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 placeholder="Text"
                 onChange={(e) =>
                   createTrip({
-                    ...trip, text: e.target.value.charAt(0).toUpperCase() +
+                    ...trip,
+                    text:
+                      e.target.value.charAt(0).toUpperCase() +
                       e.target.value.slice(1).toLowerCase(),
                   })
                 }
@@ -206,10 +223,8 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
             <button
               className="col-2 offset-1 btn btn-light"
               onClick={() => {
-
                 actions.createTrip(trip);
                 closeModal();
-
               }}
             >
               Save

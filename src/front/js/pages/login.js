@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import logo from "../component/img/traveland.png";
 import photo from "../component/img/login-photo.png";
 import "../../styles/login.css";
@@ -84,7 +83,11 @@ export const Login = () => {
                 <form className="">
                   <div className="border border-1 p-4 rounded">
                     <div className="p-5 pb-0 pt-0">
-                      <img className="mb-4 pb-4 pt-4 col-12" src={logo} alt="" />
+                      <img
+                        className="mb-4 pb-4 pt-4 col-12"
+                        src={logo}
+                        alt=""
+                      />
                     </div>
                     <div className="form-floating mb-2 ">
                       <input
@@ -121,7 +124,8 @@ export const Login = () => {
                     </button>
                     <div className="checkbox mb-2 mx-center">
                       <label>
-                        <input type="checkbox" value="remember-me" /> Remember me
+                        <input type="checkbox" value="remember-me" /> Remember
+                        me
                       </label>
                     </div>
                   </div>

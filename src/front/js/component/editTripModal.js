@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router-dom";
 
 export const EditTripModal = ({ closeModal, editTrip, trip }) => {
   const { store, actions } = useContext(Context);
+  const history = useHistory();
 
   const deleteTrip = async () => {
     try {
@@ -15,7 +17,6 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
         body: JSON.stringify(store.trip),
       });
       const data = await resp.json();
-      console.log(data);
     } catch (e) {}
   };
 
@@ -197,6 +198,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               className="fa-solid fa-trash"
               onClick={() => {
                 deleteTrip();
+                history.push("/myTrips");
               }}
             ></i>
             <div>

@@ -55,7 +55,7 @@ def protected():
     if user:
         return jsonify({"logged_in": True, "user_id": current_id}), 200
     else:
-        return jsonify({"logged_in": False}), 400
+        return jsonify({"logged_in": False, "prueba": "prueba"}), 401
 
 
 @api.route("/user", methods=["GET"])
@@ -187,6 +187,7 @@ def get_user_trips():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
+
 @api.route("/trips/<int:id>", methods=["GET"])
 @jwt_required()
 def get_user_trips_by_id(id):
@@ -195,7 +196,6 @@ def get_user_trips_by_id(id):
         return jsonify({"trips": list(map(lambda trip: trip.serialize(), user.created_trip))}), 200
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
-
 
 
 @api.route("/deleteTrip", methods=["DELETE"])
@@ -351,11 +351,11 @@ def accept():  # nombre de la función
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     body_match_id = request.json.get("id")
-   
+
     if user:  # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
         match = MatchTrip.query.get(body_match_id)
-        match.accepted=True
-        match.rejected=False
+        match.accepted = True
+        match.rejected = False
         db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
         return jsonify({"send": True}), 200
