@@ -108,6 +108,7 @@ export const Trip = () => {
                     <li>
                       <i
                         className={
+                          store.trip.likes &&
                           store.trip.likes.includes(store.user_id)
                             ? "fas fa-heart text-danger"
                             : "fas fa-heart"

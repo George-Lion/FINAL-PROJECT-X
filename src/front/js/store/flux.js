@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu47.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu47.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -88,14 +88,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userTrips: data.trips });
-          console.log(data.trips);
-          console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
           for (let x = 0; x < data.trips.length; x++) {
-            console.log(data.trips[x].trip_in_match);
-            console.log("#########################");
             for (let i in data.trips[x].trip_in_match) {
-              console.log(data.trips[x].trip_in_match[i]);
-              console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOO");
               setStore({
                 match: [...getStore().match, data.trips[x].trip_in_match[i]],
               });
@@ -174,7 +168,6 @@ const getState = ({ getStore, getActions, setStore }) => {
              .split("T")[0]; */ //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
           if (resp.status == 200) {
             setStore({ trip: data.trip });
-            console.log("€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€");
           } else {
             return false;
           }

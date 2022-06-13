@@ -188,6 +188,22 @@ def get_user_trips():
         return jsonify({"error": "Usuario no encontrado"}), 400
 
 
+@api.route("/deleteTrip", methods=["DELETE"])
+@jwt_required()
+def delete_trip():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    body_trip_id = request.json.get("id")
+    trip = Trip.query.get(body_trip_id)
+    if user.id == trip.user_id_of_trip_creator:
+        trip.like = []
+        db.session.delete(trip)
+        db.session.commit()
+        return jsonify({"deleted": True}), 200
+    else:
+        return jsonify({"error": "Trip no eliminado"}), 400
+
+
 @api.route("/tripLikes", methods=["POST"])
 @jwt_required()
 def add_like_trip():
@@ -202,6 +218,7 @@ def add_like_trip():
                 db.session.commit()
                 return jsonify({"likeAdded": True}), 200
             else:
+                print("AAAAAAAAAAAAAAAAAAAAAAA")
                 trip.likes = list(
                     filter(lambda x: x.id != user.id, trip.likes))
                 db.session.commit()
