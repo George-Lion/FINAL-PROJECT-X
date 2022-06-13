@@ -4,6 +4,21 @@ import { Context } from "../store/appContext";
 export const EditTripModal = ({ closeModal, editTrip, trip }) => {
   const { store, actions } = useContext(Context);
 
+  const deleteTrip = async () => {
+    try {
+      const resp = await fetch(store.url + "deleteTrip", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: JSON.stringify(store.trip),
+      });
+      const data = await resp.json();
+      console.log(data);
+    } catch (e) {}
+  };
+
   return (
     <div
       className="modal fade show "
@@ -24,7 +39,6 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
             <h5 className="modal-title" id="staticBackdropLabel">
               Edit Trip
             </h5>
-
           </div>
 
           {/* Banner */}
@@ -164,33 +178,45 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 aria-label="With textarea"
                 maxLength={280}
                 placeholder="Text"
-                onChange={(e) => editTrip({
-                  ...trip, text: e.target.value.charAt(0).toUpperCase() +
-                    e.target.value.slice(1).toLowerCase(),
-                })}
+                onChange={(e) =>
+                  editTrip({
+                    ...trip,
+                    text:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  })
+                }
               ></textarea>
             </div>
             <p>{trip.text ? trip.text.length : 0}/280</p>
           </div>
 
           {/* Save buttom */}
-          <div className="modal-footer">
-            <button className="col-2 offset-1 btn btn-light"
+          <div className="modal-footer d-flex justify-content-between px-5">
+            <i
+              className="fa-solid fa-trash"
               onClick={() => {
-                closeModal();
-
-              }}>
-              Close
-            </button>
-            <button
-              className="col-2 offset-1 btn btn-light"
-              onClick={async () => {
-                await actions.editTrip(trip);
-
+                deleteTrip();
               }}
-            >
-              Save
-            </button>
+            ></i>
+            <div>
+              <button
+                className="btn btn-light me-3"
+                onClick={() => {
+                  closeModal();
+                }}
+              >
+                Close
+              </button>
+              <button
+                className="btn btn-light"
+                onClick={async () => {
+                  await actions.editTrip(trip);
+                }}
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -243,7 +243,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (e) { }
       },
 
-
       /* EDIT TRIP */
 
       editTrip: async (trip) => {
