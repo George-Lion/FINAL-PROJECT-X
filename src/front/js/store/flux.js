@@ -88,19 +88,30 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userTrips: data.trips });
-          console.log(data.trips);
-          console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
+          let matches = [];
           for (let x = 0; x < data.trips.length; x++) {
-            console.log(data.trips[x].trip_in_match);
-            console.log("#########################");
             for (let i in data.trips[x].trip_in_match) {
-              console.log(data.trips[x].trip_in_match[i]);
-              console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOO");
-              setStore({
-                match: [...getStore().match, data.trips[x].trip_in_match[i]],
-              });
+              matches.push(data.trips[x].trip_in_match[i])
             }
           }
+          setStore({
+            match: matches,
+          });
+        } catch (e) { }
+      },
+
+      getUserTripsById: async (id) => {
+        try {
+          const resp = await fetch(getStore().url + "trips/" + id, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ userTrips: data.trips });
+
         } catch (e) { }
       },
 
@@ -174,7 +185,6 @@ const getState = ({ getStore, getActions, setStore }) => {
              .split("T")[0]; */ //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
           if (resp.status == 200) {
             setStore({ trip: data.trip });
-            console.log("€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€");
           } else {
             return false;
           }
@@ -216,43 +226,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       /* ACCEPT MATCH */
 
-      acceptMatch: async (trip) => {
+      acceptMatch: async (match) => {
         try {
+          console.log(match)
           const resp = await fetch(getStore().url + "accept", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("token"),
             },
-            body: JSON.stringify(trip),
+            body: JSON.stringify(match),
           });
-          const data = await resp.json();
+          if (resp.ok) {
+            getActions().getUserTrips()
+          }
         } catch (e) { }
       },
 
-      /* GET MATCH */
-
-      getMatch: async (user) => {
-        try {
-          const resp = await fetch(getStore().url + "match", {
-            method: "GET",
-            headers: {
-              "Content-Type":
-                "application/json" /* le dice al fetch que va a traer un JSON */,
-              Authorization:
-                "Bearer " +
-                localStorage.getItem(
-                  "token"
-                ) /* para que se ejecute este fetch se necesita en el local storage algo que se llame token */,
-            },
-          });
-          const data =
-            await resp.json(); /* establece que la constante data va a guardar la respuesta de la API en formato JSON */
-          setStore({
-            match: data.match.trip_in_match,
-          }); /* setStore busca la key match y la rellena con el contenido de data */
-        } catch (e) { }
-      },
 
       /* EDIT TRIP */
 
@@ -296,6 +286,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         }
       },
+
     },
   };
 };

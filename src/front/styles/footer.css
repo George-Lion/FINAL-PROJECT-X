@@ -1,0 +1,6 @@
+.footer-abajo {
+  min-height: calc(77vh - 70px);
+}
+.footer {
+  height: 50px;
+}

@@ -29,109 +29,115 @@ export const Feed = () => {
 
   return (
     <Fragment>
-      <nav className="navbar mt-5 mb-4">
-        <div className="container-fluid justify-content-center">
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="text"
-              placeholder="Search destination"
-              aria-label="Search"
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  searchDestination();
-                }
-              }}
-              onChange={(e) => {
-                setSearchTerm({
-                  ...searchTerm,
-                  destination:
-                    e.target.value.charAt(0).toUpperCase() +
-                    e.target.value.slice(1).toLowerCase(),
-                });
-              }}
-            />
-            <input
-              className="form-control me-2"
-              type="date"
-              aria-label="Search"
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  searchDestination();
-                }
-              }}
-              onChange={(e) => {
-                setSearchTerm({ ...searchTerm, date: e.target.value });
-              }}
-            />
-            <input
-              className="form-control me-2"
-              type="date"
-              aria-label="Search"
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  searchDestination();
-                }
-              }}
-              onChange={(e) => {
-                setSearchTerm({ ...searchTerm, end_date: e.target.value });
-              }}
-            />
-            <button
-              className="btn btn-outline-success"
-              type="button"
-              onClick={() => {
-                searchDestination();
-              }}
-            >
-              Search
-            </button>
-          </form>
-        </div>
-      </nav>
-      <div className="container">
-        {response == ""
-          ? store.trips.map((e) => {
-            return (
-              <div className="feed-box" key={e.id}>
-                <div className=""></div>
-                <div className="ul-feed d-flex">
-                  <div className="il-time text-white">
-                    <i className="fas fa-clock"></i>{" "}
-                    {moment(e.start_of_the_trip).format("LL")} -{" "}
-                    {moment(e.end_of_the_trip).format("LL")}
-                  </div>
-                  <div className="il-feed text-white">
-                    <i className="fas fa-user-friends"></i> {e.people}{" "}
-                  </div>
-                  {!e.likes.includes(store.user_id) ? (
-                    <div className="il-feed text-white">
-                      <i
-                        className="fas fa-heart"
-                        onClick={() => {
-                          actions.changeFavorite(e.id, "feed");
-                        }}
-                      ></i>{e.likes.length}
-                    </div>
-                  ) : (
-                    <div className="il-feed fontprueba corazon-like text-white">
-                      <i
-                        className="fas fa-heart text-danger"
-                        onClick={() => {
-                          actions.changeFavorite(e.id, "feed");
-                        }}
-                      ></i>{e.likes.length}
-                    </div>
-                  )}
-                </div>
 
-                {/*  INFORMATION */}
+      {/* SEARCH BAR */}
+      <div className="footer-abajo">
+        <nav className="navbar mt-5 mb-4">
+          <div className="container-fluid justify-content-center">
+            <form className="d-flex" role="search">
+              <input
+                className="form-control me-2"
+                type="text"
+                placeholder="Search destination"
+                aria-label="Search"
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    searchDestination();
+                  }
+                }}
+                onChange={(e) => {
+                  setSearchTerm({
+                    ...searchTerm,
+                    destination:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  });
+                }}
+              />
+              <input
+                className="form-control me-2"
+                type="date"
+                aria-label="Search"
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    searchDestination();
+                  }
+                }}
+                onChange={(e) => {
+                  setSearchTerm({ ...searchTerm, date: e.target.value });
+                }}
+              />
+              <input
+                className="form-control me-2"
+                type="date"
+                aria-label="Search"
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    searchDestination();
+                  }
+                }}
+                onChange={(e) => {
+                  setSearchTerm({ ...searchTerm, end_date: e.target.value });
+                }}
+              />
+              <button
+                className="btn btn-outline-success"
+                type="button"
+                onClick={() => {
+                  searchDestination();
+                }}
+              >
+                Search
+              </button>
+            </form>
+          </div>
+        </nav>
+
+        {/*  CARDS */}
+
+        <div className="container">
+          {response == ""
+            ? store.trips.map((e) => {
+              return (
+                <div className="feed-box" key={e.id}>
+                  <div className=""></div>
+                  <div className="ul-feed d-flex">
+                    <div className="il-time text-white">
+                      <i className="fas fa-clock"></i>{" "}
+                      {moment(e.start_of_the_trip).format("LL")} -{" "}
+                      {moment(e.end_of_the_trip).format("LL")}
+                    </div>
+                    <div className="il-feed text-white">
+                      <i className="fas fa-user-friends"></i> {e.people}{" "}
+                    </div>
+                    {!e.likes.includes(store.user_id) ? (
+                      <div className="il-feed text-white">
+                        <i
+                          className="fas fa-heart"
+                          onClick={() => {
+                            actions.changeFavorite(e.id, "feed");
+                          }}
+                        ></i>{e.likes.length}
+                      </div>
+                    ) : (
+                      <div className="il-feed fontprueba corazon-like text-white">
+                        <i
+                          className="fas fa-heart text-danger"
+                          onClick={() => {
+                            actions.changeFavorite(e.id, "feed");
+                          }}
+                        ></i>{e.likes.length}
+                      </div>
+                    )}
+                  </div>
+
+                  {/*  INFORMATION */}
 
                   <Link
                     to={
@@ -173,7 +179,7 @@ export const Feed = () => {
                 </div>
               );
             })
-          : response.map((e) => {
+            : response.map((e) => {
               return (
                 <div className="feed-box " key={e.id}>
                   <Link
@@ -249,6 +255,7 @@ export const Feed = () => {
                 </div>
               );
             })}
+        </div>
       </div>
     </Fragment>
   );

@@ -40,7 +40,7 @@
   z-index: 1;
 }
 
-.favorite-info {
+shadowf-image2 .favorite-info {
   color: #d7dfe3;
   font-size: 20px;
   position: absolute;
@@ -73,7 +73,7 @@
 
 .favorites-box {
   width: 450px;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #1d1d1d;
   border-radius: 50px;
   margin: auto;
 }
