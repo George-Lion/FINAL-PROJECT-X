@@ -114,7 +114,7 @@ export const Register = () => {
                   Lorem ipsum dolor sit amet consectetur adipiscing elit
                 </p>
               </div>
-              <div className="rounded border border-secondary mt-4">
+              <div className="rounded border border-1 mt-4">
                 <p className="text-center pb-1 p-3">
                   Do you have an account?{" "}
                   <strong>

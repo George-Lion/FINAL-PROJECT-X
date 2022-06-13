@@ -142,6 +142,11 @@
   font-size: 1em;
   margin-right: 1rem;
 }
+
+.lista-perfil {
+  list-style: none;
+}
+
 .trip-user .edit-options {
   display: block;
   position: absolute;

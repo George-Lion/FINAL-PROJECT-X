@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-v1hglk0kvbi.ws-eu47.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-nah4r194rpj.ws-eu47.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -60,7 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       getProfile: async (id) => {
@@ -74,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ profile: data.user });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       getUserTrips: async () => {
@@ -88,14 +88,31 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userTrips: data.trips });
+          let matches = [];
           for (let x = 0; x < data.trips.length; x++) {
             for (let i in data.trips[x].trip_in_match) {
-              setStore({
-                match: [...getStore().match, data.trips[x].trip_in_match[i]],
-              });
+              matches.push(data.trips[x].trip_in_match[i])
             }
           }
-        } catch (e) {}
+          setStore({
+            match: matches,
+          });
+        } catch (e) { }
+      },
+
+      getUserTripsById: async (id) => {
+        try {
+          const resp = await fetch(getStore().url + "trips/" + id, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ userTrips: data.trips });
+
+        } catch (e) { }
       },
 
       getUserProfiles: async () => {
@@ -109,7 +126,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userProfiles: data.profiles });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       editUser: async (user) => {
@@ -127,7 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       createTrip: async (trip) => {
@@ -145,7 +162,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           getActions().getUserTrips();
-        } catch (e) {}
+        } catch (e) { }
       },
 
       /* GET TRIP */
@@ -187,7 +204,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trips: data.trips });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       /* SEND MATCH */
@@ -204,47 +221,26 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(match),
           });
           const data = await resp.json();
-        } catch (e) {}
+        } catch (e) { }
       },
 
       /* ACCEPT MATCH */
 
-      acceptMatch: async (trip) => {
+      acceptMatch: async (match) => {
         try {
+          console.log(match)
           const resp = await fetch(getStore().url + "accept", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("token"),
             },
-            body: JSON.stringify(trip),
+            body: JSON.stringify(match),
           });
-          const data = await resp.json();
-        } catch (e) {}
-      },
-
-      /* GET MATCH */
-
-      getMatch: async (user) => {
-        try {
-          const resp = await fetch(getStore().url + "match", {
-            method: "GET",
-            headers: {
-              "Content-Type":
-                "application/json" /* le dice al fetch que va a traer un JSON */,
-              Authorization:
-                "Bearer " +
-                localStorage.getItem(
-                  "token"
-                ) /* para que se ejecute este fetch se necesita en el local storage algo que se llame token */,
-            },
-          });
-          const data =
-            await resp.json(); /* establece que la constante data va a guardar la respuesta de la API en formato JSON */
-          setStore({
-            match: data.match.trip_in_match,
-          }); /* setStore busca la key match y la rellena con el contenido de data */
-        } catch (e) {}
+          if (resp.ok) {
+            getActions().getUserTrips()
+          }
+        } catch (e) { }
       },
 
       /* EDIT TRIP */
@@ -267,7 +263,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trip: data.trip });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       changeFavorite: async (id, page) => {
@@ -289,6 +285,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         }
       },
+
     },
   };
 };
