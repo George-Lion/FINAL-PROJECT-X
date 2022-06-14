@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router-dom";
 
 export const EditTripModal = ({ closeModal, editTrip, trip }) => {
   const { store, actions } = useContext(Context);
@@ -202,6 +203,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               </div>
               <p>{trip.text ? trip.text.length : 0}/280</p>
             </div>
+
             {confirmDelete ? (
               <div
                 className="modal fade show"
@@ -214,6 +216,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 style={{
                   display: "block",
                   backdropFilter: "brightness(20%)",
+
                 }}
               >
                 <div className="modal-dialog">

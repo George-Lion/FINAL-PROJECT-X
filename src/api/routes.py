@@ -55,7 +55,7 @@ def protected():
     if user:
         return jsonify({"logged_in": True, "user_id": current_id}), 200
     else:
-        return jsonify({"logged_in": False}), 400
+        return jsonify({"logged_in": False, "prueba": "prueba"}), 401
 
 
 @api.route("/user", methods=["GET"])

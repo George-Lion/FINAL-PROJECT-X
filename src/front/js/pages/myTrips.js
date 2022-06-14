@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/myTrips.css";
 import moment from "moment";
@@ -8,16 +8,23 @@ export const MyTrips = () => {
   const { actions, store } = useContext(Context);
 
   useEffect(() => {
-    if (store.match == "") {
+    if (store.trip) {
       actions.getUserTrips();
     }
   }, []);
+
+  // useEffect(() => {
+  //   if (store.match == "") {
+  //     actions.getUserTrips();
+  //   }
+  // }, []);
 
   return (
     <Fragment>
       <div className="footer-abajo">
         {store.userTrips.length > 0 ? (
-          <h1 className="text-center m-5">MY TRIPS</h1>) : (
+          <h1 className="text-center m-5">MY TRIPS</h1>
+        ) : (
           <h3 className="text-center text-dark mt-4">No Trips</h3>
         )}
         {store.userTrips.map((trip) => {
@@ -63,9 +70,8 @@ export const MyTrips = () => {
                     <div className="col">
                       <p className="text-white">
                         <i className="fas fa-clock mt-2 me-2"></i>
-                        {moment(store.trip.start_of_the_trip).format(
-                          "LL"
-                        )} - {moment(store.trip.end_of_the_trip).format("LL")}
+                        {moment(trip.start_of_the_trip).format("LL")} -{" "}
+                        {moment(trip.end_of_the_trip).format("LL")}
                       </p>
                     </div>
                   </div>
