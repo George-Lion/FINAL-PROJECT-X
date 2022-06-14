@@ -206,7 +206,8 @@ def delete_trip():
     body_trip_id = request.json.get("id")
     trip = Trip.query.get(body_trip_id)
     if user.id == trip.user_id_of_trip_creator:
-        trip.like = []
+        trip.likes.clear()
+        db.session.commit()
         db.session.delete(trip)
         db.session.commit()
         return jsonify({"deleted": True}), 200
