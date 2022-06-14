@@ -278,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (e) {}
       },
 
-      changeFavorite: async (id, page) => {
+      changeFavorite: async (id, page, searchTerm) => {
         const resp = await fetch(getStore().url + "tripLikes", {
           method: "POST",
           headers: {
@@ -289,12 +289,25 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         if (resp.ok) {
           if (page == "feed") {
-            getActions().getTrips();
+            getActions().searchDestination(searchTerm);
             getActions().getUser();
           } else if (page == "trip") {
             getActions().getTrip(id);
             getActions().getUser();
           }
+        }
+      },
+      searchDestination: async (searchTerm) => {
+        try {
+          const resp = await fetch(getStore().url + "search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(searchTerm),
+          });
+          const dataSearched = await resp.json();
+          setStore({ trips: dataSearched.trip });
+        } catch (e) {
+          alert("ERROR");
         }
       },
     },

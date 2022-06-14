@@ -96,7 +96,7 @@ export const Login = () => {
                         id="floatingInput"
                         placeholder="name@example.com"
                         onChange={(e) => {
-                          setUser({ ...user, email: e.target.value });
+                          setUser({ ...user, email: e.target.value.trim() });
                         }}
                       />
                       <label htmlFor="floatingInput">Email address</label>
@@ -108,7 +108,7 @@ export const Login = () => {
                         id="floatingPassword"
                         placeholder="Password"
                         onChange={(e) => {
-                          setUser({ ...user, password: e.target.value });
+                          setUser({ ...user, password: e.target.value.trim() });
                         }}
                       />
                       <label htmlFor="floatingPassword">Password</label>
