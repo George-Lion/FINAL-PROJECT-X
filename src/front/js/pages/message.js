@@ -25,7 +25,7 @@ export const Message = () => {
               <div key={e.id} className="footer-abajo modal-dialog" role="document">
                 <div className={"modal-content rounded-4 shadow " + (e.accepted ? "bg-success" : e.rejected ? "bg-danger" : "bg-white")}>
                   <div className="modal-body p-4 text-center">
-                    <h5 className="mb-0">titulo</h5>
+                    <h5 className="mb-0">title</h5>
                     <p className="mb-0">{e.message}</p>
                   </div>
                   <div className="modal-footer flex-nowrap p-0">
