@@ -306,6 +306,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const dataSearched = await resp.json();
           setStore({ trips: dataSearched.trip });
+          if (searchTerm != trips) {
+            alert("No existe");
+          }
         } catch (e) {
           alert("ERROR");
         }

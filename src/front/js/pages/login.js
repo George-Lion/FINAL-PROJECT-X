@@ -27,7 +27,6 @@ export const Login = () => {
         alert("Email o contraseña incorrectos.");
       }
     } catch (e) {
-      console.log(e);
       alert("ERROR");
     }
   };
@@ -131,7 +130,7 @@ export const Login = () => {
                   </div>
                   <div className="border border-1 mt-4 pt-3 pb-2 mb-5 rounded">
                     <p className="text-center">
-                      You do not have an account?
+                      Don't have an account yet?
                       <Link
                         className="text-primary"
                         to="/register"

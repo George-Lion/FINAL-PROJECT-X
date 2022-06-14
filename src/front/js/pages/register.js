@@ -109,9 +109,12 @@ export const Register = () => {
                     Sign up
                   </button>
                 </Link>
-                <p className="mt-2 text-center pt-3">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit
-                </p>
+                <div className="checkbox mt-1 mb-2 mx-center">
+                  <label>
+                    <input type="checkbox" value="remember-me" /> I agree to the
+                    terms & conditions
+                  </label>
+                </div>
               </div>
               <div className="rounded border border-1 mt-4">
                 <p className="text-center pb-1 p-3">
