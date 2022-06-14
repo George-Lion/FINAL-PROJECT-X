@@ -46,7 +46,7 @@ export const Register = () => {
                     type="text"
                     placeholder="username"
                     onChange={(e) =>
-                      setUser({ ...user, username: e.target.value })
+                      setUser({ ...user, username: e.target.value.trim() })
                     }
                   />
                   <label htmlFor="floatingInput">Username</label>
@@ -58,7 +58,7 @@ export const Register = () => {
                     type="text"
                     placeholder="firstname"
                     onChange={(e) =>
-                      setUser({ ...user, firstname: e.target.value })
+                      setUser({ ...user, firstname: e.target.value.trim() })
                     }
                   />
                   <label htmlFor="floatingFirstName">First name</label>
@@ -70,7 +70,7 @@ export const Register = () => {
                     type="text"
                     placeholder="lastname"
                     onChange={(e) =>
-                      setUser({ ...user, lastname: e.target.value })
+                      setUser({ ...user, lastname: e.target.value.trim() })
                     }
                   />
                   <label htmlFor="floatingLastName">Last name</label>
@@ -82,7 +82,7 @@ export const Register = () => {
                     type="email"
                     placeholder="email"
                     onChange={(e) =>
-                      setUser({ ...user, email: e.target.value })
+                      setUser({ ...user, email: e.target.value.trim() })
                     }
                   />
                   <label htmlFor="floatingEmail">Email</label>
@@ -94,7 +94,7 @@ export const Register = () => {
                     type="password"
                     placeholder="password"
                     onChange={(e) =>
-                      setUser({ ...user, password: e.target.value })
+                      setUser({ ...user, password: e.target.value.trim() })
                     }
                   />
                   <label htmlFor="floatingPassword">Password</label>
