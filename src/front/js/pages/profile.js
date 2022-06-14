@@ -218,13 +218,8 @@ export const Profile = () => {
                                     className="icon fas fa-clock"
                                     style={{ fontSize: "16px" }}
                                   ></i>
-                                  {moment(store.trip.start_of_the_trip).format(
-                                    "LL"
-                                  )}{" "}
-                                  -{" "}
-                                  {moment(store.trip.end_of_the_trip).format(
-                                    "LL"
-                                  )}
+                                  {moment(e.start_of_the_trip).format("LL")} -{" "}
+                                  {moment(e.end_of_the_trip).format("LL")}
                                 </li>
                               </ul>
                               <div className="shadow-card-image"></div>
@@ -234,7 +229,8 @@ export const Profile = () => {
                         </Link>
                       </div>
                     );
-                  })) : (
+                  })
+                ) : (
                   <h5 className="text-center text-dark mt-4">No Trips</h5>
                 )}
               </div>

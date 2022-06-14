@@ -77,7 +77,8 @@ export const Trip = () => {
                       to={
                         store.trip.user_id_of_trip_creator == store.user_id
                           ? "/profile/" + store.trip.user_id_of_trip_creator
-                          : "/noEditProfile/" + store.trip.user_id_of_trip_creator
+                          : "/noEditProfile/" +
+                            store.trip.user_id_of_trip_creator
                       }
                     >
                       <img src={store.trip.profile_picture} alt="img" />
@@ -96,7 +97,6 @@ export const Trip = () => {
                           type="button"
                           className="match-button btn btn-light "
                           onClick={() => {
-                            console.log("Modal Click");
                             setModalMessage(true);
                           }}
                         >
@@ -159,7 +159,9 @@ export const Trip = () => {
 
               <div className="container">
                 <div className="place-description py-3 my-4 border-top border-bottom text-left justify-content-center">
-                  <p className="text-description text-break">{store.trip.text}</p>
+                  <p className="text-description text-break">
+                    {store.trip.text}
+                  </p>
                 </div>
 
                 {/* FEATURES */}
@@ -497,7 +499,6 @@ export const Trip = () => {
       ) : (
         "loading"
       )}{" "}
-
     </Fragment>
   );
 };

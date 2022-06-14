@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-nah4r194rpj.ws-eu47.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu47.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -27,8 +27,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           if (data.user_id) {
             setStore({ user_id: data.user_id });
+            setStore({ logged: data.logged_in || false });
           }
-          setStore({ logged: data.logged_in || false });
+          // setStore({ logged: data.logged_in || false })
+          else if (resp.status == 401 || resp.status == 422) {
+            console.log("parece que funciona");
+          }
         } catch (e) {
           setStore({ logged: false });
         }
@@ -46,6 +50,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           userTrips: [],
         });
       },
+      resetStates: async () => {
+        setStore({
+          trip: { likes: [] },
+          match: [],
+          profile: {},
+          userTrips: [],
+        });
+      },
+
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
       },
@@ -60,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getProfile: async (id) => {
@@ -74,7 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ profile: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getUserTrips: async () => {
@@ -91,13 +104,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           let matches = [];
           for (let x = 0; x < data.trips.length; x++) {
             for (let i in data.trips[x].trip_in_match) {
-              matches.push(data.trips[x].trip_in_match[i])
+              matches.push(data.trips[x].trip_in_match[i]);
             }
           }
           setStore({
             match: matches,
           });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getUserTripsById: async (id) => {
@@ -111,8 +124,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userTrips: data.trips });
-
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getUserProfiles: async () => {
@@ -126,7 +138,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userProfiles: data.profiles });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       editUser: async (user) => {
@@ -144,7 +156,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       createTrip: async (trip) => {
@@ -162,7 +174,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           getActions().getUserTrips();
-        } catch (e) { }
+        } catch (e) {}
       },
 
       /* GET TRIP */
@@ -204,7 +216,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trips: data.trips });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       /* SEND MATCH */
@@ -221,14 +233,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(match),
           });
           const data = await resp.json();
-        } catch (e) { }
+        } catch (e) {}
       },
 
       /* ACCEPT MATCH */
 
       acceptMatch: async (match) => {
         try {
-          console.log(match)
+          console.log(match);
           const resp = await fetch(getStore().url + "accept", {
             method: "POST",
             headers: {
@@ -238,9 +250,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(match),
           });
           if (resp.ok) {
-            getActions().getUserTrips()
+            getActions().getUserTrips();
           }
-        } catch (e) { }
+        } catch (e) {}
       },
 
       /* EDIT TRIP */
@@ -263,10 +275,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trip: data.trip });
-        } catch (e) { }
+        } catch (e) {}
       },
 
-      changeFavorite: async (id, page) => {
+      changeFavorite: async (id, page, searchTerm) => {
         const resp = await fetch(getStore().url + "tripLikes", {
           method: "POST",
           headers: {
@@ -277,7 +289,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         if (resp.ok) {
           if (page == "feed") {
-            getActions().getTrips();
+            getActions().searchDestination(searchTerm);
             getActions().getUser();
           } else if (page == "trip") {
             getActions().getTrip(id);
@@ -285,7 +297,22 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         }
       },
-
+      searchDestination: async (searchTerm) => {
+        try {
+          const resp = await fetch(getStore().url + "search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(searchTerm),
+          });
+          const dataSearched = await resp.json();
+          setStore({ trips: dataSearched.trip });
+          if (searchTerm != trips) {
+            alert("No existe");
+          }
+        } catch (e) {
+          alert("ERROR");
+        }
+      },
     },
   };
 };

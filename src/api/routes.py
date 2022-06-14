@@ -55,7 +55,7 @@ def protected():
     if user:
         return jsonify({"logged_in": True, "user_id": current_id}), 200
     else:
-        return jsonify({"logged_in": False}), 400
+        return jsonify({"logged_in": False, "prueba": "prueba"}), 401
 
 
 @api.route("/user", methods=["GET"])
@@ -224,6 +224,7 @@ def get_user_trips():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
+
 @api.route("/trips/<int:id>", methods=["GET"])
 @jwt_required()
 def get_user_trips_by_id(id):
@@ -243,7 +244,8 @@ def delete_trip():
     body_trip_id = request.json.get("id")
     trip = Trip.query.get(body_trip_id)
     if user.id == trip.user_id_of_trip_creator:
-        trip.like = []
+        trip.likes.clear()
+        db.session.commit()
         db.session.delete(trip)
         db.session.commit()
         return jsonify({"deleted": True}), 200
@@ -265,7 +267,6 @@ def add_like_trip():
                 db.session.commit()
                 return jsonify({"likeAdded": True}), 200
             else:
-                print("AAAAAAAAAAAAAAAAAAAAAAA")
                 trip.likes = list(
                     filter(lambda x: x.id != user.id, trip.likes))
                 db.session.commit()
@@ -354,19 +355,13 @@ def get_trips_search():
 @jwt_required()
 def send_match():  # nombre de la función
     current_id = get_jwt_identity()
-    print(current_id)
     user = User.query.get(current_id)
-    print(user)
     body_trip_id = request.json.get("trip_id")
-    print(body_trip_id)
     body_message = request.json.get("message")
-    print(body_message)
     trip = Trip.query.get(body_trip_id)
-    print(trip.serialize())
     # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
     if user and trip and user.id != trip.user_id_of_trip_creator:
         match = MatchTrip(user=user, trip=trip, message=body_message)
-        print(match)
         db.session.add(match)
         db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
@@ -394,11 +389,11 @@ def accept():  # nombre de la función
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     body_match_id = request.json.get("id")
-   
+
     if user:  # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
         match = MatchTrip.query.get(body_match_id)
-        match.accepted=True
-        match.rejected=False
+        match.accepted = True
+        match.rejected = False
         db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
         return jsonify({"send": True}), 200
