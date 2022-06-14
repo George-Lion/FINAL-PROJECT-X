@@ -122,8 +122,6 @@ shadowf-image2 .favorite-info {
 }
 
 .wrapper-favorites {
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   overflow-y: scroll;
   max-height: 510px;

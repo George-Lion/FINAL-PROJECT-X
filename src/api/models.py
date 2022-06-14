@@ -64,6 +64,11 @@ class Trip(db.Model):
                      default="Description of the destination")
     destination_picture = db.Column(
         db.String(300), unique=False, nullable=True)
+    imagen_1 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")
+    imagen_2 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")     
+    imagen_3 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")       
+    imagen_4 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")   
+    imagen_5 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")     
     likes = db.relationship('User', secondary=likes, lazy='subquery',
                             backref=db.backref('users', lazy=True))
     trip_in_match = db.relationship("MatchTrip")
@@ -87,6 +92,11 @@ class Trip(db.Model):
             "cost": self.cost,
             "text": self.text,
             "destination_picture": self.destination_picture,
+            "imagen_1": self.imagen_1,
+            "imagen_2": self.imagen_2,
+            "imagen_3": self.imagen_3,
+            "imagen_4": self.imagen_4,
+            "imagen_5": self.imagen_5,
             "likes":  list(map(lambda like: like.id, self.likes)),
             "trip_in_match":  list(map(lambda trip: trip.serialize(), self.trip_in_match))
 
@@ -108,6 +118,8 @@ class MatchTrip(db.Model):
     # aca el serialize me transforma toda la informacion de la base de datos, toda la instancia de clases en una libreria.
     def serialize(self):
         return {
+            "username": self.user.username,
+            "profile_picture": self.user.profile_picture,
             "id": self.id,
             "message": self.message,
             "accepted": self.accepted,
