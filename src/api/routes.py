@@ -133,6 +133,7 @@ def trip(trip_id):
     else:
         return jsonify({"error": "no trip"}), 400
 
+#EDIT A TRIP
 
 @api.route("/trip", methods=["PUT"])
 @jwt_required()
@@ -161,11 +162,48 @@ def editTrip():
     body_text = request.form.get("text", None)
     if body_text == "" or body_text == None:
         body_text = ""
+    body_imagen_1 = request.form.get("imagen_1", None)
+    if body_imagen_1 == "" or body_imagen_1 == None:
+        body_imagen_1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
+    body_imagen_2 = request.form.get("imagen_2", None)
+    if body_imagen_2 == "" or body_imagen_2 == None:
+        body_imagen_2 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
+    body_imagen_3 = request.form.get("imagen_3", None)
+    if body_imagen_3 == "" or body_imagen_3 == None:
+        body_imagen_3 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
+    body_imagen_4 = request.form.get("imagen_4", None)
+    if body_imagen_4 == "" or body_imagen_4 == None:
+        body_imagen_4 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
+    body_imagen_5 = request.form.get("imagen_5", None)
+    if body_imagen_5 == "" or body_imagen_5 == None:
+        body_imagen_5 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
+
 
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])
         trip.destination_picture = body_destination_picture['secure_url']
+    if "imagen_1" in request.files:
+        body_imagen_1 = cloudinary.uploader.upload(
+            request.files['imagen_1'])
+        trip.imagen_1 = body_imagen_1['secure_url']
+    if "imagen_2" in request.files:
+        body_imagen_2 = cloudinary.uploader.upload(
+            request.files['imagen_2'])
+        trip.imagen_2 = body_imagen_2['secure_url']
+    if "imagen_3" in request.files:
+        body_imagen_3 = cloudinary.uploader.upload(
+            request.files['imagen_3'])
+        trip.imagen_3 = body_imagen_3['secure_url']
+    if "imagen_4" in request.files:
+        body_imagen_4 = cloudinary.uploader.upload(
+            request.files['imagen_4'])
+        trip.imagen_4 = body_imagen_4['secure_url']
+    if "imagen_5" in request.files:
+        body_imagen_5 = cloudinary.uploader.upload(
+            request.files['imagen_5'])
+        trip.imagen_5 = body_imagen_5['secure_url']
+    
     trip.destination = body_destination
     trip.start_of_the_trip = body_start_of_the_trip
     trip.end_of_the_trip = body_end_of_the_trip
@@ -175,7 +213,6 @@ def editTrip():
     trip.text = body_text
     db.session.commit()
     return jsonify({"edited": True, "trip": trip.serialize()}), 200
-
 
 @api.route("/trips", methods=["GET"])
 @jwt_required()
@@ -196,7 +233,7 @@ def get_user_trips_by_id(id):
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
-
+#DELETE A TRIP
 
 @api.route("/deleteTrip", methods=["DELETE"])
 @jwt_required()
@@ -251,6 +288,7 @@ def get_user_profiles():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
+#CREATE A TRIP
 
 @api.route("/create/trip", methods=["POST"])
 @jwt_required()
@@ -264,6 +302,11 @@ def create_trip():
     body_cost = request.form.get("cost")
     body_text = request.form.get("text")
     body_destination_picture = "https://images.pexels.com/photos/358482/pexels-photo-358482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    body_imagen_1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
+    body_imagen_2 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
+    body_imagen_3 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
+    body_imagen_4 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
+    body_imagen_5 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])['secure_url']
@@ -362,3 +405,6 @@ def accept():  # nombre de la función
     else:
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
+
+# IMAGENES DEL VIAJE
+

@@ -16,7 +16,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
       });
       const data = await resp.json();
       console.log(data);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   return (
@@ -52,6 +52,18 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 }
               />
             </div>
+
+            {/* PRUEBA */}
+
+            <div className="row text-center">
+              <input
+                type="file"
+                onChange={(e) =>
+                  editTrip({ ...trip, imagen_1: e.target.files[0] })
+                }
+              />
+            </div>
+
 
             {/* Destination */}
 

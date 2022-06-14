@@ -6,6 +6,8 @@ import "../../styles/favorites.css";
 
 export const Favorites = () => {
   const { actions, store } = useContext(Context);
+  let favCount = 0;
+  favCount = store.user.likes.length;
 
   useEffect(() => {
     actions.getUser();
@@ -20,14 +22,14 @@ export const Favorites = () => {
               className="travel-title mt-3 mb-3 text-center"
               style={{ color: "white" }}
             >
-              <b>Favorites</b>
+              <b>{favCount} Favorites</b>
             </h3>
           ) : null}
 
           {/* WRAPPER */}
 
           <div>
-            <div className="d-flex overflow-auto">
+            <div className="start-div d-flex overflow-auto">
               <div className="wrapper-favorites">
                 <div className="container">
                   {store.user.likes && store.user.likes.length > 0 ? (
