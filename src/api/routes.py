@@ -229,7 +229,6 @@ def add_like_trip():
                 db.session.commit()
                 return jsonify({"likeAdded": True}), 200
             else:
-                print("AAAAAAAAAAAAAAAAAAAAAAA")
                 trip.likes = list(
                     filter(lambda x: x.id != user.id, trip.likes))
                 db.session.commit()

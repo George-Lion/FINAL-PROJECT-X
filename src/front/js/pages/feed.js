@@ -103,12 +103,14 @@ export const Feed = () => {
                   <div className=""></div>
                   <div className="ul-feed d-flex">
                     <div className="il-time text-white">
-                      <i className="fas fa-clock"></i>{" "}
+                      <i className="fas fa-clock"></i> {"\n"}
                       {moment(e.start_of_the_trip).format("LL")} -{" "}
                       {moment(e.end_of_the_trip).format("LL")}
                     </div>
+
                     <div className="il-feed text-white">
-                      <i className="fas fa-user-friends"></i> {e.people}{" "}
+                      <i className="fas fa-user-friends"></i>
+                      {"\n"} {e.people}{" "}
                     </div>
                     {!e.likes.includes(store.user_id) ? (
                       <div className="il-feed text-white">
@@ -118,6 +120,7 @@ export const Feed = () => {
                             actions.changeFavorite(e.id, "feed");
                           }}
                         ></i>
+                        {"\n"}
                         {e.likes.length}
                       </div>
                     ) : (
@@ -128,6 +131,7 @@ export const Feed = () => {
                             actions.changeFavorite(e.id, "feed");
                           }}
                         ></i>
+                        {"\n"}
                         {e.likes.length}
                       </div>
                     )}
