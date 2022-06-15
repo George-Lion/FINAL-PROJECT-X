@@ -27,7 +27,6 @@ export const Login = () => {
         alert("Email o contraseña incorrectos.");
       }
     } catch (e) {
-      console.log(e);
       alert("ERROR");
     }
   };
@@ -96,7 +95,7 @@ export const Login = () => {
                         id="floatingInput"
                         placeholder="name@example.com"
                         onChange={(e) => {
-                          setUser({ ...user, email: e.target.value });
+                          setUser({ ...user, email: e.target.value.trim() });
                         }}
                       />
                       <label htmlFor="floatingInput">Email address</label>
@@ -108,7 +107,7 @@ export const Login = () => {
                         id="floatingPassword"
                         placeholder="Password"
                         onChange={(e) => {
-                          setUser({ ...user, password: e.target.value });
+                          setUser({ ...user, password: e.target.value.trim() });
                         }}
                       />
                       <label htmlFor="floatingPassword">Password</label>
@@ -131,7 +130,7 @@ export const Login = () => {
                   </div>
                   <div className="border border-1 mt-4 pt-3 pb-2 mb-5 rounded">
                     <p className="text-center">
-                      You do not have an account?
+                      Don't have an account yet?
                       <Link
                         className="text-primary"
                         to="/register"

@@ -1,0 +1,37 @@
+.start-div {
+  margin-top: 0;
+}
+
+.img-message {
+  width: 60px;
+  height: 60px;
+}
+
+.wrapper-message {
+  display: flex;
+  overflow-y: scroll;
+  max-height: 470px;
+  margin-bottom: 70px;
+  padding-left: 20px;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.wrapper-message::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 9px;
+}
+
+.wrapper-message::-webkit-scrollbar-button:increment,
+.contenedor::-webkit-scrollbar-button {
+  display: none;
+}
+.wrapper-message::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(
+    to right,
+    #e9f8ff 0%,
+    #b8b8b8 51%,
+    #e4e4e4 100%
+  );
+  border-radius: 30px;
+}
