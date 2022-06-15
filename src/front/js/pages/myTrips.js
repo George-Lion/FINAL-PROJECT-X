@@ -45,31 +45,31 @@ export const MyTrips = () => {
                     </h1>
                   </div>
 
-                  <div className="flex-column mt-5">
+                  <div className="flex-column mt-4 p-4">
                     <div className="col">
                       <span className="text-white">
-                        <i className="fas fa-user-friends mt-2 me-2"></i>
+                        <i className="fas fa-user-friends mt-3 me-3"></i>
                         {trip.people}
                       </span>
                     </div>
 
                     <div className="col">
                       <span className="text-white">
-                        <i className="fa-solid fa-heart mt-2 me-2"></i>
+                        <i className="fa-solid fa-heart mt-3 me-3"></i>
                         {trip.likes.length}
                       </span>
                     </div>
 
                     <div className="col">
                       <span className="text-white">
-                        <i className="fas fa-user-friends mt-2 me-2"></i>
+                        <i className="fas fa-user-friends mt-3 me-3"></i>
                         {trip.transport}
                       </span>
                     </div>
 
                     <div className="col">
                       <p className="text-white">
-                        <i className="fas fa-clock mt-2 me-2"></i>
+                        <i className="fas fa-clock mt-3 me-3"></i>
                         {moment(trip.start_of_the_trip).format("LL")} -{" "}
                         {moment(trip.end_of_the_trip).format("LL")}
                       </p>

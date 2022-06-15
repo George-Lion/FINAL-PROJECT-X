@@ -81,28 +81,45 @@ export const Feed = () => {
         </div>
       </nav>
       <div className="container">
-        {store.trips.map((e) => {
-          return (
-            <div className="feed-box" key={e.id}>
-              <div className=""></div>
-              <div className="ul-feed d-flex">
-                <div className="il-time text-white">
-                  <i className="fas fa-clock"></i>{" "}
-                  {moment(e.start_of_the_trip).format("LL")} -{" "}
-                  {moment(e.end_of_the_trip).format("LL")}
-                </div>
-                <div className="il-feed text-white">
-                  <i className="fas fa-user-friends"></i> {e.people}{" "}
-                </div>
-                {!e.likes.includes(store.user_id) ? (
-                  <div className="il-feed text-white">
-                    <i
-                      className="fas fa-heart"
-                      onClick={() => {
-                        actions.changeFavorite(e.id, "feed", searchTerm);
-                      }}
-                    ></i>
-                    {e.likes.length}
+        {response == ""
+          ? store.trips.map((e) => {
+              return (
+                <div className="feed-box" key={e.id}>
+                  <div className=""></div>
+                  <div className="ul-feed d-flex">
+                    <div className="il-time text-white">
+                      <i className="fas fa-clock"></i> {"\n"}
+                      {moment(e.start_of_the_trip).format("LL")} -{" "}
+                      {moment(e.end_of_the_trip).format("LL")}
+                    </div>
+
+                    <div className="il-feed text-white">
+                      <i className="fas fa-user-friends"></i>
+                      {"\n"} {e.people}{" "}
+                    </div>
+                    {!e.likes.includes(store.user_id) ? (
+                      <div className="il-feed text-white">
+                        <i
+                          className="fas fa-heart"
+                          onClick={() => {
+                            actions.changeFavorite(e.id, "feed");
+                          }}
+                        ></i>
+                        {"\n"}
+                        {e.likes.length}
+                      </div>
+                    ) : (
+                      <div className="il-feed fontprueba corazon-like text-white">
+                        <i
+                          className="fas fa-heart text-danger"
+                          onClick={() => {
+                            actions.changeFavorite(e.id, "feed");
+                          }}
+                        ></i>
+                        {"\n"}
+                        {e.likes.length}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="il-feed fontprueba corazon-like text-white">

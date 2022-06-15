@@ -197,6 +197,7 @@ export const Profile = () => {
                                   >
                                     {" "}
                                   </i>
+                                  {"\n"}
                                   {e.people}
                                 </li>
                                 <li className="mb-1">
@@ -204,6 +205,7 @@ export const Profile = () => {
                                     className="icon fas fa-route"
                                     style={{ fontSize: "16px" }}
                                   ></i>
+                                  {"\n"}
                                   {e.transport}
                                 </li>
                                 <li className="mb-1">
@@ -211,6 +213,7 @@ export const Profile = () => {
                                     className="icon fas fa-coins"
                                     style={{ fontSize: "16px" }}
                                   ></i>
+                                  {"\n"}
                                   {e.cost} €
                                 </li>
                                 <li className="mb-1">
@@ -218,8 +221,10 @@ export const Profile = () => {
                                     className="icon fas fa-clock"
                                     style={{ fontSize: "16px" }}
                                   ></i>
-                                  {moment(e.start_of_the_trip).format("LL")} -{" "}
-                                  {moment(e.end_of_the_trip).format("LL")}
+                                  {"\n"}
+                                  {moment(e.start_of_the_trip).format(
+                                    "LL"
+                                  )} - {moment(e.end_of_the_trip).format("LL")}
                                 </li>
                               </ul>
                               <div className="shadow-card-image"></div>
