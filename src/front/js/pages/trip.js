@@ -90,28 +90,30 @@ export const Trip = () => {
                       {store.trip.destination}
                     </p>
                   </div>
-                  <div className="match-position">
-                    <ul className="list-position">
-                      <li>
-                        <button
-                          type="button"
-                          className="match-button btn btn-light "
-                          onClick={() => {
-                            setModalMessage(true);
-                          }}
-                        >
-                          I'm in
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
+                  {new Date(store.trip.start_of_the_trip) > new Date() ? (
+                    <div className="match-position">
+                      <ul className="list-position">
+                        <li>
+                          <button
+                            type="button"
+                            className="match-button btn btn-light "
+                            onClick={() => {
+                              setModalMessage(true);
+                            }}
+                          >
+                            I'm in
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : null}
                   <div className="datos-like">
                     <ul className="lista-perfil">
                       <li>
                         <i
                           className={
                             store.trip.likes &&
-                              store.trip.likes.includes(store.user_id)
+                            store.trip.likes.includes(store.user_id)
                               ? "fas fa-heart text-danger"
                               : "fas fa-heart"
                           }
@@ -229,29 +231,35 @@ export const Trip = () => {
                       role="dialog"
                       id="modalChoice"
                     >
-
-                      <div
-                        className="galery-box  position-static d-block py-3 "
-
-                      >
+                      <div className="galery-box  position-static d-block py-3 ">
                         <div className="">
                           <ul className="list-unstyled d-flex justify-content-around">
                             <li className="text-white">o</li>
-                            <li className=""><h3 className="travel-title mt-2  text-dark" style={{ color: "white" }}>
-                              <b>GALERY</b>
-                            </h3></li>
-                            {store.user_id == store.trip.user_id_of_trip_creator ? (
-                              <li><div className="edit-galery">
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setEditGalery(true);
-                                  }}
-                                >
-                                  <i className="fas fa-camera"></i>
-                                </button>
-                              </div></li>) : null}
-                          </ul></div>
+                            <li className="">
+                              <h3
+                                className="travel-title mt-2  text-dark"
+                                style={{ color: "white" }}
+                              >
+                                <b>GALERY</b>
+                              </h3>
+                            </li>
+                            {store.user_id ==
+                            store.trip.user_id_of_trip_creator ? (
+                              <li>
+                                <div className="edit-galery">
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setEditGalery(true);
+                                    }}
+                                  >
+                                    <i className="fas fa-camera"></i>
+                                  </button>
+                                </div>
+                              </li>
+                            ) : null}
+                          </ul>
+                        </div>
 
                         {/* img 1 */}
 
@@ -259,9 +267,7 @@ export const Trip = () => {
                           <div className="row row-cols-1 align-items-stretch g-4 pt-1">
                             <div className="d-flex overflow-auto">
                               <div className="galery-wrapper">
-
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -272,7 +278,8 @@ export const Trip = () => {
                                     <div
                                       className="galery-img d-flex text-white align-items-end "
                                       style={{
-                                        backgroundImage: "url(" + store.trip.imagen_1 + ")",
+                                        backgroundImage:
+                                          "url(" + store.trip.imagen_1 + ")",
                                       }}
                                     >
                                       <div
@@ -297,7 +304,6 @@ export const Trip = () => {
                                 {/* img 2 */}
 
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -308,7 +314,8 @@ export const Trip = () => {
                                     <div
                                       className="galery-img d-flex text-white align-items-end "
                                       style={{
-                                        backgroundImage: "url(" + store.trip.imagen_2 + ")",
+                                        backgroundImage:
+                                          "url(" + store.trip.imagen_2 + ")",
                                       }}
                                     >
                                       <div
@@ -333,7 +340,6 @@ export const Trip = () => {
                                 {/* img 3 */}
 
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -344,7 +350,8 @@ export const Trip = () => {
                                     <div
                                       className="galery-img d-flex text-white align-items-end "
                                       style={{
-                                        backgroundImage: "url(" + store.trip.imagen_3 + ")",
+                                        backgroundImage:
+                                          "url(" + store.trip.imagen_3 + ")",
                                       }}
                                     >
                                       <div
@@ -369,7 +376,6 @@ export const Trip = () => {
                                 {/* img 4 */}
 
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -380,7 +386,8 @@ export const Trip = () => {
                                     <div
                                       className="galery-img d-flex text-white align-items-end "
                                       style={{
-                                        backgroundImage: "url(" + store.trip.imagen_4 + ")",
+                                        backgroundImage:
+                                          "url(" + store.trip.imagen_4 + ")",
                                       }}
                                     >
                                       <div
@@ -405,7 +412,6 @@ export const Trip = () => {
                                 {/* img 5 */}
 
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -416,7 +422,8 @@ export const Trip = () => {
                                     <div
                                       className="galery-img d-flex text-white align-items-end "
                                       style={{
-                                        backgroundImage: "url(" + store.trip.imagen_5 + ")",
+                                        backgroundImage:
+                                          "url(" + store.trip.imagen_5 + ")",
                                       }}
                                     >
                                       <div
@@ -437,7 +444,6 @@ export const Trip = () => {
                                     </div>
                                   </Link>
                                 </div>
-
                               </div>
                             </div>
                           </div>
