@@ -2,6 +2,16 @@
   margin-top: 0;
 }
 
+.message-box {
+  background-color: #151d26;
+  z-index: 2;
+  width: 400px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+}
+
 .img-message {
   width: 60px;
   height: 60px;
@@ -15,6 +25,7 @@
   padding-left: 20px;
   margin-right: 10px;
   width: 100%;
+  background-color: #21303f;
 }
 
 .wrapper-message::-webkit-scrollbar {
@@ -34,4 +45,36 @@
     #e4e4e4 100%
   );
   border-radius: 30px;
+}
+
+.message-avatar {
+  display: block;
+  width: 90px;
+  height: 90px;
+  bottom: 55px;
+  left: 10px;
+  background-color: #d9dcf1;
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
+}
+
+.u-name {
+  display: block;
+  bottom: 150px;
+  left: 150px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.text-message {
+  width: 260px;
+  padding-left: 50px;
+  padding-right: 10px;
+  height: 80px;
+  left: 90px;
+  margin-left: 60px;
+  margin-top: 10px;
 }

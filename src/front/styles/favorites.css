@@ -40,7 +40,7 @@
   z-index: 1;
 }
 
-shadowf-image2 .favorite-info {
+.shadowf-image2 .favorite-info {
   color: #d7dfe3;
   font-size: 20px;
   position: absolute;
@@ -63,17 +63,9 @@ shadowf-image2 .favorite-info {
   text-align: center;
 }
 
-.ul-feed {
-  z-index: 4;
-  width: auto;
-  position: absolute;
-  font-size: 22px;
-  margin-top: 260px;
-}
-
 .favorites-box {
   width: 450px;
-  background-color: #1d1d1d;
+  background-color: #151d26;
   border-radius: 50px;
   margin: auto;
 }

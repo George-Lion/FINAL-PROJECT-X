@@ -97,7 +97,7 @@ export const Feed = () => {
                 {!e.likes.includes(store.user_id) ? (
                   <div className="il-feed text-white">
                     <i
-                      className="fas fa-heart"
+                      className="fas fa-heart me-2"
                       onClick={() => {
                         actions.changeFavorite(e.id, "feed", searchTerm);
                       }}
@@ -107,7 +107,7 @@ export const Feed = () => {
                 ) : (
                   <div className="il-feed fontprueba corazon-like text-white">
                     <i
-                      className="fas fa-heart text-danger"
+                      className="fas fa-heart text-danger me-2"
                       onClick={() => {
                         actions.changeFavorite(e.id, "feed", searchTerm);
                       }}

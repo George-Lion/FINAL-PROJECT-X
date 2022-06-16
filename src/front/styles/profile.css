@@ -135,6 +135,7 @@
 
 .information {
   margin-left: 320px;
+  color: #151d26;
 }
 
 .information-bio {
@@ -142,12 +143,14 @@
   padding-top: 19px;
   padding-left: 90px;
   margin-left: 80px;
+  color: #151d26;
 }
 
 /* CARDS MY TRIPS */
 
 .button-add-trip {
   margin-right: 2px;
+  background-color: #151d26;
 }
 
 .card-image-box {
@@ -224,12 +227,7 @@
   display: none;
 }
 .wrapper-trips::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(
-    to right,
-    #363636 0%,
-    #242424 51%,
-    #212121 100%
-  );
+  background-color: #151d26;
   border-radius: 20px;
 }
 

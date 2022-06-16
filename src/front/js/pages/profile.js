@@ -74,7 +74,7 @@ export const Profile = () => {
                   setUser(store.profile);
                 }}
               >
-                <i className="fas fa-pencil"></i>
+                <i className="fas fa-pencil" title="click to edit"></i>
               </button>
             </div>
           </div>
@@ -144,7 +144,7 @@ export const Profile = () => {
           <div className="row row-cols-1 align-items-stretch g-4 ">
             <div className="d-flex overflow-auto">
               <button
-                className="button-add-trip btn btn-dark text-light mt-4"
+                className="button-add-trip btn text-light mt-4"
                 style={{ height: "350px" }}
                 onClick={() => {
                   setShowCreateTrip(true);

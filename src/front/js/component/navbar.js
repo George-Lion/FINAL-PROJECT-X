@@ -14,7 +14,7 @@ export const Navbar = () => {
 
   return (
     <header>
-      <div className="px-3 py-2 bg-dark text-white ">
+      <div className="nav-traveland text-white ">
         <div className="container">
           <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <Link
@@ -24,7 +24,7 @@ export const Navbar = () => {
               <img src={image} alt="logo" className="logo" />
             </Link>
             <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-              <li>
+              <li className="pt-2">
                 <Link
                   to="/feed"
                   onClick={() => actions.resetStates()}
@@ -34,7 +34,7 @@ export const Navbar = () => {
                 </Link>
               </li>
 
-              <li>
+              <li className="pt-2">
                 <Link
                   to="/myTrips/"
                   onClick={() => actions.resetStates()}
@@ -44,7 +44,7 @@ export const Navbar = () => {
                 </Link>
               </li>
 
-              <li>
+              <li className="pt-2">
                 <Link
                   to="/message"
                   onClick={() => actions.resetStates()}
@@ -54,7 +54,7 @@ export const Navbar = () => {
                 </Link>
               </li>
 
-              <li>
+              <li className="pt-2">
                 <div className="dropdown text-end ">
                   <p
                     href="#"

@@ -4,11 +4,11 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import { SendMessageModal } from "../component/sendMessageModal";
 import { EditTripModal } from "../component/editTripModal";
 import { EditGaleryModal } from "../component/editGaleryModal";
-import { ImageGalery } from "../component/imageGalery";
 import { TravelBuddies } from "../component/travelBuddies";
 import { GoogleMapsApi } from "../component/googleMapsApi";
 import moment from "moment";
 import "../../styles/trip.css";
+import "../../styles/imageGalery.css";
 
 export const Trip = () => {
   const { store, actions } = useContext(Context);
@@ -35,7 +35,6 @@ export const Trip = () => {
 
   return (
     <Fragment>
-      {/*Banner*/}
       {store.trip ? (
         <>
           {modalMessage ? (
@@ -64,6 +63,9 @@ export const Trip = () => {
           <div className="footer-abajo">
             <section className="trip-user">
               <div className="trip-content">
+
+                {/*Banner*/}
+
                 <div
                   className="font-page"
                   style={{
@@ -78,7 +80,7 @@ export const Trip = () => {
                         store.trip.user_id_of_trip_creator == store.user_id
                           ? "/profile/" + store.trip.user_id_of_trip_creator
                           : "/noEditProfile/" +
-                            store.trip.user_id_of_trip_creator
+                          store.trip.user_id_of_trip_creator
                       }
                     >
                       <img src={store.trip.profile_picture} alt="img" />
@@ -92,15 +94,15 @@ export const Trip = () => {
                   </div>
                   <div className="match-position">
                     <ul className="list-position">
-                      <li>
+                      <li className="suin">
                         <button
                           type="button"
-                          className="match-button btn btn-light "
+                          className="match-button color-9 "
                           onClick={() => {
                             setModalMessage(true);
                           }}
                         >
-                          I'm in
+                          JOIN YOU
                         </button>
                       </li>
                     </ul>
@@ -112,8 +114,8 @@ export const Trip = () => {
                           className={
                             store.trip.likes &&
                               store.trip.likes.includes(store.user_id)
-                              ? "fas fa-heart text-danger"
-                              : "fas fa-heart"
+                              ? "fas fa-heart text-danger me-2"
+                              : "fas fa-heart me-2"
                           }
                           onClick={() => {
                             actions.changeFavorite(store.trip.id, "trip");
@@ -126,7 +128,7 @@ export const Trip = () => {
                   {store.user_id == store.trip.user_id_of_trip_creator ? (
                     <div className="edit-options">
                       <button
-                        type="button"
+                        type="button" title="click to edit"
                         onClick={() => {
                           setModalEdit(true);
                         }}
@@ -144,14 +146,14 @@ export const Trip = () => {
                   <Link
                     id="RouterNavLink"
                     to="/profile"
-                    className="text-dark"
-                    style={{ textDecoration: "none" }}
+                    className="user-informations"
+
                   >
                     {store.trip.user_firstname} {store.trip.user_lastname}
                   </Link>
                 </b>
               </h3>
-              <h5 className="text-dark text-center">
+              <h5 className="text-center">
                 {store.trip.user_city_of_residence +
                   " - " +
                   store.trip.user_country}
@@ -200,11 +202,11 @@ export const Trip = () => {
                 >
                   {/* API GOOGLE MAPS */}
 
-                  <div className="mt-5 ">
+                  <div className="mt-4 ">
                     <h3 className="text-dark text-center">
                       <b>Rute</b>
                     </h3>
-                    <div className="card bg-dark text-white m-5 mb-1 border border-primary border-3 ">
+                    <div className="card bg-dark text-white mb-1 border mt-3 border-primary border-3 ">
                       <GoogleMapsApi></GoogleMapsApi>
                       <div className="card-img-overlay"></div>
                     </div>
@@ -243,7 +245,7 @@ export const Trip = () => {
                             {store.user_id == store.trip.user_id_of_trip_creator ? (
                               <li><div className="edit-galery">
                                 <button
-                                  type="button"
+                                  type="button" title="add image"
                                   onClick={() => {
                                     setEditGalery(true);
                                   }}
@@ -447,7 +449,7 @@ export const Trip = () => {
 
                     {/* TRIP INFORMATION */}
 
-                    <div className="container px-4 py-5" id="featured-3">
+                    <div className="container " id="featured-3">
                       <h3 className="mt-1 text-dark text-center">
                         <b>More information</b>
                       </h3>
