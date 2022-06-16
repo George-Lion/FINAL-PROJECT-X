@@ -8,10 +8,6 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [showFavorite, setShowFavorite] = useState(false);
 
-  useEffect(() => {
-    actions.getUser();
-  }, []);
-
   return (
     <header>
       <div className="nav-traveland text-white ">
@@ -27,7 +23,7 @@ export const Navbar = () => {
               <li className="pt-2">
                 <Link
                   to="/feed"
-                  onClick={() => actions.resetStates()}
+
                   className="navbar-icon me-4 text-light "
                 >
                   <i className="fas fa-suitcase-rolling"></i>
@@ -37,7 +33,7 @@ export const Navbar = () => {
               <li className="pt-2">
                 <Link
                   to="/myTrips/"
-                  onClick={() => actions.resetStates()}
+
                   className="navbar-icon me-4 text-light "
                 >
                   <i className="fas fa-map-marker-alt"></i>
@@ -47,7 +43,7 @@ export const Navbar = () => {
               <li className="pt-2">
                 <Link
                   to="/message"
-                  onClick={() => actions.resetStates()}
+
                   className="navbar-icon me-4 text-light "
                 >
                   <i className="fas fa-envelope"></i>
@@ -80,14 +76,14 @@ export const Navbar = () => {
                     </li>
                     <Link
                       to={"/profile/" + store.user_id}
-                      onClick={() => actions.resetStates()}
+
                     >
                       <li className="ps-3">Profile</li>
                     </Link>
-                    <Link to="/favorites" onClick={() => actions.resetStates()}>
+                    <Link to="/favorites">
                       <li className="ps-3">Favorites</li>
                     </Link>
-                    <Link to="/help" onClick={() => actions.resetStates()}>
+                    <Link to="/help">
                       <li className="ps-3">Help</li>
                     </Link>
                     <li className="ps-3">

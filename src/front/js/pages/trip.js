@@ -21,7 +21,7 @@ export const Trip = () => {
   const [trip, setTrip] = useState({ likes: [] });
 
   useEffect(() => {
-    actions.getProfile(id);
+
     actions.getTrip(id);
     if (!store.trip) {
       history.push("/feed");
@@ -35,7 +35,7 @@ export const Trip = () => {
 
   return (
     <Fragment>
-      {store.trip ? (
+      {trip ? (
         <>
           {modalMessage ? (
             <SendMessageModal
@@ -407,7 +407,6 @@ export const Trip = () => {
                                 {/* img 5 */}
 
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -439,7 +438,6 @@ export const Trip = () => {
                                     </div>
                                   </Link>
                                 </div>
-
                               </div>
                             </div>
                           </div>

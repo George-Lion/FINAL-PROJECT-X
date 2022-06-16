@@ -28,6 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (data.user_id) {
             setStore({ user_id: data.user_id });
             setStore({ logged: data.logged_in || false });
+            getActions().getUser();
           }
           // setStore({ logged: data.logged_in || false })
           else if (resp.status == 401 || resp.status == 422) {
@@ -46,14 +47,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           trips: [],
           trip: {},
           match: {},
-          profile: {},
-          userTrips: [],
-        });
-      },
-      resetStates: async () => {
-        setStore({
-          trip: { likes: [] },
-          match: [],
           profile: {},
           userTrips: [],
         });

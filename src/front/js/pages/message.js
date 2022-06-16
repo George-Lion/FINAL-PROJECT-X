@@ -13,12 +13,8 @@ export const Message = () => {
   matchCount = store.match.length;
 
   useEffect(() => {
-    if (store.match == "") {
-      actions.getUserTrips();
-    }
-
+    actions.getUserTrips();
   }, []);
-
 
   return (
     <Fragment>
@@ -42,7 +38,7 @@ export const Message = () => {
                           <i className="fas fa-times-circle text-danger d-flex justify-content-end mt-2 me-2" style={{ fontSize: "23px" }}></i>
                           <div className="text-center">
                             <Link
-                              to={"/noEditProfile/" + e.id
+                              to={"/noEditProfile/" + store.user.id
                               } className="text-dark">
                               <img className="message-avatar" src={e.profile_picture} alt="img" />
                               <h5 className="u-name mb-0">{e.username}</h5></Link>

@@ -30,7 +30,8 @@ export const TravelBuddies = () => {
                     <div className="">
                         <div className="">
                             <div className="wrapper-travelers">
-                                {store.match.map((e) => {
+
+                                {store.trip.trip_in_match ? store.trip.trip_in_match.map((e) => {
                                     return (
                                         <div
                                             key={e.id}
@@ -62,7 +63,7 @@ export const TravelBuddies = () => {
                                             </Link>
                                         </div>
                                     );
-                                })}
+                                }) : (null)}
                             </div>
                         </div>
                     </div>

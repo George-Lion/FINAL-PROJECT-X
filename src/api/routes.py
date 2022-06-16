@@ -381,18 +381,6 @@ def send_match():  # nombre de la función
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
 
-#GET MATCH
-
-#@api.route("/match", methods=["GET"])
-#@jwt_required()
-#def get_match():
-#    current_id = get_jwt_identity()
-#    user = User.query.get(current_id)
-#    if user:
-#        return jsonify({"trips": list(map(lambda trip: trip.serialize(), user.created_trip))}), 200
-#    else:
-#        return jsonify({"error": "no message"}), 400
-
 #ACCEPT
 
 @api.route("/accept", methods=["POST"])  # end point de metodo POST
