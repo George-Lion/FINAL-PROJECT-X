@@ -79,6 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const data = await resp.json();
+          console.log(1, data)
           setStore({ profile: data.user });
         } catch (e) { }
       },

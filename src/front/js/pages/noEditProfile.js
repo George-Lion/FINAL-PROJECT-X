@@ -72,7 +72,7 @@ export const NoEditProfile = () => {
           <div className="row row-cols-1 align-items-stretch g-4 ">
             <div className="d-flex overflow-auto">
               <div className="wrapper-trips">
-                {store.userTrips.map((e) => {
+                {store.userTrips ? store.userTrips.map((e) => {
                   return (
                     <div
                       key={e.id}
@@ -152,7 +152,7 @@ export const NoEditProfile = () => {
                       </Link>
                     </div>
                   );
-                })}
+                }) : (null)}
               </div>
             </div>
           </div>

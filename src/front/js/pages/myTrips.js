@@ -21,7 +21,7 @@ export const MyTrips = () => {
 
   return (
     <Fragment>
-      <div className="footer-abajo">
+      {/*  <div className="footer-abajo">
         {store.userTrips.length > 0 ? (
           <h1 className="text-center m-5">MY TRIPS</h1>
         ) : (
@@ -80,7 +80,38 @@ export const MyTrips = () => {
             </div>
           );
         })}
+      </div> */}
+      <div className="footer-abajo">
+        <div className="content-mytrips mt-5 pt-1">
+          {store.userTrips.length > 0 ? (
+            <h2 className="title-myTrips text-center mt-4">MY TRIPS</h2>
+          ) : (
+            <h3 className="text-center text-dark mt-4">No Trips</h3>
+          )}
+          <div className="box-mytrips">
+            <div className="content-trips">
+              {store.userTrips.map((trip) => {
+                return (
+                  <Link to={"/trip/" + trip.id} key={trip.id} style={{ textDecoration: "none" }}>
+                    <div className="card-trip" style={{ backgroundImage: "url(" + trip.destination_picture + ")" }}>
+                      <div className="text-mytrips text-white">
+                        <h2>{trip.destination}</h2>
+                        <p><i className="fas fa-user-friends mt-2 me-2"></i>
+                          {trip.people}</p>
+                        <p><i className="fas fa-user-friends mt-2 me-2"></i>
+                          {trip.transport}</p>
+                        <p> <i className="fas fa-clock mt-2 me-2"></i>
+                          {moment(trip.start_of_the_trip).format("LL")} -{" "}
+                          {moment(trip.end_of_the_trip).format("LL")}</p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
-    </Fragment>
+    </Fragment >
   );
 };

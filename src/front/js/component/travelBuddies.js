@@ -40,7 +40,7 @@ export const TravelBuddies = () => {
                                         >
                                             <Link
                                                 style={{ textDecoration: "none" }}
-                                                to="/user"
+                                                to={"/noEditProfile/" + e.user_id}
                                             >
                                                 <div
                                                     className="travelers-img d-flex text-white align-items-end "

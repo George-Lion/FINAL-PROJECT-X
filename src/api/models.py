@@ -124,6 +124,7 @@ class MatchTrip(db.Model):
             "message": self.message,
             "accepted": self.accepted,
             "rejected": self.rejected,
+            "user_id": self.user.id
 
         }
 
