@@ -79,7 +79,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const data = await resp.json();
-          console.log(1, data)
           setStore({ profile: data.user });
         } catch (e) { }
       },
@@ -216,7 +215,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       /* SEND MATCH */
 
       sendMatch: async (match) => {
-        console.log(match);
         try {
           const resp = await fetch(getStore().url + "send/match", {
             method: "POST",
@@ -234,7 +232,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       acceptMatch: async (match) => {
         try {
-          console.log(match);
           const resp = await fetch(getStore().url + "accept", {
             method: "POST",
             headers: {
@@ -305,7 +302,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (page == "feed") {
             getActions().searchDestination(searchTerm);
             getActions().getUser();
-          } else if (page == "trip") {
+          } else if (page == "trip" || page == "favorites") {
             getActions().getTrip(id);
             getActions().getUser();
           }

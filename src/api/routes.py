@@ -372,11 +372,16 @@ def send_match():  # nombre de la función
     trip = Trip.query.get(body_trip_id)
     # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
     if user and trip and user.id != trip.user_id_of_trip_creator:
-        match = MatchTrip(user=user, trip=trip, message=body_message)
-        db.session.add(match)
-        db.session.commit()
+        if MatchTrip.query.filter_by(user=user).filter_by(trip=trip).first() is not None:
+            return jsonify({"error": "ya existe"}), 400
+        if trip.people > len(list(filter(lambda x : x.accepted==True,trip.trip_in_match))):
+            match = MatchTrip(user=user, trip=trip, message=body_message)
+            db.session.add(match)
+            db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
-        return jsonify({"send": True}), 200
+            return jsonify({"send": True}), 200
+        else:
+            return jsonify({"error": "llegas tarde"}), 400
     else:
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400

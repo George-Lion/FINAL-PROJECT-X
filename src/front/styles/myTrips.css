@@ -1,8 +1,3 @@
-/* .card-tripTrips {
-  background-size: cover;
-  height: 300px;
-} */
-
 .content-mytrips {
   width: 1300px;
   background-color: #151d26;
@@ -25,16 +20,11 @@
   width: 1240px;
   margin: auto;
   padding: 30px 0 0;
-  /* display: flex; */
   display: grid;
   grid-template-columns: 3fr 1fr;
 }
 
 .content-trips {
-  /*   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -102,7 +92,6 @@
     width: 820px;
     margin: auto;
     padding: 30px 0;
-    /* display: flex; */
     gap: 20px;
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -114,10 +103,6 @@
   }
 
   .content-trips {
-    /*   width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -138,7 +123,6 @@
     width: 400px;
     margin: auto;
     padding: 40px 0;
-    /* display: flex; */
     gap: 20px;
     display: grid;
     grid-template-columns: 0fr 0fr;
@@ -150,11 +134,6 @@
   }
 
   .content-trips {
-    /*   width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; */
-
     grid-template-columns: repeat(1, 1fr);
   }
 

@@ -51,7 +51,7 @@ export const Favorites = () => {
                                 <i
                                   className="fas fa-heart"
                                   onClick={() => {
-                                    actions.changeFavorite(e.id, "feed");
+                                    actions.changeFavorite(e.id, "favorites");
                                   }}
                                 ></i>
                                 {e.likes.length}
@@ -61,7 +61,7 @@ export const Favorites = () => {
                                 <i
                                   className="fas fa-heart text-danger"
                                   onClick={() => {
-                                    actions.changeFavorite(e.id, "feed");
+                                    actions.changeFavorite(e.id, "favorites");
                                   }}
                                 ></i>
                                 {e.likes.length}

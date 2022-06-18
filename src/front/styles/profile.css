@@ -230,6 +230,12 @@
   background-color: #151d26;
   border-radius: 20px;
 }
+.text-trips {
+  text-align: center;
+  width: 1080px;
+
+  padding-top: 100px;
+}
 
 /* RESOLUTION 1270px */
 

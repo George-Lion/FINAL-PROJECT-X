@@ -31,7 +31,8 @@ export const TravelBuddies = () => {
                         <div className="">
                             <div className="wrapper-travelers">
 
-                                {store.trip.trip_in_match ? store.trip.trip_in_match.map((e) => {
+                                {store.trip.trip_in_match ? store.trip.trip_in_match.filter((x) => x.accepted == true).map((e) => {
+
                                     return (
                                         <div
                                             key={e.id}
