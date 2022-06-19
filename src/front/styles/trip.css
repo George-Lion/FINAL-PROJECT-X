@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap");
 .features {
   margin-right: 120px;
   font-size: 20px;
@@ -27,7 +29,7 @@
 
 .trip-user {
   background: linear-gradient(#ffffff, transparent);
-  color: #333;
+  color: #151d26;
 }
 .trip-user .shadow-page {
   position: absolute;
@@ -94,12 +96,42 @@
 }
 
 .match-button {
-  padding-left: 30px;
-  padding-right: 30px;
-  border-radius: 25px;
-  font-weight: 700;
+  width: 120px;
   font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  height: 42px;
   text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.match-button:hover {
+  background-position: 100% 0;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.match-button:focus {
+  outline: none;
+}
+
+.match-button.color-9 {
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #4481eb,
+    #04befe,
+    #3f86ed
+  );
 }
 
 .match-position {
@@ -126,8 +158,14 @@
   padding-bottom: 1rem;
   padding-right: 1rem;
 }
+
+.user-informations {
+  color: #151d26;
+  text-decoration: none;
+}
 .trip-user .info-user {
   font-size: 3.4rem;
+  font-family: "Roboto", sans-serif;
   white-space: nowrap;
   margin-bottom: 0.5rem;
   overflow: hidden;
@@ -191,65 +229,14 @@
 
 .li-icon {
   list-style: none;
+  font-family: "Comfortaa", cursive;
 }
 
 .icon-options {
-  font-size: 15px;
   margin: 5px 10px 15px 60px;
   letter-spacing: 2px;
   font-size: 1.3rem;
-}
-
-/* WRAPPER */
-
-.wrapper-travelers {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  overflow-x: auto;
-  margin-bottom: 40px;
-  margin-top: 25px;
-  z-index: 1;
-  width: 1200px;
-}
-
-.wrapper-travelers::-webkit-scrollbar {
-  -webkit-appearance: none;
-  height: 8px;
-}
-
-.wrapper-travelers::-webkit-scrollbar-button:increment,
-.contenedor::-webkit-scrollbar-button {
-  display: none;
-}
-.wrapper-travelers::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(
-    to right,
-    #e9f8ff 0%,
-    #b8b8b8 51%,
-    #e4e4e4 100%
-  );
-  border-radius: 30px;
-}
-.wrapper-travelers .img1 {
-  width: 100%;
-}
-
-.card1:hover {
-  background: rgb(65, 130, 173);
-}
-
-.travelers-img {
-  display: flex;
-  display: block;
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 0.7rem;
-  min-height: 310px;
-  width: 230px;
-  padding-right: 50px;
-  border-radius: 10px 10px 10px 10px;
-  display: "block";
+  color: #0094db;
 }
 
 /* RESOLUTION 1680px */
@@ -264,6 +251,10 @@
 }
 
 @media (max-width: 1440px) {
+  .trip-user .trip-content {
+    width: 100%;
+  }
+
   .trip-user .avatar-trip {
     left: calc(51% - 105px);
   }
@@ -311,20 +302,21 @@
 
   .match-position {
     left: 0;
-
     text-align: left;
-
     width: 50%;
     color: #ffffff;
     font-size: 15px;
   }
 
+  /*  button */
   .match-button {
+    width: 110px;
     padding-left: 30px;
     padding-right: 30px;
-    font-size: 12px;
+    font-size: 11px;
   }
 
+  /*   button  */
   .trip-user .trip-data {
     bottom: 80px;
     width: 100%;
@@ -348,6 +340,19 @@
 
   .icon-options {
     font-size: 13px;
+  }
+
+  .travelers-img {
+    display: flex;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 0.7rem;
+    min-height: 300px;
+    width: 215px;
+    margin: 0px 4px 10px 4px;
+    border-radius: 10px 10px 10px 10px;
+    display: "block";
   }
 }
 

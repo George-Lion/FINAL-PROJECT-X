@@ -1,14 +1,13 @@
 /* WRAPPER */
 
 .wrapper-travelers {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 05px;
+  margin-right: 05px;
   display: flex;
   overflow-x: auto;
   margin-bottom: 40px;
-  margin-top: 25px;
+  margin-top: 15px;
   z-index: 1;
-  width: 1200px;
 }
 
 .wrapper-travelers::-webkit-scrollbar {
@@ -29,12 +28,10 @@
   );
   border-radius: 30px;
 }
-.wrapper-travelers .img1 {
-  width: 100%;
-}
 
-.card1:hover {
-  background: rgb(65, 130, 173);
+.section-box {
+  background-color: #151d26;
+  border-radius: 50px;
 }
 
 .travelers-img {
@@ -43,15 +40,9 @@
   background-size: cover;
   background-position: center;
   margin-bottom: 0.7rem;
-  min-height: 310px;
-  width: 230px;
-  padding-right: 50px;
+  min-height: 300px;
+  min-width: 205px;
+  margin: 0px 4px 10px 4px;
   border-radius: 10px 10px 10px 10px;
   display: "block";
-}
-
-.section-box {
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  border-radius: 50px;
 }

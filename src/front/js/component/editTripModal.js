@@ -22,7 +22,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
         setConfirmDelete(false);
         history.push("/feed");
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   return (
@@ -75,7 +75,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                   type="text"
                   className="col-5"
                   placeholder="Destination"
-                  maxLength={25}
+                  maxLength={13}
                   onChange={(e) =>
                     editTrip({
                       ...trip,
@@ -253,7 +253,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
             {/* Save buttom */}
             <div className="modal-footer d-flex justify-content-between px-5">
               <i
-                className="fa-solid fa-trash"
+                className="fa-solid fa-trash" title="delete trip" style={{ fontSize: "20px" }}
                 onClick={() => {
                   setConfirmDelete(true);
                 }}

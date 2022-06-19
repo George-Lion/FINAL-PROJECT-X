@@ -17,9 +17,7 @@ export const Profile = () => {
 
   useEffect(() => {
     actions.getProfile(id);
-    if (store.match == "") {
-      actions.getUserTrips();
-    }
+    actions.getUserTrips();
     actions.getUserProfiles();
   }, []);
 
@@ -74,7 +72,7 @@ export const Profile = () => {
                   setUser(store.profile);
                 }}
               >
-                <i className="fas fa-pencil"></i>
+                <i className="fas fa-pencil" title="click to edit"></i>
               </button>
             </div>
           </div>
@@ -144,7 +142,7 @@ export const Profile = () => {
           <div className="row row-cols-1 align-items-stretch g-4 ">
             <div className="d-flex overflow-auto">
               <button
-                className="button-add-trip btn btn-dark text-light mt-4"
+                className="button-add-trip btn text-light mt-4"
                 style={{ height: "350px" }}
                 onClick={() => {
                   setShowCreateTrip(true);
@@ -236,89 +234,13 @@ export const Profile = () => {
                     );
                   })
                 ) : (
-                  <h5 className="text-center text-dark mt-4">No Trips</h5>
+                  <h5 className="text-trips text-center text-dark mt-4">No Trips</h5>
                 )}
               </div>
             </div>
           </div>
         </div>
         <div className="py-2 border-top mt-4 text-left justify-content-center"></div>
-
-        {/*TESTIMONIALS*/}
-
-        <div>
-          <div className="mt-2 mb-5">
-            <h3>
-              Estas personas ya han viajado con{" "}
-              <b>{store.profile.firstname + " " + store.profile.lastname}</b>:
-            </h3>
-
-            <div className="card mb-3 mt-4" style={{ maxWidth: "540px" }}>
-              <div className="row g-0">
-                <div className="col-md-4">
-                  <img
-                    src="https://images.pexels.com/photos/5794559/pexels-photo-5794559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    className="img-fluid rounded-start"
-                    alt="..."
-                  />
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">
-                      This is a wider card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p>
-                    <p className="card-text">
-                      <small className="text-muted">
-                        Last updated 3 mins ago
-                      </small>
-                    </p>
-                    {/*Profiles SERGI MAP*/}
-                    {/* <div className="row row-cols-1 row-cols-lg-3 d-flex justify-content-between g-4 py-5">
-            {store.profileProfiles.map((e) => {
-              return (
-                <div
-                  key={e.id}
-                  className="card m-2"
-                  style={{
-                    backgroundColor: "#D7D7D7",
-                    width: "400px",
-                    height: "180px",
-                  }}
-                >
-                  <div className="row g-0">
-                    <div className="col-md-5">
-                      <img
-                        src={e.user_image}
-                        className="img-fluid rounded-start"
-                        alt="Imagenes Avatar"
-                        style={{ maxWidth: "150px" }}
-                      />
-                    </div>
-                    <div className="col-md-6 ">
-                      <div className="card-body">
-                        <h5 className="card-title">{e.fullname}</h5>
-                        <p className="card-text">
-                          Excelente persona, vivimos muchas aventuras juntas.
-                        </p>
-                        <Link
-                          style={{ textDecoration: "none" }}
-                          to={"/profile"}
-                        >
-                          <p className="card-text">
-                            <small className="text-muted">Ver perfil</small>
-                          </p>
-                        </Link>
-                      </div>
-                    </div>*/}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
