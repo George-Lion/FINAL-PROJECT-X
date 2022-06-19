@@ -92,6 +92,8 @@ export const Trip = () => {
                       {store.trip.destination}
                     </p>
                   </div>
+
+{new Date(store.trip.start_of_the_trip) > new Date() ? (
                   <div className="match-position">
                     <ul className="list-position">
                       <li className="suin">
@@ -107,15 +109,19 @@ export const Trip = () => {
                       </li>
                     </ul>
                   </div>
+       ) : null}
+
                   <div className="datos-like">
                     <ul className="lista-perfil">
                       <li>
                         <i
                           className={
                             store.trip.likes &&
+
                               store.trip.likes.includes(store.user_id)
                               ? "fas fa-heart text-danger me-2"
                               : "fas fa-heart me-2"
+
                           }
                           onClick={() => {
                             actions.changeFavorite(store.trip.id, "trip");
@@ -231,14 +237,11 @@ export const Trip = () => {
                       role="dialog"
                       id="modalChoice"
                     >
-
-                      <div
-                        className="galery-box  position-static d-block py-3 "
-
-                      >
+                      <div className="galery-box  position-static d-block py-3 ">
                         <div className="">
                           <ul className="list-unstyled d-flex justify-content-around">
                             <li className="text-white">o</li>
+
                             <li className=""><h3 className="travel-title mt-2  text-dark" style={{ color: "white" }}>
                               <b>GALERY</b>
                             </h3></li>
@@ -261,9 +264,7 @@ export const Trip = () => {
                           <div className="row row-cols-1 align-items-stretch g-4 pt-1">
                             <div className="d-flex overflow-auto">
                               <div className="galery-wrapper">
-
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -276,9 +277,11 @@ export const Trip = () => {
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
+
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
+
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">
@@ -294,7 +297,6 @@ export const Trip = () => {
                                 {/* img 2 */}
 
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -307,9 +309,11 @@ export const Trip = () => {
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
+
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
+
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">
@@ -325,7 +329,6 @@ export const Trip = () => {
                                 {/* img 3 */}
 
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -338,9 +341,11 @@ export const Trip = () => {
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
+
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
+
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">
@@ -356,7 +361,6 @@ export const Trip = () => {
                                 {/* img 4 */}
 
                                 <div
-
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
@@ -369,9 +373,11 @@ export const Trip = () => {
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
+
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
+
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">
@@ -399,9 +405,11 @@ export const Trip = () => {
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
+
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
+
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">

@@ -5,7 +5,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
+
       url: "https://3001-georgelion-finalproject-nah4r194rpj.ws-eu47.gitpod.io/api/",
+
       user_id: null,
       trips: [],
       logged: null,

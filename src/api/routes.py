@@ -7,6 +7,7 @@ from api.utils import generate_sitemap, APIException
 import cloudinary
 import cloudinary.uploader
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
+from datetime import date
 
 api = Blueprint('api', __name__)
 
@@ -135,7 +136,8 @@ def trip(trip_id):
     else:
         return jsonify({"error": "no trip"}), 400
 
-#EDIT A TRIP
+# EDIT A TRIP
+
 
 @api.route("/trip", methods=["PUT"])
 @jwt_required()
@@ -180,7 +182,6 @@ def editTrip():
     if body_imagen_5 == "" or body_imagen_5 == None:
         body_imagen_5 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
 
-
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])
@@ -205,7 +206,7 @@ def editTrip():
         body_imagen_5 = cloudinary.uploader.upload(
             request.files['imagen_5'])
         trip.imagen_5 = body_imagen_5['secure_url']
-    
+
     trip.destination = body_destination
     trip.start_of_the_trip = body_start_of_the_trip
     trip.end_of_the_trip = body_end_of_the_trip
@@ -215,6 +216,7 @@ def editTrip():
     trip.text = body_text
     db.session.commit()
     return jsonify({"edited": True, "trip": trip.serialize()}), 200
+
 
 #GET USER TRIPS    
 
@@ -239,7 +241,8 @@ def get_user_trips_by_id(id):
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
-#DELETE A TRIP
+# DELETE A TRIP
+
 
 @api.route("/deleteTrip", methods=["DELETE"]) #ELIMINA EL TRIP
 @jwt_required()
@@ -297,7 +300,8 @@ def get_user_profiles():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
-#CREATE A TRIP
+# CREATE A TRIP
+
 
 @api.route("/create/trip", methods=["POST"])
 @jwt_required()
@@ -311,11 +315,11 @@ def create_trip():
     body_cost = request.form.get("cost")
     body_text = request.form.get("text")
     body_destination_picture = "https://images.pexels.com/photos/358482/pexels-photo-358482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    body_imagen_1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
-    body_imagen_2 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
-    body_imagen_3 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
-    body_imagen_4 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
-    body_imagen_5 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png" #NEW
+    body_imagen_1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
+    body_imagen_2 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
+    body_imagen_3 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
+    body_imagen_4 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
+    body_imagen_5 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])['secure_url']
@@ -337,7 +341,7 @@ def get_trips():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     if user:
-        trips = Trip.query.all()
+        trips = Trip.query.filter(Trip.start_of_the_trip > date.today())
         # aca me hace un mapeo de una lista de instancia de clases.
         return jsonify({"trips": list(map(lambda trip: trip.serialize(), trips))}), 200
     else:
@@ -350,7 +354,7 @@ def get_trips_search():
     requested_destination = request.json.get("destination")
     requested_start_date = request.json.get("date")
     requested_end_date = request.json.get("end_date")
-    queries = []
+    queries = [Trip.start_of_the_trip > date.today()]
     if requested_destination:
         queries.append(Trip.destination == requested_destination)
     if requested_start_date:
