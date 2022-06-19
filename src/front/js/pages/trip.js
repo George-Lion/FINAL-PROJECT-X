@@ -4,11 +4,11 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import { SendMessageModal } from "../component/sendMessageModal";
 import { EditTripModal } from "../component/editTripModal";
 import { EditGaleryModal } from "../component/editGaleryModal";
-import { ImageGalery } from "../component/imageGalery";
 import { TravelBuddies } from "../component/travelBuddies";
 import { GoogleMapsApi } from "../component/googleMapsApi";
 import moment from "moment";
 import "../../styles/trip.css";
+import "../../styles/imageGalery.css";
 
 export const Trip = () => {
   const { store, actions } = useContext(Context);
@@ -21,7 +21,7 @@ export const Trip = () => {
   const [trip, setTrip] = useState({ likes: [] });
 
   useEffect(() => {
-    actions.getProfile(id);
+
     actions.getTrip(id);
     if (!store.trip) {
       history.push("/feed");
@@ -35,8 +35,7 @@ export const Trip = () => {
 
   return (
     <Fragment>
-      {/*Banner*/}
-      {store.trip ? (
+      {trip ? (
         <>
           {modalMessage ? (
             <SendMessageModal
@@ -64,6 +63,9 @@ export const Trip = () => {
           <div className="footer-abajo">
             <section className="trip-user">
               <div className="trip-content">
+
+                {/*Banner*/}
+
                 <div
                   className="font-page"
                   style={{
@@ -78,7 +80,7 @@ export const Trip = () => {
                         store.trip.user_id_of_trip_creator == store.user_id
                           ? "/profile/" + store.trip.user_id_of_trip_creator
                           : "/noEditProfile/" +
-                            store.trip.user_id_of_trip_creator
+                          store.trip.user_id_of_trip_creator
                       }
                     >
                       <img src={store.trip.profile_picture} alt="img" />
@@ -90,32 +92,36 @@ export const Trip = () => {
                       {store.trip.destination}
                     </p>
                   </div>
-                  {new Date(store.trip.start_of_the_trip) > new Date() ? (
-                    <div className="match-position">
-                      <ul className="list-position">
-                        <li>
-                          <button
-                            type="button"
-                            className="match-button btn btn-light "
-                            onClick={() => {
-                              setModalMessage(true);
-                            }}
-                          >
-                            I'm in
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  ) : null}
+
+{new Date(store.trip.start_of_the_trip) > new Date() ? (
+                  <div className="match-position">
+                    <ul className="list-position">
+                      <li className="suin">
+                        <button
+                          type="button"
+                          className="match-button color-9 "
+                          onClick={() => {
+                            setModalMessage(true);
+                          }}
+                        >
+                          JOIN YOU
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+       ) : null}
+
                   <div className="datos-like">
                     <ul className="lista-perfil">
                       <li>
                         <i
                           className={
                             store.trip.likes &&
-                            store.trip.likes.includes(store.user_id)
-                              ? "fas fa-heart text-danger"
-                              : "fas fa-heart"
+
+                              store.trip.likes.includes(store.user_id)
+                              ? "fas fa-heart text-danger me-2"
+                              : "fas fa-heart me-2"
+
                           }
                           onClick={() => {
                             actions.changeFavorite(store.trip.id, "trip");
@@ -128,7 +134,7 @@ export const Trip = () => {
                   {store.user_id == store.trip.user_id_of_trip_creator ? (
                     <div className="edit-options">
                       <button
-                        type="button"
+                        type="button" title="click to edit"
                         onClick={() => {
                           setModalEdit(true);
                         }}
@@ -146,14 +152,14 @@ export const Trip = () => {
                   <Link
                     id="RouterNavLink"
                     to="/profile"
-                    className="text-dark"
-                    style={{ textDecoration: "none" }}
+                    className="user-informations"
+
                   >
                     {store.trip.user_firstname} {store.trip.user_lastname}
                   </Link>
                 </b>
               </h3>
-              <h5 className="text-dark text-center">
+              <h5 className="text-center">
                 {store.trip.user_city_of_residence +
                   " - " +
                   store.trip.user_country}
@@ -170,7 +176,7 @@ export const Trip = () => {
 
                 <div className="icon-box">
                   <li className="li-icon">
-                    <i className="icon-options fas fa-user-friends"></i>0/
+                    <i className="icon-options fas fa-user-friends"></i>{store.trip.trip_in_match ? store.trip.trip_in_match.filter((x) => x.accepted == true).length : 0} /
                     {store.trip.people}
                   </li>
                   <li className="li-icon">
@@ -202,12 +208,12 @@ export const Trip = () => {
                 >
                   {/* API GOOGLE MAPS */}
 
-                  <div className="mt-5 ">
+                  <div className="mt-4 ">
                     <h3 className="text-dark text-center">
                       <b>Rute</b>
                     </h3>
-                    <div className="card bg-dark text-white m-5 mb-1 border border-primary border-3 ">
-                      <GoogleMapsApi></GoogleMapsApi>
+                    <div className="card bg-dark text-white mb-1 border mt-3 border-primary border-3 ">
+                      <GoogleMapsApi />
                       <div className="card-img-overlay"></div>
                     </div>
 
@@ -235,31 +241,22 @@ export const Trip = () => {
                         <div className="">
                           <ul className="list-unstyled d-flex justify-content-around">
                             <li className="text-white">o</li>
-                            <li className="">
-                              <h3
-                                className="travel-title mt-2  text-dark"
-                                style={{ color: "white" }}
-                              >
-                                <b>GALERY</b>
-                              </h3>
-                            </li>
-                            {store.user_id ==
-                            store.trip.user_id_of_trip_creator ? (
-                              <li>
-                                <div className="edit-galery">
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      setEditGalery(true);
-                                    }}
-                                  >
-                                    <i className="fas fa-camera"></i>
-                                  </button>
-                                </div>
-                              </li>
-                            ) : null}
-                          </ul>
-                        </div>
+
+                            <li className=""><h3 className="travel-title mt-2  text-dark" style={{ color: "white" }}>
+                              <b>GALERY</b>
+                            </h3></li>
+                            {store.user_id == store.trip.user_id_of_trip_creator ? (
+                              <li><div className="edit-galery">
+                                <button
+                                  type="button" title="add image"
+                                  onClick={() => {
+                                    setEditGalery(true);
+                                  }}
+                                >
+                                  <i className="fas fa-camera"></i>
+                                </button>
+                              </div></li>) : null}
+                          </ul></div>
 
                         {/* img 1 */}
 
@@ -271,34 +268,30 @@ export const Trip = () => {
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
-                                  <Link
-                                    style={{ textDecoration: "none" }}
-                                    to="/user"
+                                  <div
+                                    className="galery-img d-flex text-white align-items-end "
+                                    style={{
+                                      backgroundImage: "url(" + store.trip.imagen_1 + ")",
+                                    }}
                                   >
                                     <div
-                                      className="galery-img d-flex text-white align-items-end "
+                                      className="d-flex flex-column text-white "
                                       style={{
-                                        backgroundImage:
-                                          "url(" + store.trip.imagen_1 + ")",
+
+                                        minHeight: "40px",
+                                        minWidth: "210px",
+                                        display: "block",
+
                                       }}
                                     >
-                                      <div
-                                        className="d-flex flex-column text-white "
-                                        style={{
-                                          minHeight: "40px",
-                                          minWidth: "210px",
-                                          display: "block",
-                                        }}
-                                      >
-                                        <ul className="card-text-box list-unstyled ms-3">
-                                          <li className="mb-1">
-                                            <h2></h2>
-                                          </li>
-                                        </ul>
-                                        <div className="shadow-card-image"></div>
-                                      </div>
+                                      <ul className="card-text-box list-unstyled ms-3">
+                                        <li className="mb-1">
+                                          <h2></h2>
+                                        </li>
+                                      </ul>
+                                      <div className="shadow-card-image"></div>
                                     </div>
-                                  </Link>
+                                  </div>
                                 </div>
 
                                 {/* img 2 */}
@@ -307,34 +300,30 @@ export const Trip = () => {
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
-                                  <Link
-                                    style={{ textDecoration: "none" }}
-                                    to="/user"
+                                  <div
+                                    className="galery-img d-flex text-white align-items-end "
+                                    style={{
+                                      backgroundImage: "url(" + store.trip.imagen_2 + ")",
+                                    }}
                                   >
                                     <div
-                                      className="galery-img d-flex text-white align-items-end "
+                                      className="d-flex flex-column text-white "
                                       style={{
-                                        backgroundImage:
-                                          "url(" + store.trip.imagen_2 + ")",
+
+                                        minHeight: "40px",
+                                        minWidth: "210px",
+                                        display: "block",
+
                                       }}
                                     >
-                                      <div
-                                        className="d-flex flex-column text-white "
-                                        style={{
-                                          minHeight: "40px",
-                                          minWidth: "210px",
-                                          display: "block",
-                                        }}
-                                      >
-                                        <ul className="card-text-box list-unstyled ms-3">
-                                          <li className="mb-1">
-                                            <h2></h2>
-                                          </li>
-                                        </ul>
-                                        <div className="shadow-card-image"></div>
-                                      </div>
+                                      <ul className="card-text-box list-unstyled ms-3">
+                                        <li className="mb-1">
+                                          <h2></h2>
+                                        </li>
+                                      </ul>
+                                      <div className="shadow-card-image"></div>
                                     </div>
-                                  </Link>
+                                  </div>
                                 </div>
 
                                 {/* img 3 */}
@@ -343,34 +332,30 @@ export const Trip = () => {
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
-                                  <Link
-                                    style={{ textDecoration: "none" }}
-                                    to="/user"
+                                  <div
+                                    className="galery-img d-flex text-white align-items-end "
+                                    style={{
+                                      backgroundImage: "url(" + store.trip.imagen_3 + ")",
+                                    }}
                                   >
                                     <div
-                                      className="galery-img d-flex text-white align-items-end "
+                                      className="d-flex flex-column text-white "
                                       style={{
-                                        backgroundImage:
-                                          "url(" + store.trip.imagen_3 + ")",
+
+                                        minHeight: "40px",
+                                        minWidth: "210px",
+                                        display: "block",
+
                                       }}
                                     >
-                                      <div
-                                        className="d-flex flex-column text-white "
-                                        style={{
-                                          minHeight: "40px",
-                                          minWidth: "210px",
-                                          display: "block",
-                                        }}
-                                      >
-                                        <ul className="card-text-box list-unstyled ms-3">
-                                          <li className="mb-1">
-                                            <h2></h2>
-                                          </li>
-                                        </ul>
-                                        <div className="shadow-card-image"></div>
-                                      </div>
+                                      <ul className="card-text-box list-unstyled ms-3">
+                                        <li className="mb-1">
+                                          <h2></h2>
+                                        </li>
+                                      </ul>
+                                      <div className="shadow-card-image"></div>
                                     </div>
-                                  </Link>
+                                  </div>
                                 </div>
 
                                 {/* img 4 */}
@@ -379,34 +364,30 @@ export const Trip = () => {
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
-                                  <Link
-                                    style={{ textDecoration: "none" }}
-                                    to="/user"
+                                  <div
+                                    className="galery-img d-flex text-white align-items-end "
+                                    style={{
+                                      backgroundImage: "url(" + store.trip.imagen_4 + ")",
+                                    }}
                                   >
                                     <div
-                                      className="galery-img d-flex text-white align-items-end "
+                                      className="d-flex flex-column text-white "
                                       style={{
-                                        backgroundImage:
-                                          "url(" + store.trip.imagen_4 + ")",
+
+                                        minHeight: "40px",
+                                        minWidth: "210px",
+                                        display: "block",
+
                                       }}
                                     >
-                                      <div
-                                        className="d-flex flex-column text-white "
-                                        style={{
-                                          minHeight: "40px",
-                                          minWidth: "210px",
-                                          display: "block",
-                                        }}
-                                      >
-                                        <ul className="card-text-box list-unstyled ms-3">
-                                          <li className="mb-1">
-                                            <h2></h2>
-                                          </li>
-                                        </ul>
-                                        <div className="shadow-card-image"></div>
-                                      </div>
+                                      <ul className="card-text-box list-unstyled ms-3">
+                                        <li className="mb-1">
+                                          <h2></h2>
+                                        </li>
+                                      </ul>
+                                      <div className="shadow-card-image"></div>
                                     </div>
-                                  </Link>
+                                  </div>
                                 </div>
 
                                 {/* img 5 */}
@@ -415,84 +396,34 @@ export const Trip = () => {
                                   className="pe-3"
                                   style={{ width: "410px" }}
                                 >
-                                  <Link
-                                    style={{ textDecoration: "none" }}
-                                    to="/user"
+                                  <div
+                                    className="galery-img d-flex text-white align-items-end "
+                                    style={{
+                                      backgroundImage: "url(" + store.trip.imagen_5 + ")",
+                                    }}
                                   >
                                     <div
-                                      className="galery-img d-flex text-white align-items-end "
+                                      className="d-flex flex-column text-white "
                                       style={{
-                                        backgroundImage:
-                                          "url(" + store.trip.imagen_5 + ")",
+
+                                        minHeight: "40px",
+                                        minWidth: "210px",
+                                        display: "block",
+
                                       }}
                                     >
-                                      <div
-                                        className="d-flex flex-column text-white "
-                                        style={{
-                                          minHeight: "40px",
-                                          minWidth: "210px",
-                                          display: "block",
-                                        }}
-                                      >
-                                        <ul className="card-text-box list-unstyled ms-3">
-                                          <li className="mb-1">
-                                            <h2></h2>
-                                          </li>
-                                        </ul>
-                                        <div className="shadow-card-image"></div>
-                                      </div>
+                                      <ul className="card-text-box list-unstyled ms-3">
+                                        <li className="mb-1">
+                                          <h2></h2>
+                                        </li>
+                                      </ul>
+                                      <div className="shadow-card-image"></div>
                                     </div>
-                                  </Link>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* TRIP INFORMATION */}
-
-                    <div className="container px-4 py-5" id="featured-3">
-                      <h3 className="mt-1 text-dark text-center">
-                        <b>More information</b>
-                      </h3>
-                      <div className="row g-4 py-5 row-cols-1 row-cols-lg-3">
-                        <div className="feature col">
-                          <div className="feature-icon bg-primary bg-gradient"></div>
-                          <h2>Featured title</h2>
-                          <p>
-                            Paragraph of text beneath the heading to explain the
-                            heading. We'll add onto it with another sentence and
-                            probably just keep going until we run out of words.
-                          </p>
-                          <a href="#" className="icon-link">
-                            Call to action
-                          </a>
-                        </div>
-                        <div className="feature col">
-                          <div className="feature-icon bg-primary bg-gradient"></div>
-                          <h2>Featured title</h2>
-                          <p>
-                            Paragraph of text beneath the heading to explain the
-                            heading. We'll add onto it with another sentence and
-                            probably just keep going until we run out of words.
-                          </p>
-                          <a href="#" className="icon-link">
-                            Call to action
-                          </a>
-                        </div>
-                        <div className="feature col">
-                          <div className="feature-icon bg-primary bg-gradient"></div>
-                          <h2>Featured title</h2>
-                          <p>
-                            Paragraph of text beneath the heading to explain the
-                            heading. We'll add onto it with another sentence and
-                            probably just keep going until we run out of words.
-                          </p>
-                          <a href="#" className="icon-link">
-                            Call to action
-                          </a>
                         </div>
                       </div>
                     </div>

@@ -81,6 +81,7 @@ def getProfile(id):
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
+#EDIT USER
 
 @api.route("/user", methods=["PUT"])
 @jwt_required()
@@ -124,6 +125,7 @@ def editUser():
     db.session.commit()
     return jsonify({"edited": True, "user": user.serialize()}), 200
 
+#TRIP
 
 @api.route("/trip/<int:trip_id>", methods=["GET"])
 @jwt_required()
@@ -216,6 +218,8 @@ def editTrip():
     return jsonify({"edited": True, "trip": trip.serialize()}), 200
 
 
+#GET USER TRIPS    
+
 @api.route("/trips", methods=["GET"])
 @jwt_required()
 def get_user_trips():
@@ -226,6 +230,7 @@ def get_user_trips():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
+#GET USER TRIP BY ID
 
 @api.route("/trips/<int:id>", methods=["GET"])
 @jwt_required()
@@ -239,7 +244,7 @@ def get_user_trips_by_id(id):
 # DELETE A TRIP
 
 
-@api.route("/deleteTrip", methods=["DELETE"])
+@api.route("/deleteTrip", methods=["DELETE"]) #ELIMINA EL TRIP
 @jwt_required()
 def delete_trip():
     current_id = get_jwt_identity()
@@ -255,6 +260,7 @@ def delete_trip():
     else:
         return jsonify({"error": "Trip no eliminado"}), 400
 
+#ADD LIKE TRIP
 
 @api.route("/tripLikes", methods=["POST"])
 @jwt_required()
@@ -280,7 +286,9 @@ def add_like_trip():
         return jsonify({"error": "error"}), 400
 
 
-@api.route("/user/profiles", methods=["GET"])
+#GET USER PROFILES
+
+@api.route("/user/profiles", methods=["GET"]) #DEVUELVE EL PERFIL DEL USUARIO
 @jwt_required()
 def get_user_profiles():
     current_id = get_jwt_identity()
@@ -325,6 +333,7 @@ def create_trip():
     else:
         return jsonify({"created": False, "msg": "Falta información"}), 400
 
+#GET TRIPS
 
 @api.route("/allTrips", methods=["GET"])
 @jwt_required()
@@ -338,6 +347,7 @@ def get_trips():
     else:
         return jsonify({"error": "error"}), 400
 
+#GET TRIPS SEARCH
 
 @api.route("/search", methods=["GET", "POST"])
 def get_trips_search():
@@ -354,6 +364,7 @@ def get_trips_search():
     destination_match = Trip.query.filter(*queries)
     return jsonify({"trip": list(map(lambda trip: trip.serialize(), destination_match))}), 200
 
+#SEND MATCH
 
 @api.route("/send/match", methods=["POST"])  # end point de metodo POST
 @jwt_required()
@@ -365,27 +376,21 @@ def send_match():  # nombre de la función
     trip = Trip.query.get(body_trip_id)
     # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
     if user and trip and user.id != trip.user_id_of_trip_creator:
-        match = MatchTrip(user=user, trip=trip, message=body_message)
-        db.session.add(match)
-        db.session.commit()
+        if MatchTrip.query.filter_by(user=user).filter_by(trip=trip).first() is not None:
+            return jsonify({"error": "ya existe"}), 400
+        if trip.people > len(list(filter(lambda x : x.accepted==True,trip.trip_in_match))):
+            match = MatchTrip(user=user, trip=trip, message=body_message)
+            db.session.add(match)
+            db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
-        return jsonify({"send": True}), 200
+            return jsonify({"send": True}), 200
+        else:
+            return jsonify({"error": "llegas tarde"}), 400
     else:
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
 
-
-@api.route("/match", methods=["GET"])
-@jwt_required()
-def get_match():
-    current_id = get_jwt_identity()
-    user = User.query.get(current_id)
-    match = Trip.query.filter_by(user_id_of_trip_creator=current_id)
-    if match:
-        return jsonify({"match": list(map(lambda match: match.serialize(), match))}), 200
-    else:
-        return jsonify({"error": "no message"}), 400
-
+#ACCEPT
 
 @api.route("/accept", methods=["POST"])  # end point de metodo POST
 @jwt_required()
@@ -404,3 +409,4 @@ def accept():  # nombre de la función
     else:
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
+

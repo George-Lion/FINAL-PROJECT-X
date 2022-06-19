@@ -8,13 +8,9 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [showFavorite, setShowFavorite] = useState(false);
 
-  useEffect(() => {
-    actions.getUser();
-  }, []);
-
   return (
     <header>
-      <div className="px-3 py-2 bg-dark text-white ">
+      <div className="nav-traveland text-white ">
         <div className="container">
           <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <Link
@@ -24,37 +20,37 @@ export const Navbar = () => {
               <img src={image} alt="logo" className="logo" />
             </Link>
             <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-              <li>
+              <li className="pt-2">
                 <Link
                   to="/feed"
-                  onClick={() => actions.resetStates()}
+
                   className="navbar-icon me-4 text-light "
                 >
                   <i className="fas fa-suitcase-rolling"></i>
                 </Link>
               </li>
 
-              <li>
+              <li className="pt-2">
                 <Link
                   to="/myTrips/"
-                  onClick={() => actions.resetStates()}
+
                   className="navbar-icon me-4 text-light "
                 >
                   <i className="fas fa-map-marker-alt"></i>
                 </Link>
               </li>
 
-              <li>
+              <li className="pt-2">
                 <Link
                   to="/message"
-                  onClick={() => actions.resetStates()}
+
                   className="navbar-icon me-4 text-light "
                 >
                   <i className="fas fa-envelope"></i>
                 </Link>
               </li>
 
-              <li>
+              <li className="pt-2">
                 <div className="dropdown text-end ">
                   <p
                     href="#"
@@ -80,14 +76,14 @@ export const Navbar = () => {
                     </li>
                     <Link
                       to={"/profile/" + store.user_id}
-                      onClick={() => actions.resetStates()}
+
                     >
                       <li className="ps-3">Profile</li>
                     </Link>
-                    <Link to="/favorites" onClick={() => actions.resetStates()}>
+                    <Link to="/favorites">
                       <li className="ps-3">Favorites</li>
                     </Link>
-                    <Link to="/help" onClick={() => actions.resetStates()}>
+                    <Link to="/help">
                       <li className="ps-3">Help</li>
                     </Link>
                     <li className="ps-3">

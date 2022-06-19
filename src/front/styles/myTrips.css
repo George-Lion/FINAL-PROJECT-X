@@ -1,4 +1,161 @@
-.cardTrips {
+.content-mytrips {
+  width: 1300px;
+  background-color: #151d26;
+  border-radius: 30px;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+.title-myTrips {
+  color: #151d26;
+  padding-top: 8px;
+  margin: auto;
+  width: 250px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: #ffffff;
+}
+
+.box-mytrips {
+  width: 1240px;
+  margin: auto;
+  padding: 30px 0 0;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.content-trips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card-trip {
+  border-radius: 10px;
+  min-height: 200px;
+  font-weight: bold;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
   background-size: cover;
-  height: 300px;
+  background-position: center center;
+  width: 400px;
+  gap: 40px;
+}
+
+.card-trip .text-mytrips {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+}
+
+.banner {
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+  background-size: cover;
+  background-position: center center;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.banner ul {
+  list-style: none;
+}
+
+.banner ul li {
+  margin: 15px;
+  font-weight: bold;
+}
+
+.banner .boton {
+  background: #ffd600;
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  border-radius: 100px;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1323px) {
+  .content-mytrips {
+    width: 920px;
+  }
+  .box-mytrips {
+    width: 820px;
+    margin: auto;
+    padding: 30px 0;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .titulo {
+    font-size: 24px;
+    padding: 20px 0;
+  }
+
+  .content-trips {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .content-mytrips {
+    width: 450px;
+  }
+
+  .title-myTrips {
+    width: 200px;
+    height: 50px;
+  }
+
+  .box-mytrips {
+    width: 400px;
+    margin: auto;
+    padding: 40px 0;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 0fr 0fr;
+  }
+
+  .titulo {
+    font-size: 24px;
+    padding: 20px 0;
+  }
+
+  .content-trips {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .card-trip {
+    border-radius: 10px;
+    min-height: 200px;
+    font-weight: bold;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    width: 400px;
+    gap: 40px;
+  }
+
+  .card-trip .text-mytrips {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
 }

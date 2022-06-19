@@ -5,7 +5,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
+
       url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu47.gitpod.io/api/",
+
       user_id: null,
       trips: [],
       logged: null,
@@ -28,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (data.user_id) {
             setStore({ user_id: data.user_id });
             setStore({ logged: data.logged_in || false });
+            getActions().getUser();
           }
           // setStore({ logged: data.logged_in || false })
           else if (resp.status == 401 || resp.status == 422) {
@@ -44,15 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           user: {},
           trips: [],
           trip: {},
-          match: [],
-          profile: {},
-          userTrips: [],
-        });
-      },
-      resetStates: async () => {
-        setStore({
-          trip: { likes: [] },
-          match: [],
+          match: {},
           profile: {},
           userTrips: [],
         });
@@ -72,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       getProfile: async (id) => {
@@ -86,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ profile: data.user });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       getUserTrips: async () => {
@@ -109,7 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({
             match: matches,
           });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       getUserTripsById: async (id) => {
@@ -123,7 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userTrips: data.trips });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       getUserProfiles: async () => {
@@ -137,7 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userProfiles: data.profiles });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       editUser: async (user) => {
@@ -155,7 +150,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       createTrip: async (trip) => {
@@ -173,7 +168,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           getActions().getUserTrips();
-        } catch (e) {}
+        } catch (e) { }
       },
 
       /* GET TRIP */
@@ -215,13 +210,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trips: data.trips });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       /* SEND MATCH */
 
       sendMatch: async (match) => {
-        console.log(match);
         try {
           const resp = await fetch(getStore().url + "send/match", {
             method: "POST",
@@ -232,14 +226,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(match),
           });
           const data = await resp.json();
-        } catch (e) {}
+        } catch (e) { }
       },
 
       /* ACCEPT MATCH */
 
       acceptMatch: async (match) => {
         try {
-          console.log(match);
           const resp = await fetch(getStore().url + "accept", {
             method: "POST",
             headers: {
@@ -251,7 +244,27 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (resp.ok) {
             getActions().getUserTrips();
           }
-        } catch (e) {}
+        } catch (e) { }
+      },
+
+      getMatch: async () => {
+        try {
+          const resp = await fetch(getStore().url + "match", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          if (resp.status == 200) {
+            setStore({ match: data.match });
+          } else {
+            return false;
+          }
+        } catch (e) {
+          return false;
+        }
       },
 
       /* EDIT TRIP */
@@ -274,7 +287,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trip: data.trip });
-        } catch (e) {}
+        } catch (e) { }
       },
 
       changeFavorite: async (id, page, searchTerm) => {
@@ -290,7 +303,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (page == "feed") {
             getActions().searchDestination(searchTerm);
             getActions().getUser();
-          } else if (page == "trip") {
+          } else if (page == "trip" || page == "favorites") {
             getActions().getTrip(id);
             getActions().getUser();
           }
