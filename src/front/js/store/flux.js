@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       userProfiles: [],
       userTrips: [],
 
-      url: "https://3001-georgelion-finalproject-nah4r194rpj.ws-eu47.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu47.gitpod.io/api/",
 
       user_id: null,
       trips: [],
@@ -34,7 +34,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           // setStore({ logged: data.logged_in || false })
           else if (resp.status == 401 || resp.status == 422) {
-            console.log("parece que funciona");
           }
         } catch (e) {
           setStore({ logged: false });

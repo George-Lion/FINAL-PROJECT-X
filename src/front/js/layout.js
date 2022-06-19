@@ -30,68 +30,57 @@ const Layout = () => {
           <div>
             <Switch>
               <Route exact path="/">
-                <Login />
-              </Route>
-              <Route exact path="/login">
-                <Login />
+                {store.logged != true ? (
+                  <Login />
+                ) : (
+                  <Redirect to="/feed"></Redirect>
+                )}
               </Route>
               <Route exact path="/register">
                 <Register />
               </Route>
               <Route exact path="/feed">
-                {store.logged == true ? (
-                  <Feed />
-                ) : (
-                  <Redirect to="/login"></Redirect>
-                )}
+                {store.logged == true ? <Feed /> : <Redirect to="/"></Redirect>}
               </Route>
               <Route exact path="/home">
-                {store.logged == true ? (
-                  <Feed />
-                ) : (
-                  <Redirect to="/login"></Redirect>
-                )}
+                {store.logged == true ? <Feed /> : <Redirect to="/"></Redirect>}
               </Route>
               <Route exact path="/profile/:id">
                 {store.logged == true ? (
                   <Profile />
                 ) : (
-                  <Redirect to="/login"></Redirect>
+                  <Redirect to="/"></Redirect>
                 )}
               </Route>
               <Route exact path="/noEditProfile/:id">
                 {store.logged == true ? (
                   <NoEditProfile />
                 ) : (
-                  <Redirect to="/login"></Redirect>
+                  <Redirect to="/"></Redirect>
                 )}
               </Route>
               <Route exact path="/trip/:id">
-                {store.logged == true ? (
-                  <Trip />
-                ) : (
-                  <Redirect to="/login"></Redirect>
-                )}
+                {store.logged == true ? <Trip /> : <Redirect to="/"></Redirect>}
               </Route>
               <Route exact path="/message">
                 {store.logged == true ? (
                   <Message />
                 ) : (
-                  <Redirect to="/login"></Redirect>
+                  <Redirect to="/"></Redirect>
                 )}
               </Route>
               <Route exact path="/mytrips">
                 {store.logged == true ? (
                   <MyTrips />
                 ) : (
-                  <Redirect to="/login"></Redirect>
+                  <Redirect to="/"></Redirect>
                 )}
               </Route>
               <Route exact path="/favorites">
                 {store.logged == true ? (
                   <Favorites />
                 ) : (
-                  <Redirect to="/login"></Redirect>
+                  <Redirect to="/"></Redirect>
                 )}
               </Route>
               <Route exact path="/help">

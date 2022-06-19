@@ -410,4 +410,3 @@ def accept():  # nombre de la función
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
 
-
