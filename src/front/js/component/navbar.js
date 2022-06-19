@@ -93,7 +93,7 @@ export const Navbar = () => {
                     <li className="ps-3">
                       <hr className="dropdown-divider" />
                     </li>
-                    <Link to="/login">
+                    <Link to="/">
                       <li>
                         <p
                           className="dropdown-item"

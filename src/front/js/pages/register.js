@@ -18,7 +18,7 @@ export const Register = () => {
 
     const data = await response.json();
     if (data.created) {
-      history.push("/login");
+      history.push("/");
     }
   };
 
@@ -99,7 +99,7 @@ export const Register = () => {
                   />
                   <label htmlFor="floatingPassword">Password</label>
                 </div>
-                <Link to="/login">
+                <Link to="/">
                   <button
                     className="w-50 btn btn-primary mt-3"
                     onClick={() => {
@@ -122,7 +122,7 @@ export const Register = () => {
                   <strong>
                     <Link
                       className=""
-                      to="/login"
+                      to="/"
                       style={{ textDecoration: "none" }}
                     >
                       Login
