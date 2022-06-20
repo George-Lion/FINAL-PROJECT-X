@@ -9,3 +9,24 @@
 .nav-traveland {
   background-color: #151d26;
 }
+
+.link-styles {
+  text-decoration: none;
+  color: black;
+}
+
+.link-styles:hover {
+  color: black;
+  font-weight: 700;
+}
+
+.dropdown-item:hover {
+  color: black;
+  font-weight: 700;
+}
+
+.dropdown-item:active {
+  color: black;
+  background-color: white;
+  font-weight: 700;
+}

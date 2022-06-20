@@ -28,6 +28,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  z-index: 3;
 }
 
 .card-trip {
@@ -47,18 +48,24 @@
   height: 100%;
   display: grid;
   grid-template-rows: 2fr 1fr;
+  z-index: 1;
 }
 
-.banner {
+.text-index {
+  z-index: 3;
+}
+
+.shadow1-mytrips1 {
+  position: absolute;
+
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  width: 100%;
+  height: 400px;
+  transform: rotate(90deg);
+  top: 0;
+  left: 0;
   border-radius: 10px;
-  text-align: center;
-  padding: 20px;
-  background-size: cover;
-  background-position: center center;
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  z-index: 0;
 }
 
 .banner ul {

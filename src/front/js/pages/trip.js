@@ -93,23 +93,23 @@ export const Trip = () => {
                     </p>
                   </div>
 
-{new Date(store.trip.start_of_the_trip) > new Date() ? (
-                  <div className="match-position">
-                    <ul className="list-position">
-                      <li className="suin">
-                        <button
-                          type="button"
-                          className="match-button color-9 "
-                          onClick={() => {
-                            setModalMessage(true);
-                          }}
-                        >
-                          JOIN YOU
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-       ) : null}
+                  {new Date(store.trip.start_of_the_trip) > new Date() ? (
+                    <div className="match-position">
+                      <ul className="list-position">
+                        <li className="suin">
+                          <button
+                            type="button"
+                            className="match-button color-9 "
+                            onClick={() => {
+                              setModalMessage(true);
+                            }}
+                          >
+                            JOIN YOU
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : null}
 
                   <div className="datos-like">
                     <ul className="lista-perfil">

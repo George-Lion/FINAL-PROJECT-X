@@ -77,19 +77,19 @@ export const Navbar = () => {
                     <Link
                       to={"/profile/" + store.user_id}
 
-                    >
+                      className="link-styles">
                       <li className="ps-3">Profile</li>
                     </Link>
-                    <Link to="/favorites">
+                    <Link to="/favorites" className="link-styles">
                       <li className="ps-3">Favorites</li>
                     </Link>
-                    <Link to="/help">
+                    <Link to="/help" className="link-styles">
                       <li className="ps-3">Help</li>
                     </Link>
                     <li className="ps-3">
                       <hr className="dropdown-divider" />
                     </li>
-                    <Link to="/">
+                    <Link to="/" className="link-styles">
                       <li>
                         <p
                           className="dropdown-item"

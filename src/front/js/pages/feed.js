@@ -15,72 +15,74 @@ export const Feed = () => {
   return (
     <Fragment>
       <div className="footer-abajo">
-        <nav className="navbar mt-5 mb-4">
-          <div className="container-fluid justify-content-center">
-            <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="text"
-                placeholder="Search destination"
-                aria-label="Search"
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    e.stopPropagation();
+        <div className="search-back">
+          <nav className="search-style navbar mt-5 mb-4">
+            <div className="container-fluid justify-content-center">
+              <form className="d-flex" role="search">
+                <input
+                  className="form-control me-2"
+                  type="text"
+                  placeholder="Search destination"
+                  aria-label="Search"
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      actions.searchDestination(searchTerm);
+                    }
+                  }}
+                  onChange={(e) => {
+                    setSearchTerm({
+                      ...searchTerm,
+                      destination:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    });
+                  }}
+                />
+                <input
+                  className="form-control me-2"
+                  type="date"
+                  aria-label="Search"
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      actions.searchDestination(searchTerm);
+                    }
+                  }}
+                  onChange={(e) => {
+                    setSearchTerm({ ...searchTerm, date: e.target.value });
+                  }}
+                />
+                <input
+                  className="form-control me-2"
+                  type="date"
+                  aria-label="Search"
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      actions.searchDestination(searchTerm);
+                    }
+                  }}
+                  onChange={(e) => {
+                    setSearchTerm({ ...searchTerm, end_date: e.target.value });
+                  }}
+                />
+                <button
+                  className="search-button btn "
+                  type="button"
+                  onClick={() => {
                     actions.searchDestination(searchTerm);
-                  }
-                }}
-                onChange={(e) => {
-                  setSearchTerm({
-                    ...searchTerm,
-                    destination:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  });
-                }}
-              />
-              <input
-                className="form-control me-2"
-                type="date"
-                aria-label="Search"
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    actions.searchDestination(searchTerm);
-                  }
-                }}
-                onChange={(e) => {
-                  setSearchTerm({ ...searchTerm, date: e.target.value });
-                }}
-              />
-              <input
-                className="form-control me-2"
-                type="date"
-                aria-label="Search"
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    actions.searchDestination(searchTerm);
-                  }
-                }}
-                onChange={(e) => {
-                  setSearchTerm({ ...searchTerm, end_date: e.target.value });
-                }}
-              />
-              <button
-                className="btn btn-outline-success"
-                type="button"
-                onClick={() => {
-                  actions.searchDestination(searchTerm);
-                }}
-              >
-                Search
-              </button>
-            </form>
-          </div>
-        </nav>
+                  }}
+                >
+                  Search
+                </button>
+              </form>
+            </div>
+          </nav>
+        </div>
         <div className="container">
           {store.trips.map((e) => {
             return (
@@ -145,7 +147,6 @@ export const Feed = () => {
                       backgroundImage: "url(" + e.destination_picture + ")",
                     }}
                   >
-                    <div className="shadow-image"></div>
                     <div className="shadow1-image1"></div>
                     <div className="shadow2-image2"></div>
                     <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
