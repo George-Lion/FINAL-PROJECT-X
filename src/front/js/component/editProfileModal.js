@@ -20,7 +20,7 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
       }}
     >
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div className="modal-content bg-dark text-light">
+        <div className="user-modal modal-content text-light">
           <div className="modal-header">
             <h5 className="modal-title" id="staticBackdropLabel">
               EDIT PROFILE

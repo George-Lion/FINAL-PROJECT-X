@@ -150,7 +150,7 @@ export const Feed = () => {
                     <div className="shadow1-image1"></div>
                     <div className="shadow2-image2"></div>
                     <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
-                      <p className="destination-title">
+                      <p className="destination-title1">
                         <i className="fas fa-map-marker-alt"></i> {e.destination}
                       </p>
                     </div>

@@ -48,10 +48,12 @@
   margin-top: 60px;
 }
 
-.destination-title {
-  font-size: 55px;
-  color: #d7dfe3;
+.destination-title1 {
+  font-size: 50px;
+  color: white;
   font-weight: 600;
+  z-index: 2;
+  text-shadow: 2px 1px 2px rgb(112, 112, 112);
 }
 
 .img-content {
@@ -82,7 +84,7 @@
   display: block;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
   width: 100%;
-  height: 30%;
+  height: 40%;
   top: 0;
   transform: rotate(180deg);
   left: 0;
