@@ -61,9 +61,17 @@
 }
 
 .u-name {
-  display: block;
+  display: inline;
   bottom: 150px;
-  left: 150px;
+  left: 30px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.u-request {
+  display: inline;
+  bottom: 150px;
+  right: 90px;
   position: absolute;
   overflow: hidden;
 }

@@ -30,6 +30,7 @@ export const EditGaleryModal = ({ closeModal, editTrip, trip }) => {
                         {/* PRUEBA */}
 
                         <div className="row text-center">
+
                             <input
                                 type="file"
                                 onChange={(e) =>

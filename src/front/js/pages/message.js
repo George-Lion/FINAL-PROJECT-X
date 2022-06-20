@@ -41,7 +41,8 @@ export const Message = () => {
                               to={"/noEditProfile/" + e.user_id
                               } className="text-dark">
                               <img className="message-avatar" src={e.profile_picture} alt="img" />
-                              <h5 className="u-name mb-0">{e.username}</h5></Link>
+                              <h5 className="u-name mb-0">{e.username} </h5></Link>
+                            <h5 className="u-request mb-0"> request: {e.destination}</h5>
                             <p className="text-message rounded bg-white text-break">{e.message}</p>
                           </div>
                           <div className="modal-footer flex-nowrap p-0">
@@ -49,7 +50,9 @@ export const Message = () => {
                               actions.acceptMatch(e)
                             }><strong className="text-dark">
                                 accept request</strong></button>
-                            <button type="button" className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 text-dark" data-bs-dismiss="modal">reject request</button>
+                            <button type="button" className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 text-dark" data-bs-dismiss="modal" onClick={() => {
+                              actions.rejectMatch(e)
+                            }}>reject request</button>
                           </div>
                         </div>
                       </div>

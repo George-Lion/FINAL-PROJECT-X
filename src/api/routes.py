@@ -377,7 +377,7 @@ def send_match():  # nombre de la función
     # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
     if user and trip and user.id != trip.user_id_of_trip_creator:
         if MatchTrip.query.filter_by(user=user).filter_by(trip=trip).first() is not None:
-            return jsonify({"error": "ya existe"}), 400
+            return jsonify({"error": "ya existe"}), 420
         if trip.people > len(list(filter(lambda x : x.accepted==True,trip.trip_in_match))):
             match = MatchTrip(user=user, trip=trip, message=body_message)
             db.session.add(match)
@@ -403,6 +403,24 @@ def accept():  # nombre de la función
         match = MatchTrip.query.get(body_match_id)
         match.accepted = True
         match.rejected = False
+        db.session.commit()
+        # si la condición se cumple retorna a la terminal de python send 200.
+        return jsonify({"send": True}), 200
+    else:
+        # si la condición no se cumple retorna a la terminal de python error 400.
+        return jsonify({"error": "error"}), 400
+
+@api.route("/reject", methods=["POST"])  # end point de metodo POST
+@jwt_required()
+def reject():  # nombre de la función
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    body_match_id = request.json.get("id")
+
+    if user:  # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
+        match = MatchTrip.query.get(body_match_id)
+        match.rejected = True
+        match.accepted = False
         db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
         return jsonify({"send": True}), 200

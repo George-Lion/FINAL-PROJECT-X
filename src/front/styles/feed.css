@@ -2,13 +2,18 @@
   background-color: #151d26;
   min-width: 400px;
   max-width: 600px;
-  border-radius: 20px;
+  border-radius: 10px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .search-button {
   background-color: rgb(33, 126, 202);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.search-button:hover {
   color: #ffffff;
   font-weight: 700;
 }
@@ -26,6 +31,21 @@
   z-index: 3;
   background-color: aqua;
   margin-top: 30px;
+}
+
+.image-user:hover {
+  display: block;
+  width: 140px;
+  height: 140px;
+  background-color: #d9dcf1;
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 7px solid #ffffff;
+  box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  background-color: aqua;
+  margin-top: 60px;
 }
 
 .destination-title {
