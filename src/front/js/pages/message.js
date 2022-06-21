@@ -34,25 +34,25 @@ export const Message = () => {
                   store.match.sort((a, b) => a.id - b.id).map((e) => {
                     return (
                       <div key={e.id} className="mb-4" role="document">
-                        <div className={"modal-content rounded-4 shadow " + (e.accepted ? "bg-info" : e.rejected ? "bg-danger" : "bg-white")}>
+                        <div className="modal-content rounded-4 shadow" style={(e.accepted ? { background: '#B1EBFF' } : e.rejected ? { background: '#FF7A69' } : { background: 'white' })}>
                           <i className="fas fa-times-circle text-danger d-flex justify-content-end mt-2 me-2" style={{ fontSize: "23px" }}></i>
                           <div className="text-center">
                             <Link
                               to={"/noEditProfile/" + e.user_id
-                              } className="text-dark">
+                              } className="text-decoration-none text-dark">
                               <img className="message-avatar" src={e.profile_picture} alt="img" />
                               <h5 className="u-name mb-0">{e.username} </h5></Link>
-                            <h5 className="u-request mb-0"> request: {e.destination}</h5>
-                            <p className="text-message rounded bg-white text-break">{e.message}</p>
+                            <h5 className="u-request mb-0"> Travel: {e.destination}</h5>
+                            <p className="text-message rounded bg-white text-break text-dark">{e.message}</p>
                           </div>
                           <div className="modal-footer flex-nowrap p-0">
-                            <button type="button" className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right" onClick={() =>
+                            <button type="button" className="btn btn-lg  fs-6 text-decoration-none col-6 m-0 rounded-0 border-right" onClick={() =>
                               actions.acceptMatch(e)
-                            }><strong className="text-dark">
+                            }><strong className="">
                                 accept request</strong></button>
-                            <button type="button" className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 text-dark" data-bs-dismiss="modal" onClick={() => {
+                            <button type="button" className="btn btn-lg  fs-6 text-decoration-none col-6 m-0 rounded-0 " data-bs-dismiss="modal" onClick={() => {
                               actions.rejectMatch(e)
-                            }}>reject request</button>
+                            }}><strong className="">reject request</strong></button>
                           </div>
                         </div>
                       </div>

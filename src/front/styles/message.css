@@ -62,26 +62,37 @@
 
 .u-name {
   display: inline;
-  bottom: 150px;
-  left: 30px;
   position: absolute;
+  padding-top: 5px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50;
+  margin: auto;
+  font-weight: 700;
   overflow: hidden;
+  z-index: 0;
 }
 
 .u-request {
   display: inline;
-  bottom: 150px;
-  right: 90px;
+  bottom: 118px;
+  left: 110px;
+  font-size: 15px;
+  font-weight: 500;
   position: absolute;
   overflow: hidden;
 }
 
 .text-message {
   width: 260px;
+  padding-top: 25px;
   padding-left: 50px;
   padding-right: 10px;
   height: 80px;
   left: 90px;
+  font-size: 14px;
   margin-left: 60px;
   margin-top: 10px;
+  text-align: left;
 }
