@@ -20,7 +20,7 @@ export const TravelBuddies = () => {
                 className="section-box position-static d-block py-1 mt-3"
 
             >
-                <h3 className="travel-title mt-3 text-center" style={{ color: "white" }}>
+                <h3 className="travel-titlex mt-3 text-center" style={{ color: "white" }}>
                     <b>Travel buddies</b>
                 </h3>
 

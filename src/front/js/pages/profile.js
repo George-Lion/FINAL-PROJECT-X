@@ -77,10 +77,10 @@ export const Profile = () => {
             </div>
           </div>
           <div className="information-box pt-1">
-            <h3 className="information">
+            <h3 className="information1">
               <b>{store.profile.firstname + " " + store.profile.lastname}</b>
             </h3>
-            <h5 className="information">
+            <h5 className="information2">
               {store.profile.city_of_residence + " - " + store.profile.country}
             </h5>
             <p className="information-bio text-break">
@@ -136,7 +136,7 @@ export const Profile = () => {
         <div>
           <div className="text-center">
             <h2>
-              <b>My Trips</b>
+              <b className="myTrips-title">My Trips</b>
             </h2>
           </div>
           <div className=" ">

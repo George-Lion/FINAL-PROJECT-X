@@ -20,20 +20,17 @@ export const Trip = () => {
   const [message, setMessage] = useState({});
   const [trip, setTrip] = useState({ likes: [] });
 
-
   useEffect(() => {
 
     actions.getTrip(id);
     if (!store.trip) {
       history.push("/feed");
-
     }
   }, []);
 
   useEffect(() => {
     setTrip(store.trip);
     setMessage({ ...message, trip_id: store.trip.id });
-
   }, [store.trip]);
 
   return (
@@ -96,8 +93,7 @@ export const Trip = () => {
                     </p>
                   </div>
 
-                  {store.trip.trip_in_match &&
-                    (!store.trip.trip_in_match.map((x) => { if (x.rejected != false || x.accepted != false) { return x.user_id } }).includes(store.user_id) && store.user_id != trip.user_id_of_trip_creator && new Date(store.trip.start_of_the_trip) > new Date()) ? (
+                  {new Date(store.trip.start_of_the_trip) > new Date() ? (
                     <div className="match-position">
                       <ul className="list-position">
                         <li className="suin">
@@ -121,6 +117,7 @@ export const Trip = () => {
                         <i
                           className={
                             store.trip.likes &&
+
                               store.trip.likes.includes(store.user_id)
                               ? "fas fa-heart text-danger me-2"
                               : "fas fa-heart me-2"
@@ -162,15 +159,15 @@ export const Trip = () => {
                   </Link>
                 </b>
               </h3>
-              <h5 className="text-center">
+              <h5 className="user-city text-center">
                 {store.trip.user_city_of_residence +
                   " - " +
                   store.trip.user_country}
               </h5>
 
               <div className="container">
-                <div className="place-description py-3 my-4 border-top border-bottom text-left justify-content-center">
-                  <p className="text-description text-break">
+                <div className="place-description mt-4 mb-4 border-top border-bottom text-left justify-content-center">
+                  <p className="text-description mt-3 text-break">
                     {store.trip.text}
                   </p>
                 </div>
@@ -179,7 +176,7 @@ export const Trip = () => {
 
                 <div className="icon-box">
                   <li className="li-icon">
-                    <i className="icon-options fas fa-user-friends"></i>{store.trip.trip_in_match ? store.trip.trip_in_match.filter((x) => x.accepted == true).length : 0} /
+                    <i className="icon-options fas fa-user-friends"></i>{store.trip.trip_in_match ? store.trip.trip_in_match.filter((x) => x.accepted == true).length : 0}/
                     {store.trip.people}
                   </li>
                   <li className="li-icon">
@@ -213,7 +210,7 @@ export const Trip = () => {
 
                   <div className="mt-4 ">
                     <h3 className="text-dark text-center">
-                      <b>Rute</b>
+                      <b className="t-rute"> Rute</b>
                     </h3>
                     <div className="card bg-dark text-white mb-1 border mt-3 border-primary border-3 ">
                       <GoogleMapsApi />
@@ -246,7 +243,7 @@ export const Trip = () => {
                             <li className="text-white">o</li>
 
                             <li className=""><h3 className="travel-title mt-2  text-dark" style={{ color: "white" }}>
-                              <b>GALERY</b>
+                              <b className="t-rute">Galery</b>
                             </h3></li>
                             {store.user_id == store.trip.user_id_of_trip_creator ? (
                               <li><div className="edit-galery">

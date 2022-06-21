@@ -22,7 +22,7 @@ export const Favorites = () => {
               className="travel-title mt-3 mb-3 text-center"
               style={{ color: "white" }}
             >
-              <b>{favCount} Favorites</b>
+              <b>Favorites {favCount}</b>
             </h3>
           ) : null}
 
@@ -106,14 +106,13 @@ export const Favorites = () => {
                                   {e.destination}
                                 </p>
                               </div>
-                              <></>
                             </div>
                           </Link>
                         </div>
                       );
                     })
                   ) : (
-                    <h5 className="text-center text-white mt-4">No favorites</h5>
+                    <h5 className="travel-title text-center text-white mt-4">No favorites</h5>
                   )}
                 </div>
               </div>

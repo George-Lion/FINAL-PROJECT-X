@@ -128,7 +128,7 @@ export const Feed = () => {
                       ? "/profile/" + e.user_id_of_trip_creator
                       : "/noEditProfile/" + e.user_id_of_trip_creator
                   }
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none", fontWeight: "900" }}
                 >
                   <img
                     className="image-user ms-3"
@@ -136,7 +136,7 @@ export const Feed = () => {
                     alt="user"
                   />
                   <div className="trip-box">
-                    <h2 className="">{e.username}</h2>
+                    <h2 className="user-name">{e.username}</h2>
                   </div>
                 </Link>
 

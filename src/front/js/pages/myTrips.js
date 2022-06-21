@@ -29,8 +29,7 @@ export const MyTrips = () => {
                   <Link to={"/trip/" + trip.id} key={trip.id} style={{ textDecoration: "none" }}>
                     <div className="card-trip" style={{ backgroundImage: "url(" + trip.destination_picture + ")" }}>
                       <div className="text-mytrips text-white">
-
-                        <h2 className="text-index">{trip.destination}</h2>
+                        <h2 className="title-index">{trip.destination}</h2>
                         <p className="text-index"><i className="fas fa-user-friends mt-2 me-2"></i>
                           {trip.people}</p>
                         <p className="text-index"><i className="fas fa-user-friends mt-2 me-2"></i>
@@ -41,7 +40,6 @@ export const MyTrips = () => {
                         <div className="shadow1-mytrips1"></div>
                         <div className="shadow2-mytrips2"></div>
                       </div>
-
                     </div>
                   </Link>
                 );

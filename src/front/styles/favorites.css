@@ -16,6 +16,12 @@
   font-weight: 600;
 }
 
+.travel-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+}
+
 .favorite-destination {
   display: block;
   background-size: cover;

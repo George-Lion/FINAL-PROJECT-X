@@ -22,7 +22,7 @@ export const Message = () => {
         <div className="message-box position-static d-block py-1 mt-5 mb-4">
           {store.match && store.match.length > 0 ? (
             <h3
-              className="travel-title mt-3 mb-3 text-center text-white"
+              className="sms-title mt-3 mb-3 text-center text-white"
             >
               <b>{matchCount} Messages</b>
             </h3>

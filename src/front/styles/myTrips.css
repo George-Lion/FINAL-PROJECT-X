@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
 .content-mytrips {
   width: 1300px;
   background-color: #151d26;
@@ -11,10 +13,12 @@
   margin: auto;
   width: 25%;
   padding: 10px;
-  text-align: center;
   vertical-align: baseline;
   border-radius: 30px;
   background-color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
 }
 
 .box-mytrips {
@@ -57,8 +61,18 @@
   z-index: 1;
 }
 
+.title-index {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  z-index: 3;
+}
+
 .text-index {
   z-index: 3;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
 }
 
 .shadow1-mytrips1 {

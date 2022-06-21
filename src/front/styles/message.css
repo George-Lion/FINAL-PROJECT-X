@@ -12,6 +12,12 @@
   border-radius: 20px;
 }
 
+.sms-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
 .img-message {
   width: 60px;
   height: 60px;
