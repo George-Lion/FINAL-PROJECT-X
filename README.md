@@ -1,7 +1,17 @@
+
+# Librerias instaladas aparte de las que ya usamos habitualmente:
+
+`npm install moment --save`
+https://momentjs.com/
+
+Google Maps
+Google Maps JavaScript API →`npm i @react-google-maps/api`
+Google Maps JavaScript API React Wrapper on NPM → `npm i @googlemaps/react-wrapper`
+npm install --save react-geocode
+
 Descripción de que trata la plataforma:
 
 Se busca que gente que tenga ganas de viajar pero no se quiera sentir sola, pueda buscar acompañantes a través de nuestra web para poder encontrar mutuals y además de estar en compañia, poder tener la posibilidad de hacer amistades. 
-
 
 # WebApp boilerplate with React JS and Flask API
 
@@ -37,9 +47,9 @@ The `Provider` is already set. You can consume from any component using the useC
 ```jsx
 import { Context } from "../store/appContext";
 const MyComponentSuper = () => {
-    //here you use useContext to get store and actions
-    const { store, actions } = useContext(Context);
-    return <div>{/* you can use your actions or store inside the html */}</div>;
+  //here you use useContext to get store and actions
+  const { store, actions } = useContext(Context);
+  return <div>{/* you can use your actions or store inside the html */}</div>;
 };
 ```
 
@@ -85,7 +95,7 @@ To update with all yours tables you can edit the file app.py and go to the line 
 
 ### Front-End Manual Installation:
 
--   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
+- Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`

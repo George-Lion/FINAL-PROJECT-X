@@ -1,0 +1,63 @@
+/* WRAPPER */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+.wrapper-travelers {
+  margin-left: 05px;
+  margin-right: 05px;
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 40px;
+  margin-top: 15px;
+  z-index: 1;
+}
+
+.wrapper-travelers::-webkit-scrollbar {
+  -webkit-appearance: none;
+  height: 8px;
+}
+
+.wrapper-travelers::-webkit-scrollbar-button:increment,
+.contenedor::-webkit-scrollbar-button {
+  display: none;
+}
+.wrapper-travelers::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(
+    to right,
+    #e9f8ff 0%,
+    #b8b8b8 51%,
+    #e4e4e4 100%
+  );
+  border-radius: 30px;
+}
+
+.section-box {
+  background-color: #151d26;
+  border-radius: 50px;
+}
+
+.travelers-img {
+  display: flex;
+  display: block;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 0.7rem;
+  min-height: 300px;
+  min-width: 205px;
+  margin: 0px 4px 10px 4px;
+  border-radius: 10px 10px 10px 10px;
+  display: "block";
+}
+
+.travel-titlex {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 800px) {
+  .travel-titlex {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+  }
+}

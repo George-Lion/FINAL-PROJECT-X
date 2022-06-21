@@ -1,12 +1,348 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
+  return {
+    store: {
+      user: {},
+      profile: {},
+      userProfiles: [],
+      userTrips: [],
 
-		},
-		actions: {
+      url: "https://3001-georgelion-finalproject-aaswi73eujd.ws-eu47.gitpod.io/api/",
 
-		}
-	};
+      user_id: null,
+      trips: [],
+      logged: null,
+      trip: { likes: [] },
+      searchedTrip: [],
+      match: [],
+    },
+
+    actions: {
+      verify: async () => {
+        try {
+          const resp = await fetch(getStore().url + "protected", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          if (data.user_id) {
+            setStore({ user_id: data.user_id });
+            setStore({ logged: data.logged_in || false });
+            getActions().getUser();
+          }
+          // setStore({ logged: data.logged_in || false })
+          else if (resp.status == 401 || resp.status == 422) {
+          }
+        } catch (e) {
+          setStore({ logged: false });
+        }
+      },
+      logout: async () => {
+        localStorage.clear();
+        setStore({
+          logged: false,
+          user_id: null,
+          user: {},
+          trips: [],
+          trip: {},
+          match: {},
+          profile: {},
+          userTrips: [],
+        });
+      },
+
+      setUser: (loggedUser) => {
+        setStore({ user: loggedUser });
+      },
+      getUser: async () => {
+        try {
+          const resp = await fetch(getStore().url + "user", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ user: data.user });
+        } catch (e) { }
+      },
+
+      getProfile: async (id) => {
+        try {
+          const resp = await fetch(getStore().url + "profile/" + id, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ profile: data.user });
+        } catch (e) { }
+      },
+
+      getUserTrips: async () => {
+        try {
+          const resp = await fetch(getStore().url + "trips", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ userTrips: data.trips });
+          let matches = [];
+          for (let x = 0; x < data.trips.length; x++) {
+            for (let i in data.trips[x].trip_in_match) {
+              matches.push(data.trips[x].trip_in_match[i]);
+            }
+          }
+          setStore({
+            match: matches,
+          });
+        } catch (e) { }
+      },
+
+      getUserTripsById: async (id) => {
+        try {
+          const resp = await fetch(getStore().url + "trips/" + id, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ userTrips: data.trips });
+        } catch (e) { }
+      },
+
+      getUserProfiles: async () => {
+        try {
+          const resp = await fetch(getStore().url + "user/profiles", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ userProfiles: data.profiles });
+        } catch (e) { }
+      },
+
+      editUser: async (user) => {
+        try {
+          let body = new FormData();
+          for (let key in user) {
+            body.append(key, user[key]);
+          }
+          const resp = await fetch(getStore().url + "user", {
+            method: "PUT",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: body,
+          });
+          const data = await resp.json();
+          setStore({ user: data.user });
+        } catch (e) { }
+      },
+
+      createTrip: async (trip) => {
+        try {
+          let body = new FormData();
+          for (let key in trip) {
+            body.append(key, trip[key]);
+          }
+          const resp = await fetch(getStore().url + "create/trip", {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: body,
+          });
+          const data = await resp.json();
+          getActions().getUserTrips();
+        } catch (e) { }
+      },
+
+      /* GET TRIP */
+
+      getTrip: async (id) => {
+        try {
+          const resp = await fetch(getStore().url + "trip/" + id, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          /*   data.trip.start_of_the_trip = new Date(data.trip.start_of_the_trip)
+              .toISOString()
+              .split("T")[0]; */ //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
+          /*  data.trip.end_of_the_trip = new Date(data.trip.end_of_the_trip)
+             .toISOString()
+             .split("T")[0]; */ //new Date se encarga de cambiar un string a date(fecha), luego .toISOString().split('T')[0] aplica el formato a yyyy-mm-dd
+          if (resp.status == 200) {
+            setStore({ trip: data.trip });
+          } else {
+            return false;
+          }
+        } catch (e) {
+          return false;
+        }
+      },
+
+      getTrips: async () => {
+        try {
+          const resp = await fetch(getStore().url + "allTrips", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          setStore({ trips: data.trips });
+        } catch (e) { }
+      },
+
+      /* SEND MATCH */
+
+      sendMatch: async (match) => {
+        try {
+          const resp = await fetch(getStore().url + "send/match", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify(match),
+          });
+          if (resp.status == 420) {
+            alert("ya envio un mensaje")
+          }
+          const data = await resp.json();
+        } catch (e) { }
+      },
+
+      /* ACCEPT MATCH */
+
+      acceptMatch: async (match) => {
+        try {
+          const resp = await fetch(getStore().url + "accept", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify(match),
+          });
+          if (resp.ok) {
+            getActions().getUserTrips();
+          }
+        } catch (e) { }
+      },
+
+      rejectMatch: async (match) => {
+        try {
+          const resp = await fetch(getStore().url + "reject", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify(match),
+          });
+          if (resp.ok) {
+            getActions().getUserTrips();
+          }
+        } catch (e) { }
+      },
+
+      getMatch: async () => {
+        try {
+          const resp = await fetch(getStore().url + "match", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+          const data = await resp.json();
+          if (resp.status == 200) {
+            setStore({ match: data.match });
+          } else {
+            return false;
+          }
+        } catch (e) {
+          return false;
+        }
+      },
+
+      /* EDIT TRIP */
+
+      editTrip: async (trip) => {
+        //función para editar el viaje.
+        try {
+          let body = new FormData();
+          for (let key in trip) {
+            //Iteramos trip en su index.
+            body.append(key, trip[key]);
+          }
+          const resp = await fetch(getStore().url + "trip", {
+            //acceso a la base de datos.
+            method: "PUT", //Metodo PUT para modificar la base de datos. si el metodo no se especifica por default es un metodo GET.
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: body,
+          });
+          const data = await resp.json();
+          setStore({ trip: data.trip });
+        } catch (e) { }
+      },
+
+      changeFavorite: async (id, page, searchTerm) => {
+        const resp = await fetch(getStore().url + "tripLikes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          body: JSON.stringify({ trip_id: id }),
+        });
+        if (resp.ok) {
+          if (page == "feed") {
+            getActions().searchDestination(searchTerm);
+            getActions().getUser();
+          } else if (page == "trip" || page == "favorites") {
+            getActions().getTrip(id);
+            getActions().getUser();
+          }
+        }
+      },
+      searchDestination: async (searchTerm) => {
+        try {
+          const resp = await fetch(getStore().url + "search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(searchTerm),
+          });
+          const dataSearched = await resp.json();
+          setStore({ trips: dataSearched.trip });
+        } catch (e) {
+          alert("ERROR");
+        }
+      },
+    },
+  };
 };
 
 export default getState;
