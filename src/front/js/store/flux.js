@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       userProfiles: [],
       userTrips: [],
 
-      url: "https://3001-georgelion-finalproject-nah4r194rpj.ws-eu47.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-aaswi73eujd.ws-eu47.gitpod.io/api/",
 
       user_id: null,
       trips: [],
@@ -225,6 +225,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             body: JSON.stringify(match),
           });
+          if (resp.status == 420) {
+            alert("ya envio un mensaje")
+          }
           const data = await resp.json();
         } catch (e) { }
       },
@@ -234,6 +237,22 @@ const getState = ({ getStore, getActions, setStore }) => {
       acceptMatch: async (match) => {
         try {
           const resp = await fetch(getStore().url + "accept", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+            body: JSON.stringify(match),
+          });
+          if (resp.ok) {
+            getActions().getUserTrips();
+          }
+        } catch (e) { }
+      },
+
+      rejectMatch: async (match) => {
+        try {
+          const resp = await fetch(getStore().url + "reject", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

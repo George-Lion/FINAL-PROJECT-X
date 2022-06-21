@@ -8,10 +8,11 @@
 
 .title-myTrips {
   color: #151d26;
-  padding-top: 8px;
   margin: auto;
-  width: 250px;
-  height: 60px;
+  width: 25%;
+  padding: 10px;
+  text-align: center;
+  vertical-align: baseline;
   border-radius: 30px;
   background-color: #ffffff;
 }
@@ -42,6 +43,11 @@
   background-position: center center;
   width: 400px;
   gap: 40px;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
+}
+
+.card-trip:hover {
+  box-shadow: 5px 5px 10px 5px rgb(69, 92, 105);
 }
 
 .card-trip .text-mytrips {

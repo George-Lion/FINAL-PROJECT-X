@@ -126,7 +126,7 @@ export const Profile = () => {
         />
       ) : null}
 
-      <div className="container mt-4">
+      <div className="container mt-2">
         <div className="py-2 border-top text-left justify-content-center"></div>
       </div>
 
@@ -139,7 +139,7 @@ export const Profile = () => {
               <b>My Trips</b>
             </h2>
           </div>
-          <div className="row row-cols-1 align-items-stretch g-4 ">
+          <div className=" ">
             <div className="d-flex overflow-auto">
               <button
                 className="button-add-trip btn text-light mt-4"
@@ -157,7 +157,7 @@ export const Profile = () => {
                       <div
                         key={e.id}
                         className="col container "
-                        style={{ width: "280px" }}
+                        style={{ width: "280px", marginRight: "25px" }}
                       >
                         <Link
                           style={{ textDecoration: "none" }}
@@ -166,8 +166,9 @@ export const Profile = () => {
                           <div
                             className="card-image-box d-flex text-white bg-dark align-items-end "
                             style={{
-                              minHeight: "350px",
-                              minWidth: "270px",
+                              height: "350px",
+                              width: "290px",
+
                               display: "block",
                               backgroundImage:
                                 "url(" + e.destination_picture + ")",
@@ -240,7 +241,7 @@ export const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="py-2 border-top mt-4 text-left justify-content-center"></div>
+
       </div>
     </div>
   );

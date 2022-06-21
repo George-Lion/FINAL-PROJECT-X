@@ -25,7 +25,7 @@
 
 .content-profile {
   max-width: 1440px;
-  height: 430px;
+  height: 420px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -139,7 +139,7 @@
 }
 
 .information-bio {
-  font-size: 21px;
+  font-size: 1.1rem;
   padding-top: 19px;
   padding-left: 90px;
   margin-left: 80px;
@@ -214,6 +214,7 @@
   overflow-x: auto;
   margin-bottom: 40px;
   margin-top: 25px;
+
   z-index: 1;
 }
 
@@ -252,7 +253,7 @@
 @media (max-width: 780px) {
   .user-profile .content-profile {
     width: 100%;
-    height: 30%;
+    height: 500px;
   }
   .user-profile .avatar-picture-profile {
     left: calc(57% - 105px);

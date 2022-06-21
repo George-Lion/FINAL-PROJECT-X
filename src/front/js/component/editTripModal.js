@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import "../../styles/editTripModal.css";
 
 export const EditTripModal = ({ closeModal, editTrip, trip }) => {
   const { store, actions } = useContext(Context);
@@ -41,7 +42,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
         }}
       >
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content bg-dark text-light">
+          <div className="trip-modal modal-content text-light">
             <div className="modal-header ">
               <h5 className="modal-title" id="staticBackdropLabel">
                 Edit Trip
@@ -217,12 +218,12 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                   backdropFilter: "brightness(20%)",
                 }}
               >
-                <div className="modal-dialog">
-                  <div className="modal-content bg-dark">
+                <div className="delete-modal modal-dialog">
+                  <div className="trip-modal modal-content">
                     <div className="modal-header">
                       <h5 className="modal-title" id="exampleModalLabel">
-                        Seguro que quieres eliminar el trip?{" "}
-                        <i>Esta acción no puede desacerse</i>
+                        Are you sure you want to delete the trip?{" "}
+                        <i>This action cannot be undone</i>
                       </h5>
                     </div>
                     <div className="modal-footer">
@@ -253,7 +254,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
             {/* Save buttom */}
             <div className="modal-footer d-flex justify-content-between px-5">
               <i
-                className="fa-solid fa-trash" title="delete trip" style={{ fontSize: "20px" }}
+                className="delete-icon fa-solid fa-trash" title="delete trip" style={{ fontSize: "20px" }}
                 onClick={() => {
                   setConfirmDelete(true);
                 }}

@@ -120,6 +120,7 @@ class MatchTrip(db.Model):
         return {
             "username": self.user.username,
             "profile_picture": self.user.profile_picture,
+            "destination": self.trip.destination,
             "id": self.id,
             "message": self.message,
             "accepted": self.accepted,

@@ -26,7 +26,7 @@ export const Navbar = () => {
 
                   className="navbar-icon me-4 text-light "
                 >
-                  <i className="fas fa-suitcase-rolling"></i>
+                  <i className="ras fas fa-suitcase-rolling"></i>
                 </Link>
               </li>
 
@@ -36,7 +36,7 @@ export const Navbar = () => {
 
                   className="navbar-icon me-4 text-light "
                 >
-                  <i className="fas fa-map-marker-alt"></i>
+                  <i className="ras fas fa-map-marker-alt"></i>
                 </Link>
               </li>
 
@@ -46,7 +46,7 @@ export const Navbar = () => {
 
                   className="navbar-icon me-4 text-light "
                 >
-                  <i className="fas fa-envelope"></i>
+                  <i className="ras fas fa-envelope"></i>
                 </Link>
               </li>
 

@@ -20,17 +20,20 @@ export const Trip = () => {
   const [message, setMessage] = useState({});
   const [trip, setTrip] = useState({ likes: [] });
 
+
   useEffect(() => {
 
     actions.getTrip(id);
     if (!store.trip) {
       history.push("/feed");
+
     }
   }, []);
 
   useEffect(() => {
     setTrip(store.trip);
     setMessage({ ...message, trip_id: store.trip.id });
+
   }, [store.trip]);
 
   return (
@@ -93,7 +96,8 @@ export const Trip = () => {
                     </p>
                   </div>
 
-                  {new Date(store.trip.start_of_the_trip) > new Date() ? (
+                  {store.trip.trip_in_match &&
+                    (!store.trip.trip_in_match.map((x) => { if (x.rejected != false || x.accepted != false) { return x.user_id } }).includes(store.user_id) && store.user_id != trip.user_id_of_trip_creator && new Date(store.trip.start_of_the_trip) > new Date()) ? (
                     <div className="match-position">
                       <ul className="list-position">
                         <li className="suin">
@@ -117,7 +121,6 @@ export const Trip = () => {
                         <i
                           className={
                             store.trip.likes &&
-
                               store.trip.likes.includes(store.user_id)
                               ? "fas fa-heart text-danger me-2"
                               : "fas fa-heart me-2"
