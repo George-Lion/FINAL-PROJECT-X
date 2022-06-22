@@ -19,7 +19,7 @@ export const EditGaleryModal = ({ closeModal, editTrip, trip }) => {
             }}
         >
             <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div className="modal-content bg-dark text-light">
+                <div className="modal-galery modal-content text-light">
                     <div className="modal-header ">
                         <h5 className="modal-title" id="staticBackdropLabel">
                             Add imagens
@@ -76,7 +76,7 @@ export const EditGaleryModal = ({ closeModal, editTrip, trip }) => {
                         </div>
 
                         {/* Save buttom */}
-                        <div className="modal-footer d-flex justify-content-between px-5">
+                        <div className="modal-footer d-flex justify-content-between mt-3 px-5">
                             <div>
                                 <button
                                     className="btn btn-light me-3"

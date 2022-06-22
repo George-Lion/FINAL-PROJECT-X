@@ -113,7 +113,7 @@ export const Login = () => {
                       <label htmlFor="floatingPassword">Password</label>
                     </div>
                     <button
-                      className="w-100 btn btn-lg btn-primary mb-4 mt-2"
+                      className="login-button w-100 btn btn-lg mb-4 mt-2"
                       type="submit"
                       onClick={() => {
                         loginUser();
@@ -132,7 +132,7 @@ export const Login = () => {
                     <p className="text-center">
                       Don't have an account yet?
                       <Link
-                        className="text-primary"
+                        className="text-signup"
                         to="/register"
                         style={{ textDecoration: "none" }}
                       >

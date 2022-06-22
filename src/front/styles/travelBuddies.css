@@ -20,6 +20,7 @@
 .contenedor::-webkit-scrollbar-button {
   display: none;
 }
+
 .wrapper-travelers::-webkit-scrollbar-thumb {
   background-image: linear-gradient(
     to right,

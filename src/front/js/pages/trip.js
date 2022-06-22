@@ -240,8 +240,7 @@ export const Trip = () => {
                       <div className="galery-box  position-static d-block py-3 ">
                         <div className="">
                           <ul className="list-unstyled d-flex justify-content-around">
-                            <li className="text-white">o</li>
-
+                            <li className="square1"></li>
                             <li className=""><h3 className="travel-title mt-2  text-dark" style={{ color: "white" }}>
                               <b className="t-rute">Galery</b>
                             </h3></li>
@@ -255,7 +254,8 @@ export const Trip = () => {
                                 >
                                   <i className="fas fa-camera"></i>
                                 </button>
-                              </div></li>) : null}
+                              </div></li>) : <li className="square1"></li>}
+
                           </ul></div>
 
                         {/* img 1 */}
