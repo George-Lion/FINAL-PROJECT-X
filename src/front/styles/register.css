@@ -6,6 +6,28 @@
   margin-left: 50px;
 }
 
+.register-button {
+  background-color: rgb(32, 134, 194);
+  color: white;
+  font-weight: 500;
+}
+
+.text-login {
+  color: rgb(26, 151, 223);
+  font-weight: 700;
+}
+
+.text-login:hover {
+  color: rgb(26, 151, 223);
+  font-weight: 700;
+}
+
+.register-button:hover {
+  background-color: rgb(26, 151, 223);
+  color: white;
+  font-weight: 500;
+}
+
 @media (max-width: 900px) {
   .image-register {
     display: none !important;

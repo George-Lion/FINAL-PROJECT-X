@@ -188,42 +188,40 @@ export const Profile = () => {
                                   {e.destination}
                                 </h3>
                               </div>
-                              <ul className="card-text-box list-unstyled ms-3">
+                              <ul className="card-text-box list-unstyled ms-3 text-wrap">
                                 <li className="mb-1">
                                   <i
-                                    className="icon fas fa-user-friends"
-                                    style={{ fontSize: "16px" }}
+                                    className="icon-size icon fas fa-user-friends"
+
                                   >
-                                    {" "}
+                                    {" "}{e.people}
                                   </i>
-                                  {"\n"}
-                                  {e.people}
+
                                 </li>
                                 <li className="mb-1">
                                   <i
-                                    className="icon fas fa-route"
-                                    style={{ fontSize: "16px" }}
-                                  ></i>
-                                  {"\n"}
-                                  {e.transport}
+                                    className="icon-size icon fas fa-route"
+
+                                  >  {" "}
+                                    {e.transport}</i>
+
                                 </li>
                                 <li className="mb-1">
                                   <i
-                                    className="icon fas fa-coins"
-                                    style={{ fontSize: "16px" }}
-                                  ></i>
-                                  {"\n"}
-                                  {e.cost} €
+                                    className="icon-size icon fas fa-coins"
+
+                                  >{" "}{e.cost} €</i>
+
                                 </li>
                                 <li className="mb-1">
                                   <i
-                                    className="icon fas fa-clock"
-                                    style={{ fontSize: "16px" }}
-                                  ></i>
-                                  {"\n"}
-                                  {moment(e.start_of_the_trip).format(
-                                    "LL"
-                                  )} - {moment(e.end_of_the_trip).format("LL")}
+                                    className="icon-size icon fas fa-clock"
+
+                                  >  {" "}
+                                    {moment(e.start_of_the_trip).format(
+                                      "LL"
+                                    )} - {moment(e.end_of_the_trip).format("LL")}</i>
+
                                 </li>
                               </ul>
                               <div className="shadow-card-image"></div>

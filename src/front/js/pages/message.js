@@ -60,7 +60,7 @@ export const Message = () => {
                   })
                 ) : (
                   <div className="abajo">
-                    <h4 className="text-center text-white mt-5">You have no messages</h4>
+                    <h4 className="sms-title text-center text-white mt-5">You have no messages</h4>
                   </div>
                 )}
               </div>

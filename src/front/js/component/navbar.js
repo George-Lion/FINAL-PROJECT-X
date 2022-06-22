@@ -71,20 +71,20 @@ export const Navbar = () => {
                     className="dropdown-menu text-small mt-2"
                     aria-labelledby="dropdownUser1"
                   >
-                    <li className="ps-3 pb-1">
+                    <li className="link-title ps-3 pb-1">
                       Hola <b>{store.user.firstname}</b>
                     </li>
                     <Link
                       to={"/profile/" + store.user_id}
 
                       className="link-styles">
-                      <li className="ps-3">Profile</li>
+                      <li className="nav-links ps-3">Profile</li>
                     </Link>
                     <Link to="/favorites" className="link-styles">
-                      <li className="ps-3">Favorites</li>
+                      <li className="nav-links ps-3">Favorites</li>
                     </Link>
                     <Link to="/help" className="link-styles">
-                      <li className="ps-3">Help</li>
+                      <li className="nav-links ps-3">Help</li>
                     </Link>
                     <li className="ps-3">
                       <hr className="dropdown-divider" />
@@ -92,7 +92,7 @@ export const Navbar = () => {
                     <Link to="/" className="link-styles">
                       <li>
                         <p
-                          className="dropdown-item"
+                          className="nav-links dropdown-item"
                           onClick={() => actions.logout()}
                         >
                           Sign out
