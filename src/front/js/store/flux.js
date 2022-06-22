@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       userProfiles: [],
       userTrips: [],
 
-      url: "https://3001-georgelion-finalproject-aaswi73eujd.ws-eu47.gitpod.io/api/",
+      url: "https://traveland-trips-v1.herokuapp.com/api/",
 
       user_id: null,
       trips: [],
