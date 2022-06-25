@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
-import { EditProfileModal } from "../component/editProfileModal";
+import { ChangeBannerModal } from "../component/changeBannerModal";
+import { EditInformationModal } from "../component/editInformationModal";
+import { ChangePhotoModal } from "../component/changePhotoModal";
 import { CreateTripModal } from "../component/createTripModal";
 import moment from "moment";
 import "../../styles/profile.css";
@@ -9,6 +11,8 @@ import "../../styles/profile.css";
 export const Profile = () => {
   const { store, actions } = useContext(Context);
   const [showEdit, setShowEdit] = useState(false);
+  const [showEdit2, setShowEdit2] = useState(false);
+  const [showPhoto, setShowPhoto] = useState(false);
   const [showCreateTrip, setShowCreateTrip] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [user, setUser] = useState();
@@ -42,7 +46,7 @@ export const Profile = () => {
                 href="#"
                 className="cambiar-foto"
                 onClick={(e) => {
-                  setShowEdit(true);
+                  setShowPhoto(true);
                   setUser(store.profile);
                 }}
               >
@@ -77,9 +81,19 @@ export const Profile = () => {
             </div>
           </div>
           <div className="information-box pt-1">
-            <h3 className="information1">
-              <b>{store.profile.firstname + " " + store.profile.lastname}</b>
-            </h3>
+            <div className="name-pencil">
+              <h3 className="information1">
+                <b>{store.profile.firstname + " " + store.profile.lastname}</b>
+              </h3>
+
+              {/*  boton 2 */}
+
+              <i type="button" className="pencil-icon fas fa-pencil" title="click to edit information" onClick={(e) => {
+                setShowEdit2(true);
+                setUser(store.profile);
+              }}></i>
+
+            </div>
             <h5 className="information2">
               {store.profile.city_of_residence + " - " + store.profile.country}
             </h5>
@@ -91,7 +105,7 @@ export const Profile = () => {
       </section>
 
       {showEdit ? (
-        <EditProfileModal
+        <ChangeBannerModal
           closeModal={() => {
             setShowEdit(false);
           }}
@@ -102,6 +116,29 @@ export const Profile = () => {
         />
       ) : null}
 
+      {showEdit2 ? (
+        <EditInformationModal
+          closeModal={() => {
+            setShowEdit2(false);
+          }}
+          editUser={(user) => {
+            setUser(user);
+          }}
+          user={user}
+        />
+      ) : null}
+
+      {showPhoto ? (
+        <ChangePhotoModal
+          closeModal={() => {
+            setShowPhoto(false);
+          }}
+          editUser={(user) => {
+            setUser(user);
+          }}
+          user={user}
+        />
+      ) : null}
       {modalEdit ? (
         <EditTripModal
           closeModal={() => {

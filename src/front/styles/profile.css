@@ -168,6 +168,27 @@
   font-weight: 700;
 }
 
+.name-pencil {
+  display: flex;
+}
+
+.pencil-icon {
+  margin-left: 20px;
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  padding: 7px;
+}
+
+.pencil-icon:hover {
+  width: 36px;
+  height: 36px;
+  margin-left: 20px;
+  font-size: 20px;
+  background-color: rgb(172, 208, 255);
+  border-radius: 50px;
+}
+
 /* CARDS MY TRIPS */
 
 .button-add-trip {

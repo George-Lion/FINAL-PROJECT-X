@@ -1,0 +1,58 @@
+.modal-box1 {
+  width: 500px;
+  height: 470px;
+  margin: auto;
+  border-radius: 25px;
+  background: rgb(21, 117, 159);
+  padding: 40px;
+  margin-top: 14rem;
+}
+
+.content-head {
+  color: white;
+}
+
+.section-user {
+  display: flex;
+  color: white;
+  margin-top: 15px;
+}
+
+.section-username {
+  display: block;
+  width: 100%;
+}
+
+.input-username {
+  border-radius: 6px;
+  padding-left: 5px;
+  width: 100%;
+}
+
+.section-first {
+  display: block;
+  width: 100%;
+}
+
+.section-last {
+  display: block;
+  width: 100%;
+}
+
+.section-info {
+  display: flex;
+  color: white;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.section-text {
+  color: white;
+  margin-top: 20px;
+}
+
+.input-style {
+  border-radius: 6px;
+  padding-left: 5px;
+  width: 100%;
+}
