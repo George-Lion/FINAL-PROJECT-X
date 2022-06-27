@@ -81,19 +81,18 @@ export const Profile = () => {
             </div>
           </div>
           <div className="information-box pt-1">
+            {/*  boton 2 */}
             <div className="name-pencil">
-              <h3 className="information1">
-                <b>{store.profile.firstname + " " + store.profile.lastname}</b>
-              </h3>
-
-              {/*  boton 2 */}
-
               <i type="button" className="pencil-icon fas fa-pencil" title="click to edit information" onClick={(e) => {
                 setShowEdit2(true);
                 setUser(store.profile);
               }}></i>
-
             </div>
+            <h3 className="information1">
+              <b>{store.profile.firstname + " " + store.profile.lastname}</b>
+            </h3>
+
+
             <h5 className="information2">
               {store.profile.city_of_residence + " - " + store.profile.country}
             </h5>
@@ -180,12 +179,12 @@ export const Profile = () => {
             <div className="d-flex overflow-auto">
               <button
                 className="button-add-trip btn text-light mt-4"
-                style={{ height: "350px" }}
+                style={{ height: "350px" }} title="click to create a trip"
                 onClick={() => {
                   setShowCreateTrip(true);
                 }}
               >
-                <b>ADD TRIP</b>
+                <i className="fas fa-plus" ></i>
               </button>
               <div className="wrapper-trips">
                 {store.userTrips.length > 0 ? (

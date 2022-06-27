@@ -36,12 +36,20 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
             ></button>
           </div>
           <div className="row m-4">
-            <div className="row">
+            <div className="">
+
+              <div
+                className="banner-min"
+                style={{
+                  backgroundImage: "url(" + store.profile.banner_picture + ")",
+                }}
+              >
+              </div>
 
               {/* COVER & PROFILE PICTURE*/}
 
-              <div className="row mb-3">
-                <label className="col-6">
+              <div className="mb-3">
+                <label className="">
                   <input
                     className="custom-file-input2"
                     type="file"

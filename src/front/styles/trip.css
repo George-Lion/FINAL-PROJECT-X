@@ -275,6 +275,25 @@
   background-color: white;
 }
 
+.pencil-features {
+  display: flex;
+  justify-content: end;
+}
+
+.button-pe {
+  margin-left: 20px;
+  font-size: 20px;
+  padding: 9px;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 50px;
+}
+
+.button-pe:hover {
+  background-color: rgb(172, 208, 255);
+  border-radius: 50px;
+}
+
 /* RESOLUTION 1680px */
 
 @media (max-width: 1680px) {

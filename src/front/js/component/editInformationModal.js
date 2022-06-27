@@ -25,6 +25,17 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                         <div className="section-title">
                             <h3>Edit Profile</h3>
                         </div>
+
+                        {/* CLOSE BUTTON */}
+
+                        <button
+                            type="button"
+                            className="btn-close bg-light"
+                            aria-label="Close"
+                            onClick={() => {
+                                closeModal();
+                            }}
+                        ></button>
                     </div>
                     <div className="content-body">
 
@@ -32,8 +43,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
 
                         <div className="section-user">
                             <div className="section-username">
-                                <label htmlFor="username">Username:</label>
-                                <input className="input-username" type="text" id="username" name="Username" onChange={(e) =>
+                                {/*  <label htmlFor="username">Username:</label> */}
+                                <input className="input-username" type="text" maxLength={25} defaultValue={store.user.username} id="username" name="Username" placeholder="Username" onChange={(e) =>
                                     editUser({ ...user, username: e.target.value })
                                 }></input>
                             </div>
@@ -43,8 +54,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
 
                         <div className="section-info">
                             <div className="section-first">
-                                <label htmlFor="first">First Name:</label>
-                                <input className="input-style" type="text" id="first" name="First" onChange={(e) =>
+                                {/* <label htmlFor="first">First Name:</label> */}
+                                <input className="input-style" type="text" maxLength={15} defaultValue={store.user.firstname} id="first" name="First" placeholder="FirstName" onChange={(e) =>
                                     editUser({
                                         ...user,
                                         firstname:
@@ -54,8 +65,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                                 }></input>
                             </div>
                             <div className="section-last">
-                                <label htmlFor="last">Last Name:</label>
-                                <input className="input-style" type="text" id="last" name="Last" onChange={(e) =>
+                                {/* <label htmlFor="last">Last Name:</label> */}
+                                <input className="input-style" type="text" maxLength={15} defaultValue={store.user.lastname} id="last" name="Last" placeholder="LastName" onChange={(e) =>
                                     editUser({
                                         ...user,
                                         lastname:
@@ -70,8 +81,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
 
                         <div className="section-info">
                             <div className="section-first">
-                                <label htmlFor="city">City:</label>
-                                <input className="input-style" type="text" id="city" name="City" onChange={(e) =>
+                                {/* <label htmlFor="city">City:</label> */}
+                                <input className="input-style" type="text" maxLength={18} defaultValue={store.user.city_of_residence} id="city" name="City" placeholder="City" onChange={(e) =>
                                     editUser({
                                         ...user,
                                         city_of_residence:
@@ -81,8 +92,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                                 }></input>
                             </div>
                             <div className="section-last">
-                                <label htmlFor="country">Country:</label>
-                                <input className="input-style" type="text" id="country" name="Country" onChange={(e) =>
+                                {/* <label htmlFor="country">Country:</label> */}
+                                <input className="input-style" type="text" maxLength={18} defaultValue={store.user.country} id="country" name="Country" placeholder="Country" onChange={(e) =>
                                     editUser({
                                         ...user,
                                         country:
@@ -97,49 +108,29 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
 
                         <div className="section-text">
                             <div className="text-area">
-                                <label htmlFor="textDescription">About me:</label>
-                                <textarea
-                                    name="description"
-                                    id="textDescription"
-                                    className="form-control"
-                                    defaultValue={store.user.description}
-                                    aria-label="With textarea"
-                                    maxLength={280}
-                                    placeholder="Text"
-                                    onChange={(e) =>
-                                        editUser({
-                                            ...user, description: e.target.value.charAt(0).toUpperCase() +
-                                                e.target.value.slice(1).toLowerCase(),
-                                        })
-                                    }
-                                ></textarea>
+                                {/* <label htmlFor="textDescription">About me:</label> */}
+                                <textarea className="text-info text-white" defaultValue={store.user.description} rows="4" cols="50" placeholder="About me" maxLength={280} onChange={(e) =>
+                                    editUser({
+                                        ...user, description: e.target.value.charAt(0).toUpperCase() +
+                                            e.target.value.slice(1).toLowerCase(),
+                                    })
+                                }></textarea>
                             </div>
-                            {<p>{user.description ? user.description.length : 0}/280</p>}
+                            {<p className="counter-bio">{user.description ? user.description.length : 0}/280</p>}
                         </div>
                     </div>
 
                     <div className="modal-footer">
 
-                        {/* CLOSE BUTTON */}
-
-                        <button
-                            type="button"
-                            className="btn-close bg-light"
-                            aria-label="Close"
-                            onClick={() => {
-                                closeModal();
-                            }}
-                        ></button>
-
                         {/* SAVE BUTTON */}
 
                         <button
-                            className="btn bg-light"
+                            className="save-button"
                             onClick={() => {
                                 actions.editUser(user);
                             }}
                         >
-                            <i className="far fa-save"></i>
+                            <i className="far fa-save me-2"></i>save
                         </button>
                     </div>
                 </div>

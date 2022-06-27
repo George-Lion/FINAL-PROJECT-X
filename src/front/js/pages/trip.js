@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { SendMessageModal } from "../component/sendMessageModal";
 import { EditTripModal } from "../component/editTripModal";
+import { EditInfoTrip } from "../component/editInfoTrip";
 import { EditGaleryModal } from "../component/editGaleryModal";
 import { TravelBuddies } from "../component/travelBuddies";
 import { GoogleMapsApi } from "../component/googleMapsApi";
@@ -15,6 +16,7 @@ export const Trip = () => {
   const { id } = useParams();
   const [modalMessage, setModalMessage] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
+  const [modalInfo, setModalInfo] = useState(false);
   const [editGalery, setEditGalery] = useState(false);
   const history = useHistory();
   const [message, setMessage] = useState({});
@@ -60,6 +62,19 @@ export const Trip = () => {
               trip={trip}
             />
           ) : null}
+
+          {modalInfo ? (
+            <EditInfoTrip
+              closeModal={() => {
+                setModalInfo(false);
+              }}
+              editTrip={(trip) => {
+                setTrip(trip);
+              }}
+              trip={trip}
+            />
+          ) : null}
+
           <div className="footer-abajo">
             <section className="trip-user">
               <div className="trip-content">
@@ -164,9 +179,19 @@ export const Trip = () => {
                   " - " +
                   store.trip.user_country}
               </h5>
-
               <div className="container">
-                <div className="place-description mt-4 mb-4 border-top border-bottom text-left justify-content-center">
+                {store.user_id == store.trip.user_id_of_trip_creator ? (
+                  <div className="pencil-features">
+
+                    <i type="button" title="click to edit"
+                      onClick={() => {
+                        setModalInfo(true);
+                      }}
+                      className="button-pe fas fa-pencil"></i>
+
+                  </div>
+                ) : null}
+                <div className="place-description  mb-4 border-top border-bottom text-left justify-content-center">
                   <p className="text-description mt-3 text-break">
                     {store.trip.text}
                   </p>

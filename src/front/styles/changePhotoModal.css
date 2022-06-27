@@ -1,6 +1,46 @@
 .user-modal {
   background-color: #151d26;
 }
+
+.modal-bt {
+  bottom: 20px;
+}
+
+.modal-pi {
+  height: 200px;
+}
+
+.modal-pic {
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 8px solid #ffffff;
+  margin: auto;
+  z-index: 1;
+}
+
+.input-image {
+  display: "flex";
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+.delete-button {
+  padding: 5px;
+  background-color: red;
+  cursor: pointer;
+  border: none;
+  width: 200px;
+  color: white;
+  border-radius: 30px;
+  margin: auto;
+  margin-top: 10px;
+}
+
 .custom-file-input {
   color: transparent;
 }
