@@ -17,35 +17,28 @@ export const Navbar = () => {
               to="/feed"
               className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
             >
-              <img src={image} alt="logo" className="logo" />
+              <img
+                src={image}
+                alt="logo"
+                className="logo"
+                onClick={() => actions.resetearTrip()}
+              />
             </Link>
             <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
               <li className="pt-2">
-                <Link
-                  to="/feed"
-
-                  className="navbar-icon me-4 text-light "
-                >
+                <Link to="/feed" className="navbar-icon me-4 text-light ">
                   <i className="ras fas fa-suitcase-rolling"></i>
                 </Link>
               </li>
 
               <li className="pt-2">
-                <Link
-                  to="/myTrips/"
-
-                  className="navbar-icon me-4 text-light "
-                >
+                <Link to="/myTrips/" className="navbar-icon me-4 text-light ">
                   <i className="ras fas fa-map-marker-alt"></i>
                 </Link>
               </li>
 
               <li className="pt-2">
-                <Link
-                  to="/message"
-
-                  className="navbar-icon me-4 text-light "
-                >
+                <Link to="/message" className="navbar-icon me-4 text-light ">
                   <i className="ras fas fa-envelope"></i>
                 </Link>
               </li>
@@ -76,8 +69,8 @@ export const Navbar = () => {
                     </li>
                     <Link
                       to={"/profile/" + store.user_id}
-
-                      className="link-styles">
+                      className="link-styles"
+                    >
                       <li className="ps-3">Profile</li>
                     </Link>
                     <Link to="/favorites" className="link-styles">

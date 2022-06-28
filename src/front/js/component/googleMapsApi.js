@@ -68,6 +68,7 @@ const Map = () => {
           center={{ lat, lng }}
           mapContainerStyle={{ width: "100%", height: "550px" }}
         >
+          <Marker position={{ lat, lng }} />
           {response !== null && (
             <DirectionsRenderer
               options={{

@@ -50,7 +50,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           userTrips: [],
         });
       },
-
+      resetearTrip: async () => {
+        setStore({
+          trip: {},
+        });
+      },
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
       },
