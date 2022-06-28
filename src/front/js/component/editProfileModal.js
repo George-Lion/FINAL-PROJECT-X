@@ -1,9 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/editProfileModal.css";
 
 export const EditProfileModal = ({ closeModal, editUser, user }) => {
   const { store, actions } = useContext(Context);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const deleteProfile = async () => {
+    try {
+      const resp = await fetch(store.url + "deleteProfile", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      const data = await resp.json();
+      if (resp.ok) {
+        setConfirmDelete(false);
+        history.push("/feed");
+      }
+    } catch (e) {}
+  };
 
   return (
     <div
@@ -37,13 +55,15 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
           </div>
           <div className="row m-4">
             <div className="row">
-
               {/* COVER & PROFILE PICTURE*/}
 
               <div className="row mb-3">
                 <label htmlFor="file" className="mx-auto">
                   <input
-                    type="file" name="file" id="file" className="custom-file-input"
+                    type="file"
+                    name="file"
+                    id="file"
+                    className="custom-file-input"
                     onChange={(e) =>
                       editUser({ ...user, profile_picture: e.target.files[0] })
                     }
@@ -186,8 +206,64 @@ export const EditProfileModal = ({ closeModal, editUser, user }) => {
             </div>
 
             {/* Save buttom */}
+            {confirmDelete ? (
+              <div
+                className="modal fade show"
+                id="exampleModal"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabIndex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-modal="true"
+                style={{
+                  display: "block",
+                  backdropFilter: "brightness(20%)",
+                }}
+              >
+                <div className="delete-modal modal-dialog">
+                  <div className="trip-modal modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">
+                        Are you sure you want to delete the profile?{" "}
+                        <i>This action cannot be undone</i>
+                      </h5>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-light text-dark"
+                        onClick={() => {
+                          setConfirmDelete(false);
+                        }}
+                        data-bs-dismiss="modal"
+                      >
+                        No
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-danger text-white"
+                        onClick={() => {
+                          deleteProfile(true);
+                        }}
+                      >
+                        Yes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : null}
 
             <div className="modal-footer">
+              <i
+                className="delete-icon fa-solid fa-trash"
+                title="delete trip"
+                style={{ fontSize: "20px" }}
+                onClick={() => {
+                  setConfirmDelete(true);
+                }}
+              ></i>
+
               <button
                 className="col-2 offset-1 btn btn-light"
                 onClick={() => {
