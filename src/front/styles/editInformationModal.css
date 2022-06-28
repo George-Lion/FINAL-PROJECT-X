@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&display=swap");
 
 .modal-box1 {
-  width: 500px;
+  width: 450px;
   height: 490px;
   margin: auto;
   border-radius: 25px;
@@ -9,7 +9,7 @@
   padding: 40px;
   margin-top: 14rem;
   font-size: 1rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
 .content-head {
@@ -84,6 +84,7 @@
 }
 
 .text-info {
+  font-size: 0.9rem;
   background: rgba(255, 255, 255, 0.2);
   color: white;
   border: none;
@@ -111,7 +112,7 @@
   margin-right: 0;
   background-color: rgb(19, 23, 41);
   color: white;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
 .save-button:hover {

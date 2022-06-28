@@ -45,7 +45,7 @@ export const Navbar = () => {
                   to="/message"
 
                   className="navbar-icon me-4 text-light "
-                >
+                >  {store.match && store.match.length > 0 && store.match.filter((x) => x.read != true).length > 0 ? store.match.filter((x) => x.read != true).length : null}
                   <i className="ras fas fa-envelope"></i>
                 </Link>
               </li>

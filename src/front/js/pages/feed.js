@@ -10,6 +10,8 @@ export const Feed = () => {
 
   useEffect(() => {
     actions.getTrips();
+    actions.getUserTrips();
+    actions.verify();
   }, []);
 
   return (

@@ -341,6 +341,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           alert("ERROR");
         }
       },
+
+      readMessages: async () => {
+        const resp = await fetch(getStore().url + "read", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          }
+        },
+        )
+        if (resp.status == 200) {
+          getActions().getUserTrips()
+        }
+      }
+
     },
   };
 };

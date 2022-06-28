@@ -13,8 +13,8 @@ export const Message = () => {
   matchCount = store.match.length;
 
   useEffect(() => {
-    actions.getUserTrips();
-  }, []);
+    actions.readMessages()
+  }, [])
 
   return (
     <Fragment>

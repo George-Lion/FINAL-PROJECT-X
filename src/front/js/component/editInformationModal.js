@@ -59,19 +59,20 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                                     editUser({
                                         ...user,
                                         firstname:
-                                            e.target.value.charAt(0).toUpperCase() +
-                                            e.target.value.slice(1).toLowerCase(),
+                                            e.target.value
+
                                     })
                                 }></input>
                             </div>
+                            {user.firstname.length < 6 ? <h5>name containt 6 letters</h5> : null}
+                            {user.firstname.length < 6 ? <h5>name containt 6 letters</h5> : null}
                             <div className="section-last">
                                 {/* <label htmlFor="last">Last Name:</label> */}
                                 <input className="input-style" type="text" maxLength={15} defaultValue={store.user.lastname} id="last" name="Last" placeholder="LastName" onChange={(e) =>
                                     editUser({
                                         ...user,
                                         lastname:
-                                            e.target.value.charAt(0).toUpperCase() +
-                                            e.target.value.slice(1).toLowerCase(),
+                                            e.target.value
                                     })
                                 }></input>
                             </div>
@@ -127,7 +128,12 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                         <button
                             className="save-button"
                             onClick={() => {
-                                actions.editUser(user);
+                                if (user.firstname.length >= 6) {
+                                    actions.editUser(user);
+                                } else {
+
+                                }
+
                             }}
                         >
                             <i className="far fa-save me-2"></i>save

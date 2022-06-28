@@ -16,7 +16,10 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
   };
 
   const removeSelectedImage = () => {
+    ref.current.value = null;
+    editUser();
     setSelectedImage();
+
   };
 
   const reset = () => {
@@ -77,7 +80,7 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
                   <img className="modal-pic" src={selectedImage == undefined ? store.profile.profile_picture : URL.createObjectURL(selectedImage)} alt="img" />
                   {selectedImage && (
                     <div style={styles.preview}>
-                      <button className="delete-button" onClick={() => { removeSelectedImage(), reset() }}>
+                      <button className="delete-button" onClick={() => { removeSelectedImage() }}>
                         Remove This Images
                       </button>
                     </div>

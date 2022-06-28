@@ -281,11 +281,13 @@
 }
 
 .button-pe {
+  margin-top: 10px;
   margin-left: 20px;
   font-size: 20px;
   padding: 9px;
   background: rgba(0, 0, 0, 0.2);
   border: none;
+  position: absolute;
   border-radius: 50px;
 }
 
