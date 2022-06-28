@@ -49,14 +49,14 @@ const Map = () => {
         setResponse(res);
       } else {
         count.current = 0;
-        console.log("res: ", res);
+        console.log("res: ", res, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
       }
     }
   };
 
   const DirectionsServiceOption = {
-    destination: "Madrid",
-    origin: "Barcelona",
+    destination: store.trip.destination,
+    origin: store.user.city_of_residence,
     travelMode: "DRIVING",
   };
 
