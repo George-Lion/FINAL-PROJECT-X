@@ -78,7 +78,6 @@ export const Trip = () => {
           <div className="footer-abajo">
             <section className="trip-user">
               <div className="trip-content">
-
                 {/*Banner*/}
 
                 <div
@@ -95,7 +94,7 @@ export const Trip = () => {
                         store.trip.user_id_of_trip_creator == store.user_id
                           ? "/profile/" + store.trip.user_id_of_trip_creator
                           : "/noEditProfile/" +
-                          store.trip.user_id_of_trip_creator
+                            store.trip.user_id_of_trip_creator
                       }
                     >
                       <img src={store.trip.profile_picture} alt="img" />
@@ -132,11 +131,9 @@ export const Trip = () => {
                         <i
                           className={
                             store.trip.likes &&
-
-                              store.trip.likes.includes(store.user_id)
+                            store.trip.likes.includes(store.user_id)
                               ? "fas fa-heart text-danger me-2"
                               : "fas fa-heart me-2"
-
                           }
                           onClick={() => {
                             actions.changeFavorite(store.trip.id, "trip");
@@ -149,7 +146,8 @@ export const Trip = () => {
                   {store.user_id == store.trip.user_id_of_trip_creator ? (
                     <div className="edit-options">
                       <button
-                        type="button" title="click to edit"
+                        type="button"
+                        title="click to edit"
                         onClick={() => {
                           setModalEdit(true);
                         }}
@@ -166,9 +164,12 @@ export const Trip = () => {
                 <b>
                   <Link
                     id="RouterNavLink"
-                    to="/profile"
+                    to={
+                      store.trip.user_id_of_trip_creator == store.user_id
+                        ? "/profile/" + store.trip.user_id_of_trip_creator
+                        : "/noEditProfile/" + store.trip.user_id_of_trip_creator
+                    }
                     className="user-informations"
-
                   >
                     {store.trip.user_firstname} {store.trip.user_lastname}
                   </Link>
@@ -201,8 +202,13 @@ export const Trip = () => {
 
                 <div className="icon-box">
                   <li className="li-icon">
-                    <i className="icon-options fas fa-user-friends"></i>{store.trip.trip_in_match ? store.trip.trip_in_match.filter((x) => x.accepted == true).length : 0}/
-                    {store.trip.people}
+                    <i className="icon-options fas fa-user-friends"></i>
+                    {store.trip.trip_in_match
+                      ? store.trip.trip_in_match.filter(
+                          (x) => x.accepted == true
+                        ).length
+                      : 0}
+                    /{store.trip.people}
                   </li>
                   <li className="li-icon">
                     <i className="icon-options fas fa-route"> </i>
@@ -265,6 +271,7 @@ export const Trip = () => {
                       <div className="galery-box  position-static d-block py-3 ">
                         <div className="">
                           <ul className="list-unstyled d-flex justify-content-around">
+
                             <li className="square1"></li>
                             <li className=""><h3 className="travel-title mt-2  text-dark" style={{ color: "white" }}>
                               <b className="t-rute">Galery</b>
@@ -296,17 +303,16 @@ export const Trip = () => {
                                   <div
                                     className="galery-img d-flex text-white align-items-end "
                                     style={{
-                                      backgroundImage: "url(" + store.trip.imagen_1 + ")",
+                                      backgroundImage:
+                                        "url(" + store.trip.imagen_1 + ")",
                                     }}
                                   >
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
-
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
-
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">
@@ -328,17 +334,16 @@ export const Trip = () => {
                                   <div
                                     className="galery-img d-flex text-white align-items-end "
                                     style={{
-                                      backgroundImage: "url(" + store.trip.imagen_2 + ")",
+                                      backgroundImage:
+                                        "url(" + store.trip.imagen_2 + ")",
                                     }}
                                   >
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
-
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
-
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">
@@ -360,17 +365,16 @@ export const Trip = () => {
                                   <div
                                     className="galery-img d-flex text-white align-items-end "
                                     style={{
-                                      backgroundImage: "url(" + store.trip.imagen_3 + ")",
+                                      backgroundImage:
+                                        "url(" + store.trip.imagen_3 + ")",
                                     }}
                                   >
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
-
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
-
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">
@@ -392,17 +396,16 @@ export const Trip = () => {
                                   <div
                                     className="galery-img d-flex text-white align-items-end "
                                     style={{
-                                      backgroundImage: "url(" + store.trip.imagen_4 + ")",
+                                      backgroundImage:
+                                        "url(" + store.trip.imagen_4 + ")",
                                     }}
                                   >
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
-
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
-
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">
@@ -424,17 +427,16 @@ export const Trip = () => {
                                   <div
                                     className="galery-img d-flex text-white align-items-end "
                                     style={{
-                                      backgroundImage: "url(" + store.trip.imagen_5 + ")",
+                                      backgroundImage:
+                                        "url(" + store.trip.imagen_5 + ")",
                                     }}
                                   >
                                     <div
                                       className="d-flex flex-column text-white "
                                       style={{
-
                                         minHeight: "40px",
                                         minWidth: "210px",
                                         display: "block",
-
                                       }}
                                     >
                                       <ul className="card-text-box list-unstyled ms-3">
