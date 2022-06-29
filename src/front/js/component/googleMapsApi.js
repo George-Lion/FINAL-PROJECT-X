@@ -1,6 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { Context } from "../store/appContext";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  DirectionsService,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
 import Geocode from "react-geocode";
 import "../../styles/googlemapsapi.css";
 
@@ -17,6 +23,7 @@ const Map = () => {
   const { store, actions } = useContext(Context);
   const [lat, setLat] = useState(40.4303759999059);
   const [lng, setLng] = useState(-3.7049425337888837);
+  const [response, setResponse] = useState(null);
 
   useEffect(() => {
     if (store.trip.destination) {
@@ -34,6 +41,25 @@ const Map = () => {
     setLng(response.results[0].geometry.location.lng);
   };
 
+  let count = React.useRef(0);
+  const directionsCallback = (res) => {
+    if (res !== null && count.current < 2) {
+      if (res.status === "OK") {
+        count.current += 1;
+        setResponse(res);
+      } else {
+        count.current = 0;
+        console.log("res: ", res, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+      }
+    }
+  };
+
+  const DirectionsServiceOption = {
+    destination: store.trip.destination,
+    origin: store.user.city_of_residence,
+    travelMode: "DRIVING",
+  };
+
   return (
     <>
       {store.trip ? (
@@ -43,6 +69,18 @@ const Map = () => {
           mapContainerStyle={{ width: "100%", height: "550px" }}
         >
           <Marker position={{ lat, lng }} />
+          {response !== null && (
+            <DirectionsRenderer
+              options={{
+                directions: response,
+              }}
+            />
+          )}
+
+          <DirectionsService
+            options={DirectionsServiceOption}
+            callback={directionsCallback}
+          />
         </GoogleMap>
       ) : null}
     </>

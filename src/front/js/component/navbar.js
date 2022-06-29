@@ -17,26 +17,29 @@ export const Navbar = () => {
               to="/feed"
               className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
             >
-              <img src={image} alt="logo" className="logo" />
+              <img
+                src={image}
+                alt="logo"
+                className="logo"
+                onClick={() => actions.resetearTrip()}
+              />
             </Link>
             <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
               <li className="pt-2">
-                <Link
-                  to="/feed"
-
-                  className="navbar-icon me-4 text-light "
-                >
-                  <i className="ras fas fa-suitcase-rolling"></i>
+                <Link to="/feed" className="navbar-icon me-4 text-light ">
+                  <i
+                    className="ras fas fa-suitcase-rolling"
+                    onClick={() => actions.resetearTrip()}
+                  ></i>
                 </Link>
               </li>
 
               <li className="pt-2">
-                <Link
-                  to="/myTrips/"
-
-                  className="navbar-icon me-4 text-light "
-                >
-                  <i className="ras fas fa-map-marker-alt"></i>
+                <Link to="/myTrips/" className="navbar-icon me-4 text-light ">
+                  <i
+                    className="ras fas fa-map-marker-alt"
+                    onClick={() => actions.resetearTrip()}
+                  ></i>
                 </Link>
               </li>
 
@@ -47,7 +50,8 @@ export const Navbar = () => {
                   className="navbar-icon me-4 text-light "
                 > {store.match && store.match.length > 0 && store.match.filter((x) => x.read != true).length > 0 ? <div className="message-count"> {store.match.filter((x) => x.read != true).length}</div> : null}
 
-                  <i className="ras fas fa-envelope"></i>
+                  <i className="ras fas fa-envelope" onClick={() => actions.resetearTrip()}></i>
+
                 </Link>
               </li>
 
@@ -77,15 +81,30 @@ export const Navbar = () => {
                     </li>
                     <Link
                       to={"/profile/" + store.user_id}
-
-                      className="link-styles">
-                      <li className="nav-links ps-3">Profile</li>
+                      className="link-styles"
+                    >
+                      <li
+                        className="nav-links ps-3"
+                        onClick={() => actions.resetearTrip()}
+                      >
+                        Profile
+                      </li>
                     </Link>
                     <Link to="/favorites" className="link-styles">
-                      <li className="nav-links ps-3">Favorites</li>
+                      <li
+                        className="nav-links ps-3"
+                        onClick={() => actions.resetearTrip()}
+                      >
+                        Favorites
+                      </li>
                     </Link>
                     <Link to="/help" className="link-styles">
-                      <li className="nav-links ps-3">Help</li>
+                      <li
+                        className="nav-links ps-3"
+                        onClick={() => actions.resetearTrip()}
+                      >
+                        Help
+                      </li>
                     </Link>
                     <li className="ps-3">
                       <hr className="dropdown-divider" />

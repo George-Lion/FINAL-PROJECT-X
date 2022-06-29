@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       url: "https://3001-georgelion-finalproject-aaswi73eujd.ws-eu47.gitpod.io/api/",
 
+
       user_id: null,
       trips: [],
       logged: null,
@@ -52,7 +53,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           userTrips: [],
         });
       },
-
+      resetearTrip: async () => {
+        setStore({
+          trip: {},
+        });
+      },
       setUser: (loggedUser) => {
         setStore({ user: loggedUser });
       },
