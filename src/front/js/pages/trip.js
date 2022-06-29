@@ -27,7 +27,7 @@ export const Trip = () => {
     if (!store.trip) {
       history.push("/feed");
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
   useEffect(() => {
@@ -183,13 +183,14 @@ export const Trip = () => {
               <div className="container">
                 {store.user_id == store.trip.user_id_of_trip_creator ? (
                   <div className="pencil-features">
-
-                    <i type="button" title="click to edit"
+                    <i
+                      type="button"
+                      title="click to edit"
                       onClick={() => {
                         setModalInfo(true);
                       }}
-                      className="button-pe fas fa-pencil"></i>
-
+                      className="button-pe fas fa-pencil"
+                    ></i>
                   </div>
                 ) : null}
                 <div className="place-description  mb-4 border-top border-bottom text-left justify-content-center">
@@ -241,9 +242,9 @@ export const Trip = () => {
 
                   <div className="mt-4 ">
                     <h3 className="text-dark text-center">
-                      <b className="t-rute"> Rute</b>
+                      <b className="t-rute">Rute</b>
                     </h3>
-                    <div className="card bg-dark text-white mb-1 border mt-3 border-primary border-3 ">
+                    <div className="card mb-1 mt-3 border-5">
                       <GoogleMapsApi />
                       <div className="card-img-overlay"></div>
                     </div>
@@ -271,24 +272,35 @@ export const Trip = () => {
                       <div className="galery-box  position-static d-block py-3 ">
                         <div className="">
                           <ul className="list-unstyled d-flex justify-content-around">
-
                             <li className="square1"></li>
-                            <li className=""><h3 className="travel-title mt-2  text-dark" style={{ color: "white" }}>
-                              <b className="t-rute">Galery</b>
-                            </h3></li>
-                            {store.user_id == store.trip.user_id_of_trip_creator ? (
-                              <li><div className="edit-galery">
-                                <button
-                                  type="button" title="add image"
-                                  onClick={() => {
-                                    setEditGalery(true);
-                                  }}
-                                >
-                                  <i className="fas fa-camera"></i>
-                                </button>
-                              </div></li>) : <li className="square1"></li>}
-
-                          </ul></div>
+                            <li className="">
+                              <h3
+                                className="travel-title mt-2  text-dark"
+                                style={{ color: "white" }}
+                              >
+                                <b className="t-rute">Galery</b>
+                              </h3>
+                            </li>
+                            {store.user_id ==
+                            store.trip.user_id_of_trip_creator ? (
+                              <li>
+                                <div className="edit-galery">
+                                  <button
+                                    type="button"
+                                    title="add image"
+                                    onClick={() => {
+                                      setEditGalery(true);
+                                    }}
+                                  >
+                                    <i className="fas fa-camera"></i>
+                                  </button>
+                                </div>
+                              </li>
+                            ) : (
+                              <li className="square1"></li>
+                            )}
+                          </ul>
+                        </div>
 
                         {/* img 1 */}
 
