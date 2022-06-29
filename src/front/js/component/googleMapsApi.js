@@ -49,7 +49,6 @@ const Map = () => {
         setResponse(res);
       } else {
         count.current = 0;
-        console.log("res: ", res, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
       }
     }
   };
@@ -64,7 +63,7 @@ const Map = () => {
     <>
       {store.trip ? (
         <GoogleMap
-          zoom={10}
+          zoom={13}
           center={{ lat, lng }}
           mapContainerStyle={{ width: "100%", height: "550px" }}
         >

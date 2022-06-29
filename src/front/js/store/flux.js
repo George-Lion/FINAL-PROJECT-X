@@ -5,10 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
-
-      url: "https://3001-georgelion-finalproject-aaswi73eujd.ws-eu47.gitpod.io/api/",
-
-
+      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu47.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -72,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getProfile: async (id) => {
@@ -86,7 +83,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ profile: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getUserTrips: async () => {
@@ -115,7 +112,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({
             match: matches,
           });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getUserTripsById: async (id) => {
@@ -129,7 +126,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userTrips: data.trips });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getUserProfiles: async () => {
@@ -143,7 +140,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ userProfiles: data.profiles });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       editUser: async (user) => {
@@ -161,7 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ user: data.user });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       createTrip: async (trip) => {
@@ -179,7 +176,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           getActions().getUserTrips();
-        } catch (e) { }
+        } catch (e) {}
       },
 
       /* GET TRIP */
@@ -228,7 +225,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               );
             }),
           });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       /* SEND MATCH */
@@ -247,7 +244,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             alert("ya envio un mensaje");
           }
           const data = await resp.json();
-        } catch (e) { }
+        } catch (e) {}
       },
 
       /* ACCEPT MATCH */
@@ -265,7 +262,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (resp.ok) {
             getActions().getUserTrips();
           }
-        } catch (e) { }
+        } catch (e) {}
       },
 
       rejectMatch: async (match) => {
@@ -281,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (resp.ok) {
             getActions().getUserTrips();
           }
-        } catch (e) { }
+        } catch (e) {}
       },
 
       getMatch: async () => {
@@ -324,7 +321,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await resp.json();
           setStore({ trip: data.trip });
-        } catch (e) { }
+        } catch (e) {}
       },
 
       changeFavorite: async (id, page, searchTerm) => {
@@ -366,14 +363,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("token"),
-          }
-        },
-        )
+          },
+        });
         if (resp.status == 200) {
-          getActions().getUserTrips()
+          getActions().getUserTrips();
         }
-      }
-
+      },
     },
   };
 };

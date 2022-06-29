@@ -90,7 +90,6 @@ def editUser():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     body_username = request.form.get("username", None)
-    print(user.profile_picture)
     if body_username == "" or body_username == None:
         body_username = "Username"
     body_firstname = request.form.get("firstname", None)
@@ -112,17 +111,10 @@ def editUser():
         body_banner_picture = cloudinary.uploader.upload(
             request.files['banner_picture'])
         user.banner_picture = body_banner_picture['secure_url']
-    print(request.form)
     if "profile_picture" in request.files:
-        print("@@@@@@@@@@@@@@@@@")
-
-
         body_profile_picture = cloudinary.uploader.upload(
             request.files['profile_picture'])
         user.profile_picture = body_profile_picture['secure_url']
-
-    print(user.profile_picture)
-
     user.username = body_username
     user.firstname = body_firstname
     user.lastname = body_lastname
@@ -426,8 +418,9 @@ def send_match():  # nombre de la función
         if MatchTrip.query.filter_by(user=user).filter_by(trip=trip).first() is not None:
             return jsonify({"error": "ya existe"}), 420
 
-        if trip.people > len(list(filter(lambda x : x.accepted==True,trip.trip_in_match))):
-            match = MatchTrip(user=user, trip=trip, message=body_message, read=body_read)
+        if trip.people > len(list(filter(lambda x: x.accepted == True, trip.trip_in_match))):
+            match = MatchTrip(user=user, trip=trip,
+                              message=body_message, read=body_read)
 
             db.session.add(match)
             db.session.commit()
@@ -479,15 +472,14 @@ def reject():  # nombre de la función
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
 
+
 @api.route("/read", methods=["PUT"])
 @jwt_required()
 def read():
     current_id = get_jwt_identity()
-    trips=Trip.query.filter_by(user_id_of_trip_creator=current_id)
+    trips = Trip.query.filter_by(user_id_of_trip_creator=current_id)
     for trip in trips:
         for match in trip.trip_in_match:
-            match.read=True
+            match.read = True
             db.session.commit()
     return jsonify({"edited": True}), 200
-
-
