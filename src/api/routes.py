@@ -81,7 +81,8 @@ def getProfile(id):
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
-#EDIT USER
+# EDIT USER
+
 
 @api.route("/user", methods=["PUT"])
 @jwt_required()
@@ -131,7 +132,8 @@ def editUser():
     db.session.commit()
     return jsonify({"edited": True, "user": user.serialize()}), 200
 
-#TRIP
+# TRIP
+
 
 @api.route("/trip/<int:trip_id>", methods=["GET"])
 @jwt_required()
@@ -224,7 +226,7 @@ def editTrip():
     return jsonify({"edited": True, "trip": trip.serialize()}), 200
 
 
-#GET USER TRIPS    
+# GET USER TRIPS
 
 @api.route("/trips", methods=["GET"])
 @jwt_required()
@@ -236,7 +238,8 @@ def get_user_trips():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
-#GET USER TRIP BY ID
+# GET USER TRIP BY ID
+
 
 @api.route("/trips/<int:id>", methods=["GET"])
 @jwt_required()
@@ -250,7 +253,7 @@ def get_user_trips_by_id(id):
 # DELETE A TRIP
 
 
-@api.route("/deleteTrip", methods=["DELETE"]) #ELIMINA EL TRIP
+@api.route("/deleteTrip", methods=["DELETE"])  # ELIMINA EL TRIP
 @jwt_required()
 def delete_trip():
     current_id = get_jwt_identity()
@@ -266,7 +269,40 @@ def delete_trip():
     else:
         return jsonify({"error": "Trip no eliminado"}), 400
 
-#ADD LIKE TRIP
+# DELETE A PROFILE
+
+
+@api.route("/deleteProfile", methods=["DELETE"])  # ELIMINA EL PERFIL
+@jwt_required()
+def delete_user():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        trips = Trip.query.filter_by(
+            user_id_of_trip_creator=current_id)
+        for trip in trips:
+            matches = MatchTrip.query.filter_by(trip_id=trip.id)
+            for match in matches:
+                db.session.delete(match)
+                db.session.commit()
+            trip.likes.clear()
+            db.session.commit()
+            db.session.delete(trip)
+            db.session.commit()
+        matches = MatchTrip.query.filter_by(user_id=current_id)
+        for match in matches:
+            db.session.delete(match)
+            db.session.commit()
+        user.likes.clear()
+        db.session.commit()
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({"deleted": True}), 200
+    else:
+        return jsonify({"error": "User no eliminado"}), 400
+
+# ADD LIKE TRIP
+
 
 @api.route("/tripLikes", methods=["POST"])
 @jwt_required()
@@ -292,9 +328,9 @@ def add_like_trip():
         return jsonify({"error": "error"}), 400
 
 
-#GET USER PROFILES
+# GET USER PROFILES
 
-@api.route("/user/profiles", methods=["GET"]) #DEVUELVE EL PERFIL DEL USUARIO
+@api.route("/user/profiles", methods=["GET"])  # DEVUELVE EL PERFIL DEL USUARIO
 @jwt_required()
 def get_user_profiles():
     current_id = get_jwt_identity()
@@ -339,7 +375,8 @@ def create_trip():
     else:
         return jsonify({"created": False, "msg": "Falta información"}), 400
 
-#GET TRIPS
+# GET TRIPS
+
 
 @api.route("/allTrips", methods=["GET"])
 @jwt_required()
@@ -353,7 +390,8 @@ def get_trips():
     else:
         return jsonify({"error": "error"}), 400
 
-#GET TRIPS SEARCH
+# GET TRIPS SEARCH
+
 
 @api.route("/search", methods=["GET", "POST"])
 def get_trips_search():
@@ -370,7 +408,8 @@ def get_trips_search():
     destination_match = Trip.query.filter(*queries)
     return jsonify({"trip": list(map(lambda trip: trip.serialize(), destination_match))}), 200
 
-#SEND MATCH
+# SEND MATCH
+
 
 @api.route("/send/match", methods=["POST"])  # end point de metodo POST
 @jwt_required()
@@ -386,8 +425,10 @@ def send_match():  # nombre de la función
     if user and trip and user.id != trip.user_id_of_trip_creator:
         if MatchTrip.query.filter_by(user=user).filter_by(trip=trip).first() is not None:
             return jsonify({"error": "ya existe"}), 420
+
         if trip.people > len(list(filter(lambda x : x.accepted==True,trip.trip_in_match))):
             match = MatchTrip(user=user, trip=trip, message=body_message, read=body_read)
+
             db.session.add(match)
             db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
@@ -398,7 +439,8 @@ def send_match():  # nombre de la función
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
 
-#ACCEPT
+# ACCEPT
+
 
 @api.route("/accept", methods=["POST"])  # end point de metodo POST
 @jwt_required()
@@ -417,6 +459,7 @@ def accept():  # nombre de la función
     else:
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
+
 
 @api.route("/reject", methods=["POST"])  # end point de metodo POST
 @jwt_required()
@@ -446,4 +489,5 @@ def read():
             match.read=True
             db.session.commit()
     return jsonify({"edited": True}), 200
+
 
