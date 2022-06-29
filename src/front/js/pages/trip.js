@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { SendMessageModal } from "../component/sendMessageModal";
 import { EditTripModal } from "../component/editTripModal";
+import { EditInfoTrip } from "../component/editInfoTrip";
 import { EditGaleryModal } from "../component/editGaleryModal";
 import { TravelBuddies } from "../component/travelBuddies";
 import { GoogleMapsApi } from "../component/googleMapsApi";
@@ -15,17 +16,18 @@ export const Trip = () => {
   const { id } = useParams();
   const [modalMessage, setModalMessage] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
+  const [modalInfo, setModalInfo] = useState(false);
   const [editGalery, setEditGalery] = useState(false);
   const history = useHistory();
   const [message, setMessage] = useState({});
   const [trip, setTrip] = useState({ likes: [] });
 
   useEffect(() => {
-
     actions.getTrip(id);
     if (!store.trip) {
       history.push("/feed");
     }
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
   useEffect(() => {
@@ -60,6 +62,19 @@ export const Trip = () => {
               trip={trip}
             />
           ) : null}
+
+          {modalInfo ? (
+            <EditInfoTrip
+              closeModal={() => {
+                setModalInfo(false);
+              }}
+              editTrip={(trip) => {
+                setTrip(trip);
+              }}
+              trip={trip}
+            />
+          ) : null}
+
           <div className="footer-abajo">
             <section className="trip-user">
               <div className="trip-content">
@@ -164,9 +179,19 @@ export const Trip = () => {
                   " - " +
                   store.trip.user_country}
               </h5>
-
               <div className="container">
-                <div className="place-description mt-4 mb-4 border-top border-bottom text-left justify-content-center">
+                {store.user_id == store.trip.user_id_of_trip_creator ? (
+                  <div className="pencil-features">
+
+                    <i type="button" title="click to edit"
+                      onClick={() => {
+                        setModalInfo(true);
+                      }}
+                      className="button-pe fas fa-pencil"></i>
+
+                  </div>
+                ) : null}
+                <div className="place-description  mb-4 border-top border-bottom text-left justify-content-center">
                   <p className="text-description mt-3 text-break">
                     {store.trip.text}
                   </p>
@@ -240,8 +265,7 @@ export const Trip = () => {
                       <div className="galery-box  position-static d-block py-3 ">
                         <div className="">
                           <ul className="list-unstyled d-flex justify-content-around">
-                            <li className="text-white">o</li>
-
+                            <li className="square1"></li>
                             <li className=""><h3 className="travel-title mt-2  text-dark" style={{ color: "white" }}>
                               <b className="t-rute">Galery</b>
                             </h3></li>
@@ -255,7 +279,8 @@ export const Trip = () => {
                                 >
                                   <i className="fas fa-camera"></i>
                                 </button>
-                              </div></li>) : null}
+                              </div></li>) : <li className="square1"></li>}
+
                           </ul></div>
 
                         {/* img 1 */}

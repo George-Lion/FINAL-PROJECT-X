@@ -1,0 +1,106 @@
+.user-modal {
+  background-color: #151d26;
+}
+
+.modal-bt {
+  bottom: 20px;
+}
+
+.modal-pi {
+  height: 200px;
+}
+
+.modal-pic {
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 8px solid #ffffff;
+  margin: auto;
+  z-index: 1;
+}
+
+.input-image {
+  display: "flex";
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+.delete-button {
+  padding: 5px;
+  background-color: red;
+  cursor: pointer;
+  border: none;
+  width: 200px;
+  color: white;
+  border-radius: 30px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.custom-file-input {
+  color: transparent;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: "Profile picture";
+  color: black;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.custom-file-input2 {
+  color: transparent;
+}
+.custom-file-input2::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input2::before {
+  content: "Cover picture";
+  color: black;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+
+  margin-top: 10px;
+}
+.custom-file-input2:hover::before {
+  border-color: black;
+}
+.custom-file-input2:active {
+  outline: 0;
+}
+.custom-file-input2:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}

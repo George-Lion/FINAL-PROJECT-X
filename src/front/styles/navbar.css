@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
 .logo {
   width: 200px;
 }
@@ -10,14 +12,29 @@
   background-color: #151d26;
 }
 
+.link-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
 .link-styles {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
   text-decoration: none;
   color: black;
 }
 
 .link-styles:hover {
   color: black;
+  font-weight: 900;
+  font-size: 1rem;
+}
+.dropdown-item {
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
+  font-size: 0.9rem;
 }
 
 .dropdown-item:hover {
@@ -33,5 +50,19 @@
 
 .ras:hover {
   color: rgb(131, 198, 224);
-  font-size: 33px;
+}
+
+.message-count {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  vertical-align: auto;
+  position: absolute;
+  margin-left: 5px;
 }

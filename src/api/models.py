@@ -98,8 +98,8 @@ class Trip(db.Model):
             "imagen_4": self.imagen_4,
             "imagen_5": self.imagen_5,
             "likes":  list(map(lambda like: like.id, self.likes)),
-            "trip_in_match":  list(map(lambda trip: trip.serialize(), self.trip_in_match))
-
+            "trip_in_match":  list(map(lambda trip: trip.serialize(), self.trip_in_match)),
+        
         }
 
 
@@ -110,6 +110,8 @@ class MatchTrip(db.Model):
     user = db.relationship("User")
     trip = db.relationship("Trip")
     message = db.Column(db.Text, unique=False, nullable=False)
+    read = db.Column(db.Boolean, unique=False,
+                         nullable=True, default=False)
     accepted = db.Column(db.Boolean, unique=False,
                          nullable=True, default=False)
     rejected = db.Column(db.Boolean, unique=False,
@@ -125,7 +127,8 @@ class MatchTrip(db.Model):
             "message": self.message,
             "accepted": self.accepted,
             "rejected": self.rejected,
-            "user_id": self.user.id
+            "user_id": self.user.id,
+            "read": self.read
 
         }
 

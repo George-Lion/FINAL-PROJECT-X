@@ -49,6 +49,28 @@
   z-index: 2;
 }
 
+.login-button {
+  background-color: rgb(32, 134, 194);
+  color: white;
+  font-weight: 500;
+}
+
+.login-button:hover {
+  background-color: rgb(26, 151, 223);
+  color: white;
+  font-weight: 500;
+}
+
+.text-signup {
+  color: rgb(26, 151, 223);
+  font-weight: 500;
+}
+
+.text-signup:hover {
+  color: rgb(26, 151, 223);
+  font-weight: 500;
+}
+
 .image-login {
   margin-top: 95px;
   width: 400px;

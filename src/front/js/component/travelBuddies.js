@@ -56,11 +56,14 @@ export const TravelBuddies = () => {
                                                         <ul className="card-text-box list-unstyled ms-3">
                                                             <li className="mb-1">
                                                                 <h2>{e.username}</h2>
+
                                                             </li>
+
                                                         </ul>
-                                                        <div className="shadow-card-image"></div>
+
                                                     </div>
                                                 </div>
+
                                             </Link>
                                         </div>
                                     );

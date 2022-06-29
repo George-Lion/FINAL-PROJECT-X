@@ -101,7 +101,7 @@ export const Register = () => {
                 </div>
                 <Link to="/">
                   <button
-                    className="w-50 btn btn-primary mt-3"
+                    className="register-button w-50 btn mt-2 mb-2"
                     onClick={() => {
                       sendUserInfo();
                     }}
@@ -121,7 +121,7 @@ export const Register = () => {
                   Do you have an account?{" "}
                   <strong>
                     <Link
-                      className=""
+                      className="text-login"
                       to="/"
                       style={{ textDecoration: "none" }}
                     >
