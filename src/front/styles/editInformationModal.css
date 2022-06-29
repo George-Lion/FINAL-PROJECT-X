@@ -190,3 +190,7 @@
   margin: auto;
   font-size: 14px;
 }
+
+.eliminar {
+  color: red;
+}
