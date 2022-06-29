@@ -94,7 +94,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const data = await resp.json();
-          setStore({ userTrips: data.trips });
+          setStore({
+            userTrips: data.trips.sort((a, b) => {
+              return (
+                new Date(b.start_of_the_trip) - new Date(a.start_of_the_trip)
+              );
+            }),
+          });
           let matches = [];
           for (let x = 0; x < data.trips.length; x++) {
             for (let i in data.trips[x].trip_in_match) {
