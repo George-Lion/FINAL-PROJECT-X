@@ -22,9 +22,7 @@ const injectContext = (PassedComponent) => {
     );
 
     useEffect(() => {
-      if (localStorage != "token") {
-        state.actions.verify();
-      } //Para cuando hay un token activo, cuando refresques la página, se mantiene en la vista privada, sin tener que iniciar sesion nuevamente
+      state.actions.verify(); //Para cuando hay un token activo, cuando refresques la página, se mantiene en la vista privada, sin tener que iniciar sesion nuevamente
       state.actions.getUserTrips();
     }, []);
 
