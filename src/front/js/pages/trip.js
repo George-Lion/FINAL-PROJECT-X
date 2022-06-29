@@ -23,11 +23,11 @@ export const Trip = () => {
   const [trip, setTrip] = useState({ likes: [] });
 
   useEffect(() => {
-
     actions.getTrip(id);
     if (!store.trip) {
       history.push("/feed");
     }
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
   useEffect(() => {

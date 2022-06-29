@@ -50,5 +50,19 @@
 
 .ras:hover {
   color: rgb(131, 198, 224);
-  font-size: 33px;
+}
+
+.message-count {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  vertical-align: auto;
+  position: absolute;
+  margin-left: 5px;
 }

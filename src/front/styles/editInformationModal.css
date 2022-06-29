@@ -2,14 +2,17 @@
 
 .modal-box1 {
   width: 450px;
-  height: 490px;
+
   margin: auto;
   border-radius: 25px;
-  background: rgb(21, 117, 159);
+  background: #052d55;
   padding: 40px;
   margin-top: 14rem;
   font-size: 1rem;
   font-family: "Rubik", sans-serif;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #78cffc;
 }
 
 .content-head {
@@ -110,8 +113,8 @@
   width: 140px;
   border: none;
   margin-right: 0;
-  background-color: rgb(19, 23, 41);
-  color: white;
+  background-color: white;
+  color: #052d55;
   font-family: "Rubik", sans-serif;
 }
 
@@ -124,4 +127,67 @@
   display: flex;
   justify-content: center;
   margin: 3px 0px 5px 0px;
+}
+
+.error-name {
+  display: flex;
+  color: #e17570;
+  height: 19px;
+  font-size: 14px;
+  padding: 5px 0px 0px 0px;
+}
+
+.icon-error {
+  height: 19px;
+  width: 19px;
+  font-size: 13px;
+  text-align: center;
+  padding: 4px;
+  margin-right: 4px;
+}
+
+.icon-check {
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  text-align: center;
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+.message-check {
+  color: white;
+  background-color: green;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  height: 30px;
+  padding: 4px;
+  vertical-align: auto;
+  margin: auto;
+  font-size: 14px;
+}
+
+.icon-error2 {
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  text-align: center;
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+.message-error {
+  color: white;
+  background-color: #d83c47;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  height: 30px;
+  padding: 4px;
+  vertical-align: auto;
+  margin: auto;
+  font-size: 14px;
 }

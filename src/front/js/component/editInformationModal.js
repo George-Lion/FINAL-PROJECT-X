@@ -1,9 +1,36 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/editInformationModal.css";
 
 export const EditInformationModal = ({ closeModal, editUser, user }) => {
     const { store, actions } = useContext(Context);
+    const [infoError, setInfoError] = useState(false)
+    const [infoCheck, setInfoCheck] = useState(false)
+    const special = [" ", "$", "#", "*", "@", "-", "(", ")", "!", "^", "?", "/", "=", "+", "[", "]", ",", "%", "{", "}", "'", '"', "<", ">", "|", "¨", "`", ":", ";", "¿", "·", "&", "¡"]
+
+    const messageError = () => {
+        setInfoError(true)
+        setInfoCheck(false)
+    }
+
+    const messageCheck = () => {
+        setInfoCheck(true)
+        setInfoError(false)
+    }
+
+    const specialCharacters = (element) => {
+        if (Array.isArray(special)) {
+            for (let value of special) {
+                for (let x of element) {
+                    if (value == x) {
+                        return true;
+                    } else false;
+                }
+            }
+        } else {
+            return false;
+        }
+    };
 
     return (
         <Fragment>
@@ -44,28 +71,39 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                         <div className="section-user">
                             <div className="section-username">
                                 {/*  <label htmlFor="username">Username:</label> */}
-                                <input className="input-username" type="text" maxLength={25} defaultValue={store.user.username} id="username" name="Username" placeholder="Username" onChange={(e) =>
-                                    editUser({ ...user, username: e.target.value })
+                                <input className="input-username" type="text" maxLength={35} defaultValue={store.user.username} id="username" name="Username" placeholder="Username" onChange={(e) =>
+                                    editUser({ ...user, username: e.target.value }, setInfoError(false), setInfoCheck(false))
                                 }></input>
+
                             </div>
                         </div>
 
-                        {/* NAME */}
+                        {user.username.length == 0 ? <div className="error-name"><i className="icon-error fas fa-exclamation-circle"></i><p>
+                            username is required</p></div> : null}
+                        {user.username.length > 25 ? <div className="error-name"><i className="icon-error fas fa-exclamation-circle"></i><p>
+                            Character limit exceeded (25)</p></div> : null}
+                        {specialCharacters(user.username) ? <div className="error-name"><i className="icon-error fas fa-exclamation-circle"></i><p>
+                            Only special characters _ or . </p></div> : null}
+
+                        {/* FIRSTNAME AND LASTNAME */}
 
                         <div className="section-info">
                             <div className="section-first">
                                 {/* <label htmlFor="first">First Name:</label> */}
-                                <input className="input-style" type="text" maxLength={15} defaultValue={store.user.firstname} id="first" name="First" placeholder="FirstName" onChange={(e) =>
+                                <input className="input-style" type="text" maxLength={30} defaultValue={store.user.firstname} id="first" name="First" placeholder="FirstName" onChange={(e) =>
                                     editUser({
                                         ...user,
                                         firstname:
                                             e.target.value
 
-                                    })
+                                    }, setInfoError(false), setInfoCheck(false))
                                 }></input>
+                                {user.firstname.length == 0 ? <div className="error-name"><i className="icon-error fas fa-exclamation-circle"></i><p>
+                                    firstname is required</p></div> : null}
+                                {user.firstname.length > 15 ? <div className="error-name"><i className="icon-error fas fa-exclamation-circle"></i><p>
+                                    Character limit (15)</p></div> : null}
                             </div>
-                            {user.firstname.length < 6 ? <h5>name containt 6 letters</h5> : null}
-                            {user.firstname.length < 6 ? <h5>name containt 6 letters</h5> : null}
+
                             <div className="section-last">
                                 {/* <label htmlFor="last">Last Name:</label> */}
                                 <input className="input-style" type="text" maxLength={15} defaultValue={store.user.lastname} id="last" name="Last" placeholder="LastName" onChange={(e) =>
@@ -73,12 +111,14 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                                         ...user,
                                         lastname:
                                             e.target.value
-                                    })
+                                    }, setInfoError(false), setInfoCheck(false))
                                 }></input>
+                                {user.lastname.length == 0 ? <div className="error-name"><i className="icon-error fas fa-exclamation-circle"></i><p>
+                                    lastname is required</p></div> : null}
                             </div>
                         </div>
 
-                        {/* DIRECCTION */}
+                        {/* CITY AND COUNTRY OF RESIDENCE */}
 
                         <div className="section-info">
                             <div className="section-first">
@@ -89,7 +129,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                                         city_of_residence:
                                             e.target.value.charAt(0).toUpperCase() +
                                             e.target.value.slice(1).toLowerCase(),
-                                    })
+                                    }, setInfoError(false), setInfoCheck(false))
                                 }></input>
                             </div>
                             <div className="section-last">
@@ -100,12 +140,12 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                                         country:
                                             e.target.value.charAt(0).toUpperCase() +
                                             e.target.value.slice(1).toLowerCase(),
-                                    })
+                                    }, setInfoError(false), setInfoCheck(false))
                                 }></input>
                             </div>
                         </div>
 
-                        {/* TEXT */}
+                        {/* ABOUT ME */}
 
                         <div className="section-text">
                             <div className="text-area">
@@ -114,7 +154,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                                     editUser({
                                         ...user, description: e.target.value.charAt(0).toUpperCase() +
                                             e.target.value.slice(1).toLowerCase(),
-                                    })
+                                    }, setInfoError(false), setInfoCheck(false))
                                 }></textarea>
                             </div>
                             {<p className="counter-bio">{user.description ? user.description.length : 0}/280</p>}
@@ -128,17 +168,28 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                         <button
                             className="save-button"
                             onClick={() => {
-                                if (user.firstname.length >= 6) {
+                                if (!specialCharacters(user.username) && user.username.length > 0 && user.username.length <= 25 && user.firstname.length <= 15 && user.firstname.length > 0 && user.lastname.length > 0 && user.lastname.length <= 15) {
+                                    messageCheck();
                                     actions.editUser(user);
                                 } else {
-
+                                    messageError();
                                 }
-
                             }}
                         >
                             <i className="far fa-save me-2"></i>save
                         </button>
                     </div>
+                    {infoCheck == true ?
+                        <div className="message-check">
+                            <i className="icon-check fas fa-check-circle"></i><p>
+                                Changes saved</p>
+                        </div> : null}
+
+                    {infoError == true ?
+                        <div className="message-error">
+                            <i className="icon-error2 fas fa-exclamation-circle"></i><p>
+                                please write the fields correctly </p>
+                        </div> : null}
                 </div>
             </div>
         </Fragment >

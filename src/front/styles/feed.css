@@ -146,6 +146,18 @@
   font-weight: 900;
 }
 
+.scroll-top {
+  position: fixed;
+  padding: 0.6rem 2rem;
+  font-size: 20px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #0c9;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+}
+
 @media (max-width: 1300px) {
   .ul-feed {
     font-size: 18px;
