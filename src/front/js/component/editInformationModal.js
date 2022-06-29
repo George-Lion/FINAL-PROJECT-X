@@ -7,6 +7,24 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
     const [infoError, setInfoError] = useState(false)
     const [infoCheck, setInfoCheck] = useState(false)
     const special = [" ", "$", "#", "*", "@", "-", "(", ")", "!", "^", "?", "/", "=", "+", "[", "]", ",", "%", "{", "}", "'", '"', "<", ">", "|", "¨", "`", ":", ";", "¿", "·", "&", "¡"]
+    const [confirmDelete, setConfirmDelete] = useState(false);
+
+    const deleteProfile = async () => {
+        try {
+            const resp = await fetch(store.url + "deleteProfile", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+            });
+            const data = await resp.json();
+            if (resp.ok) {
+                setConfirmDelete(false);
+                history.push("/feed");
+            }
+        } catch (e) { }
+    };
 
     const messageError = () => {
         setInfoError(true)
@@ -160,8 +178,64 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                             {<p className="counter-bio">{user.description ? user.description.length : 0}/280</p>}
                         </div>
                     </div>
+                    {confirmDelete ? (
+                        <div
+                            className="modal fade show"
+                            id="exampleModal"
+                            data-bs-backdrop="static"
+                            data-bs-keyboard="false"
+                            tabIndex="-1"
+                            aria-labelledby="staticBackdropLabel"
+                            aria-modal="true"
+                            style={{
+                                display: "block",
+                                backdropFilter: "brightness(20%)",
+                            }}
+                        >
+                            <div className="delete-modal modal-dialog">
+                                <div className="trip-modal modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="exampleModalLabel">
+                                            Are you sure you want to delete the profile?{" "}
+                                            <i>This action cannot be undone</i>
+                                        </h5>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button
+                                            type="button"
+                                            className="btn btn-light text-dark"
+                                            onClick={() => {
+                                                setConfirmDelete(false);
+                                            }}
+                                            data-bs-dismiss="modal"
+                                        >
+                                            No
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn btn-danger text-white"
+                                            onClick={() => {
+                                                deleteProfile(true);
+                                            }}
+                                        >
+                                            Yes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ) : null}
+
 
                     <div className="modal-footer">
+                        <i
+                            className="delete-icon fa-solid fa-trash"
+                            title="delete trip"
+                            style={{ fontSize: "20px" }}
+                            onClick={() => {
+                                setConfirmDelete(true);
+                            }}
+                        ></i>
 
                         {/* SAVE BUTTON */}
 
