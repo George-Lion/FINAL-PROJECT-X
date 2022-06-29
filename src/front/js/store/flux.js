@@ -96,7 +96,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
           });
           const data = await resp.json();
-          setStore({ userTrips: data.trips });
+          setStore({
+            userTrips: data.trips.sort((a, b) => {
+              return (
+                new Date(b.start_of_the_trip) - new Date(a.start_of_the_trip)
+              );
+            }),
+          });
           let matches = [];
           for (let x = 0; x < data.trips.length; x++) {
             for (let i in data.trips[x].trip_in_match) {
@@ -350,6 +356,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           alert("ERROR");
         }
       },
+
+      readMessages: async () => {
+        const resp = await fetch(getStore().url + "read", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          }
+        },
+        )
+        if (resp.status == 200) {
+          getActions().getUserTrips()
+        }
+      }
+
     },
   };
 };

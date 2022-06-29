@@ -8,6 +8,7 @@ export const MyTrips = () => {
   const { actions, store } = useContext(Context);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     if (store.trip) {
       actions.getUserTrips();
     }

@@ -1,6 +1,13 @@
 .user-modal {
   background-color: #151d26;
 }
+
+.banner-min {
+  width: 425px;
+  height: 200px;
+  border-radius: 25px;
+}
+
 .custom-file-input {
   color: transparent;
 }

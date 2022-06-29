@@ -44,11 +44,14 @@ export const Navbar = () => {
               </li>
 
               <li className="pt-2">
-                <Link to="/message" className="navbar-icon me-4 text-light ">
-                  <i
-                    className="ras fas fa-envelope"
-                    onClick={() => actions.resetearTrip()}
-                  ></i>
+                <Link
+                  to="/message"
+
+                  className="navbar-icon me-4 text-light "
+                > {store.match && store.match.length > 0 && store.match.filter((x) => x.read != true).length > 0 ? <div className="message-count"> {store.match.filter((x) => x.read != true).length}</div> : null}
+
+                  <i className="ras fas fa-envelope" onClick={() => actions.resetearTrip()}></i>
+
                 </Link>
               </li>
 
@@ -73,7 +76,7 @@ export const Navbar = () => {
                     className="dropdown-menu text-small mt-2"
                     aria-labelledby="dropdownUser1"
                   >
-                    <li className="ps-3 pb-1">
+                    <li className="link-title ps-3 pb-1">
                       Hola <b>{store.user.firstname}</b>
                     </li>
                     <Link
@@ -81,7 +84,7 @@ export const Navbar = () => {
                       className="link-styles"
                     >
                       <li
-                        className="ps-3"
+                        className="nav-links ps-3"
                         onClick={() => actions.resetearTrip()}
                       >
                         Profile
@@ -89,7 +92,7 @@ export const Navbar = () => {
                     </Link>
                     <Link to="/favorites" className="link-styles">
                       <li
-                        className="ps-3"
+                        className="nav-links ps-3"
                         onClick={() => actions.resetearTrip()}
                       >
                         Favorites
@@ -97,7 +100,7 @@ export const Navbar = () => {
                     </Link>
                     <Link to="/help" className="link-styles">
                       <li
-                        className="ps-3"
+                        className="nav-links ps-3"
                         onClick={() => actions.resetearTrip()}
                       >
                         Help
@@ -109,7 +112,7 @@ export const Navbar = () => {
                     <Link to="/" className="link-styles">
                       <li>
                         <p
-                          className="dropdown-item"
+                          className="nav-links dropdown-item"
                           onClick={() => actions.logout()}
                         >
                           Sign out

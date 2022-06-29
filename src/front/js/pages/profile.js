@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
-import { EditProfileModal } from "../component/editProfileModal";
+import { ChangeBannerModal } from "../component/changeBannerModal";
+import { EditInformationModal } from "../component/editInformationModal";
+import { ChangePhotoModal } from "../component/changePhotoModal";
 import { CreateTripModal } from "../component/createTripModal";
 import moment from "moment";
 import "../../styles/profile.css";
 
 export const Profile = () => {
+
   const { store, actions } = useContext(Context);
   const [showEdit, setShowEdit] = useState(false);
+  const [showEdit2, setShowEdit2] = useState(false);
+  const [showPhoto, setShowPhoto] = useState(false);
   const [showCreateTrip, setShowCreateTrip] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [user, setUser] = useState();
@@ -16,9 +21,11 @@ export const Profile = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     actions.getProfile(id);
     actions.getUserTrips();
     actions.getUserProfiles();
+
   }, []);
 
   useEffect(() => {
@@ -42,7 +49,7 @@ export const Profile = () => {
                 href="#"
                 className="cambiar-foto"
                 onClick={(e) => {
-                  setShowEdit(true);
+                  setShowPhoto(true);
                   setUser(store.profile);
                 }}
               >
@@ -77,9 +84,18 @@ export const Profile = () => {
             </div>
           </div>
           <div className="information-box pt-1">
+            {/*  boton 2 */}
+            <div className="name-pencil">
+              <i type="button" className="pencil-icon fas fa-pencil" title="click to edit information" onClick={(e) => {
+                setShowEdit2(true);
+                setUser(store.profile);
+              }}></i>
+            </div>
             <h3 className="information1">
               <b>{store.profile.firstname + " " + store.profile.lastname}</b>
             </h3>
+
+
             <h5 className="information2">
               {store.profile.city_of_residence + " - " + store.profile.country}
             </h5>
@@ -91,7 +107,7 @@ export const Profile = () => {
       </section>
 
       {showEdit ? (
-        <EditProfileModal
+        <ChangeBannerModal
           closeModal={() => {
             setShowEdit(false);
           }}
@@ -102,6 +118,29 @@ export const Profile = () => {
         />
       ) : null}
 
+      {showEdit2 ? (
+        <EditInformationModal
+          closeModal={() => {
+            setShowEdit2(false);
+          }}
+          editUser={(user) => {
+            setUser(user);
+          }}
+          user={user}
+        />
+      ) : null}
+
+      {showPhoto ? (
+        <ChangePhotoModal
+          closeModal={() => {
+            setShowPhoto(false);
+          }}
+          editUser={(user) => {
+            setUser(user);
+          }}
+          user={user}
+        />
+      ) : null}
       {modalEdit ? (
         <EditTripModal
           closeModal={() => {
@@ -143,12 +182,12 @@ export const Profile = () => {
             <div className="d-flex overflow-auto">
               <button
                 className="button-add-trip btn text-light mt-4"
-                style={{ height: "350px" }}
+                style={{ height: "350px" }} title="click to create a trip"
                 onClick={() => {
                   setShowCreateTrip(true);
                 }}
               >
-                <b>ADD TRIP</b>
+                <i className="fas fa-plus" ></i>
               </button>
               <div className="wrapper-trips">
                 {store.userTrips.length > 0 ? (
@@ -188,42 +227,40 @@ export const Profile = () => {
                                   {e.destination}
                                 </h3>
                               </div>
-                              <ul className="card-text-box list-unstyled ms-3">
+                              <ul className="card-text-box list-unstyled ms-3 text-wrap">
                                 <li className="mb-1">
                                   <i
-                                    className="icon fas fa-user-friends"
-                                    style={{ fontSize: "16px" }}
+                                    className="icon-size icon fas fa-user-friends"
+
                                   >
-                                    {" "}
+                                    {" "}{e.people}
                                   </i>
-                                  {"\n"}
-                                  {e.people}
+
                                 </li>
                                 <li className="mb-1">
                                   <i
-                                    className="icon fas fa-route"
-                                    style={{ fontSize: "16px" }}
-                                  ></i>
-                                  {"\n"}
-                                  {e.transport}
+                                    className="icon-size icon fas fa-route"
+
+                                  >  {" "}
+                                    {e.transport}</i>
+
                                 </li>
                                 <li className="mb-1">
                                   <i
-                                    className="icon fas fa-coins"
-                                    style={{ fontSize: "16px" }}
-                                  ></i>
-                                  {"\n"}
-                                  {e.cost} €
+                                    className="icon-size icon fas fa-coins"
+
+                                  >{" "}{e.cost} €</i>
+
                                 </li>
                                 <li className="mb-1">
                                   <i
-                                    className="icon fas fa-clock"
-                                    style={{ fontSize: "16px" }}
-                                  ></i>
-                                  {"\n"}
-                                  {moment(e.start_of_the_trip).format(
-                                    "LL"
-                                  )} - {moment(e.end_of_the_trip).format("LL")}
+                                    className="icon-size icon fas fa-clock"
+
+                                  >  {" "}
+                                    {moment(e.start_of_the_trip).format(
+                                      "LL"
+                                    )} - {moment(e.end_of_the_trip).format("LL")}</i>
+
                                 </li>
                               </ul>
                               <div className="shadow-card-image"></div>

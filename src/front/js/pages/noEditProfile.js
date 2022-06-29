@@ -43,10 +43,10 @@ export const NoEditProfile = () => {
             </div>
           </div>
           <div className="information-box pt-1">
-            <h3 className="information">
+            <h3 className="information1">
               <b>{store.profile.firstname + " " + store.profile.lastname}</b>
             </h3>
-            <h5 className="information">
+            <h5 className="information2">
               {store.profile.city_of_residence + " - " + store.profile.country}
             </h5>
             <p className="information-bio text-break">
