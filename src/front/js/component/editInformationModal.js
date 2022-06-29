@@ -150,7 +150,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                         <div className="section-text">
                             <div className="text-area">
                                 {/* <label htmlFor="textDescription">About me:</label> */}
-                                <textarea className="text-info text-white" defaultValue={store.user.description} rows="4" cols="50" placeholder="About me" maxLength={280} onChange={(e) =>
+                                <textarea className="text-information " defaultValue={store.user.description} rows="4" cols="50" placeholder="About me" maxLength={280} onChange={(e) =>
                                     editUser({
                                         ...user, description: e.target.value.charAt(0).toUpperCase() +
                                             e.target.value.slice(1).toLowerCase(),
@@ -176,7 +176,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                                 }
                             }}
                         >
-                            <i className="far fa-save me-2"></i>save
+                            {/* <i className="far fa-save me-2"></i> */}save
                         </button>
                     </div>
                     {infoCheck == true ?

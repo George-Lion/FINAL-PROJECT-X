@@ -152,10 +152,11 @@
   font-size: 20px;
   bottom: 40px;
   right: 40px;
-  background-color: #0c9;
+  background-color: rgb(0, 146, 204);
   color: #fff;
   text-align: center;
   border-radius: 20px;
+  z-index: 6;
 }
 
 @media (max-width: 1300px) {
