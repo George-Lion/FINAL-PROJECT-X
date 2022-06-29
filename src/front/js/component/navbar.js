@@ -27,19 +27,28 @@ export const Navbar = () => {
             <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
               <li className="pt-2">
                 <Link to="/feed" className="navbar-icon me-4 text-light ">
-                  <i className="ras fas fa-suitcase-rolling"></i>
+                  <i
+                    className="ras fas fa-suitcase-rolling"
+                    onClick={() => actions.resetearTrip()}
+                  ></i>
                 </Link>
               </li>
 
               <li className="pt-2">
                 <Link to="/myTrips/" className="navbar-icon me-4 text-light ">
-                  <i className="ras fas fa-map-marker-alt"></i>
+                  <i
+                    className="ras fas fa-map-marker-alt"
+                    onClick={() => actions.resetearTrip()}
+                  ></i>
                 </Link>
               </li>
 
               <li className="pt-2">
                 <Link to="/message" className="navbar-icon me-4 text-light ">
-                  <i className="ras fas fa-envelope"></i>
+                  <i
+                    className="ras fas fa-envelope"
+                    onClick={() => actions.resetearTrip()}
+                  ></i>
                 </Link>
               </li>
 
@@ -71,13 +80,28 @@ export const Navbar = () => {
                       to={"/profile/" + store.user_id}
                       className="link-styles"
                     >
-                      <li className="ps-3">Profile</li>
+                      <li
+                        className="ps-3"
+                        onClick={() => actions.resetearTrip()}
+                      >
+                        Profile
+                      </li>
                     </Link>
                     <Link to="/favorites" className="link-styles">
-                      <li className="ps-3">Favorites</li>
+                      <li
+                        className="ps-3"
+                        onClick={() => actions.resetearTrip()}
+                      >
+                        Favorites
+                      </li>
                     </Link>
                     <Link to="/help" className="link-styles">
-                      <li className="ps-3">Help</li>
+                      <li
+                        className="ps-3"
+                        onClick={() => actions.resetearTrip()}
+                      >
+                        Help
+                      </li>
                     </Link>
                     <li className="ps-3">
                       <hr className="dropdown-divider" />
