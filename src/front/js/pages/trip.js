@@ -148,7 +148,11 @@ export const Trip = () => {
                 <b>
                   <Link
                     id="RouterNavLink"
-                    to="/profile"
+                    to={
+                      store.trip.user_id_of_trip_creator == store.user_id
+                        ? "/profile/" + store.trip.user_id_of_trip_creator
+                        : "/noEditProfile/" + store.trip.user_id_of_trip_creator
+                    }
                     className="user-informations"
                   >
                     {store.trip.user_firstname} {store.trip.user_lastname}
@@ -213,7 +217,7 @@ export const Trip = () => {
                     <h3 className="text-dark text-center">
                       <b className="t-rute"> Rute</b>
                     </h3>
-                    <div className="card mb-1 mt-3">
+                    <div className="card bg-dark text-white mb-1 border mt-3 border-primary border-3 ">
                       <GoogleMapsApi />
                       <div className="card-img-overlay"></div>
                     </div>
