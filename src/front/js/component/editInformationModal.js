@@ -105,7 +105,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
         <div className="modal-box1">
           <div className="content-head modal-header">
             <div className="section-title">
-
               <h4>Edit Profile</h4>
             </div>
 
@@ -145,15 +144,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                 ></input>
               </div>
             </div>
-
-            {/*   {user.username.length == 0 ? (
-              <div className="error-name">
-                <i className="icon-error fas fa-exclamation-circle"></i>
-                <p>username is required</p>
-              </div>
-            ) : null} */}
-
-
 
             {/* FIRSTNAME AND LASTNAME */}
 
