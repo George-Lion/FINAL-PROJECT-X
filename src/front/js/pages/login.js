@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useHistory, Link } from "react-router-dom";
 import logo from "../component/img/traveland.png";
@@ -6,6 +6,10 @@ import photo from "../component/img/login-photo.png";
 import "../../styles/login.css";
 
 export const Login = () => {
+  useEffect(() => {
+    actions.verify();
+  }, []);
+
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const [user, setUser] = useState({});
