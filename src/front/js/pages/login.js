@@ -6,10 +6,6 @@ import photo from "../component/img/login-photo.png";
 import "../../styles/login.css";
 
 export const Login = () => {
-  useEffect(() => {
-    actions.verify();
-  }, []);
-
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const [user, setUser] = useState({});

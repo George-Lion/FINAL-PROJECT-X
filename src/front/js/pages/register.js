@@ -5,10 +5,6 @@ import Logo from "../component/img/traveland.png";
 import "../../styles/register.css";
 
 export const Register = () => {
-  useEffect(() => {
-    actions.verify();
-  }, []);
-
   const [user, setUser] = useState({});
   const { store } = useContext(Context);
   const history = useHistory();
