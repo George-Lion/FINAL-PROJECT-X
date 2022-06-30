@@ -28,7 +28,7 @@ export const Navbar = () => {
               <li className="pt-2">
                 <Link to="/feed" className="navbar-icon me-4 text-light ">
                   <i
-                    className="ras fas fa-suitcase-rolling"
+                    className="ras fas fa-house"
                     onClick={() => actions.resetearTrip()}
                   ></i>
                 </Link>
