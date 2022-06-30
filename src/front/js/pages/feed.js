@@ -9,7 +9,7 @@ export const Feed = () => {
   const { actions, store } = useContext(Context);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     actions.getTrips();
     actions.getUserTrips();
     actions.verify();
@@ -154,7 +154,8 @@ export const Feed = () => {
                     <div className="shadow2-image2"></div>
                     <div className="d-flex me-5 position-absolute top-0 end-0 mt-3">
                       <p className="destination-title1">
-                        <i className="fas fa-map-marker-alt"></i> {e.destination}
+                        <i className="fas fa-map-marker-alt"></i>{" "}
+                        {e.destination}
                       </p>
                     </div>
                     <></>
@@ -163,15 +164,15 @@ export const Feed = () => {
               </div>
             );
           })}
-          <button className="scroll-top"
+          <button
+            className="scroll-top"
             onClick={() => {
-              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+              window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
             }}
           >
             Scroll to top
           </button>
         </div>
-
       </div>
     </Fragment>
   );

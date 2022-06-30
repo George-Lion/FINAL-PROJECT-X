@@ -1,11 +1,15 @@
+import { useHistory } from "react-router-dom";
+
 const getState = ({ getStore, getActions, setStore }) => {
+  const history = useHistory();
+
   return {
     store: {
       user: {},
       profile: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-d16qehmb8rn.ws-eu47.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-anr1uc1f3vx.ws-eu51.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -32,6 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           // setStore({ logged: data.logged_in || false })
           else if (resp.status == 401 || resp.status == 422) {
+            history.push("/");
           }
         } catch (e) {
           setStore({ logged: false });

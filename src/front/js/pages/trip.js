@@ -23,6 +23,7 @@ export const Trip = () => {
   const [trip, setTrip] = useState({ likes: [] });
 
   useEffect(() => {
+    actions.verify();
     actions.getTrip(id);
     if (!store.trip) {
       history.push("/feed");
