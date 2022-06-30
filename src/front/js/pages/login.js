@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext, useEffect } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory, Link } from "react-router-dom";
 import logo from "../component/img/traveland.png";
