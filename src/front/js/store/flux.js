@@ -369,6 +369,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           getActions().getUserTrips();
         }
       },
+
+
     },
   };
 };

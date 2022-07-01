@@ -183,6 +183,9 @@ export const Profile = () => {
                 style={{ height: "350px" }} title="click to create a trip"
                 onClick={() => {
                   setShowCreateTrip(true);
+                  trip.destination = "";
+                  trip.start_of_the_trip = "";
+                  trip.end_of_the_trip = "";
                 }}
               >
                 <i className="fas fa-plus" ></i>

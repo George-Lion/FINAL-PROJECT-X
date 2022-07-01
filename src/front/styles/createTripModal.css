@@ -6,7 +6,7 @@
   border-radius: 25px;
   background-color: #151d26;
   padding: 30px 40px 20px 40px;
-  margin-top: 7rem;
+  margin-top: 6rem;
   font-size: 1rem;
   font-family: "Rubik", sans-serif;
   border-width: 3px;
@@ -220,11 +220,9 @@
   font-size: 14px;
 }
 
-.buttons-footer {
+.save-footer {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding-right: 95px;
+  justify-content: center;
 }
 
 .delete-profile {
