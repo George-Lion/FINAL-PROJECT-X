@@ -186,6 +186,7 @@ export const Profile = () => {
                   trip.destination = "";
                   trip.start_of_the_trip = "";
                   trip.end_of_the_trip = "";
+                  trip.people = "";
                 }}
               >
                 <i className="fas fa-plus" ></i>

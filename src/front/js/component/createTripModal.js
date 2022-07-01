@@ -121,7 +121,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
         }}
       >
         <div className="modal-box2">
-          <div className="content-head modal-header">
+          <div className="content-head ">
             <div className="section-title">
               <h4>Create a trip</h4>
             </div>
@@ -139,161 +139,167 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
             ></i>
           </div>
           <div className="content-body">
-
             <div className="banner-box">
               <img className="modal-banner" src={selectedImage == undefined ? "https://res.cloudinary.com/dmogh4y33/image/upload/v1656681829/d_hivrmb.jpg" : URL.createObjectURL(selectedImage)} alt="img" />
             </div>
-            <input className="banner-input"
-              accept="image/*"
-              type="file"
-              onChange={bannerChange}
-            />
+            <div className="banner-x">
+              <div class="image-upload">
+                <label for="file-input">
+                  <img className="image-selected" src="https://res.cloudinary.com/dmogh4y33/image/upload/v1656708631/camera-icon-circle-21_k0bqrq.png" />
+                </label>
+                <input className=""
+                  accept="image/*"
+                  id="file-input" type="file"
+                  onChange={bannerChange}
+                />
+              </div>
+            </div>
 
             {/* DESTINATION */}
 
-            <div className="section-trip">
-              <div className="trip-first">
-                <input
-                  type="text"
-                  defaultValue=""
-                  className="input-time"
-                  placeholder="Destination"
-                  maxLength={25}
-                  style={(trip.destination.length == 0 || specialCharacters(trip.destination) || numbers(trip.destination) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
-                  onChange={(e) =>
-                    createTrip({
-                      ...trip,
-                      destination:
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase(),
-                    },
-                      setInfoError(false),
-                      setInfoCheck(false)
-                    )
-                  }
 
-                ></input>
+            <div className="trip-first">
+              <input
+                type="text"
+                defaultValue=""
+                className="input-time"
+                placeholder="Destination"
+                maxLength={25}
+                style={(trip.destination.length == 0 || specialCharacters(trip.destination) || numbers(trip.destination) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                onChange={(e) =>
+                  createTrip({
+                    ...trip,
+                    destination:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  },
+                    setInfoError(false),
+                    setInfoCheck(false)
+                  )
+                }
 
-                {/* PEOPLE */}
+              ></input>
 
-                <input
-                  type="number"
-                  min={1}
-                  id="people"
-                  className="input-time"
-                  placeholder="Travel buddies"
-                  style={(trip.people < 1 ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
-                  onChange={(e) =>
-                    createTrip({
-                      ...trip,
-                      people:
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase(),
-                    },
-                      setInfoError(false),
-                      setInfoCheck(false)
-                    )
-                  }
-                ></input>
+              {/* PEOPLE */}
 
-                {/* START OF THE TRIP */}
+              <input
+                type="number"
+                min={1}
+                id="people"
+                className="input-time"
+                placeholder="Travel buddies"
+                style={(trip.people < 1 ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                onChange={(e) =>
+                  createTrip({
+                    ...trip,
+                    people:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  },
+                    setInfoError(false),
+                    setInfoCheck(false)
+                  )
+                }
+              ></input>
 
-                <input
-                  type="date"
-                  className="input-time"
-                  placeholder="Start"
-                  style={(trip.start_of_the_trip == "" || trip.start_of_the_trip > trip.end_of_the_trip ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
-                  onChange={(e) =>
-                    createTrip({
-                      ...trip,
-                      start_of_the_trip:
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase(),
-                    },
-                      setInfoError(false),
-                      setInfoCheck(false)
-                    )
-                  }
-                ></input>
+              {/* START OF THE TRIP */}
 
-                {/* END OF THE TRIP */}
+              <input
+                type="date"
+                className="input-time"
+                placeholder="Start"
+                style={(trip.start_of_the_trip == "" || trip.start_of_the_trip > trip.end_of_the_trip ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                onChange={(e) =>
+                  createTrip({
+                    ...trip,
+                    start_of_the_trip:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  },
+                    setInfoError(false),
+                    setInfoCheck(false)
+                  )
+                }
+              ></input>
 
-                <input
-                  id="endTrip"
-                  type="date"
-                  required
-                  className="input-time"
-                  placeholder="End"
-                  style={(trip.start_of_the_trip > trip.end_of_the_trip || trip.end_of_the_trip == "" ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
-                  onChange={(e) =>
-                    createTrip({
-                      ...trip,
-                      end_of_the_trip:
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase(),
-                    },
-                      setInfoError(false),
-                      setInfoCheck(false)
-                    )
-                  }
-                ></input>
+              {/* END OF THE TRIP */}
 
-                {/* TRANSPORT */}
+              <input
+                id="endTrip"
+                type="date"
+                required
+                className="input-time"
+                placeholder="End"
+                style={(trip.start_of_the_trip > trip.end_of_the_trip || trip.end_of_the_trip == "" ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                onChange={(e) =>
+                  createTrip({
+                    ...trip,
+                    end_of_the_trip:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  },
+                    setInfoError(false),
+                    setInfoCheck(false)
+                  )
+                }
+              ></input>
 
-                <select
-                  name="transporte"
-                  className="input-time"
-                  placeholder="none"
-                  onChange={(e) =>
-                    createTrip({
-                      ...trip,
-                      transport:
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase(),
-                    },
-                      setInfoError(false),
-                      setInfoCheck(false)
-                    )
-                  }
-                >
-                  <option>None</option>
-                  <option>Car</option>
-                  <option>Airplane</option>
-                  <option>Train</option>
-                  <option>Boat</option>
-                  <option>Bike</option>
-                  <option>Motorcycle</option>
-                </select>
+              {/* TRANSPORT */}
 
-                {/* COST */}
+              <select
+                name="transporte"
+                className="input-time"
+                placeholder="none"
+                onChange={(e) =>
+                  createTrip({
+                    ...trip,
+                    transport:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  },
+                    setInfoError(false),
+                    setInfoCheck(false)
+                  )
+                }
+              >
+                <option>None</option>
+                <option>Car</option>
+                <option>Airplane</option>
+                <option>Train</option>
+                <option>Boat</option>
+                <option>Bike</option>
+                <option>Motorcycle</option>
+              </select>
 
-                <input
-                  type="number"
-                  max="9999"
-                  min={0}
-                  id="cost"
-                  defaultValue={store.trip.cost}
-                  className="input-time"
-                  placeholder="Cost"
-                  onChange={(e) =>
-                    createTrip({
-                      ...trip,
-                      cost:
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase(),
-                    },
-                      setInfoError(false),
-                      setInfoCheck(false)
-                    )
-                  }
-                ></input>
-              </div>
+              {/* COST */}
+
+              <input
+                type="number"
+                max="9999"
+                min={0}
+                id="cost"
+                defaultValue={store.trip.cost}
+                className="input-time"
+                placeholder="Cost"
+                onChange={(e) =>
+                  createTrip({
+                    ...trip,
+                    cost:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1).toLowerCase(),
+                  },
+                    setInfoError(false),
+                    setInfoCheck(false)
+                  )
+                }
+              ></input>
             </div>
+
 
             {/* DESCRIPTION TRIP */}
 
             <div className="section-text">
-              <div className="text-area">
+              <div className="text-area2">
                 <textarea
                   className="text-information "
                   defaultValue={store.trip.text}
@@ -314,10 +320,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                   }
                 ></textarea>
               </div>
-              {
-                <p className="counter-bio">{trip.text ? trip.text.length : 0}/280</p>
-              }
             </div>
+            {
+              <p className="counter-text">{trip.text ? trip.text.length : 0}/280</p>
+            }
           </div>
           <div className="modal-footer">
             <div className="save-footer">
@@ -350,7 +356,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
             </div>
           ) : null}
 
-          {trip.people < 1 ? (
+          {trip.people < 1 && trip.people != "" ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>At least one travel companion</p>
