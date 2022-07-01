@@ -16,7 +16,7 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
       aria-modal="true"
       style={{
         display: "block",
-        backdropFilter: "brightness(20%)",
+        backdropFilter: "blur(3px) brightness(40%)",
       }}
     >
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">

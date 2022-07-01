@@ -8,6 +8,10 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [showFavorite, setShowFavorite] = useState(false);
 
+  useEffect(() => {
+
+  }, [window.scrollTo({ top: 0, left: 0, behavior: "smooth" })]);
+
   return (
     <header>
       <div className="nav-traveland text-white ">

@@ -9,7 +9,6 @@ import moment from "moment";
 import "../../styles/profile.css";
 
 export const Profile = () => {
-
   const { store, actions } = useContext(Context);
   const [showEdit, setShowEdit] = useState(false);
   const [showEdit2, setShowEdit2] = useState(false);
@@ -21,7 +20,6 @@ export const Profile = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     actions.getProfile(id);
     actions.getUserTrips();
     actions.getUserProfiles();

@@ -76,8 +76,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
   const specialCharacters = (element) => {
     if (Array.isArray(special)) {
       for (let value of special) {
-        for (let x of element) {
-          if (value == x) {
+        for (let i of element) {
+          if (value == i) {
             return true;
           } else false;
         }
@@ -99,7 +99,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
         aria-modal="true"
         style={{
           display: "block",
-          backdropFilter: "brightness(20%)",
+          backdropFilter: "blur(3px) brightness(40%)",
         }}
       >
         <div className="modal-box1">

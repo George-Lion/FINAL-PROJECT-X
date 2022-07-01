@@ -5,7 +5,6 @@ import "../../styles/changePhotoModal.css";
 export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
   const { store, actions } = useContext(Context);
   const [selectedImage, setSelectedImage] = useState();
-  const ref = useRef();
 
   const imageChange = (e) => {
 
@@ -26,7 +25,7 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
       aria-modal="true"
       style={{
         display: "block",
-        backdropFilter: "brightness(20%)",
+        backdropFilter: "blur(3px) brightness(40%)",
       }}
     >
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
