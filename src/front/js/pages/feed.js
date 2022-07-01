@@ -162,11 +162,16 @@ export const Feed = () => {
               </div>
             );
           })}
-          <i className="arrow-up fas fa-arrow-alt-circle-up" type="button"
+
+
+
+
+
+          {/*     <i className="arrow-up fas fa-arrow-alt-circle-up" type="button"
             onClick={() => {
               window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
             }}
-          ></i>
+          ></i> */}
         </div>
 
       </div>
