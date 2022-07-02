@@ -176,13 +176,13 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 maxLength={25}
                 style={
                   trip.destination.length == "" ||
-                  specialCharacters(trip.destination) ||
-                  numbers(trip.destination)
+                    specialCharacters(trip.destination) ||
+                    numbers(trip.destination)
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "4px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -210,10 +210,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 style={
                   trip.people < 1
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "4px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -238,12 +238,12 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 placeholder="Start"
                 style={
                   trip.start_of_the_trip == "" ||
-                  trip.start_of_the_trip > trip.end_of_the_trip
+                    trip.start_of_the_trip > trip.end_of_the_trip
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "4px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -270,12 +270,12 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 placeholder="End"
                 style={
                   trip.start_of_the_trip > trip.end_of_the_trip ||
-                  trip.end_of_the_trip == ""
+                    trip.end_of_the_trip == ""
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "4px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -332,10 +332,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 style={
                   specialCharacters(trip.cost)
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "4px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -425,8 +425,8 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
           ) : null}
 
           {trip.destination == "" ||
-          trip.start_of_the_trip.length == 0 ||
-          trip.end_of_the_trip.length == 0 ? (
+            trip.start_of_the_trip.length == 0 ||
+            trip.end_of_the_trip.length == 0 ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>the field is required</p>
@@ -448,8 +448,8 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
           ) : null}
 
           {trip.start_of_the_trip > trip.end_of_the_trip &&
-          trip.start_of_the_trip != "" &&
-          trip.end_of_the_trip != "" ? (
+            trip.start_of_the_trip != "" &&
+            trip.end_of_the_trip != "" ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>the dates do not match</p>
@@ -464,6 +464,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
           ) : null}
         </div>
       </div>
+      <div className="eliminar"></div>
     </Fragment>
   );
 };
