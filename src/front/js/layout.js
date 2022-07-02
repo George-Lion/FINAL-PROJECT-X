@@ -37,7 +37,11 @@ const Layout = () => {
                 )}
               </Route>
               <Route exact path="/register">
-                <Register />
+                {store.logged != true ? (
+                  <Register />
+                ) : (
+                  <Redirect to="/feed"></Redirect>
+                )}
               </Route>
               <Route exact path="/feed">
                 {store.logged == true ? <Feed /> : <Redirect to="/"></Redirect>}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/changePhotoModal.css";
 
@@ -8,10 +8,9 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
   const ref = useRef();
 
   const imageChange = (e) => {
-
     if (e.target.files && e.target.files.length > 0) {
       editUser({ ...user, profile_picture: e.target.files[0] }),
-        setSelectedImage(e.target.files[0])
+        setSelectedImage(e.target.files[0]);
     }
   };
 
@@ -19,21 +18,17 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
     ref.current.value = null;
     editUser();
     setSelectedImage();
-
   };
 
   const reset = () => {
     ref.current.value = null;
-
   };
 
-
   const styles = {
-
     preview: {
       display: "flex",
       flexDirection: "column",
-      zIndex: "2"
+      zIndex: "2",
     },
     image: { width: "150px", height: "150px" },
   };
@@ -72,15 +67,27 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
           </div>
           <div className="row m-4">
             <div className="row">
-
               {/* COVER & PROFILE PICTURE*/}
 
               <section className="user-pi">
                 <div className="modal-pi">
-                  <img className="modal-pic" src={selectedImage == undefined ? store.profile.profile_picture : URL.createObjectURL(selectedImage)} alt="img" />
+                  <img
+                    className="modal-pic"
+                    src={
+                      selectedImage == undefined
+                        ? store.profile.profile_picture
+                        : URL.createObjectURL(selectedImage)
+                    }
+                    alt="img"
+                  />
                   {selectedImage && (
                     <div style={styles.preview}>
-                      <button className="delete-button" onClick={() => { removeSelectedImage() }}>
+                      <button
+                        className="delete-button"
+                        onClick={() => {
+                          removeSelectedImage();
+                        }}
+                      >
                         Remove This Images
                       </button>
                     </div>

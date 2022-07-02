@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import image from "./img/traveland.png";
@@ -44,14 +44,20 @@ export const Navbar = () => {
               </li>
 
               <li className="pt-2">
-                <Link
-                  to="/message"
-
-                  className="navbar-icon me-4 text-light "
-                > {store.match && store.match.length > 0 && store.match.filter((x) => x.read != true).length > 0 ? <div className="message-count"> {store.match.filter((x) => x.read != true).length}</div> : null}
-
-                  <i className="ras fas fa-envelope" onClick={() => actions.resetearTrip()}></i>
-
+                <Link to="/message" className="navbar-icon me-4 text-light ">
+                  {" "}
+                  {store.match &&
+                  store.match.length > 0 &&
+                  store.match.filter((x) => x.read != true).length > 0 ? (
+                    <div className="message-count">
+                      {" "}
+                      {store.match.filter((x) => x.read != true).length}
+                    </div>
+                  ) : null}
+                  <i
+                    className="ras fas fa-envelope"
+                    onClick={() => actions.resetearTrip()}
+                  ></i>
                 </Link>
               </li>
 
