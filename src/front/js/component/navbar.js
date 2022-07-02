@@ -32,16 +32,6 @@ export const Navbar = () => {
                   ></i>
                 </Link>
               </li>
-
-              <li className="pt-2">
-                <Link to="/myTrips/" className="navbar-icon me-4 text-light ">
-                  <i
-                    className="ras fas fa-map-marker-alt"
-                    onClick={() => actions.resetearTrip()}
-                  ></i>
-                </Link>
-              </li>
-
               <li className="pt-2">
                 <Link to="/message" className="navbar-icon me-4 text-light ">
                   {" "}
@@ -95,6 +85,16 @@ export const Navbar = () => {
                         Profile
                       </li>
                     </Link>
+
+                    <Link to="/myTrips/" className="link-styles">
+                      <li
+                        className="nav-links ps-3"
+                        onClick={() => actions.resetearTrip()}
+                      >
+                        My trips
+                      </li>
+                    </Link>
+
                     <Link to="/favorites" className="link-styles">
                       <li
                         className="nav-links ps-3"
