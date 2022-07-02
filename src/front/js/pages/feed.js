@@ -10,6 +10,7 @@ export const Feed = () => {
 
   useEffect(() => {
     actions.verify();
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     actions.getTrips();
     actions.getUserTrips();
   }, []);

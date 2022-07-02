@@ -10,6 +10,7 @@ export const NoEditProfile = () => {
 
   useEffect(() => {
     actions.verify();
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     actions.getProfile(id);
     actions.getUserTripsById(id);
   }, []);
