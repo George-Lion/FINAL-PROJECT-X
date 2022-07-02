@@ -188,6 +188,10 @@ export const Profile = () => {
                 title="click to create a trip"
                 onClick={() => {
                   setShowCreateTrip(true);
+                  trip.destination = "";
+                  trip.start_of_the_trip = "";
+                  trip.end_of_the_trip = "";
+                  trip.people = "";
                 }}
               >
                 <i className="fas fa-plus"></i>

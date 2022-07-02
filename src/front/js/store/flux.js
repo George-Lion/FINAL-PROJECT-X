@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-aaswi73eujd.ws-eu51.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-aaswi73eujd.ws-eu47.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -374,6 +374,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           getActions().getUserTrips();
         }
       },
+
+
     },
   };
 };
