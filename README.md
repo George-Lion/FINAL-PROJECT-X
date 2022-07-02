@@ -1,4 +1,3 @@
-
 # Librerias instaladas aparte de las que ya usamos habitualmente:
 
 `npm install moment --save`
@@ -7,11 +6,12 @@ https://momentjs.com/
 Google Maps
 Google Maps JavaScript API →`npm i @react-google-maps/api`
 Google Maps JavaScript API React Wrapper on NPM → `npm i @googlemaps/react-wrapper`
-npm install --save react-geocode
+Google Maps Geocode →`npm install --save react-geocode`
+React Icons →`npm i react-icons`
 
 Descripción de que trata la plataforma:
 
-Se busca que gente que tenga ganas de viajar pero no se quiera sentir sola, pueda buscar acompañantes a través de nuestra web para poder encontrar mutuals y además de estar en compañia, poder tener la posibilidad de hacer amistades. 
+Se busca que gente que tenga ganas de viajar pero no se quiera sentir sola, pueda buscar acompañantes a través de nuestra web para poder encontrar mutuals y además de estar en compañia, poder tener la posibilidad de hacer amistades.
 
 # WebApp boilerplate with React JS and Flask API
 

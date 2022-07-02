@@ -9,9 +9,9 @@ export const Feed = () => {
   const { actions, store } = useContext(Context);
 
   useEffect(() => {
+    actions.verify();
     actions.getTrips();
     actions.getUserTrips();
-    actions.verify();
   }, []);
 
   return (

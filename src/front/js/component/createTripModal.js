@@ -3,12 +3,11 @@ import { Context } from "../store/appContext";
 import "../../styles/createTripModal.css";
 
 export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
-  const { store, actions } = useContext(Context)
+  const { store, actions } = useContext(Context);
   const [infoError, setInfoError] = useState(false);
   const [infoCheck, setInfoCheck] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
   const special = [
-    " ",
     "$",
     "#",
     "*",
@@ -45,10 +44,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
   const numberList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const bannerChange = (e) => {
-
     if (e.target.files && e.target.files.length > 0) {
       createTrip({ ...trip, destination_picture: e.target.files[0] }),
-        setSelectedImage(e.target.files[0])
+        setSelectedImage(e.target.files[0]);
     }
   };
 
@@ -103,7 +101,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
     trip.cost = "";
     trip.text = "";
     trip.destination_picture = "";
-  }
+  };
 
   return (
     <Fragment>
@@ -140,16 +138,29 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
           </div>
           <div className="content-body">
             <div className="banner-box">
-              <img className="modal-banner" src={selectedImage == undefined ? "https://res.cloudinary.com/dmogh4y33/image/upload/v1656681829/d_hivrmb.jpg" : URL.createObjectURL(selectedImage)} alt="img" />
+              <img
+                className="modal-banner"
+                src={
+                  selectedImage == undefined
+                    ? "https://res.cloudinary.com/dmogh4y33/image/upload/v1656681829/d_hivrmb.jpg"
+                    : URL.createObjectURL(selectedImage)
+                }
+                alt="img"
+              />
             </div>
             <div className="banner-x">
-              <div class="image-upload">
-                <label for="file-input">
-                  <img className="image-selected" src="https://res.cloudinary.com/dmogh4y33/image/upload/v1656708631/camera-icon-circle-21_k0bqrq.png" />
+              <div className="image-upload">
+                <label htmlFor="file-input">
+                  <img
+                    className="image-selected"
+                    src="https://res.cloudinary.com/dmogh4y33/image/upload/v1656708631/camera-icon-circle-21_k0bqrq.png"
+                  />
                 </label>
-                <input className=""
+                <input
+                  className=""
                   accept="image/*"
-                  id="file-input" type="file"
+                  id="file-input"
+                  type="file"
                   onChange={bannerChange}
                 />
               </div>
@@ -157,27 +168,35 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
 
             {/* DESTINATION */}
 
-
             <div className="trip-first">
               <input
                 type="text"
-                defaultValue=""
                 className="input-time"
                 placeholder="Destination"
                 maxLength={25}
-                style={(trip.destination.length == 0 || specialCharacters(trip.destination) || numbers(trip.destination) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                style={
+                  trip.destination.length == "" ||
+                  specialCharacters(trip.destination) ||
+                  numbers(trip.destination)
+                    ? {
+                        borderStyle: "solid",
+                        borderWidth: "4px",
+                        borderColor: "#DB2C2C",
+                      }
+                    : null
+                }
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    destination:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  },
+                  createTrip(
+                    {
+                      ...trip,
+                      destination:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
                     setInfoError(false),
                     setInfoCheck(false)
                   )
                 }
-
               ></input>
 
               {/* PEOPLE */}
@@ -188,14 +207,23 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 id="people"
                 className="input-time"
                 placeholder="Travel buddies"
-                style={(trip.people < 1 ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                style={
+                  trip.people < 1
+                    ? {
+                        borderStyle: "solid",
+                        borderWidth: "4px",
+                        borderColor: "#DB2C2C",
+                      }
+                    : null
+                }
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    people:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  },
+                  createTrip(
+                    {
+                      ...trip,
+                      people:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
                     setInfoError(false),
                     setInfoCheck(false)
                   )
@@ -208,14 +236,24 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 type="date"
                 className="input-time"
                 placeholder="Start"
-                style={(trip.start_of_the_trip == "" || trip.start_of_the_trip > trip.end_of_the_trip ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                style={
+                  trip.start_of_the_trip == "" ||
+                  trip.start_of_the_trip > trip.end_of_the_trip
+                    ? {
+                        borderStyle: "solid",
+                        borderWidth: "4px",
+                        borderColor: "#DB2C2C",
+                      }
+                    : null
+                }
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    start_of_the_trip:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  },
+                  createTrip(
+                    {
+                      ...trip,
+                      start_of_the_trip:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
                     setInfoError(false),
                     setInfoCheck(false)
                   )
@@ -230,14 +268,24 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 required
                 className="input-time"
                 placeholder="End"
-                style={(trip.start_of_the_trip > trip.end_of_the_trip || trip.end_of_the_trip == "" ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                style={
+                  trip.start_of_the_trip > trip.end_of_the_trip ||
+                  trip.end_of_the_trip == ""
+                    ? {
+                        borderStyle: "solid",
+                        borderWidth: "4px",
+                        borderColor: "#DB2C2C",
+                      }
+                    : null
+                }
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    end_of_the_trip:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  },
+                  createTrip(
+                    {
+                      ...trip,
+                      end_of_the_trip:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
                     setInfoError(false),
                     setInfoCheck(false)
                   )
@@ -251,12 +299,13 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 className="input-time"
                 placeholder="none"
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    transport:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  },
+                  createTrip(
+                    {
+                      ...trip,
+                      transport:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
                     setInfoError(false),
                     setInfoCheck(false)
                   )
@@ -274,27 +323,35 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               {/* COST */}
 
               <input
-                type="number"
-                max="9999"
+                type="text"
+                max={9999}
                 min={0}
                 id="cost"
-                defaultValue={store.trip.cost}
                 className="input-time"
                 placeholder="Cost"
+                style={
+                  specialCharacters(trip.cost)
+                    ? {
+                        borderStyle: "solid",
+                        borderWidth: "4px",
+                        borderColor: "#DB2C2C",
+                      }
+                    : null
+                }
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    cost:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  },
+                  createTrip(
+                    {
+                      ...trip,
+                      cost:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
                     setInfoError(false),
                     setInfoCheck(false)
                   )
                 }
               ></input>
             </div>
-
 
             {/* DESCRIPTION TRIP */}
 
@@ -308,12 +365,13 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                   placeholder="About me"
                   maxLength={280}
                   onChange={(e) =>
-                    createTrip({
-                      ...trip,
-                      text:
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase(),
-                    },
+                    createTrip(
+                      {
+                        ...trip,
+                        text:
+                          e.target.value.charAt(0).toUpperCase() +
+                          e.target.value.slice(1).toLowerCase(),
+                      },
                       setInfoError(false),
                       setInfoCheck(false)
                     )
@@ -322,22 +380,25 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               </div>
             </div>
             {
-              <p className="counter-text">{trip.text ? trip.text.length : 0}/280</p>
+              <p className="counter-text">
+                {trip.text ? trip.text.length : 0}/280
+              </p>
             }
           </div>
           <div className="modal-footer">
             <div className="save-footer">
-
               {/* SAVE BUTTON */}
 
               <button
                 className="save-button"
                 onClick={() => {
-                  if (trip.start_of_the_trip < trip.end_of_the_trip &&
+                  if (
+                    trip.start_of_the_trip < trip.end_of_the_trip &&
                     !specialCharacters(trip.destination) &&
                     !numbers(trip.destination) &&
                     !trip.destination == "" &&
-                    trip.people >= 1) {
+                    trip.people >= 1
+                  ) {
                     messageCheck();
                     actions.createTrip(trip);
                   } else {
@@ -363,21 +424,32 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
             </div>
           ) : null}
 
-          {trip.destination == 0 || trip.start_of_the_trip.length == 0 || trip.end_of_the_trip.length == 0 ? (
+          {trip.destination == "" ||
+          trip.start_of_the_trip.length == 0 ||
+          trip.end_of_the_trip.length == 0 ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>the field is required</p>
             </div>
           ) : null}
 
-          {numbers(trip.destination) || specialCharacters(trip.destination) ? (
+          {specialCharacters(trip.destination) ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>Only letters</p>
             </div>
           ) : null}
 
-          {trip.start_of_the_trip > trip.end_of_the_trip && trip.start_of_the_trip != "" && trip.end_of_the_trip != "" ? (
+          {numbers(trip.destination) ? (
+            <div className="message-error">
+              <i className="icon-error fas fa-exclamation-circle"></i>
+              <p>Only letters 2</p>
+            </div>
+          ) : null}
+
+          {trip.start_of_the_trip > trip.end_of_the_trip &&
+          trip.start_of_the_trip != "" &&
+          trip.end_of_the_trip != "" ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>the dates do not match</p>
@@ -395,5 +467,3 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
     </Fragment>
   );
 };
-
-

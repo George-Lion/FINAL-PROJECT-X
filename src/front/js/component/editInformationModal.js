@@ -60,7 +60,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
         history.push("/");
         actions.logout();
       }
-    } catch (e) { }
+    } catch (e) {}
   };
 
   const messageError = () => {
@@ -120,7 +120,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
             ></i>
           </div>
           <div className="content-body">
-
             {/* USERNAME */}
 
             <div className="section-user">
@@ -133,7 +132,16 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   id="username"
                   name="Username"
                   placeholder="Username"
-                  style={(user.username.length == 0 || specialCharacters(user.username) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                  style={
+                    user.username.length == 0 ||
+                    specialCharacters(user.username)
+                      ? {
+                          borderStyle: "solid",
+                          borderWidth: "4px",
+                          borderColor: "#DB2C2C",
+                        }
+                      : null
+                  }
                   onChange={(e) =>
                     editUser(
                       { ...user, username: e.target.value },
@@ -157,7 +165,16 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   id="first"
                   name="First"
                   placeholder="First name"
-                  style={(user.firstname.length == 0 || specialCharacters(user.firstname) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                  style={
+                    user.firstname.length == 0 ||
+                    specialCharacters(user.firstname)
+                      ? {
+                          borderStyle: "solid",
+                          borderWidth: "4px",
+                          borderColor: "#DB2C2C",
+                        }
+                      : null
+                  }
                   onChange={(e) =>
                     editUser(
                       {
@@ -180,7 +197,16 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   id="last"
                   name="Last"
                   placeholder="Last name"
-                  style={(user.lastname.length == 0 || specialCharacters(user.lastname) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                  style={
+                    user.lastname.length == 0 ||
+                    specialCharacters(user.lastname)
+                      ? {
+                          borderStyle: "solid",
+                          borderWidth: "4px",
+                          borderColor: "#DB2C2C",
+                        }
+                      : null
+                  }
                   onChange={(e) =>
                     editUser(
                       {
@@ -372,14 +398,18 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
             </div>
           ) : null}
 
-          {user.username.length == 0 || user.firstname.length == 0 || user.lastname.length == 0 ? (
+          {user.username.length == 0 ||
+          user.firstname.length == 0 ||
+          user.lastname.length == 0 ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>the field is required</p>
             </div>
           ) : null}
 
-          {specialCharacters(user.username) || specialCharacters(user.firstname) || specialCharacters(user.lastname) ? (
+          {specialCharacters(user.username) ||
+          specialCharacters(user.firstname) ||
+          specialCharacters(user.lastname) ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>Only special characters _ or . </p>
@@ -394,6 +424,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
           ) : null}
         </div>
       </div>
-    </Fragment >
+    </Fragment>
   );
 };

@@ -369,7 +369,6 @@ def get_trips():
 # GET TRIPS SEARCH
 
 @api.route("/search", methods=["GET", "POST"])
-@jwt_required()
 def get_trips_search():
     requested_destination = request.json.get("destination")
     requested_start_date = request.json.get("date")

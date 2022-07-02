@@ -5,13 +5,14 @@ import "../../styles/footer.css";
 
 export const Footer = () => {
   const { store, actions } = useContext(Context);
+
   return (
     <div className="footer container ">
       <footer className="mt-auto py-3 my-4">
         <ul className="nav justify-content-center border-bottom pb-3 mb-3">
           <Link
             to="/feed"
-            onClick={() => actions.resetStates()}
+            onClick={() => actions.resetearTrip()}
             style={{ textDecoration: "none" }}
           >
             <li

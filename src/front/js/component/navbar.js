@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import image from "./img/traveland.png";
@@ -8,9 +8,9 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [showFavorite, setShowFavorite] = useState(false);
 
-  useEffect(() => {
-
-  }, [window.scrollTo({ top: 0, left: 0, behavior: "smooth" })]);
+  useEffect(() => {}, [
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" }),
+  ]);
 
   return (
     <header>
