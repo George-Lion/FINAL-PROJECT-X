@@ -131,8 +131,8 @@
 
 .user-profile .options-profile button {
   border: 0;
-  padding: 8px 20px;
-  border-radius: 8px;
+  padding: 8px 13px;
+  border-radius: 50px;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   cursor: pointer;
