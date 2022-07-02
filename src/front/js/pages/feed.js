@@ -98,7 +98,12 @@ export const Feed = () => {
                     {moment(e.end_of_the_trip).format("LL")}
                   </div>
                   <div className="il-feed text-white">
-                    <i className="fas fa-user-friends"></i> {e.people}{" "}
+                    <i className="fas fa-user-friends"></i>  {e.trip_in_match
+                      ? e.trip_in_match.filter(
+                        (x) => x.accepted == true
+                      ).length
+                      : 0}
+                    /{e.people}{" "}
                   </div>
                   {!e.likes.includes(store.user_id) ? (
                     <div className="il-feed text-white">

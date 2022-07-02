@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/createTripModal.css";
+import { string } from "prop-types";
 
 export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
   const { store, actions } = useContext(Context);
@@ -92,6 +93,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
     }
   };
 
+  const onlyLettersAndSpaces = (str) => {
+    return /^[A-Za-z\s]*$/.test(str);
+  }
+
   const deleteTripState = () => {
     trip.destination = "";
     trip.people = "";
@@ -176,8 +181,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 maxLength={25}
                 style={
                   trip.destination.length == "" ||
-                    specialCharacters(trip.destination) ||
-                    numbers(trip.destination)
+                    !onlyLettersAndSpaces(trip.destination)
                     ? {
                       borderStyle: "solid",
                       borderWidth: "4px",
@@ -247,7 +251,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                     : null
                 }
                 onChange={(e) =>
-                  createTrip(
+                  onlyLettersAndSpaces(createTrip(
                     {
                       ...trip,
                       start_of_the_trip:
@@ -257,7 +261,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                     setInfoError(false),
                     setInfoCheck(false)
                   )
-                }
+                  )}
               ></input>
 
               {/* END OF THE TRIP */}
@@ -387,15 +391,15 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
           </div>
           <div className="modal-footer">
             <div className="save-footer">
+
               {/* SAVE BUTTON */}
 
               <button
                 className="save-button"
                 onClick={() => {
                   if (
+                    onlyLettersAndSpaces(trip.destination) &&
                     trip.start_of_the_trip < trip.end_of_the_trip &&
-                    !specialCharacters(trip.destination) &&
-                    !numbers(trip.destination) &&
                     !trip.destination == "" &&
                     trip.people >= 1
                   ) {
@@ -433,17 +437,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
             </div>
           ) : null}
 
-          {specialCharacters(trip.destination) ? (
+          {!onlyLettersAndSpaces(trip.destination) ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>Only letters</p>
-            </div>
-          ) : null}
-
-          {numbers(trip.destination) ? (
-            <div className="message-error">
-              <i className="icon-error fas fa-exclamation-circle"></i>
-              <p>Only letters 2</p>
             </div>
           ) : null}
 
