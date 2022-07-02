@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
 import { Context } from "./store/appContext";
 import { Feed } from "./pages/feed";
 import { Trip } from "./pages/trip";
@@ -15,6 +14,7 @@ import { Help } from "./pages/help";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { ScrollToTop } from './component/scrollToTop';
 
 //create your first component
 const Layout = () => {
@@ -25,9 +25,9 @@ const Layout = () => {
   return (
     <div>
       <BrowserRouter basename={basename}>
-        <ScrollToTop>
           {store.logged == true ? <Navbar /> : null}
           <div>
+          <ScrollToTop />          
             <Switch>
               <Route exact path="/">
                 {store.logged != true ? (
@@ -96,7 +96,6 @@ const Layout = () => {
             </Switch>
           </div>
           <Footer />
-        </ScrollToTop>
       </BrowserRouter>
     </div>
   );

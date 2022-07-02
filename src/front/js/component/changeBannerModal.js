@@ -16,26 +16,26 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
       aria-modal="true"
       style={{
         display: "block",
-        backdropFilter: "brightness(20%)",
+        backdropFilter: "blur(3px) brightness(40%)",
       }}
     >
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div className="user-modal modal-content text-light">
+        <div className="banner-modal modal-content text-light">
           <div className="modal-header">
-            <h5 className="modal-title" id="staticBackdropLabel">
+            <h4 className="modal-title" id="staticBackdropLabel">
               Select a picture
-            </h5>
+            </h4>
             {/* CLOSE BUTTON */}
-            <button
+            <i
               type="button"
-              className="btn-close bg-light"
+              className="close-photo far fa-times-circle"
               aria-label="Close"
               onClick={() => {
                 closeModal();
               }}
-            ></button>
+            ></i>
           </div>
-          <div className="row m-4">
+          <div className="">
             <div className="">
 
               <div
@@ -48,10 +48,10 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
 
               {/* COVER & PROFILE PICTURE*/}
 
-              <div className="mb-3">
+              <div className="content-cover mb-3">
                 <label className="">
                   <input
-                    className="custom-file-input2"
+                    className="custom-file-input"
                     type="file"
                     onChange={(e) =>
                       editUser({ ...user, banner_picture: e.target.files[0] })

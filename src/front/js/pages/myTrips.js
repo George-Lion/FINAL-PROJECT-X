@@ -9,7 +9,6 @@ export const MyTrips = () => {
 
   useEffect(() => {
     actions.verify();
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     if (store.trip) {
       actions.getUserTrips();
     }

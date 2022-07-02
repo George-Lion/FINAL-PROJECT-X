@@ -28,7 +28,6 @@ export const Trip = () => {
     if (!store.trip) {
       history.push("/feed");
     }
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
   useEffect(() => {
@@ -95,7 +94,7 @@ export const Trip = () => {
                         store.trip.user_id_of_trip_creator == store.user_id
                           ? "/profile/" + store.trip.user_id_of_trip_creator
                           : "/noEditProfile/" +
-                            store.trip.user_id_of_trip_creator
+                          store.trip.user_id_of_trip_creator
                       }
                     >
                       <img src={store.trip.profile_picture} alt="img" />
@@ -132,7 +131,7 @@ export const Trip = () => {
                         <i
                           className={
                             store.trip.likes &&
-                            store.trip.likes.includes(store.user_id)
+                              store.trip.likes.includes(store.user_id)
                               ? "fas fa-heart text-danger me-2"
                               : "fas fa-heart me-2"
                           }
@@ -207,8 +206,8 @@ export const Trip = () => {
                     <i className="icon-options fas fa-user-friends"></i>
                     {store.trip.trip_in_match
                       ? store.trip.trip_in_match.filter(
-                          (x) => x.accepted == true
-                        ).length
+                        (x) => x.accepted == true
+                      ).length
                       : 0}
                     /{store.trip.people}
                   </li>
@@ -283,7 +282,7 @@ export const Trip = () => {
                               </h3>
                             </li>
                             {store.user_id ==
-                            store.trip.user_id_of_trip_creator ? (
+                              store.trip.user_id_of_trip_creator ? (
                               <li>
                                 <div className="edit-galery">
                                   <button

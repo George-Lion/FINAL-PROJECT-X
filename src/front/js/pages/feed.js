@@ -9,7 +9,6 @@ export const Feed = () => {
   const { actions, store } = useContext(Context);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     actions.getTrips();
     actions.getUserTrips();
     actions.verify();
@@ -164,14 +163,6 @@ export const Feed = () => {
               </div>
             );
           })}
-          <button
-            className="scroll-top"
-            onClick={() => {
-              window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-            }}
-          >
-            Scroll to top
-          </button>
         </div>
       </div>
     </Fragment>

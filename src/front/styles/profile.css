@@ -207,7 +207,7 @@
 
 .button-add-trip:hover {
   margin-right: 2px;
-  background: rgb(21, 117, 159);
+  background: #088fd8;
   border-radius: 20px;
   font-size: 3rem;
 }

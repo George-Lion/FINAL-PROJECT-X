@@ -8,6 +8,10 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [showFavorite, setShowFavorite] = useState(false);
 
+  useEffect(() => {
+
+  }, [window.scrollTo({ top: 0, left: 0, behavior: "smooth" })]);
+
   return (
     <header>
       <div className="nav-traveland text-white ">
@@ -28,7 +32,7 @@ export const Navbar = () => {
               <li className="pt-2">
                 <Link to="/feed" className="navbar-icon me-4 text-light ">
                   <i
-                    className="ras fas fa-suitcase-rolling"
+                    className="ras fas fa-house"
                     onClick={() => actions.resetearTrip()}
                   ></i>
                 </Link>

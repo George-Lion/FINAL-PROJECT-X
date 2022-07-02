@@ -60,7 +60,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
         history.push("/");
         actions.logout();
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const messageError = () => {
@@ -76,8 +76,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
   const specialCharacters = (element) => {
     if (Array.isArray(special)) {
       for (let value of special) {
-        for (let x of element) {
-          if (value == x) {
+        for (let i of element) {
+          if (value == i) {
             return true;
           } else false;
         }
@@ -99,40 +99,41 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
         aria-modal="true"
         style={{
           display: "block",
-          backdropFilter: "brightness(20%)",
+          backdropFilter: "blur(3px) brightness(40%)",
         }}
       >
         <div className="modal-box1">
-          <div className="content-head">
+          <div className="content-head modal-header">
             <div className="section-title">
-              <h3>Edit Profile</h3>
+              <h4>Edit Profile</h4>
             </div>
 
             {/* CLOSE BUTTON */}
 
-            <button
+            <i
               type="button"
-              className="btn-close bg-light"
+              className="close-button far fa-times-circle"
               aria-label="Close"
               onClick={() => {
                 closeModal();
               }}
-            ></button>
+            ></i>
           </div>
           <div className="content-body">
+
             {/* USERNAME */}
 
             <div className="section-user">
               <div className="section-username">
-                {/*  <label htmlFor="username">Username:</label> */}
                 <input
                   className="input-username"
                   type="text"
-                  maxLength={35}
+                  maxLength={25}
                   defaultValue={store.user.username}
                   id="username"
                   name="Username"
                   placeholder="Username"
+                  style={(user.username.length == 0 || specialCharacters(user.username) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
                   onChange={(e) =>
                     editUser(
                       { ...user, username: e.target.value },
@@ -144,30 +145,10 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
               </div>
             </div>
 
-            {user.username.length == 0 ? (
-              <div className="error-name">
-                <i className="icon-error fas fa-exclamation-circle"></i>
-                <p>username is required</p>
-              </div>
-            ) : null}
-            {user.username.length > 25 ? (
-              <div className="error-name">
-                <i className="icon-error fas fa-exclamation-circle"></i>
-                <p>Character limit exceeded (25)</p>
-              </div>
-            ) : null}
-            {specialCharacters(user.username) ? (
-              <div className="error-name">
-                <i className="icon-error fas fa-exclamation-circle"></i>
-                <p>Only special characters _ or . </p>
-              </div>
-            ) : null}
-
             {/* FIRSTNAME AND LASTNAME */}
 
             <div className="section-info">
               <div className="section-first">
-                {/* <label htmlFor="first">First Name:</label> */}
                 <input
                   className="input-style"
                   type="text"
@@ -175,7 +156,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   defaultValue={store.user.firstname}
                   id="first"
                   name="First"
-                  placeholder="FirstName"
+                  placeholder="First name"
+                  style={(user.firstname.length == 0 || specialCharacters(user.firstname) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
                   onChange={(e) =>
                     editUser(
                       {
@@ -187,22 +169,9 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                     )
                   }
                 ></input>
-                {user.firstname.length == 0 ? (
-                  <div className="error-name">
-                    <i className="icon-error fas fa-exclamation-circle"></i>
-                    <p>firstname is required</p>
-                  </div>
-                ) : null}
-                {user.firstname.length > 15 ? (
-                  <div className="error-name">
-                    <i className="icon-error fas fa-exclamation-circle"></i>
-                    <p>Character limit (15)</p>
-                  </div>
-                ) : null}
               </div>
 
               <div className="section-last">
-                {/* <label htmlFor="last">Last Name:</label> */}
                 <input
                   className="input-style"
                   type="text"
@@ -210,7 +179,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   defaultValue={store.user.lastname}
                   id="last"
                   name="Last"
-                  placeholder="LastName"
+                  placeholder="Last name"
+                  style={(user.lastname.length == 0 || specialCharacters(user.lastname) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
                   onChange={(e) =>
                     editUser(
                       {
@@ -222,12 +192,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                     )
                   }
                 ></input>
-                {user.lastname.length == 0 ? (
-                  <div className="error-name">
-                    <i className="icon-error fas fa-exclamation-circle"></i>
-                    <p>lastname is required</p>
-                  </div>
-                ) : null}
               </div>
             </div>
 
@@ -235,7 +199,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
 
             <div className="section-info">
               <div className="section-first">
-                {/* <label htmlFor="city">City:</label> */}
                 <input
                   className="input-style"
                   type="text"
@@ -259,7 +222,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                 ></input>
               </div>
               <div className="section-last">
-                {/* <label htmlFor="country">Country:</label> */}
                 <input
                   className="input-style"
                   type="text"
@@ -288,7 +250,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
 
             <div className="section-text">
               <div className="text-area">
-                {/* <label htmlFor="textDescription">About me:</label> */}
                 <textarea
                   className="text-information "
                   defaultValue={store.user.description}
@@ -317,6 +278,9 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
               }
             </div>
           </div>
+
+          {/*  DELETE PROFILE */}
+
           {confirmDelete ? (
             <div
               className="modal fade show"
@@ -366,43 +330,59 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
           ) : null}
 
           <div className="modal-footer">
-            <i
-              className="delete-icon fa-solid fa-trash"
-              title="delete trip"
-              style={{ fontSize: "20px" }}
-              onClick={() => {
-                setConfirmDelete(true);
-              }}
-            ></i>
+            <div className="buttons-footer">
+              <i
+                className="delete-profile fa-solid fa-trash"
+                type="button"
+                title="Click to delete profile"
+                style={{ fontSize: "20px" }}
+                onClick={() => {
+                  setConfirmDelete(true);
+                }}
+              ></i>
 
-            {/* SAVE BUTTON */}
+              {/* SAVE BUTTON */}
 
-            <button
-              className="save-button"
-              onClick={() => {
-                if (
-                  !specialCharacters(user.username) &&
-                  user.username.length > 0 &&
-                  user.username.length <= 25 &&
-                  user.firstname.length <= 15 &&
-                  user.firstname.length > 0 &&
-                  user.lastname.length > 0 &&
-                  user.lastname.length <= 15
-                ) {
-                  messageCheck();
-                  actions.editUser(user);
-                } else {
-                  messageError();
-                }
-              }}
-            >
-              {/* <i className="far fa-save me-2"></i> */}save
-            </button>
+              <button
+                className="save-button"
+                onClick={() => {
+                  if (
+                    !specialCharacters(user.username) &&
+                    !specialCharacters(user.firstname) &&
+                    !specialCharacters(user.lastname) &&
+                    user.username.length > 0 &&
+                    user.firstname.length > 0 &&
+                    user.lastname.length > 0
+                  ) {
+                    messageCheck();
+                    actions.editUser(user);
+                  } else {
+                    messageError();
+                  }
+                }}
+              >
+                save
+              </button>
+            </div>
           </div>
           {infoCheck == true ? (
             <div className="message-check">
               <i className="icon-check fas fa-check-circle"></i>
               <p>Changes saved</p>
+            </div>
+          ) : null}
+
+          {user.username.length == 0 || user.firstname.length == 0 || user.lastname.length == 0 ? (
+            <div className="message-error">
+              <i className="icon-error fas fa-exclamation-circle"></i>
+              <p>the field is required</p>
+            </div>
+          ) : null}
+
+          {specialCharacters(user.username) || specialCharacters(user.firstname) || specialCharacters(user.lastname) ? (
+            <div className="message-error">
+              <i className="icon-error fas fa-exclamation-circle"></i>
+              <p>Only special characters _ or . </p>
             </div>
           ) : null}
 
@@ -414,6 +394,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
           ) : null}
         </div>
       </div>
-    </Fragment>
+    </Fragment >
   );
 };

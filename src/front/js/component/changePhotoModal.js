@@ -5,32 +5,12 @@ import "../../styles/changePhotoModal.css";
 export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
   const { store, actions } = useContext(Context);
   const [selectedImage, setSelectedImage] = useState();
-  const ref = useRef();
 
   const imageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       editUser({ ...user, profile_picture: e.target.files[0] }),
         setSelectedImage(e.target.files[0]);
     }
-  };
-
-  const removeSelectedImage = () => {
-    ref.current.value = null;
-    editUser();
-    setSelectedImage();
-  };
-
-  const reset = () => {
-    ref.current.value = null;
-  };
-
-  const styles = {
-    preview: {
-      display: "flex",
-      flexDirection: "column",
-      zIndex: "2",
-    },
-    image: { width: "150px", height: "150px" },
   };
 
   return (
@@ -44,64 +24,44 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
       aria-modal="true"
       style={{
         display: "block",
-        backdropFilter: "brightness(20%)",
+        backdropFilter: "blur(3px) brightness(40%)",
       }}
     >
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="user-modal modal-content text-light">
           <div className="modal-header">
-            <h5 className="modal-title" id="staticBackdropLabel">
-              Change photo
-            </h5>
+            <h4 className="modal-title" id="staticBackdropLabel">
+              Profile picture
+            </h4>
 
             {/* CLOSE BUTTON */}
 
-            <button
+            <i
               type="button"
-              className="btn-close bg-light"
+              className="close-photo far fa-times-circle"
               aria-label="Close"
               onClick={() => {
                 closeModal();
               }}
-            ></button>
+            ></i>
           </div>
-          <div className="row m-4">
+          <div className="mt-3">
             <div className="row">
-              {/* COVER & PROFILE PICTURE*/}
+
+              {/*PROFILE PICTURE*/}
 
               <section className="user-pi">
                 <div className="modal-pi">
-                  <img
-                    className="modal-pic"
-                    src={
-                      selectedImage == undefined
-                        ? store.profile.profile_picture
-                        : URL.createObjectURL(selectedImage)
-                    }
-                    alt="img"
-                  />
-                  {selectedImage && (
-                    <div style={styles.preview}>
-                      <button
-                        className="delete-button"
-                        onClick={() => {
-                          removeSelectedImage();
-                        }}
-                      >
-                        Remove This Images
-                      </button>
-                    </div>
-                  )}
+                  <img className="modal-pic" src={selectedImage == undefined ? store.profile.profile_picture : URL.createObjectURL(selectedImage)} alt="img" />
                 </div>
                 <div className="modal-bt">
                   <label htmlFor="file" className="mx-auto">
                     <>
                       <div className="input-image">
-                        <input
+                        <input className="custom-file-input2"
                           accept="image/*"
                           type="file"
                           onChange={imageChange}
-                          ref={ref}
                         />
                       </div>
                     </>
@@ -114,7 +74,7 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
 
             <div className="modal-footer">
               <button
-                className="col-2 offset-1 btn btn-light"
+                className="save-changes"
                 onClick={() => {
                   actions.editUser(user);
                   closeModal();
