@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/changePhotoModal.css";
 
@@ -7,10 +7,9 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
   const [selectedImage, setSelectedImage] = useState();
 
   const imageChange = (e) => {
-
     if (e.target.files && e.target.files.length > 0) {
       editUser({ ...user, profile_picture: e.target.files[0] }),
-        setSelectedImage(e.target.files[0])
+        setSelectedImage(e.target.files[0]);
     }
   };
 

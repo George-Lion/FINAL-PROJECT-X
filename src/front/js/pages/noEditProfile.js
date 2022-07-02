@@ -9,6 +9,7 @@ export const NoEditProfile = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    actions.verify();
     actions.getProfile(id);
     actions.getUserTripsById(id);
   }, []);
@@ -72,87 +73,89 @@ export const NoEditProfile = () => {
           <div className="row row-cols-1 align-items-stretch g-4 ">
             <div className="d-flex overflow-auto">
               <div className="wrapper-trips">
-                {store.userTrips ? store.userTrips.map((e) => {
-                  return (
-                    <div
-                      key={e.id}
-                      className="col container "
-                      style={{ width: "280px" }}
-                    >
-                      <Link
-                        style={{ textDecoration: "none" }}
-                        to={"/trip/" + e.id}
-                      >
+                {store.userTrips
+                  ? store.userTrips.map((e) => {
+                      return (
                         <div
-                          className="card-image-box d-flex text-white bg-dark align-items-end "
-                          style={{
-                            minHeight: "350px",
-                            minWidth: "270px",
-                            display: "block",
-                            backgroundImage:
-                              "url(" + e.destination_picture + ")",
-                          }}
+                          key={e.id}
+                          className="col container "
+                          style={{ width: "280px" }}
                         >
-                          <div
-                            className="d-flex flex-column text-white "
-                            style={{
-                              minHeight: "50px",
-                              minWidth: "230px",
-                              display: "block",
-                            }}
+                          <Link
+                            style={{ textDecoration: "none" }}
+                            to={"/trip/" + e.id}
                           >
-                            <div className="card-title-area ms-3 ">
-                              <h3 className="">
-                                <i className="rute fas fa-map-marker-alt"></i>
-                                {e.destination}
-                              </h3>
+                            <div
+                              className="card-image-box d-flex text-white bg-dark align-items-end "
+                              style={{
+                                minHeight: "350px",
+                                minWidth: "270px",
+                                display: "block",
+                                backgroundImage:
+                                  "url(" + e.destination_picture + ")",
+                              }}
+                            >
+                              <div
+                                className="d-flex flex-column text-white "
+                                style={{
+                                  minHeight: "50px",
+                                  minWidth: "230px",
+                                  display: "block",
+                                }}
+                              >
+                                <div className="card-title-area ms-3 ">
+                                  <h3 className="">
+                                    <i className="rute fas fa-map-marker-alt"></i>
+                                    {e.destination}
+                                  </h3>
+                                </div>
+                                <ul className="card-text-box list-unstyled ms-3">
+                                  <li className="mb-1">
+                                    <i
+                                      className="icon fas fa-user-friends"
+                                      style={{ fontSize: "16px" }}
+                                    >
+                                      {" "}
+                                    </i>
+                                    {e.people}
+                                  </li>
+                                  <li className="mb-1">
+                                    <i
+                                      className="icon fas fa-route"
+                                      style={{ fontSize: "16px" }}
+                                    ></i>
+                                    {e.transport}
+                                  </li>
+                                  <li className="mb-1">
+                                    <i
+                                      className="icon fas fa-coins"
+                                      style={{ fontSize: "16px" }}
+                                    ></i>
+                                    {e.cost} €
+                                  </li>
+                                  <li className="mb-1">
+                                    <i
+                                      className="icon fas fa-clock"
+                                      style={{ fontSize: "16px" }}
+                                    ></i>
+                                    {moment(
+                                      store.trip.start_of_the_trip
+                                    ).format("LL")}{" "}
+                                    -{" "}
+                                    {moment(store.trip.end_of_the_trip).format(
+                                      "LL"
+                                    )}
+                                  </li>
+                                </ul>
+                                <div className="shadow-card-image"></div>
+                                <div className="shadow-card-image2"></div>
+                              </div>
                             </div>
-                            <ul className="card-text-box list-unstyled ms-3">
-                              <li className="mb-1">
-                                <i
-                                  className="icon fas fa-user-friends"
-                                  style={{ fontSize: "16px" }}
-                                >
-                                  {" "}
-                                </i>
-                                {e.people}
-                              </li>
-                              <li className="mb-1">
-                                <i
-                                  className="icon fas fa-route"
-                                  style={{ fontSize: "16px" }}
-                                ></i>
-                                {e.transport}
-                              </li>
-                              <li className="mb-1">
-                                <i
-                                  className="icon fas fa-coins"
-                                  style={{ fontSize: "16px" }}
-                                ></i>
-                                {e.cost} €
-                              </li>
-                              <li className="mb-1">
-                                <i
-                                  className="icon fas fa-clock"
-                                  style={{ fontSize: "16px" }}
-                                ></i>
-                                {moment(store.trip.start_of_the_trip).format(
-                                  "LL"
-                                )}{" "}
-                                -{" "}
-                                {moment(store.trip.end_of_the_trip).format(
-                                  "LL"
-                                )}
-                              </li>
-                            </ul>
-                            <div className="shadow-card-image"></div>
-                            <div className="shadow-card-image2"></div>
-                          </div>
+                          </Link>
                         </div>
-                      </Link>
-                    </div>
-                  );
-                }) : (null)}
+                      );
+                    })
+                  : null}
               </div>
             </div>
           </div>

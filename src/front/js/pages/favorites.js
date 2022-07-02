@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import moment from "moment";
@@ -10,6 +10,7 @@ export const Favorites = () => {
   favCount = store.user.likes.length;
 
   useEffect(() => {
+    actions.verify();
     actions.getUser();
   }, []);
 
@@ -112,7 +113,9 @@ export const Favorites = () => {
                       );
                     })
                   ) : (
-                    <h5 className="travel-title text-center text-white mt-4">No favorites</h5>
+                    <h5 className="travel-title text-center text-white mt-4">
+                      No favorites
+                    </h5>
                   )}
                 </div>
               </div>

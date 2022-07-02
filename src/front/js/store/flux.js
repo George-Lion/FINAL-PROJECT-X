@@ -1,4 +1,8 @@
+import { useHistory } from "react-router-dom";
+
 const getState = ({ getStore, getActions, setStore }) => {
+  const history = useHistory();
+
   return {
     store: {
       user: {},
@@ -32,6 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           // setStore({ logged: data.logged_in || false })
           else if (resp.status == 401 || resp.status == 422) {
+            history.push("/");
           }
         } catch (e) {
           setStore({ logged: false });

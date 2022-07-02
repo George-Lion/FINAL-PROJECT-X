@@ -25,73 +25,77 @@ const Layout = () => {
   return (
     <div>
       <BrowserRouter basename={basename}>
-        {store.logged == true ? <Navbar /> : null}
-        <div>
-          <ScrollToTop />
-          <Switch>
-            <Route exact path="/">
-              {store.logged != true ? (
-                <Login />
-              ) : (
-                <Redirect to="/feed"></Redirect>
-              )}
-            </Route>
-            <Route exact path="/register">
-              <Register />
-            </Route>
-            <Route exact path="/feed">
-              {store.logged == true ? <Feed /> : <Redirect to="/"></Redirect>}
-            </Route>
-            <Route exact path="/home">
-              {store.logged == true ? <Feed /> : <Redirect to="/"></Redirect>}
-            </Route>
-            <Route exact path="/profile/:id">
-              {store.logged == true ? (
-                <Profile />
-              ) : (
-                <Redirect to="/"></Redirect>
-              )}
-            </Route>
-            <Route exact path="/noEditProfile/:id">
-              {store.logged == true ? (
-                <NoEditProfile />
-              ) : (
-                <Redirect to="/"></Redirect>
-              )}
-            </Route>
-            <Route exact path="/trip/:id">
-              {store.logged == true ? <Trip /> : <Redirect to="/"></Redirect>}
-            </Route>
-            <Route exact path="/message">
-              {store.logged == true ? (
-                <Message />
-              ) : (
-                <Redirect to="/"></Redirect>
-              )}
-            </Route>
-            <Route exact path="/mytrips">
-              {store.logged == true ? (
-                <MyTrips />
-              ) : (
-                <Redirect to="/"></Redirect>
-              )}
-            </Route>
-            <Route exact path="/favorites">
-              {store.logged == true ? (
-                <Favorites />
-              ) : (
-                <Redirect to="/"></Redirect>
-              )}
-            </Route>
-            <Route exact path="/help">
-              <Help />
-            </Route>
-            <Route>
-              <h1>Not found!</h1>
-            </Route>
-          </Switch>
-        </div>
-        <Footer />
+          {store.logged == true ? <Navbar /> : null}
+          <div>
+          <ScrollToTop />          
+            <Switch>
+              <Route exact path="/">
+                {store.logged != true ? (
+                  <Login />
+                ) : (
+                  <Redirect to="/feed"></Redirect>
+                )}
+              </Route>
+              <Route exact path="/register">
+                {store.logged != true ? (
+                  <Register />
+                ) : (
+                  <Redirect to="/feed"></Redirect>
+                )}
+              </Route>
+              <Route exact path="/feed">
+                {store.logged == true ? <Feed /> : <Redirect to="/"></Redirect>}
+              </Route>
+              <Route exact path="/home">
+                {store.logged == true ? <Feed /> : <Redirect to="/"></Redirect>}
+              </Route>
+              <Route exact path="/profile/:id">
+                {store.logged == true ? (
+                  <Profile />
+                ) : (
+                  <Redirect to="/"></Redirect>
+                )}
+              </Route>
+              <Route exact path="/noEditProfile/:id">
+                {store.logged == true ? (
+                  <NoEditProfile />
+                ) : (
+                  <Redirect to="/"></Redirect>
+                )}
+              </Route>
+              <Route exact path="/trip/:id">
+                {store.logged == true ? <Trip /> : <Redirect to="/"></Redirect>}
+              </Route>
+              <Route exact path="/message">
+                {store.logged == true ? (
+                  <Message />
+                ) : (
+                  <Redirect to="/"></Redirect>
+                )}
+              </Route>
+              <Route exact path="/mytrips">
+                {store.logged == true ? (
+                  <MyTrips />
+                ) : (
+                  <Redirect to="/"></Redirect>
+                )}
+              </Route>
+              <Route exact path="/favorites">
+                {store.logged == true ? (
+                  <Favorites />
+                ) : (
+                  <Redirect to="/"></Redirect>
+                )}
+              </Route>
+              <Route exact path="/help">
+                <Help />
+              </Route>
+              <Route>
+                <h1>Not found!</h1>
+              </Route>
+            </Switch>
+          </div>
+          <Footer />
       </BrowserRouter>
     </div>
   );

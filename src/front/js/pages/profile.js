@@ -20,10 +20,10 @@ export const Profile = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    actions.verify();
     actions.getProfile(id);
     actions.getUserTrips();
     actions.getUserProfiles();
-
   }, []);
 
   useEffect(() => {
@@ -84,15 +84,19 @@ export const Profile = () => {
           <div className="information-box pt-1">
             {/*  boton 2 */}
             <div className="name-pencil">
-              <i type="button" className="pencil-icon fas fa-pencil" title="click to edit information" onClick={(e) => {
-                setShowEdit2(true);
-                setUser(store.profile);
-              }}></i>
+              <i
+                type="button"
+                className="pencil-icon fas fa-pencil"
+                title="click to edit information"
+                onClick={(e) => {
+                  setShowEdit2(true);
+                  setUser(store.profile);
+                }}
+              ></i>
             </div>
             <h3 className="information1">
               <b>{store.profile.firstname + " " + store.profile.lastname}</b>
             </h3>
-
 
             <h5 className="information2">
               {store.profile.city_of_residence + " - " + store.profile.country}
@@ -180,12 +184,13 @@ export const Profile = () => {
             <div className="d-flex overflow-auto">
               <button
                 className="button-add-trip btn text-light mt-4"
-                style={{ height: "350px" }} title="click to create a trip"
+                style={{ height: "350px" }}
+                title="click to create a trip"
                 onClick={() => {
                   setShowCreateTrip(true);
                 }}
               >
-                <i className="fas fa-plus" ></i>
+                <i className="fas fa-plus"></i>
               </button>
               <div className="wrapper-trips">
                 {store.userTrips.length > 0 ? (
@@ -227,38 +232,31 @@ export const Profile = () => {
                               </div>
                               <ul className="card-text-box list-unstyled ms-3 text-wrap">
                                 <li className="mb-1">
-                                  <i
-                                    className="icon-size icon fas fa-user-friends"
-
-                                  >
-                                    {" "}{e.people}
+                                  <i className="icon-size icon fas fa-user-friends">
+                                    {" "}
+                                    {e.people}
                                   </i>
-
                                 </li>
                                 <li className="mb-1">
-                                  <i
-                                    className="icon-size icon fas fa-route"
-
-                                  >  {" "}
-                                    {e.transport}</i>
-
+                                  <i className="icon-size icon fas fa-route">
+                                    {" "}
+                                    {e.transport}
+                                  </i>
                                 </li>
                                 <li className="mb-1">
-                                  <i
-                                    className="icon-size icon fas fa-coins"
-
-                                  >{" "}{e.cost} €</i>
-
+                                  <i className="icon-size icon fas fa-coins">
+                                    {" "}
+                                    {e.cost} €
+                                  </i>
                                 </li>
                                 <li className="mb-1">
-                                  <i
-                                    className="icon-size icon fas fa-clock"
-
-                                  >  {" "}
+                                  <i className="icon-size icon fas fa-clock">
+                                    {" "}
                                     {moment(e.start_of_the_trip).format(
                                       "LL"
-                                    )} - {moment(e.end_of_the_trip).format("LL")}</i>
-
+                                    )} -{" "}
+                                    {moment(e.end_of_the_trip).format("LL")}
+                                  </i>
                                 </li>
                               </ul>
                               <div className="shadow-card-image"></div>
@@ -270,13 +268,14 @@ export const Profile = () => {
                     );
                   })
                 ) : (
-                  <h5 className="text-trips text-center text-dark mt-4">No Trips</h5>
+                  <h5 className="text-trips text-center text-dark mt-4">
+                    No Trips
+                  </h5>
                 )}
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
