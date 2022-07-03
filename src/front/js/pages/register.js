@@ -10,15 +10,19 @@ export const Register = () => {
   const history = useHistory();
 
   const sendUserInfo = async () => {
-    const response = await fetch(store.url + "register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
+    try {
+      const response = await fetch(store.url + "register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
 
-    const data = await response.json();
-    if (data.created) {
-      history.push("/");
+      const data = await response.json();
+      if (data.created) {
+        history.push("/");
+      }
+    } catch (e) {
+      alert("Ya existe el usuario que intentas registrar");
     }
   };
 
