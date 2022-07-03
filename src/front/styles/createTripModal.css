@@ -348,36 +348,40 @@
 
 @media (max-width: 430px) {
   .modal-box2 {
-    width: 360px;
+    width: 310px;
     margin-top: 3rem;
     padding: 20px 30px 10px 30px;
     font-size: 0.9rem;
   }
 
   .input-time {
-    width: 46%;
+    width: 45%;
+    height: 35px;
   }
 
   .image-selected {
-    top: 24px;
-    margin-left: 122px;
-  }
-}
-
-@media (max-width: 390px) {
-  .modal-box2 {
-    width: 360px;
-    margin-top: 4.5rem;
-    padding: 20px 30px 10px 30px;
-    font-size: 0.9rem;
+    top: 195px;
+    margin-left: 100px;
   }
 
-  .input-time {
-    width: 46%;
+  .banner-box {
+    height: 100px;
   }
 
-  .image-selected {
-    top: 265px;
-    margin-left: 122px;
+  .modal-banner {
+    height: 90px;
+  }
+
+  .text-area2 {
+    height: 70px;
+  }
+
+  .image-upload img {
+    width: 40px;
+    cursor: pointer;
+  }
+
+  .save-button {
+    width: 90px;
   }
 }
