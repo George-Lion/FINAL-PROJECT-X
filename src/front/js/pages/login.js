@@ -9,6 +9,7 @@ export const Login = () => {
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const [user, setUser] = useState({});
+  // const [checked, setChecked] = useState("");
 
   const loginUser = async () => {
     try {
@@ -128,12 +129,6 @@ export const Login = () => {
                     >
                       Login
                     </button>
-                    <div className="checkbox mb-2 mx-center">
-                      <label>
-                        <input type="checkbox" value="remember-me" /> Remember
-                        me
-                      </label>
-                    </div>
                   </div>
                   <div className="border border-1 mt-4 pt-3 pb-2 mb-5 rounded">
                     <p className="text-center">
