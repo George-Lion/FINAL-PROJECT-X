@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/changePhotoModal.css";
 
@@ -47,18 +47,26 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
           </div>
           <div className="mt-3">
             <div className="row">
-
               {/*PROFILE PICTURE*/}
 
               <section className="user-pi">
                 <div className="modal-pi">
-                  <img className="modal-pic" src={selectedImage == undefined ? store.profile.profile_picture : URL.createObjectURL(selectedImage)} alt="img" />
+                  <img
+                    className="modal-pic"
+                    src={
+                      selectedImage == undefined
+                        ? store.profile.profile_picture
+                        : URL.createObjectURL(selectedImage)
+                    }
+                    alt="img"
+                  />
                 </div>
                 <div className="modal-bt">
                   <label htmlFor="file" className="mx-auto">
                     <>
                       <div className="input-image">
-                        <input className="custom-file-input2"
+                        <input
+                          className="custom-file-input2"
                           accept="image/*"
                           type="file"
                           onChange={imageChange}
