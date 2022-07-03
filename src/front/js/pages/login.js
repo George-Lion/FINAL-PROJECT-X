@@ -115,6 +115,13 @@ export const Login = () => {
                     <button
                       className="login-button w-100 btn btn-lg mb-4 mt-2"
                       type="submit"
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          loginUser();
+                        }
+                      }}
                       onClick={() => {
                         loginUser();
                       }}

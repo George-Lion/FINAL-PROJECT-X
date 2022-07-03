@@ -99,16 +99,23 @@ export const Register = () => {
                   />
                   <label htmlFor="floatingPassword">Password</label>
                 </div>
-                <Link to="/">
-                  <button
-                    className="register-button w-50 btn mt-2 mb-2"
-                    onClick={() => {
+
+                <button
+                  className="register-button w-50 btn mt-2 mb-2"
+                  onClick={() => {
+                    sendUserInfo();
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      e.stopPropagation();
                       sendUserInfo();
-                    }}
-                  >
-                    Sign up
-                  </button>
-                </Link>
+                    }
+                  }}
+                >
+                  Sign up
+                </button>
+
                 <div className="checkbox mt-1 mb-2 mx-center">
                   <label>
                     <input type="checkbox" value="remember-me" /> I agree to the
