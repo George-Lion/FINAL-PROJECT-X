@@ -60,7 +60,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
         history.push("/");
         actions.logout();
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const messageError = () => {
@@ -120,6 +120,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
             ></i>
           </div>
           <div className="content-body">
+
             {/* USERNAME */}
 
             <div className="section-user">
@@ -134,12 +135,12 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   placeholder="Username"
                   style={
                     user.username.length == 0 ||
-                    specialCharacters(user.username)
+                      specialCharacters(user.username)
                       ? {
-                          borderStyle: "solid",
-                          borderWidth: "4px",
-                          borderColor: "#DB2C2C",
-                        }
+                        borderStyle: "solid",
+                        borderWidth: "4px",
+                        borderColor: "#DB2C2C",
+                      }
                       : null
                   }
                   onChange={(e) =>
@@ -167,12 +168,12 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   placeholder="First name"
                   style={
                     user.firstname.length == 0 ||
-                    specialCharacters(user.firstname)
+                      specialCharacters(user.firstname)
                       ? {
-                          borderStyle: "solid",
-                          borderWidth: "4px",
-                          borderColor: "#DB2C2C",
-                        }
+                        borderStyle: "solid",
+                        borderWidth: "4px",
+                        borderColor: "#DB2C2C",
+                      }
                       : null
                   }
                   onChange={(e) =>
@@ -199,12 +200,12 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   placeholder="Last name"
                   style={
                     user.lastname.length == 0 ||
-                    specialCharacters(user.lastname)
+                      specialCharacters(user.lastname)
                       ? {
-                          borderStyle: "solid",
-                          borderWidth: "4px",
-                          borderColor: "#DB2C2C",
-                        }
+                        borderStyle: "solid",
+                        borderWidth: "4px",
+                        borderColor: "#DB2C2C",
+                      }
                       : null
                   }
                   onChange={(e) =>
@@ -318,16 +319,16 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
               aria-modal="true"
               style={{
                 display: "block",
-                backdropFilter: "brightness(20%)",
+                backdropFilter: "blur(3px) brightness(20%)",
               }}
             >
-              <div className="delete-modal modal-dialog">
-                <div className="trip-modal modal-content">
+              <div className="otro-modal modal-dialog">
+                <div className="delete-modal modal-content">
                   <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">
+                    <p className="modal-title text-white" id="exampleModalLabel">
                       Are you sure you want to delete the profile?{" "}
                       <i>This action cannot be undone</i>
-                    </h5>
+                    </p>
                   </div>
                   <div className="modal-footer">
                     <button
@@ -342,7 +343,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                     </button>
                     <button
                       type="button"
-                      className="btn btn-danger text-white"
+                      className="button-delete btn"
                       onClick={() => {
                         deleteProfile(true);
                       }}
@@ -399,8 +400,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
           ) : null}
 
           {user.username.length == 0 ||
-          user.firstname.length == 0 ||
-          user.lastname.length == 0 ? (
+            user.firstname.length == 0 ||
+            user.lastname.length == 0 ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>the field is required</p>
@@ -408,8 +409,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
           ) : null}
 
           {specialCharacters(user.username) ||
-          specialCharacters(user.firstname) ||
-          specialCharacters(user.lastname) ? (
+            specialCharacters(user.firstname) ||
+            specialCharacters(user.lastname) ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>Only special characters _ or . </p>

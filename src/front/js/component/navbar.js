@@ -36,8 +36,8 @@ export const Navbar = () => {
                 <Link to="/message" className="navbar-icon me-4 text-light ">
                   {" "}
                   {store.match &&
-                  store.match.length > 0 &&
-                  store.match.filter((x) => x.read != true).length > 0 ? (
+                    store.match.length > 0 &&
+                    store.match.filter((x) => x.read != true).length > 0 ? (
                     <div className="message-count">
                       {" "}
                       {store.match.filter((x) => x.read != true).length}
@@ -119,7 +119,7 @@ export const Navbar = () => {
                         <p
                           className="nav-links dropdown-item"
                           onClick={() => actions.logout()}
-                        >
+                        ><i className="fas fa-sign-out-alt" style={{ fontSize: "1.3rem", marginRight: "15px" }}></i>
                           Sign out
                         </p>
                       </li>

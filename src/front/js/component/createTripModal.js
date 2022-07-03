@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/createTripModal.css";
-import { string } from "prop-types";
 
 export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
   const { store, actions } = useContext(Context);
@@ -94,7 +93,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
   };
 
   const onlyLettersAndSpaces = (str) => {
-    return /^[A-Za-z\s]*$/.test(str);
+    return /^[A-Ñ-Za-ñ-z\s]*$/.test(str);
   }
 
   const deleteTripState = () => {
@@ -197,8 +196,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               ></input>
@@ -228,8 +226,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               ></input>
@@ -258,8 +255,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                   )}
               ></input>
@@ -290,8 +286,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               ></input>
@@ -310,8 +305,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               >
@@ -350,8 +344,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               ></input>
@@ -376,8 +369,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                           e.target.value.charAt(0).toUpperCase() +
                           e.target.value.slice(1).toLowerCase(),
                       },
-                      setInfoError(false),
-                      setInfoCheck(false)
+                      setInfoError(false)
                     )
                   }
                 ></textarea>
@@ -401,10 +393,11 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                     onlyLettersAndSpaces(trip.destination) &&
                     trip.start_of_the_trip < trip.end_of_the_trip &&
                     !trip.destination == "" &&
-                    trip.people >= 1
+                    trip.people >= 1 &&
+                    !specialCharacters(trip.cost)
                   ) {
-                    messageCheck();
-                    actions.createTrip(trip);
+                    actions.createTrip(trip),
+                      closeModal()
                   } else {
                     messageError();
                   }
@@ -414,12 +407,6 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               </button>
             </div>
           </div>
-          {infoCheck == true ? (
-            <div className="message-check">
-              <i className="icon-check fas fa-check-circle"></i>
-              <p>Changes saved</p>
-            </div>
-          ) : null}
 
           {trip.people < 1 && trip.people != "" ? (
             <div className="message-error">
@@ -444,6 +431,14 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
             </div>
           ) : null}
 
+          {specialCharacters(trip.cost) ? (
+            <div className="message-error">
+              <i className="icon-error fas fa-exclamation-circle"></i>
+              <p>Indicate an approximate cost</p>
+            </div>
+          ) : null}
+
+
           {trip.start_of_the_trip > trip.end_of_the_trip &&
             trip.start_of_the_trip != "" &&
             trip.end_of_the_trip != "" ? (
@@ -461,7 +456,6 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
           ) : null}
         </div>
       </div>
-      <div className="eliminar"></div>
-    </Fragment>
+    </Fragment >
   );
 };

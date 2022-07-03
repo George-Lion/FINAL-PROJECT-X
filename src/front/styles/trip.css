@@ -275,11 +275,6 @@
   background-color: white;
 }
 
-.pencil-features {
-  display: flex;
-  justify-content: end;
-}
-
 .button-pe {
   margin-top: 10px;
   margin-left: 20px;

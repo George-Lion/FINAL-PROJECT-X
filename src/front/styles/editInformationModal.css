@@ -231,3 +231,19 @@
   color: white;
   margin-bottom: 7px;
 }
+
+.delete-modal {
+  background-color: #151d26;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-family: "Rubik", sans-serif;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #db2c2c;
+  color: white;
+}
+
+.button-delete {
+  background-color: #db2c2c;
+  color: white;
+}

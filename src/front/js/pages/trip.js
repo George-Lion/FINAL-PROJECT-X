@@ -95,7 +95,7 @@ export const Trip = () => {
                         store.trip.user_id_of_trip_creator == store.user_id
                           ? "/profile/" + store.trip.user_id_of_trip_creator
                           : "/noEditProfile/" +
-                            store.trip.user_id_of_trip_creator
+                          store.trip.user_id_of_trip_creator
                       }
                     >
                       <img src={store.trip.profile_picture} alt="img" />
@@ -132,7 +132,7 @@ export const Trip = () => {
                         <i
                           className={
                             store.trip.likes &&
-                            store.trip.likes.includes(store.user_id)
+                              store.trip.likes.includes(store.user_id)
                               ? "fas fa-heart text-danger me-2"
                               : "fas fa-heart me-2"
                           }
@@ -153,7 +153,7 @@ export const Trip = () => {
                           setModalEdit(true);
                         }}
                       >
-                        <i className="fas fa-pencil"></i>
+                        Edit trip
                       </button>
                     </div>
                   ) : null}
@@ -182,18 +182,6 @@ export const Trip = () => {
                   store.trip.user_country}
               </h5>
               <div className="container">
-                {store.user_id == store.trip.user_id_of_trip_creator ? (
-                  <div className="pencil-features">
-                    <i
-                      type="button"
-                      title="click to edit"
-                      onClick={() => {
-                        setModalInfo(true);
-                      }}
-                      className="button-pe fas fa-pencil"
-                    ></i>
-                  </div>
-                ) : null}
                 <div className="place-description  mb-4 border-top border-bottom text-left justify-content-center">
                   <p className="text-description mt-3 text-break">
                     {store.trip.text}
@@ -207,8 +195,8 @@ export const Trip = () => {
                     <i className="icon-options fas fa-user-friends"></i>
                     {store.trip.trip_in_match
                       ? store.trip.trip_in_match.filter(
-                          (x) => x.accepted == true
-                        ).length
+                        (x) => x.accepted == true
+                      ).length
                       : 0}
                     /{store.trip.people}
                   </li>
@@ -283,7 +271,7 @@ export const Trip = () => {
                               </h3>
                             </li>
                             {store.user_id ==
-                            store.trip.user_id_of_trip_creator ? (
+                              store.trip.user_id_of_trip_creator ? (
                               <li>
                                 <div className="edit-galery">
                                   <button

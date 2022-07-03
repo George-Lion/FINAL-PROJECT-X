@@ -252,6 +252,40 @@
   background-color: #db2c2c;
 }
 
+.save-delete {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-right: 100px;
+}
+
+.delete-trip-button {
+  color: #db2c2c;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 9px;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.delete-trip-button:hover {
+  color: white;
+  background-color: #db2c2c;
+}
+
+.trip-d {
+  width: 500px;
+  background-color: #151d26;
+  color: white;
+  margin-top: 300px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  border-width: 2px;
+  border-color: #db2c2c;
+}
+
 .close-button {
   font-size: 27px;
   color: white;
@@ -310,4 +344,40 @@
 }
 .banner-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+@media (max-width: 430px) {
+  .modal-box2 {
+    width: 360px;
+    margin-top: 3rem;
+    padding: 20px 30px 10px 30px;
+    font-size: 0.9rem;
+  }
+
+  .input-time {
+    width: 46%;
+  }
+
+  .image-selected {
+    top: 24px;
+    margin-left: 122px;
+  }
+}
+
+@media (max-width: 390px) {
+  .modal-box2 {
+    width: 360px;
+    margin-top: 4.5rem;
+    padding: 20px 30px 10px 30px;
+    font-size: 0.9rem;
+  }
+
+  .input-time {
+    width: 46%;
+  }
+
+  .image-selected {
+    top: 265px;
+    margin-left: 122px;
+  }
 }
