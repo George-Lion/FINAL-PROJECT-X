@@ -61,9 +61,9 @@ export const Navbar = () => {
                   <img
                     src={store.user.profile_picture}
                     alt="mdo"
-                    width="45"
-                    height="45"
-                    className="rounded-circle"
+                    width="40"
+                    height="40"
+                    className="rounded-circle mt-1"
                   />
                 </p>
                 <ul className="d-down dropdown-menu text-small" aria-labelledby="dropdownUser1" style={{ position: "absolute", inset: "0px 0px auto auto", margin: "0px", marginTop: "20px", transform: "translate(0px, 34px)" }} data-popper-placement="bottom-end" >

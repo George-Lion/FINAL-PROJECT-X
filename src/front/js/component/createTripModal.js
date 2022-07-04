@@ -183,7 +183,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                     !onlyLettersAndSpaces(trip.destination)
                     ? {
                       borderStyle: "solid",
-                      borderWidth: "4px",
+                      borderWidth: "3px",
                       borderColor: "#DB2C2C",
                     }
                     : null
@@ -213,7 +213,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                   trip.people < 1
                     ? {
                       borderStyle: "solid",
-                      borderWidth: "4px",
+                      borderWidth: "3px",
                       borderColor: "#DB2C2C",
                     }
                     : null
@@ -242,7 +242,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                     trip.start_of_the_trip > trip.end_of_the_trip
                     ? {
                       borderStyle: "solid",
-                      borderWidth: "4px",
+                      borderWidth: "3px",
                       borderColor: "#DB2C2C",
                     }
                     : null
@@ -273,7 +273,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                     trip.end_of_the_trip == ""
                     ? {
                       borderStyle: "solid",
-                      borderWidth: "4px",
+                      borderWidth: "3px",
                       borderColor: "#DB2C2C",
                     }
                     : null
@@ -331,7 +331,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                   specialCharacters(trip.cost)
                     ? {
                       borderStyle: "solid",
-                      borderWidth: "4px",
+                      borderWidth: "3px",
                       borderColor: "#DB2C2C",
                     }
                     : null

@@ -18,12 +18,12 @@ export const Feed = () => {
   return (
     <Fragment>
       <div className="footer-abajo">
-        <div className="search-back">
-          <nav className="search-style navbar mt-5 mb-4">
-            <div className="container-fluid justify-content-center">
+        <div className="search-back container">
+          <nav className="search-style navbar mt-4 mb-4">
+            <div className="w-inputs">
               <form className="d-flex" role="search">
                 <input
-                  className="form-control me-2"
+                  className="inp-control form-control me-2"
                   type="text"
                   placeholder="Search destination"
                   aria-label="Search"
@@ -44,7 +44,7 @@ export const Feed = () => {
                   }}
                 />
                 <input
-                  className="form-control me-2"
+                  className="inp-control form-control me-2"
                   type="date"
                   aria-label="Search"
                   onKeyPress={(e) => {
@@ -59,7 +59,7 @@ export const Feed = () => {
                   }}
                 />
                 <input
-                  className="form-control me-2"
+                  className="inp-control form-control me-2"
                   type="date"
                   aria-label="Search"
                   onKeyPress={(e) => {

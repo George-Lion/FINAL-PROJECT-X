@@ -10,7 +10,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
   const [selectedImage, setSelectedImage] = useState();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const history = useHistory();
-  /* const special = [
+  const special = [
     "$",
     "#",
     "*",
@@ -43,7 +43,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
     "·",
     "&",
     "¡",
-  ]; */
+  ];
   const numberList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const bannerChange = (e) => {
@@ -65,22 +65,6 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
     setInfoCheck(true);
     setInfoError(false);
   };
-
-  /* const specialCharacters = (element) => {
-    if (element) {
-      if (Array.isArray(special)) {
-        for (let value of special) {
-          for (let x of element) {
-            if (value == x) {
-              return true;
-            } else false;
-          }
-        }
-      } else {
-        return false;
-      }
-    }
-  }; */
 
   const numbers = (element) => {
     if (element) {
@@ -199,7 +183,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                     !onlyLettersAndSpaces(trip.destination)
                     ? {
                       borderStyle: "solid",
-                      borderWidth: "4px",
+                      borderWidth: "3px",
                       borderColor: "#DB2C2C",
                     }
                     : null
@@ -224,7 +208,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                   trip.people < 1
                     ? {
                       borderStyle: "solid",
-                      borderWidth: "4px",
+                      borderWidth: "3px",
                       borderColor: "#DB2C2C",
                     }
                     : null
@@ -247,7 +231,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                   trip.start_of_the_trip > trip.end_of_the_trip
                     ? {
                       borderStyle: "solid",
-                      borderWidth: "4px",
+                      borderWidth: "3px",
                       borderColor: "#DB2C2C",
                     }
                     : null
@@ -271,7 +255,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                   trip.start_of_the_trip > trip.end_of_the_trip
                     ? {
                       borderStyle: "solid",
-                      borderWidth: "4px",
+                      borderWidth: "3px",
                       borderColor: "#DB2C2C",
                     }
                     : null
@@ -308,22 +292,12 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               {/* COST */}
 
               <input
-                type="text"
-                max={9999}
+                type="number"
                 min={0}
                 id="cost"
                 className="input-time"
                 defaultValue={store.trip.cost}
                 placeholder="Cost"
-                /* style={
-                  specialCharacters(trip.cost)
-                    ? {
-                      borderStyle: "solid",
-                      borderWidth: "4px",
-                      borderColor: "#DB2C2C",
-                    }
-                    : null
-                } */
                 onChange={(e) =>
                   editTrip({ ...trip, cost: e.target.value },
                     setInfoError(false)
@@ -420,7 +394,6 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 style={{ fontSize: "20px" }}
                 onClick={() => {
                   setConfirmDelete(true);
-
                 }}
               ></i>
 
@@ -434,7 +407,6 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                     trip.start_of_the_trip < trip.end_of_the_trip &&
                     !trip.destination == "" &&
                     trip.people >= 1
-                    /*  !specialCharacters(trip.cost) */
                   ) {
                     actions.editTrip(trip),
                       closeModal()
@@ -470,14 +442,6 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               <p>Only letters</p>
             </div>
           ) : null}
-
-          {/*      {specialCharacters(trip.cost) ? (
-            <div className="message-error">
-              <i className="icon-error fas fa-exclamation-circle"></i>
-              <p>Indicate an approximate cost</p>
-            </div>
-          ) : null} */}
-
 
           {trip.start_of_the_trip > trip.end_of_the_trip &&
             trip.start_of_the_trip != "" &&

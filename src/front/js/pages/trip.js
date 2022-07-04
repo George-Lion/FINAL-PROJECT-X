@@ -230,13 +230,8 @@ export const Trip = () => {
                   {/* API GOOGLE MAPS */}
 
                   <div className="mt-4 ">
-                    <h3 className="text-dark text-center">
-                      <b className="t-rute">Rute</b>
-                    </h3>
-                    <div className="card mb-1 mt-3 border-5">
-                      <GoogleMapsApi />
-                      <div className="card-img-overlay"></div>
-                    </div>
+
+                    <GoogleMapsApi />
 
                     {/* IMAGE GALERY */}
 

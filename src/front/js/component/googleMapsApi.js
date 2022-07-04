@@ -61,27 +61,34 @@ const Map = () => {
 
   return (
     <>
-      {store.trip ? (
-        <GoogleMap
-          zoom={13}
-          center={{ lat, lng }}
-          mapContainerStyle={{ width: "100%", height: "550px" }}
-        >
-          <Marker position={{ lat, lng }} />
-          {response !== null && (
-            <DirectionsRenderer
-              options={{
-                directions: response,
-              }}
-            />
-          )}
+      <div className="border-map">
+        <h3 className="mt-2 mb-3">
+          <b className="travel-route">Travel route</b>
+        </h3>
+        <div className="display-map">
+          {store.trip ? (
+            <GoogleMap
+              zoom={13}
+              center={{ lat, lng }}
+              mapContainerStyle={{ width: "98%", height: "550px", borderRadius: "10px" }}
+            >
+              <Marker position={{ lat, lng }} />
+              {response !== null && (
+                <DirectionsRenderer
+                  options={{
+                    directions: response,
+                  }}
+                />
+              )}
 
-          <DirectionsService
-            options={DirectionsServiceOption}
-            callback={directionsCallback}
-          />
-        </GoogleMap>
-      ) : null}
+              <DirectionsService
+                options={DirectionsServiceOption}
+                callback={directionsCallback}
+              />
+            </GoogleMap>
+          ) : null}
+        </div>
+      </div>
     </>
   );
 };
