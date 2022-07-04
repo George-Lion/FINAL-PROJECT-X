@@ -1,14 +1,14 @@
 import React, { Fragment, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory, Link } from "react-router-dom";
+import "../../styles/loginAndRegister.css";
 import logo from "../component/img/traveland.png";
-import photo from "../component/img/login-photo.png";
-import "../../styles/login.css";
-
 export const Login = () => {
+
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const [user, setUser] = useState({});
+  const [switchPanel, setSwitchPanel] = useState(false)
 
   const loginUser = async () => {
     try {
@@ -31,121 +31,106 @@ export const Login = () => {
     }
   };
 
+  const sendUserInfo = async () => {
+    const response = await fetch(store.url + "register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    });
+
+    const data = await response.json();
+    if (data.created) {
+      press2();
+    }
+  };
+
   return (
     <Fragment>
-      <div className="footer-abajo">
-        <div className="d-flex justify-content-center">
-          <div className="card-login-image">
-            <div className="shadow-card-login"></div>
-            <p className="login-title">
-              <i className="fas fa-map-marker-alt"></i> Petra
-            </p>
-            <div className="box-user-information">
-              <ul className="list-unstyled list-group list-group-horizontal">
-                <li>
-                  <img className="image-user-login" src={photo} />
-                </li>
-                <li className="pt-2">
-                  <h3 className="pt-5">Amanda Girona</h3>
-                </li>
-              </ul>
-              <ul className="list-unstyled list-group list-group-horizontal ps-2">
-                <li className="me-4">
-                  <p className="">
-                    <i className="fas fa-clock"></i> July, 23 - August, 3
-                  </p>
-                </li>
-                <li className="me-4">
-                  <p className="">
-                    <i className="fas fa-user-friends"></i> 3/4
-                  </p>
-                </li>
-                <li className="me-4">
-                  <p className="">
-                    <i className="fas fa-route"></i> Airplane
-                  </p>
-                </li>
-              </ul>
-            </div>
-            <img
-              className="image-login row me-3"
-              src="https://images.pexels.com/photos/4388167/pexels-photo-4388167.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            />
+      <div className="body-all">
+        <div className={"container-1 " + (switchPanel == true ? "right-panel-active" : "false")} id="container">
+          <div className="form-container sign-up-container">
+            <form className="form-move" action="#">
+              <h1 style={{
+                fontWeight: "bold",
+                margin: "0"
+              }}>Create Account</h1>
+              <div className="social-container">
+              </div>
+              <span className="span-box">or use your email for registration</span>
+              <input type="text" className="inp-data" placeholder="Username" onChange={(e) =>
+                setUser({ ...user, username: e.target.value.trim() })
+              } />
+              <input type="email" className="inp-data" placeholder="Email" onChange={(e) =>
+                setUser({ ...user, email: e.target.value.trim() })
+              } />
+              <input type="password" className="inp-data" placeholder="Password" onChange={(e) =>
+                setUser({ ...user, password: e.target.value.trim() })
+              } />
+              <input type="text" className="inp-data" placeholder="First name" onChange={(e) =>
+                setUser({ ...user, firstname: e.target.value.trim() })
+              } />
+              <input type="text" className="inp-data" placeholder="Last name" onChange={(e) =>
+                setUser({ ...user, lastname: e.target.value.trim() })
+              } />
+              <button className="button-all mt-2" onClick={() => {
+                sendUserInfo();
+              }}>Sign Up</button>
+            </form>
           </div>
-          <div className="mt-5 row justify-content-center align-items-center"></div>
-          <div className="content-form mt-5 mb-5 row justify-content-center align-items-center ">
-            <div
-              className="col-auto bg-ganger p-5 text-center"
-              style={{ width: "480px" }}
-            >
-              <main className="form-signin">
-                <form className="">
-                  <div className="border border-1 p-4 rounded">
-                    <div className="p-5 pb-0 pt-0">
-                      <img
-                        className="mb-4 pb-4 pt-4 col-12"
-                        src={logo}
-                        alt=""
-                      />
-                    </div>
-                    <div className="form-floating mb-2 ">
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="floatingInput"
-                        placeholder="name@example.com"
-                        onChange={(e) => {
-                          setUser({ ...user, email: e.target.value.trim() });
-                        }}
-                      />
-                      <label htmlFor="floatingInput">Email address</label>
-                    </div>
-                    <div className="form-floating mb-2">
-                      <input
-                        type="password"
-                        className="form-control"
-                        id="floatingPassword"
-                        placeholder="Password"
-                        onChange={(e) => {
-                          setUser({ ...user, password: e.target.value.trim() });
-                        }}
-                      />
-                      <label htmlFor="floatingPassword">Password</label>
-                    </div>
-                    <button
-                      className="login-button w-100 btn btn-lg mb-4 mt-2"
-                      type="submit"
-                      onClick={() => {
-                        loginUser();
-                      }}
-                    >
-                      Login
-                    </button>
-                    <div className="checkbox mb-2 mx-center">
-                      <label>
-                        <input type="checkbox" value="remember-me" /> Remember
-                        me
-                      </label>
-                    </div>
-                  </div>
-                  <div className="border border-1 mt-4 pt-3 pb-2 mb-5 rounded">
-                    <p className="text-center">
-                      Don't have an account yet?
-                      <Link
-                        className="text-signup"
-                        to="/register"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <strong> Sign up</strong>
-                      </Link>
-                    </p>
-                  </div>
-                </form>
-              </main>
+          <div className="form-container sign-in-container">
+            <form className="form-move" action="#">
+              <h1 style={{
+                fontWeight: "bold",
+                margin: "0"
+              }}>Sign in</h1>
+              <div className="social-container">
+              </div>
+              <span className="span-box">or use your account</span>
+              <input type="email" className="inp-data" placeholder="Email" onChange={(e) => {
+                setUser({ ...user, email: e.target.value.trim() });
+              }} />
+              <input type="password" className="inp-data" placeholder="Password" onChange={(e) => {
+                setUser({ ...user, password: e.target.value.trim() });
+              }} />
+              <a className="social" href="#">Forgot your password?</a>
+              <button className="button-all" onClick={() => {
+                loginUser();
+              }}>Sign In</button>
+            </form>
+          </div>
+          <div className="overlay-container">
+            <div className="overlay">
+              <div className="overlay-panel overlay-left">
+                <div className="img-left"></div>
+                <h1 style={{
+                  fontWeight: "bold",
+                  margin: "0"
+                }}>Welcome Back!</h1>
+                <p className="text-instruction">To keep connected with us please login with your personal info</p>
+                <button className="button-all ghost" id="signIn" onClick={() => {
+                  setSwitchPanel(false)
+                }}>Sign In</button>
+              </div>
+              <div className="overlay-panel overlay-right">
+                <img
+                  className="logo-t mb-4 pb-4 pt-2 col-12"
+                  src={logo}
+                  alt=""
+                />
+                <h1 style={{
+                  fontWeight: "bold",
+                  margin: "0"
+                }}>Hello, Friend!</h1>
+                <p className="text-instruction">Enter your personal details and start journey with us</p>
+                <button className="button-all ghost" id="signUp" onClick={() => {
+                  setSwitchPanel(true)
+                }}>Sign Up</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </Fragment>
+    </Fragment >
   );
 };
+

@@ -17,6 +17,22 @@ export const Message = () => {
     actions.readMessages();
   }, []);
 
+  const deleteMessage = async () => {
+    try {
+      const resp = await fetch(store.url + "deleteMessage", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      const data = await resp.json();
+      if (resp.ok) {
+        setConfirmDelete(false);
+        actions.match();
+      }
+    } catch (e) { }
+  };
   return (
     <Fragment>
       <div className="footer-abajo">
@@ -35,20 +51,22 @@ export const Message = () => {
                     .map((e) => {
                       return (
                         <div key={e.id} className="mb-4" role="document">
+                          <i
+                            className="fas fa-times-circle text-warning d-flex justify-content-end mt-2 me-2"
+                            style={{ fontSize: "23px" }}
+                            onClick={() => {
+                              deleteMessage();
+                            }}></i>
                           <div
                             className="modal-content rounded-4 shadow"
                             style={
                               e.accepted
                                 ? { background: "#B1EBFF" }
                                 : e.rejected
-                                ? { background: "#FF7A69" }
-                                : { background: "white" }
+                                  ? { background: "#FF7A69" }
+                                  : { background: "white" }
                             }
                           >
-                            <i
-                              className="fas fa-times-circle text-danger d-flex justify-content-end mt-2 me-2"
-                              style={{ fontSize: "23px" }}
-                            ></i>
                             <div className="text-center">
                               <Link
                                 to={"/noEditProfile/" + e.user_id}

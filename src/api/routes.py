@@ -412,6 +412,23 @@ def send_match():  # nombre de la función
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
 
+#delete message
+
+@api.route("/deleteMessage", methods=["DELETE"])  # ELIMINA EL TRIP
+@jwt_required()
+def delete_Message():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    body_message_id = request.json.get("id")
+    match = MatchTrip.query.get(body_message_id)
+    if user.id == trip.user_id_of_trip_creator:
+        db.session.commit()
+        db.session.delete(match)
+        db.session.commit()
+        return jsonify({"deleted": True}), 200
+    else:
+        return jsonify({"error": "message no eliminado"}), 400
+
 # ACCEPT
 
 @api.route("/accept", methods=["POST"])  # end point de metodo POST
