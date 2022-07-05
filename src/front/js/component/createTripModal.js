@@ -107,6 +107,14 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
     trip.destination_picture = "";
   };
 
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+  };
+
   return (
     <Fragment>
       <div
@@ -235,7 +243,9 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
 
               <input
                 type="date"
+                name="date"
                 className="input-time"
+                min={disablePastDate()}
                 placeholder="Start"
                 style={
                   trip.start_of_the_trip == "" ||
@@ -268,6 +278,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 required
                 className="input-time"
                 placeholder="End"
+
                 style={
                   trip.start_of_the_trip > trip.end_of_the_trip ||
                     trip.end_of_the_trip == ""
@@ -321,7 +332,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               {/* COST */}
 
               <input
-                type="text"
+                type="number"
                 max={9999}
                 min={0}
                 id="cost"
@@ -387,7 +398,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               {/* SAVE BUTTON */}
 
               <button
-                className="save-button"
+                className="save-button-3"
                 onClick={() => {
                   if (
                     onlyLettersAndSpaces(trip.destination) &&
@@ -409,7 +420,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
           </div>
 
           {trip.people < 1 && trip.people != "" ? (
-            <div className="message-error">
+            <div className="message-error-1">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>At least one travel companion</p>
             </div>
@@ -418,21 +429,21 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
           {trip.destination == "" ||
             trip.start_of_the_trip.length == 0 ||
             trip.end_of_the_trip.length == 0 ? (
-            <div className="message-error">
+            <div className="message-error-1">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>the field is required</p>
             </div>
           ) : null}
 
           {!onlyLettersAndSpaces(trip.destination) ? (
-            <div className="message-error">
+            <div className="message-error-1">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>Only letters</p>
             </div>
           ) : null}
 
           {specialCharacters(trip.cost) ? (
-            <div className="message-error">
+            <div className="message-error-1">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>Indicate an approximate cost</p>
             </div>
@@ -442,14 +453,14 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
           {trip.start_of_the_trip > trip.end_of_the_trip &&
             trip.start_of_the_trip != "" &&
             trip.end_of_the_trip != "" ? (
-            <div className="message-error">
+            <div className="message-error-1">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>the dates do not match</p>
             </div>
           ) : null}
 
           {infoError == true ? (
-            <div className="message-error">
+            <div className="message-error-1">
               <i className="icon-error2 fas fa-exclamation-circle"></i>
               <p>please write the fields correctly </p>
             </div>

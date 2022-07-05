@@ -3,10 +3,10 @@
 .modal-box2 {
   width: 450px;
   margin: auto;
-  border-radius: 25px;
+  border-radius: 15px;
   background-color: #151d26;
-  padding: 30px 40px 20px 40px;
-  margin-top: 6rem;
+  padding: 15px 30px 10px 30px;
+  margin-top: 7rem;
   font-size: 1rem;
   font-family: "Rubik", sans-serif;
   border-width: 1px;
@@ -141,23 +141,23 @@
 .modal-footer {
   display: flex;
   justify-content: center;
+  height: 57px;
 }
 
-.save-button {
+.save-button-3 {
   font-size: 1.2rem;
   border-radius: 15px;
   padding: 1px;
   width: 110px;
   border: none;
   margin-right: 0;
-  background-color: white;
-  color: #052d55;
+  color: white;
+  background-color: #008ac3;
   font-family: "Rubik", sans-serif;
 }
 
-.save-button:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(19, 23, 41);
+.save-button-3:hover {
+  background-color: #1498d1;
 }
 
 .counter-text {
@@ -217,7 +217,7 @@
   font-size: 14px;
 }
 
-.message-error {
+.message-error-1 {
   color: white;
   background-color: #db2c2c;
   border-radius: 20px;
@@ -227,7 +227,7 @@
   height: 24px;
   padding: 1px;
   vertical-align: auto;
-  margin: 6px auto 0px;
+  margin: 6px auto 5px;
   font-size: 14px;
 }
 
@@ -256,7 +256,19 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding-right: 100px;
+  padding-right: 130px;
+}
+
+.save-button-2 {
+  font-size: 1.2rem;
+  border-radius: 15px;
+  padding: 1px;
+  width: 100px;
+  border: none;
+  margin-right: 0;
+  color: white;
+  background-color: #008ac3;
+  font-family: "Rubik", sans-serif;
 }
 
 .delete-trip-button {
@@ -294,7 +306,7 @@
 
 .image-selected {
   top: 300px;
-  margin-left: 158px;
+  margin-left: 168px;
   position: absolute;
   z-index: 7;
   border-style: solid;

@@ -14,7 +14,6 @@
 .logo-t {
   width: 90%;
   margin-bottom: 40px;
-  padding-bottom: 40px;
 }
 
 .text-instruction {
@@ -27,6 +26,7 @@
 
 .span-box {
   font-size: 12px;
+  color: white;
 }
 
 .social {
@@ -34,6 +34,11 @@
   font-size: 14px;
   text-decoration: none;
   margin: 15px 0;
+  color: white;
+}
+
+.title-login {
+  color: white;
 }
 
 .button-all {
@@ -63,7 +68,7 @@
 }
 
 .form-move {
-  background-color: #ffffff;
+  background-color: #151d26;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,10 +84,11 @@
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
+  border-radius: 30px;
 }
 
 .container-1 {
-  background-color: #fff;
+  background-color: #151d26;
   border-radius: 20px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
@@ -154,9 +160,9 @@
 }
 
 .overlay {
-  background: #26a1f3;
-  background: -webkit-linear-gradient(to right, #1e8de7, #1779b3);
-  background: linear-gradient(to right, #4eb4e4, #19446b);
+  background: #151d26;
+  background: -webkit-linear-gradient(to right, #151d26, #151d26);
+  background: linear-gradient(to right, #151d26, #151d26);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
@@ -177,9 +183,10 @@
   position: absolute;
   display: flex;
   align-items: center;
-  justify-content: center;
+
   flex-direction: column;
   padding: 0 40px;
+  padding-top: 140px;
   text-align: center;
   top: 0;
   height: 100%;
@@ -201,6 +208,8 @@
 .overlay-right {
   right: 0;
   transform: translateX(0);
+  background-image: url("https://res.cloudinary.com/dmogh4y33/image/upload/v1657017999/Sin_t%C3%ADtulo-1_blynpq.jpg");
+  background-size: 500px 700px;
 }
 
 .container-1.right-panel-active .overlay-right {

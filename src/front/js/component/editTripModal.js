@@ -400,7 +400,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               {/* SAVE BUTTON */}
 
               <button
-                className="save-button"
+                className="save-button-2"
                 onClick={() => {
                   if (
                     onlyLettersAndSpaces(trip.destination) &&

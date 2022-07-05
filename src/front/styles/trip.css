@@ -82,22 +82,17 @@
 }
 .trip-user .avatar-trip {
   display: block;
-  width: 190px;
-  height: 190px;
+  width: 165px;
+  height: 165px;
   background-color: #d9dcf1;
   position: absolute;
   bottom: -85px;
-  left: 39rem;
+  left: 40rem;
   border-radius: 50%;
   overflow: hidden;
   border: 8px solid #ffffff;
   box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
   z-index: 2;
-}
-
-.trip-user .avatar-trip:hover {
-  width: 193px;
-  height: 193px;
 }
 
 .trip-user .trip-data {

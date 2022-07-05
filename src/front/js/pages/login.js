@@ -40,7 +40,7 @@ export const Login = () => {
 
     const data = await response.json();
     if (data.created) {
-      press2();
+      setSwitchPanel(false)
     }
   };
 
@@ -50,7 +50,7 @@ export const Login = () => {
         <div className={"container-1 " + (switchPanel == true ? "right-panel-active" : "false")} id="container">
           <div className="form-container sign-up-container">
             <form className="form-move" action="#">
-              <h1 style={{
+              <h1 className="title-login" style={{
                 fontWeight: "bold",
                 margin: "0"
               }}>Create Account</h1>
@@ -79,7 +79,7 @@ export const Login = () => {
           </div>
           <div className="form-container sign-in-container">
             <form className="form-move" action="#">
-              <h1 style={{
+              <h1 className="title-login" style={{
                 fontWeight: "bold",
                 margin: "0"
               }}>Sign in</h1>
@@ -102,7 +102,7 @@ export const Login = () => {
             <div className="overlay">
               <div className="overlay-panel overlay-left">
                 <div className="img-left"></div>
-                <h1 style={{
+                <h1 className="title-login" style={{
                   fontWeight: "bold",
                   margin: "0"
                 }}>Welcome Back!</h1>
@@ -117,7 +117,7 @@ export const Login = () => {
                   src={logo}
                   alt=""
                 />
-                <h1 style={{
+                <h1 className="title-login" style={{
                   fontWeight: "bold",
                   margin: "0"
                 }}>Hello, Friend!</h1>
