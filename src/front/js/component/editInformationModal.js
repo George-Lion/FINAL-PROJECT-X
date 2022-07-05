@@ -8,7 +8,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
   const history = useHistory();
   const [infoError, setInfoError] = useState(false);
   const [infoCheck, setInfoCheck] = useState(false);
-  const special = [
+  const numberList = [
     " ",
     "$",
     "#",
@@ -73,17 +73,19 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
     setInfoError(false);
   };
 
-  const specialCharacters = (element) => {
-    if (Array.isArray(special)) {
-      for (let value of special) {
-        for (let i of element) {
-          if (value == i) {
-            return true;
-          } else false;
+  const numbers = (element) => {
+    if (element) {
+      if (Array.isArray(numberList)) {
+        for (let value of numberList) {
+          for (let x of element) {
+            if (value == x) {
+              return true;
+            } else false;
+          }
         }
+      } else {
+        return false;
       }
-    } else {
-      return false;
     }
   };
 
@@ -135,7 +137,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   placeholder="Username"
                   style={
                     user.username.length == 0 ||
-                      specialCharacters(user.username)
+                      numbers(user.username)
                       ? {
                         borderStyle: "solid",
                         borderWidth: "4px",

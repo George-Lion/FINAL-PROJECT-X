@@ -59,6 +59,7 @@ export const Navbar = () => {
                   aria-expanded="false"
                 >
                   <img
+                    type="button"
                     src={store.user.profile_picture}
                     alt="mdo"
                     width="40"

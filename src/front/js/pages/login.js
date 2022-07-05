@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useHistory, Link } from "react-router-dom";
 import "../../styles/loginAndRegister.css";
@@ -9,6 +9,11 @@ export const Login = () => {
   const { store, actions } = useContext(Context);
   const [user, setUser] = useState({});
   const [switchPanel, setSwitchPanel] = useState(false)
+  const [infoError, setInfoError] = useState(false);
+
+  useEffect(() => {
+    initialState();
+  }, []);
 
   const loginUser = async () => {
     try {
@@ -32,16 +37,42 @@ export const Login = () => {
   };
 
   const sendUserInfo = async () => {
-    const response = await fetch(store.url + "register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
+    if (onlyLettersAndNumbers(user.username) && user.username != "" && emailInput(user.email) && user.email != "" && user.password != "") {
+      const response = await fetch(store.url + "register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
 
-    const data = await response.json();
-    if (data.created) {
-      setSwitchPanel(false)
+      });
+
+      const data = await response.json();
+      if (data.created) {
+        setSwitchPanel(false)
+      } else {
+        alert(error)
+      }
+    } else {
+      messageError();
     }
+  };
+
+  const onlyLettersAndNumbers = (element) => {
+    return /^[A-Ñ-Za-ñ-z0-9]*$/.test(element);
+  }
+
+  const emailInput = (element) => {
+    return /^[A-Ñ-Za-ñ-z0-9@.]*$/.test(element);
+  }
+
+  const messageError = () => {
+    setInfoError(true);
+  };
+
+  const initialState = () => {
+    user.username = "";
+    user.email = "";
+    user.password = "";
+
   };
 
   return (
@@ -57,24 +88,58 @@ export const Login = () => {
               <div className="social-container">
               </div>
               <span className="span-box">or use your email for registration</span>
-              <input type="text" className="inp-data" placeholder="Username" onChange={(e) =>
-                setUser({ ...user, username: e.target.value.trim() })
+              <input type="text" className="inp-data" placeholder="Username" style={
+                user.username == "" ||
+                  !onlyLettersAndNumbers(user.username)
+                  ? {
+                    borderStyle: "solid",
+                    borderWidth: "3px",
+                    borderColor: "#DB2C2C",
+                  }
+                  : null
+              } onChange={(e) =>
+                setUser({ ...user, username: e.target.value.trim() },
+                  setInfoError(false)
+                )
               } />
-              <input type="email" className="inp-data" placeholder="Email" onChange={(e) =>
-                setUser({ ...user, email: e.target.value.trim() })
-              } />
-              <input type="password" className="inp-data" placeholder="Password" onChange={(e) =>
-                setUser({ ...user, password: e.target.value.trim() })
-              } />
+              <input type="email" className="inp-data" placeholder="Email" style={
+                user.email == "" ||
+                  !emailInput(user.email)
+                  ? {
+                    borderStyle: "solid",
+                    borderWidth: "3px",
+                    borderColor: "#DB2C2C",
+                  }
+                  : null} onChange={(e) =>
+                    setUser({ ...user, email: e.target.value.trim() })
+                  } />
+              <input type="password" className="inp-data" placeholder="Password"
+                style={user.password == ""
+                  ? {
+                    borderStyle: "solid",
+                    borderWidth: "3px",
+                    borderColor: "#DB2C2C",
+                  }
+                  : null}
+
+                onChange={(e) =>
+                  setUser({ ...user, password: e.target.value.trim() })
+                } />
               <input type="text" className="inp-data" placeholder="First name" onChange={(e) =>
                 setUser({ ...user, firstname: e.target.value.trim() })
               } />
               <input type="text" className="inp-data" placeholder="Last name" onChange={(e) =>
                 setUser({ ...user, lastname: e.target.value.trim() })
               } />
-              <button className="button-all mt-2" onClick={() => {
+              <button type="button" className="button-all mt-2" onClick={() => {
                 sendUserInfo();
               }}>Sign Up</button>
+              {infoError == true ? (
+                <div className="error-register">
+                  <i className="icon-error2 fas fa-exclamation-circle"></i>
+                  <p>please write the fields correctly </p>
+                </div>
+              ) : null}
             </form>
           </div>
           <div className="form-container sign-in-container">
