@@ -5,7 +5,6 @@ import { Feed } from "./pages/feed";
 import { Trip } from "./pages/trip";
 import { Login } from "./pages/login";
 import { Profile } from "./pages/profile";
-import { Register } from "./pages/register";
 import { Message } from "./pages/message";
 import { MyTrips } from "./pages/myTrips";
 import { NoEditProfile } from "./pages/noEditProfile";
@@ -32,13 +31,6 @@ const Layout = () => {
             <Route exact path="/">
               {store.logged != true ? (
                 <Login />
-              ) : (
-                <Redirect to="/feed"></Redirect>
-              )}
-            </Route>
-            <Route exact path="/register">
-              {store.logged != true ? (
-                <Register />
               ) : (
                 <Redirect to="/feed"></Redirect>
               )}

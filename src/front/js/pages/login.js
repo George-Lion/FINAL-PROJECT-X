@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { useHistory, Link } from "react-router-dom";
 import "../../styles/loginAndRegister.css";
 import logo from "../component/img/traveland.png";
+import ReactTooltip from 'react-tooltip';
 export const Login = () => {
 
   const history = useHistory();
@@ -48,6 +49,7 @@ export const Login = () => {
       const data = await response.json();
       if (data.created) {
         setSwitchPanel(false)
+        formSignUp.reset()
       } else {
         alert(error)
       }
@@ -72,7 +74,6 @@ export const Login = () => {
     user.username = "";
     user.email = "";
     user.password = "";
-
   };
 
   return (
@@ -80,7 +81,7 @@ export const Login = () => {
       <div className="body-all">
         <div className={"container-1 " + (switchPanel == true ? "right-panel-active" : "false")} id="container">
           <div className="form-container sign-up-container">
-            <form className="form-move" action="#">
+            <form className="form-move" action="#" id="formSignUp">
               <h1 className="title-login" style={{
                 fontWeight: "bold",
                 margin: "0"
@@ -88,7 +89,7 @@ export const Login = () => {
               <div className="social-container">
               </div>
               <span className="span-box">or use your email for registration</span>
-              <input type="text" className="inp-data" placeholder="Username" style={
+              <input type="text" className="inp-data" data-tip data-for="botonTooltipUsername" placeholder="Username" style={
                 user.username == "" ||
                   !onlyLettersAndNumbers(user.username)
                   ? {
@@ -102,7 +103,7 @@ export const Login = () => {
                   setInfoError(false)
                 )
               } />
-              <input type="email" className="inp-data" placeholder="Email" style={
+              <input type="email" className="inp-data" data-tip data-for="botonTooltipEmail" placeholder="Email" style={
                 user.email == "" ||
                   !emailInput(user.email)
                   ? {
@@ -113,7 +114,7 @@ export const Login = () => {
                   : null} onChange={(e) =>
                     setUser({ ...user, email: e.target.value.trim() })
                   } />
-              <input type="password" className="inp-data" placeholder="Password"
+              <input type="password" className="inp-data" data-tip data-for="botonTooltipPassword" placeholder="Password"
                 style={user.password == ""
                   ? {
                     borderStyle: "solid",
@@ -195,6 +196,29 @@ export const Login = () => {
           </div>
         </div>
       </div>
+      {user.username == "" ?
+        <ReactTooltip id="botonTooltipUsername"
+          type="error" className="tooltip-style">
+          the field is required.
+        </ReactTooltip> : !onlyLettersAndNumbers(user.username) ?
+          <ReactTooltip id="botonTooltipUsername"
+            type="error" className="tooltip-style">
+            Please remove any special characters.
+          </ReactTooltip> : null}
+      {user.email == "" ?
+        <ReactTooltip id="botonTooltipEmail"
+          type="error" className="tooltip-style">
+          the field is required.
+        </ReactTooltip> : !emailInput(user.email) ?
+          <ReactTooltip id="botonTooltipEmail"
+            type="error" className="tooltip-style">
+            email example: jhon77@email.com
+          </ReactTooltip> : null}
+      {user.password == "" ?
+        <ReactTooltip id="botonTooltipPassword"
+          type="error" className="tooltip-style">
+          the field is required.
+        </ReactTooltip> : null}
     </Fragment >
   );
 };

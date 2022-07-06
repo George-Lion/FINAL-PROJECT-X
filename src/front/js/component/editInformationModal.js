@@ -8,7 +8,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
   const history = useHistory();
   const [infoError, setInfoError] = useState(false);
   const [infoCheck, setInfoCheck] = useState(false);
-  const numberList = [
+  const special = [
     " ",
     "$",
     "#",
@@ -73,19 +73,17 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
     setInfoError(false);
   };
 
-  const numbers = (element) => {
-    if (element) {
-      if (Array.isArray(numberList)) {
-        for (let value of numberList) {
-          for (let x of element) {
-            if (value == x) {
-              return true;
-            } else false;
-          }
+  const specialCharacters = (element) => {
+    if (Array.isArray(special)) {
+      for (let value of special) {
+        for (let i of element) {
+          if (value == i) {
+            return true;
+          } else false;
         }
-      } else {
-        return false;
       }
+    } else {
+      return false;
     }
   };
 
@@ -135,16 +133,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   id="username"
                   name="Username"
                   placeholder="Username"
-                  style={
-                    user.username.length == 0 ||
-                      numbers(user.username)
-                      ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
-                      : null
-                  }
+                  style={user.username.length == 0 || specialCharacters(user.username) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null}
                   onChange={(e) =>
                     editUser(
                       { ...user, username: e.target.value },
@@ -168,16 +157,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   id="first"
                   name="First"
                   placeholder="First name"
-                  style={
-                    user.firstname.length == 0 ||
-                      specialCharacters(user.firstname)
-                      ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
-                      : null
-                  }
+                  style={(user.firstname.length == 0 || specialCharacters(user.firstname) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
                   onChange={(e) =>
                     editUser(
                       {
@@ -200,16 +180,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   id="last"
                   name="Last"
                   placeholder="Last name"
-                  style={
-                    user.lastname.length == 0 ||
-                      specialCharacters(user.lastname)
-                      ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
-                      : null
-                  }
+                  style={(user.lastname.length == 0 || specialCharacters(user.lastname) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
                   onChange={(e) =>
                     editUser(
                       {
@@ -321,16 +292,16 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
               aria-modal="true"
               style={{
                 display: "block",
-                backdropFilter: "blur(3px) brightness(20%)",
+                backdropFilter: "brightness(20%)",
               }}
             >
-              <div className="otro-modal modal-dialog">
-                <div className="delete-modal modal-content">
+              <div className="delete-modal modal-dialog">
+                <div className="trip-modal modal-content">
                   <div className="modal-header">
-                    <p className="modal-title text-white" id="exampleModalLabel">
+                    <h5 className="modal-title" id="exampleModalLabel">
                       Are you sure you want to delete the profile?{" "}
                       <i>This action cannot be undone</i>
-                    </p>
+                    </h5>
                   </div>
                   <div className="modal-footer">
                     <button
@@ -345,7 +316,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                     </button>
                     <button
                       type="button"
-                      className="button-delete btn"
+                      className="btn btn-danger text-white"
                       onClick={() => {
                         deleteProfile(true);
                       }}
@@ -401,18 +372,14 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
             </div>
           ) : null}
 
-          {user.username.length == 0 ||
-            user.firstname.length == 0 ||
-            user.lastname.length == 0 ? (
+          {user.username.length == 0 || user.firstname.length == 0 || user.lastname.length == 0 ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>the field is required</p>
             </div>
           ) : null}
 
-          {specialCharacters(user.username) ||
-            specialCharacters(user.firstname) ||
-            specialCharacters(user.lastname) ? (
+          {specialCharacters(user.username) || specialCharacters(user.firstname) || specialCharacters(user.lastname) ? (
             <div className="message-error">
               <i className="icon-error fas fa-exclamation-circle"></i>
               <p>Only special characters _ or . </p>
@@ -427,6 +394,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
           ) : null}
         </div>
       </div>
-    </Fragment>
+    </Fragment >
   );
 };

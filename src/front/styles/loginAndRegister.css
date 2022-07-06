@@ -250,3 +250,7 @@
   margin: 6px auto 5px;
   font-size: 14px;
 }
+
+.tooltip-style {
+  border-radius: 10px !important;
+}

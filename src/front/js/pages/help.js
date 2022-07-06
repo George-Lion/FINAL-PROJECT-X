@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect, useContext } from "react";
+import React, { Fragment, useEffect, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/help.css";
 
 export const Help = () => {
   const { actions, store } = useContext(Context);
+  const [switchPanel, setSwitchPanel] = useState(false)
 
   useEffect(() => {
     actions.verify();
@@ -46,7 +47,8 @@ export const Help = () => {
                   complete profile is the best way to connect with people. Here
                   you can tell people if you're traveling and where. Be sure to
                   include photos. Don't have a profile yet?{" "}
-                  <Link to="/register">Sign Up Now</Link>
+                  <Link to="/"
+                  >Sign Up Now</Link>
                 </p>
               </div>
 
