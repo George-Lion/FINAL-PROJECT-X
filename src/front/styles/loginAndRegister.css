@@ -39,6 +39,11 @@
 
 .title-login {
   color: white;
+  padding-bottom: 15px;
+}
+
+.title-login2 {
+  color: white;
 }
 
 .button-all {
@@ -80,9 +85,8 @@
 
 .inp-data {
   background-color: #eee;
-  border: none;
   outline: none;
-  padding: 12px 15px;
+  padding: 15px 15px;
   margin: 8px 0;
   width: 100%;
   border-radius: 30px;
@@ -189,7 +193,6 @@
   position: absolute;
   display: flex;
   align-items: center;
-
   flex-direction: column;
   padding: 0 40px;
   padding-top: 140px;
@@ -247,8 +250,14 @@
   height: 24px;
   padding: 1px;
   vertical-align: auto;
-  margin: 6px auto 5px;
+  margin: 15px auto 5px;
   font-size: 14px;
+}
+
+.before-register {
+  height: 24px;
+  background-color: #151d26;
+  margin: 15px auto 5px;
 }
 
 .tooltip-style {

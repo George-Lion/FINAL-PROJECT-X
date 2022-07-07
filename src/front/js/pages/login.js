@@ -1,9 +1,10 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../../styles/loginAndRegister.css";
 import logo from "../component/img/traveland.png";
 import ReactTooltip from 'react-tooltip';
+
 export const Login = () => {
 
   const history = useHistory();
@@ -38,7 +39,7 @@ export const Login = () => {
   };
 
   const sendUserInfo = async () => {
-    if (onlyLettersAndNumbers(user.username) && user.username != "" && emailInput(user.email) && user.email != "" && user.password != "") {
+    if (onlyLettersAndNumbers(user.username) && user.username != "" && emailIsValid(user.email) && emailInput(user.email) && user.email != "" && user.password != "") {
       const response = await fetch(store.url + "register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -48,8 +49,9 @@ export const Login = () => {
 
       const data = await response.json();
       if (data.created) {
-        setSwitchPanel(false)
-        formSignUp.reset()
+        formSignUp.reset();
+        initialState();
+        setSwitchPanel(false);
       } else {
         alert(error)
       }
@@ -66,6 +68,10 @@ export const Login = () => {
     return /^[A-Ñ-Za-ñ-z0-9@.]*$/.test(element);
   }
 
+  const emailIsValid = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
+
   const messageError = () => {
     setInfoError(true);
   };
@@ -74,6 +80,8 @@ export const Login = () => {
     user.username = "";
     user.email = "";
     user.password = "";
+    user.firstname = "";
+    user.lastname = "";
   };
 
   return (
@@ -82,13 +90,13 @@ export const Login = () => {
         <div className={"container-1 " + (switchPanel == true ? "right-panel-active" : "false")} id="container">
           <div className="form-container sign-up-container">
             <form className="form-move" action="#" id="formSignUp">
+
+              <div className="social-container">
+              </div>
               <h1 className="title-login" style={{
                 fontWeight: "bold",
                 margin: "0"
               }}>Create Account</h1>
-              <div className="social-container">
-              </div>
-              <span className="span-box">or use your email for registration</span>
               <input type="text" className="inp-data" data-tip data-for="botonTooltipUsername" placeholder="Username" style={
                 user.username == "" ||
                   !onlyLettersAndNumbers(user.username)
@@ -103,16 +111,16 @@ export const Login = () => {
                   setInfoError(false)
                 )
               } />
-              <input type="email" className="inp-data" data-tip data-for="botonTooltipEmail" placeholder="Email" style={
+              <input type="text" className="inp-data" data-tip data-for="botonTooltipEmail" placeholder="Email" style={
                 user.email == "" ||
-                  !emailInput(user.email)
+                  !emailIsValid(user.email) || !emailInput(user.email)
                   ? {
                     borderStyle: "solid",
                     borderWidth: "3px",
                     borderColor: "#DB2C2C",
                   }
                   : null} onChange={(e) =>
-                    setUser({ ...user, email: e.target.value.trim() })
+                    setUser({ ...user, email: e.target.value.trim() }, setInfoError(false))
                   } />
               <input type="password" className="inp-data" data-tip data-for="botonTooltipPassword" placeholder="Password"
                 style={user.password == ""
@@ -124,7 +132,7 @@ export const Login = () => {
                   : null}
 
                 onChange={(e) =>
-                  setUser({ ...user, password: e.target.value.trim() })
+                  setUser({ ...user, password: e.target.value.trim() }, setInfoError(false))
                 } />
               <input type="text" className="inp-data" placeholder="First name" onChange={(e) =>
                 setUser({ ...user, firstname: e.target.value.trim() })
@@ -140,26 +148,25 @@ export const Login = () => {
                   <i className="icon-error2 fas fa-exclamation-circle"></i>
                   <p>please write the fields correctly </p>
                 </div>
-              ) : null}
+              ) : <div className="before-register"></div>}
             </form>
           </div>
           <div className="form-container sign-in-container">
             <form className="form-move" action="#">
+              <div className="social-container">
+              </div>
               <h1 className="title-login" style={{
                 fontWeight: "bold",
                 margin: "0"
               }}>Sign in</h1>
-              <div className="social-container">
-              </div>
-              <span className="span-box">or use your account</span>
-              <input type="email" className="inp-data" placeholder="Email" onChange={(e) => {
+              <input type="text" className="inp-data" placeholder="Email" onChange={(e) => {
                 setUser({ ...user, email: e.target.value.trim() });
               }} />
               <input type="password" className="inp-data" placeholder="Password" onChange={(e) => {
                 setUser({ ...user, password: e.target.value.trim() });
               }} />
-              <a className="social" href="#">Forgot your password?</a>
-              <button className="button-all" onClick={() => {
+              <a className="social" href="#"></a>
+              <button type="submit" className="button-all" onClick={() => {
                 loginUser();
               }}>Sign In</button>
             </form>
@@ -168,9 +175,9 @@ export const Login = () => {
             <div className="overlay">
               <div className="overlay-panel overlay-left">
                 <div className="img-left"></div>
-                <h1 className="title-login" style={{
+                <h1 className="title-login2" style={{
                   fontWeight: "bold",
-                  margin: "0"
+                  marginTop: "90px"
                 }}>Welcome Back!</h1>
                 <p className="text-instruction">To keep connected with us please login with your personal info</p>
                 <button className="button-all ghost" id="signIn" onClick={() => {
@@ -186,38 +193,46 @@ export const Login = () => {
                 <h1 className="title-login" style={{
                   fontWeight: "bold",
                   margin: "0"
-                }}>Hello, Friend!</h1>
+                }}>Hello!</h1>
                 <p className="text-instruction">Enter your personal details and start journey with us</p>
                 <button className="button-all ghost" id="signUp" onClick={() => {
                   setSwitchPanel(true)
+                  initialState()
                 }}>Sign Up</button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       {user.username == "" ?
         <ReactTooltip id="botonTooltipUsername"
           type="error" className="tooltip-style">
-          the field is required.
+          The field is required.
         </ReactTooltip> : !onlyLettersAndNumbers(user.username) ?
           <ReactTooltip id="botonTooltipUsername"
             type="error" className="tooltip-style">
             Please remove any special characters.
           </ReactTooltip> : null}
+
       {user.email == "" ?
         <ReactTooltip id="botonTooltipEmail"
           type="error" className="tooltip-style">
-          the field is required.
-        </ReactTooltip> : !emailInput(user.email) ?
+          The field is required.
+        </ReactTooltip> : !emailIsValid(user.email) ?
           <ReactTooltip id="botonTooltipEmail"
             type="error" className="tooltip-style">
-            email example: jhon77@email.com
-          </ReactTooltip> : null}
+            Email example: jhon77@email.com
+          </ReactTooltip> : !emailInput(user.email) ?
+            <ReactTooltip id="botonTooltipEmail"
+              type="error" className="tooltip-style">
+              Sorry you can only use (@) and (.)
+            </ReactTooltip> : null}
+
       {user.password == "" ?
         <ReactTooltip id="botonTooltipPassword"
           type="error" className="tooltip-style">
-          the field is required.
+          The field is required.
         </ReactTooltip> : null}
     </Fragment >
   );
