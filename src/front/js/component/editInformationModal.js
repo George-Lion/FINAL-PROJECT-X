@@ -103,7 +103,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
         }}
       >
         <div className="modal-box1">
-          <div className="content-head modal-header">
+          <div className="content-head ">
             <div className="section-title">
               <h4>Edit Profile</h4>
             </div>
@@ -133,7 +133,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   id="username"
                   name="Username"
                   placeholder="Username"
-                  style={user.username.length == 0 || specialCharacters(user.username) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null}
+                  style={user.username.length == 0 || specialCharacters(user.username) ? { borderStyle: "solid", borderWidth: "2px", borderColor: '#DB2C2C' } : null}
                   onChange={(e) =>
                     editUser(
                       { ...user, username: e.target.value },
@@ -157,7 +157,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   id="first"
                   name="First"
                   placeholder="First name"
-                  style={(user.firstname.length == 0 || specialCharacters(user.firstname) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                  style={(user.firstname.length == 0 || specialCharacters(user.firstname) ? { borderStyle: "solid", borderWidth: "2px", borderColor: '#DB2C2C' } : null)}
                   onChange={(e) =>
                     editUser(
                       {
@@ -180,7 +180,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   id="last"
                   name="Last"
                   placeholder="Last name"
-                  style={(user.lastname.length == 0 || specialCharacters(user.lastname) ? { borderStyle: "solid", borderWidth: "4px", borderColor: '#DB2C2C' } : null)}
+                  style={(user.lastname.length == 0 || specialCharacters(user.lastname) ? { borderStyle: "solid", borderWidth: "2px", borderColor: '#DB2C2C' } : null)}
                   onChange={(e) =>
                     editUser(
                       {
@@ -329,7 +329,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
             </div>
           ) : null}
 
-          <div className="modal-footer">
+          <div className="">
             <div className="buttons-footer">
               <i
                 className="delete-profile fa-solid fa-trash"

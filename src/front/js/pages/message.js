@@ -8,6 +8,7 @@ export const Message = () => {
   const { actions, store } = useContext(Context);
   const { id } = useParams();
   const [accept, setAccept] = useState(false);
+  const [newMessage, setNewMessage] = useState([]);
 
   let matchCount = 0;
   matchCount = store.match.length;
@@ -15,9 +16,22 @@ export const Message = () => {
   useEffect(() => {
     actions.verify();
     actions.readMessages();
+    getMessages();
   }, []);
 
-  const deleteMessage = async () => {
+  const getMessages = async () => {
+    const response = await fetch(store.url + "messageA", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+    const data = await response.json();
+    setNewMessage(data.messages)
+
+  }
+
+  const deleteMessage = async (id) => {
     try {
       const resp = await fetch(store.url + "deleteMessage", {
         method: "DELETE",
@@ -25,9 +39,10 @@ export const Message = () => {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
+        body: JSON.stringify({ "id": id })
       });
-      const data = await resp.json();
       if (resp.ok) {
+        await actions.getUserTrips();
         setConfirmDelete(false);
         actions.match();
       }
@@ -55,7 +70,7 @@ export const Message = () => {
                             className="fas fa-times-circle text-warning d-flex justify-content-end mt-2 me-2"
                             style={{ fontSize: "23px" }}
                             onClick={() => {
-                              deleteMessage();
+                              deleteMessage(e.id);
                             }}></i>
                           <div
                             className="modal-content rounded-4 shadow"
@@ -98,7 +113,6 @@ export const Message = () => {
                               <button
                                 type="button"
                                 className="btn btn-lg  fs-6 text-decoration-none col-6 m-0 rounded-0 "
-                                data-bs-dismiss="modal"
                                 onClick={() => {
                                   actions.rejectMatch(e);
                                 }}
@@ -117,6 +131,51 @@ export const Message = () => {
                     </h4>
                   </div>
                 )}
+                {newMessage.sort((a, b) => a.id - b.id)
+                  .map((e) => {
+                    return (
+                      <div key={e.id} className="mb-4" role="document">
+                        <i
+                          className="fas fa-times-circle text-warning d-flex justify-content-end mt-2 me-2"
+                          style={{ fontSize: "23px" }}
+                          onClick={() => {
+                            deleteMessage(e.id);
+                          }}></i>
+                        <div
+                          className="modal-content rounded-4 shadow"
+                          style={
+                            e.accepted
+                              ? { background: "#B1EBFF" }
+                              : e.rejected
+                                ? { background: "#FF7A69" }
+                                : { background: "white" }
+                          }
+                        >
+                          <div className="text-center">
+                            <Link
+                              to={"/noEditProfile/" + e.user_id}
+                              className="text-decoration-none text-dark"
+                            >
+                              <img
+                                className="message-avatar"
+                                src={e.profile_picture}
+                                alt="img"
+                              />
+                              <h5 className="u-name mb-0">{e.username} </h5>
+                            </Link>
+                            <h5 className="u-request mb-0">
+                              {" "}
+                              Travel: {e.destination}
+                            </h5>
+                            <p className="text-message rounded bg-white text-break text-dark">
+                              {e.message}
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                    )
+                  })}
               </div>
             </div>
           </div>

@@ -21,10 +21,10 @@ export const Profile = () => {
 
   useEffect(() => {
     actions.verify();
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     actions.getProfile(id);
     actions.getUserTrips();
     actions.getUserProfiles();
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
   useEffect(() => {

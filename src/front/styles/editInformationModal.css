@@ -9,15 +9,16 @@
   margin-top: 14rem;
   font-size: 1rem;
   font-family: "Rubik", sans-serif;
-  border-width: 3px;
+  border-width: 1px;
   border-style: solid;
-  border-color: #9df7fe;
+  border-color: #7c7c7c;
 }
 
 .content-head {
   display: flex;
   color: white;
   justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 .section-user {
@@ -123,14 +124,14 @@
   width: 140px;
   border: none;
   margin-right: 0;
-  background-color: white;
-  color: #052d55;
+  background-color: #008ac3;
+  color: white;
   font-family: "Rubik", sans-serif;
 }
 
 .save-button:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(19, 23, 41);
+  background-color: #1498d1;
+  color: white;
 }
 
 .counter-bio {
@@ -207,7 +208,8 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding-right: 95px;
+  margin-top: 20px;
+  padding-right: 117px;
 }
 
 .delete-profile {

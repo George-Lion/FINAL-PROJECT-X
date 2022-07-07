@@ -17,6 +17,8 @@ export const Login = () => {
     initialState();
   }, []);
 
+  //LOGIN 
+
   const loginUser = async () => {
     try {
       const resp = await fetch(store.url + "login", {
@@ -34,9 +36,12 @@ export const Login = () => {
         alert("Email o contraseña incorrectos.");
       }
     } catch (e) {
+      console.log(e)
       alert("ERROR");
     }
   };
+
+  //REGISTER
 
   const sendUserInfo = async () => {
     if (onlyLettersAndNumbers(user.username) && user.username != "" && emailIsValid(user.email) && emailInput(user.email) && user.email != "" && user.password != "") {
@@ -49,9 +54,9 @@ export const Login = () => {
 
       const data = await response.json();
       if (data.created) {
-        formSignUp.reset();
-        initialState();
-        setSwitchPanel(false);
+        formSignUp.reset(); //input reset
+        initialState(); //state = ""
+        setSwitchPanel(false); //Switch to the form panel to login
       } else {
         alert(error)
       }
@@ -59,6 +64,8 @@ export const Login = () => {
       messageError();
     }
   };
+
+  //INPUT FUNCTIONS
 
   const onlyLettersAndNumbers = (element) => {
     return /^[A-Ñ-Za-ñ-z0-9]*$/.test(element);
@@ -68,7 +75,7 @@ export const Login = () => {
     return /^[A-Ñ-Za-ñ-z0-9@.]*$/.test(element);
   }
 
-  const emailIsValid = (email) => {
+  const emailIsValid = (email) => { //validates that the input is an email address
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 
@@ -76,7 +83,7 @@ export const Login = () => {
     setInfoError(true);
   };
 
-  const initialState = () => {
+  const initialState = () => { //set states to ""
     user.username = "";
     user.email = "";
     user.password = "";
@@ -89,8 +96,10 @@ export const Login = () => {
       <div className="body-all">
         <div className={"container-1 " + (switchPanel == true ? "right-panel-active" : "false")} id="container">
           <div className="form-container sign-up-container">
-            <form className="form-move" action="#" id="formSignUp">
 
+            {/* SIGN UP FORM */}
+
+            <div className="form-move" id="formSignUp">
               <div className="social-container">
               </div>
               <h1 className="title-login" style={{
@@ -149,10 +158,13 @@ export const Login = () => {
                   <p>please write the fields correctly </p>
                 </div>
               ) : <div className="before-register"></div>}
-            </form>
+            </div>
           </div>
           <div className="form-container sign-in-container">
-            <form className="form-move" action="#">
+
+            {/*  SIGN IN FORM */}
+
+            <div className="form-move" >
               <div className="social-container">
               </div>
               <h1 className="title-login" style={{
@@ -166,10 +178,10 @@ export const Login = () => {
                 setUser({ ...user, password: e.target.value.trim() });
               }} />
               <a className="social" href="#"></a>
-              <button type="submit" className="button-all" onClick={() => {
+              <button className="button-all" onClick={() => {
                 loginUser();
               }}>Sign In</button>
-            </form>
+            </div>
           </div>
           <div className="overlay-container">
             <div className="overlay">
