@@ -69,7 +69,7 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
 
             <div className="modal-footer">
               <button
-                className="col-2 offset-1 btn btn-light"
+                className="save-picture"
                 onClick={() => {
                   actions.editUser(user);
                   closeModal();

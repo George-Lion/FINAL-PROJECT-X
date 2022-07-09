@@ -145,15 +145,25 @@
 }
 
 .save-button-3 {
-  font-size: 1.2rem;
-  border-radius: 15px;
-  padding: 1px;
-  width: 110px;
-  border: none;
-  margin-right: 0;
-  color: white;
-  background-color: #008ac3;
   font-family: "Rubik", sans-serif;
+  border-radius: 20px;
+  border: 1px solid #2bc3ff;
+  background-color: #1c8dce;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px 43px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+.save-button-3:active {
+  transform: scale(0.95);
+}
+
+.save-button-3:focus {
+  outline: none;
 }
 
 .save-button-3:hover {
@@ -163,7 +173,7 @@
 .counter-text {
   display: flex;
   justify-content: center;
-  margin: 3px 0px 5px 0px;
+  margin: 10px 0px 15px 0px;
   font-size: 0.9rem;
   color: #fffefd;
 }
@@ -234,6 +244,7 @@
 .save-footer {
   display: flex;
   justify-content: center;
+  margin-bottom: 15px;
 }
 
 .delete-profile {
@@ -305,7 +316,7 @@
 }
 
 .image-selected {
-  top: 300px;
+  top: 305px;
   margin-left: 168px;
   position: absolute;
   z-index: 7;
@@ -313,6 +324,18 @@
   border-radius: 50%;
   border-color: white;
   background-color: white;
+}
+
+.image-selected:active {
+  transform: scale(0.95);
+}
+
+.image-selected:focus {
+  outline: none;
+}
+
+.image-selected:hover {
+  background-color: #1498d1;
 }
 
 .image-upload > input {
