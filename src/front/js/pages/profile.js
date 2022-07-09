@@ -219,6 +219,7 @@ export const Profile = () => {
                               display: "block",
                               backgroundImage:
                                 "url(" + e.destination_picture + ")",
+                              opacity: "0.9"
                             }}
                           >
                             <div

@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 import "../../styles/editInformationModal.css";
+import ReactTooltip from 'react-tooltip';
 
 export const EditInformationModal = ({ closeModal, editUser, user }) => {
   const { store, actions } = useContext(Context);
@@ -73,19 +74,9 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
     setInfoError(false);
   };
 
-  const specialCharacters = (element) => {
-    if (Array.isArray(special)) {
-      for (let value of special) {
-        for (let i of element) {
-          if (value == i) {
-            return true;
-          } else false;
-        }
-      }
-    } else {
-      return false;
-    }
-  };
+  const onlyLettersAndNumbers = (element) => {
+    return /^[A-Ñ-Za-ñ-z0-9]*$/.test(element);
+  }
 
   return (
     <Fragment>
@@ -132,8 +123,9 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   defaultValue={store.user.username}
                   id="username"
                   name="Username"
+                  data-tip data-for="botonTooltipUsername"
                   placeholder="Username"
-                  style={user.username.length == 0 || specialCharacters(user.username) ? { borderStyle: "solid", borderWidth: "2px", borderColor: '#DB2C2C' } : null}
+                  style={user.username == "" || !onlyLettersAndNumbers(user.username) ? { borderStyle: "solid", borderWidth: "2px", borderColor: '#DB2C2C' } : null}
                   onChange={(e) =>
                     editUser(
                       { ...user, username: e.target.value },
@@ -144,6 +136,16 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                 ></input>
               </div>
             </div>
+
+            {user.username == "" ?
+              <ReactTooltip id="botonTooltipUsername"
+                type="error" className="tooltip-style">
+                The field is required.
+              </ReactTooltip> : !onlyLettersAndNumbers(user.username) ?
+                <ReactTooltip id="botonTooltipUsername"
+                  type="error" className="tooltip-style">
+                  Please remove any special characters.
+                </ReactTooltip> : null}
 
             {/* FIRSTNAME AND LASTNAME */}
 
@@ -156,8 +158,9 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   defaultValue={store.user.firstname}
                   id="first"
                   name="First"
+                  data-tip data-for="botonTooltipFirstname"
                   placeholder="First name"
-                  style={(user.firstname.length == 0 || specialCharacters(user.firstname) ? { borderStyle: "solid", borderWidth: "2px", borderColor: '#DB2C2C' } : null)}
+                  style={(user.firstname == "" || !onlyLettersAndNumbers(user.firstname) ? { borderStyle: "solid", borderWidth: "2px", borderColor: '#DB2C2C' } : null)}
                   onChange={(e) =>
                     editUser(
                       {
@@ -171,6 +174,16 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                 ></input>
               </div>
 
+              {user.firstname == "" ?
+                <ReactTooltip id="botonTooltipFirstname"
+                  type="error" className="tooltip-style">
+                  The field is required.
+                </ReactTooltip> : !onlyLettersAndNumbers(user.firstname) ?
+                  <ReactTooltip id="botonTooltipFirstname"
+                    type="error" className="tooltip-style">
+                    Please remove any special characters.
+                  </ReactTooltip> : null}
+
               <div className="section-last">
                 <input
                   className="input-style"
@@ -179,8 +192,9 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                   defaultValue={store.user.lastname}
                   id="last"
                   name="Last"
+                  data-tip data-for="botonTooltipLastname"
                   placeholder="Last name"
-                  style={(user.lastname.length == 0 || specialCharacters(user.lastname) ? { borderStyle: "solid", borderWidth: "2px", borderColor: '#DB2C2C' } : null)}
+                  style={(user.lastname == "" || !onlyLettersAndNumbers(user.lastname) ? { borderStyle: "solid", borderWidth: "2px", borderColor: '#DB2C2C' } : null)}
                   onChange={(e) =>
                     editUser(
                       {
@@ -194,6 +208,16 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                 ></input>
               </div>
             </div>
+
+            {user.lastname == "" ?
+              <ReactTooltip id="botonTooltipLastname"
+                type="error" className="tooltip-style">
+                The field is required.
+              </ReactTooltip> : !onlyLettersAndNumbers(user.lastname) ?
+                <ReactTooltip id="botonTooltipLastname"
+                  type="error" className="tooltip-style">
+                  Please remove any special characters.
+                </ReactTooltip> : null}
 
             {/* CITY AND COUNTRY OF RESIDENCE */}
 
@@ -347,12 +371,12 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                 className="save-button"
                 onClick={() => {
                   if (
-                    !specialCharacters(user.username) &&
-                    !specialCharacters(user.firstname) &&
-                    !specialCharacters(user.lastname) &&
-                    user.username.length > 0 &&
-                    user.firstname.length > 0 &&
-                    user.lastname.length > 0
+                    !onlyLettersAndNumbers(user.username) &&
+                    !onlyLettersAndNumbers(user.firstname) &&
+                    !onlyLettersAndNumbers(user.lastname) &&
+                    user.username != "" &&
+                    user.firstname != "" &&
+                    user.lastname != ""
                   ) {
                     messageCheck();
                     actions.editUser(user);
@@ -369,20 +393,6 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
             <div className="message-check">
               <i className="icon-check fas fa-check-circle"></i>
               <p>Changes saved</p>
-            </div>
-          ) : null}
-
-          {user.username.length == 0 || user.firstname.length == 0 || user.lastname.length == 0 ? (
-            <div className="message-error">
-              <i className="icon-error fas fa-exclamation-circle"></i>
-              <p>the field is required</p>
-            </div>
-          ) : null}
-
-          {specialCharacters(user.username) || specialCharacters(user.firstname) || specialCharacters(user.lastname) ? (
-            <div className="message-error">
-              <i className="icon-error fas fa-exclamation-circle"></i>
-              <p>Only special characters _ or . </p>
             </div>
           ) : null}
 

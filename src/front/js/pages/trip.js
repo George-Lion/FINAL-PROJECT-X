@@ -86,6 +86,7 @@ export const Trip = () => {
                   style={{
                     backgroundImage:
                       "url(" + store.trip.destination_picture + ")",
+                    opacity: "0.9"
                   }}
                 >
                   <div className="shadow-page"></div>
