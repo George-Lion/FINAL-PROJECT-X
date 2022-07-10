@@ -371,9 +371,9 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                 className="save-button"
                 onClick={() => {
                   if (
-                    !onlyLettersAndNumbers(user.username) &&
-                    !onlyLettersAndNumbers(user.firstname) &&
-                    !onlyLettersAndNumbers(user.lastname) &&
+                    onlyLettersAndNumbers(user.username) &&
+                    onlyLettersAndNumbers(user.firstname) &&
+                    onlyLettersAndNumbers(user.lastname) &&
                     user.username != "" &&
                     user.firstname != "" &&
                     user.lastname != ""

@@ -263,3 +263,18 @@
 .tooltip-style {
   border-radius: 10px !important;
 }
+
+@media screen and (max-height: 1300px) {
+  .content-mytrips {
+    width: 920px;
+    height: auto;
+  }
+  .box-mytrips {
+    width: 820px;
+    margin: auto;
+    padding: 30px 0;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+}

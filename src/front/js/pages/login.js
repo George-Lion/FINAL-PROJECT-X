@@ -52,9 +52,9 @@ export const Login = () => {
 
       const data = await response.json();
       if (data.created) {
-        formSignUp.reset(); //input reset
         initialState(); //state = ""
         setSwitchPanel(false); //Switch to the form panel to login
+        /* formSignUp.reset(); */ //input reset
       } else {
         alert(error)
       }
