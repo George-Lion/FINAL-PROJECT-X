@@ -14,6 +14,10 @@
   border-radius: 20px;
 }
 
+.box-f1 {
+  border-radius: 20px;
+}
+
 .sms-title {
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
@@ -54,11 +58,15 @@
   border-radius: 30px;
 }
 
+.mss-body {
+  height: 100px;
+}
+
 .message-avatar {
   display: block;
-  width: 90px;
-  height: 90px;
-  bottom: 55px;
+  width: 67px;
+  height: 67px;
+  bottom: 14px;
   left: 10px;
   background-color: #d9dcf1;
   position: absolute;
@@ -72,11 +80,11 @@
   display: inline;
   position: absolute;
   padding-top: 5px;
-  top: 0;
+  padding-left: 85px;
   left: 0;
-  right: 0;
   bottom: 50;
   margin: auto;
+  font-size: 0.9rem;
   font-weight: 700;
   overflow: hidden;
   z-index: 0;
@@ -95,13 +103,57 @@
 
 .text-message {
   width: 260px;
-  padding-top: 25px;
-  padding-left: 50px;
+  padding-left: 30px;
   padding-right: 10px;
-  height: 80px;
+  height: 40px;
   left: 90px;
   font-size: 14px;
-  margin-left: 60px;
-  margin-top: 10px;
+  margin: 0px 0px 10px 60px;
   text-align: left;
+  background-color: transparent;
+}
+
+.div-delete {
+  margin-top: 10px;
+}
+
+.link-delete {
+  display: flex;
+  justify-content: space-between;
+}
+
+.div-link {
+  height: 30px;
+}
+
+.delete-mss {
+  z-index: 100;
+  padding: 5px;
+  color: red;
+}
+
+.delete-mss:hover {
+  color: #251414;
+}
+
+.caja-botones {
+  display: flex;
+  justify-content: center;
+  width: 250px;
+  height: 30px;
+}
+
+.button-accept {
+  position: absolute;
+  z-index: 10;
+  bottom: -25px;
+  font-size: 1.5rem;
+}
+
+.button-reject {
+  position: absolute;
+  z-index: 10;
+  bottom: -25px;
+  margin-left: 30px;
+  font-size: 1.5rem;
 }

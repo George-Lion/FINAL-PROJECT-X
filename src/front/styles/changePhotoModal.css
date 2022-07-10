@@ -148,3 +148,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media screen and (max-height: 720px) {
+  .user-modal {
+    margin-top: 9rem;
+  }
+}

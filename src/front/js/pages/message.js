@@ -45,7 +45,7 @@ export const Message = () => {
         setConfirmDelete(false);
         actions.match();
       }
-    } catch (e) {}
+    } catch (e) { }
   };
   return (
     <Fragment>
@@ -69,60 +69,72 @@ export const Message = () => {
                     .map((e) => {
                       return (
                         <div key={e.id} className="mb-4" role="document">
-                          <i
-                            className="fas fa-times-circle text-warning d-flex justify-content-end mt-2 me-2"
-                            style={{ fontSize: "23px" }}
-                            onClick={() => {
-                              deleteMessage(e.id);
-                            }}
-                          ></i>
+
                           <div
-                            className="modal-content rounded-4 shadow"
+                            className="mss-body box-f1 modal-content rounded-4 shadow"
                             style={
                               e.accepted
                                 ? { background: "#B1EBFF" }
                                 : e.rejected
-                                ? { background: "#FF7A69" }
-                                : { background: "white" }
+                                  ? { background: "#FF7A69" }
+                                  : { background: "white" }
                             }
                           >
                             <div className="text-center">
-                              <Link
-                                to={"/noEditProfile/" + e.user_id}
-                                className="text-decoration-none text-dark"
-                              >
-                                <img
-                                  className="message-avatar"
-                                  src={e.profile_picture}
-                                  alt="img"
-                                />
-                                <h5 className="u-name mb-0">{e.username} </h5>
-                              </Link>
+                              <div>
+
+                                <Link
+                                  to={"/noEditProfile/" + e.user_id}
+                                  className="text-decoration-none text-dark"
+                                >
+                                </Link>
+                              </div>
+
+                              <div className="div-delete">
+                                <Link to={"/noEditProfile/" + e.user_id}>
+                                  <img
+                                    className="message-avatar"
+                                    src={e.profile_picture}
+                                    alt="img"
+                                  />
+                                  <p className="div-link u-name">{e.username} </p>
+
+                                </Link>
+                                <i type="button"
+                                  className="delete-mss fas fa-times-circle d-flex justify-content-end mt-2 me-2"
+                                  style={{ fontSize: "23px" }}
+                                  onClick={() => {
+                                    deleteMessage(e.id);
+                                  }}
+                                ></i>
+                              </div>
                               <h5 className="u-request mb-0">
                                 {" "}
                                 Travel: {e.destination}
                               </h5>
-                              <p className="text-message rounded bg-white text-break text-dark">
+                              <p className="text-message rounded  text-break text-dark">
                                 {e.message}
                               </p>
                             </div>
-                            <div className="modal-footer flex-nowrap p-0">
-                              <button
-                                type="button"
-                                className="btn btn-lg  fs-6 text-decoration-none col-6 m-0 rounded-0 border-right"
-                                onClick={() => actions.acceptMatch(e)}
-                              >
-                                <strong className="">Accept request</strong>
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-lg  fs-6 text-decoration-none col-6 m-0 rounded-0 "
-                                onClick={() => {
-                                  actions.rejectMatch(e);
-                                }}
-                              >
-                                <strong className="">Reject request</strong>
-                              </button>
+                            <div className="caja-botones">
+                              <div className="flex-nowrap p-0">
+                                <button
+                                  type="button"
+                                  className="button-accept btn"
+                                  onClick={() => actions.acceptMatch(e)}
+                                >
+                                  <i className="fas fa-check-circle text-success"></i>
+                                </button>
+                                <button
+                                  type="button"
+                                  className="button-reject btn"
+                                  onClick={() => {
+                                    actions.rejectMatch(e);
+                                  }}
+                                >
+                                  <i class="fas fa-times-circle text-danger"></i>
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -153,8 +165,8 @@ export const Message = () => {
                             e.accepted
                               ? { background: "#B1EBFF" }
                               : e.rejected
-                              ? { background: "#FF7A69" }
-                              : { background: "white" }
+                                ? { background: "#FF7A69" }
+                                : { background: "white" }
                           }
                         >
                           <div className="text-center">

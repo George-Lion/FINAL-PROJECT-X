@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import "../../styles/sendMessageModal.css";
+
 
 export const SendMessageModal = ({ closeModal, setMessage, message }) => {
     const { store, actions } = useContext(Context);
@@ -17,30 +19,30 @@ export const SendMessageModal = ({ closeModal, setMessage, message }) => {
                 backdropFilter: "brightness(20%)",
             }}
         >
-            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div className="modal-content bg-dark text-light">
-                    <div className="modal-header">
+            <div className=" modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div className="message-1 modal-content text-light">
+                    <div className="title-mss">
                         <h5 className="modal-title" id="staticBackdropLabel">
                             Send a travel buddy request to <b>{store.trip.user_firstname}</b>
                         </h5>
 
                         {/* CLOSE BUTTON */}
 
-                        <button
+                        <i
                             type="button"
-                            className="btn-close bg-light"
+                            className="close-photo far fa-times-circle"
                             aria-label="Close"
                             onClick={() => {
                                 closeModal();
                             }}
-                        ></button>
+                        ></i>
                     </div>
 
                     {/* MESSAGE */}
 
-                    <div className="modal-body m-5 ">
+                    <div className="modal-body m-2 ">
                         <div className="row text-center">
-                            <input type="text" placeholder="Message" maxLength={57} onChange={(e) =>
+                            <input className="text-message-1" type="text" placeholder="Message" maxLength={57} onChange={(e) =>
                                 setMessage(e.target.value)
                             }></input>
                         </div>
@@ -48,9 +50,9 @@ export const SendMessageModal = ({ closeModal, setMessage, message }) => {
 
                     {/* SEND BUTTON */}
 
-                    <div className="modal-footer">
+                    <div className="send-box">
                         <button
-                            className="col-2 offset-1 btn btn-light" onClick={async () => {
+                            className="send-button" onClick={async () => {
                                 await actions.sendMatch(message);
                                 closeModal();
                             }}>

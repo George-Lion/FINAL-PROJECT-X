@@ -4,7 +4,7 @@
   border-radius: 25px;
   background-color: #151d26;
   padding: 30px 40px 20px 40px;
-  margin-top: 14rem;
+  margin-top: 12rem;
   font-size: 1rem;
   font-family: "Rubik", sans-serif;
   border-width: 1px;
@@ -81,4 +81,10 @@
 
 .save-picture:hover {
   background-color: #1498d1;
+}
+
+@media screen and (max-height: 720px) {
+  .banner-modal {
+    margin-top: 8rem;
+  }
 }

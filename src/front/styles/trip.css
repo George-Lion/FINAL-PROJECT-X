@@ -176,6 +176,10 @@
   padding-right: 1rem;
 }
 
+.star-3:hover {
+  transform: scale(1.3);
+}
+
 .user-informations {
   color: #151d26;
   text-decoration: none;
