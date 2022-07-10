@@ -61,7 +61,10 @@ const Map = () => {
 
   return (
     <>
-      {store.trip ? (
+      {store.trip &&
+      store.trip.destination &&
+      store.user &&
+      store.user.city_of_residence ? (
         <GoogleMap
           zoom={13}
           center={{ lat, lng }}

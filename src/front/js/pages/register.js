@@ -10,15 +10,19 @@ export const Register = () => {
   const history = useHistory();
 
   const sendUserInfo = async () => {
-    const response = await fetch(store.url + "register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
+    try {
+      const response = await fetch(store.url + "register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
 
-    const data = await response.json();
-    if (data.created) {
-      history.push("/");
+      const data = await response.json();
+      if (data.created) {
+        history.push("/");
+      }
+    } catch (e) {
+      alert("Ya existe el usuario que intentas registrar");
     }
   };
 
@@ -99,16 +103,23 @@ export const Register = () => {
                   />
                   <label htmlFor="floatingPassword">Password</label>
                 </div>
-                <Link to="/">
-                  <button
-                    className="register-button w-50 btn mt-2 mb-2"
-                    onClick={() => {
+
+                <button
+                  className="register-button w-50 btn mt-2 mb-2"
+                  onClick={() => {
+                    sendUserInfo();
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      e.stopPropagation();
                       sendUserInfo();
-                    }}
-                  >
-                    Sign up
-                  </button>
-                </Link>
+                    }
+                  }}
+                >
+                  Sign up
+                </button>
+
                 <div className="checkbox mt-1 mb-2 mx-center">
                   <label>
                     <input type="checkbox" value="remember-me" /> I agree to the

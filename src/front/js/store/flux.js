@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://3001-georgelion-finalproject-anr1uc1f3vx.ws-eu47.gitpod.io/api/",
+      url: "https://3001-georgelion-finalproject-anr1uc1f3vx.ws-eu51.gitpod.io/api/",
       user_id: null,
       trips: [],
       logged: null,
@@ -356,9 +356,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(searchTerm),
           });
           const dataSearched = await resp.json();
-          setStore({ trips: dataSearched.trip });
+          setStore({
+            trips: dataSearched.trip.sort((a, b) => {
+              return (
+                new Date(a.start_of_the_trip) - new Date(b.start_of_the_trip)
+                //Invertir B y A para cambiar orden en el feed
+              );
+            }),
+          });
+          // setStore({ trips: dataSearched.trip });
         } catch (e) {
-          alert("ERROR2222");
+          alert("ERROR");
         }
       },
 
