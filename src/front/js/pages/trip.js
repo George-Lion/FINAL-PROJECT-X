@@ -113,15 +113,18 @@ export const Trip = () => {
                     <div className="match-position">
                       <ul className="list-position">
                         <li className="suin">
-                          <button
-                            type="button"
-                            className="match-button color-9 "
-                            onClick={() => {
-                              setModalMessage(true);
-                            }}
-                          >
-                            JOIN YOU
-                          </button>
+                          {store.trip.user_id_of_trip_creator !=
+                          store.user_id ? (
+                            <button
+                              type="button"
+                              className="match-button color-9 "
+                              onClick={() => {
+                                setModalMessage(true);
+                              }}
+                            >
+                              JOIN YOU
+                            </button>
+                          ) : null}
                         </li>
                       </ul>
                     </div>

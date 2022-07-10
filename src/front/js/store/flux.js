@@ -246,7 +246,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(match),
           });
           if (resp.status == 420) {
-            alert("ya envio un mensaje");
+            alert("You are already part of this trip.");
           }
           const data = await resp.json();
         } catch (e) {}

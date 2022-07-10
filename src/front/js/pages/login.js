@@ -30,7 +30,7 @@ export const Login = () => {
         await actions.verify();
         history.push("/feed");
       } else {
-        alert("Email o contraseña incorrectos.");
+        alert("Wrong email or password.");
       }
     } catch (e) {
       console.log(e);
