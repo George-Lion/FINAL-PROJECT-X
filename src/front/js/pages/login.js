@@ -56,7 +56,7 @@ export const Login = () => {
 
       const data = await response.json();
       if (data.created) {
-        formSignUp.reset(); //input reset
+        // formSignUp.reset(); //input reset
         initialState(); //state = ""
         setSwitchPanel(false); //Switch to the form panel to login
       } else {
@@ -206,6 +206,13 @@ export const Login = () => {
               <button
                 type="button"
                 className="button-all mt-2"
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    sendUserInfo();
+                  }
+                }}
                 onClick={() => {
                   sendUserInfo();
                 }}
@@ -252,11 +259,17 @@ export const Login = () => {
                   setUser({ ...user, password: e.target.value.trim() });
                 }}
               />
-              <a className="social" href="#"></a>
               <button
                 className="button-all"
                 onClick={() => {
                   loginUser();
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    loginUser();
+                  }
                 }}
               >
                 Sign In
