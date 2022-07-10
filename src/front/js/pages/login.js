@@ -278,7 +278,7 @@ export const Login = () => {
           </div>
           <div className="overlay-container">
             <div className="overlay">
-              <div className="overlay-panel overlay-left">
+              <div className="overlay-panel-l overlay-left">
                 <div className="img-left"></div>
                 <h1
                   className="title-login2"
@@ -303,7 +303,7 @@ export const Login = () => {
                   Sign In
                 </button>
               </div>
-              <div className="overlay-panel overlay-right">
+              <div className="overlay-panel-r overlay-right">
                 <img
                   className="logo-t mb-4 pb-4 pt-2 col-12"
                   src={logo}
