@@ -1,9 +1,17 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/changeBannerModal.css";
 
 export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
   const { store, actions } = useContext(Context);
+  const [selectedImage, setSelectedImage] = useState();
+
+  const imageChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      editUser({ ...user, banner_picture: e.target.files[0] }),
+        setSelectedImage(e.target.files[0]);
+    }
+  };
 
   return (
     <div
@@ -39,11 +47,9 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
             <div className="">
 
               <div
-                className="banner-min"
-                style={{
-                  backgroundImage: "url(" + store.profile.banner_picture + ")",
-                }}
-              >
+                className="">
+
+                <img className="banner-min" src={selectedImage == undefined ? store.profile.banner_picture : URL.createObjectURL(selectedImage)} alt="img" />
               </div>
 
               {/* COVER & PROFILE PICTURE*/}
@@ -53,9 +59,7 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
                   <input
                     className="custom-file-input"
                     type="file"
-                    onChange={(e) =>
-                      editUser({ ...user, banner_picture: e.target.files[0] })
-                    }
+                    onChange={imageChange}
                   />
                 </label>
               </div>
@@ -65,7 +69,7 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
 
             <div className="modal-footer">
               <button
-                className="col-2 offset-1 btn btn-light"
+                className="save-picture"
                 onClick={() => {
                   actions.editUser(user);
                   closeModal();

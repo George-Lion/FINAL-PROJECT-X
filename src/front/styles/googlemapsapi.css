@@ -1,4 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
 .map-container {
   width: 50%;
   height: 50%;
+}
+
+.border-map {
+  text-align: center;
+  color: white;
+  padding: 10px;
+  padding-bottom: 22px;
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+  background-color: #151d26;
+}
+
+.display-map {
+  display: flex;
+  justify-content: center;
+}
+
+.travel-route {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.7rem;
 }

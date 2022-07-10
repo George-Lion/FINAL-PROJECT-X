@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/createTripModal.css";
+import ReactTooltip from 'react-tooltip';
 
 export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
   const { store, actions } = useContext(Context);
@@ -92,6 +93,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
     }
   };
 
+  const onlyLettersAndSpaces = (str) => {
+    return /^[A-Ñ-Za-ñ-z\s]*$/.test(str);
+  }
+
   const deleteTripState = () => {
     trip.destination = "";
     trip.people = "";
@@ -101,6 +106,14 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
     trip.cost = "";
     trip.text = "";
     trip.destination_picture = "";
+  };
+
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
   };
 
   return (
@@ -174,15 +187,15 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 className="input-time"
                 placeholder="Destination"
                 maxLength={25}
+                data-tip data-for="botonTooltipDestination"
                 style={
                   trip.destination.length == "" ||
-                  specialCharacters(trip.destination) ||
-                  numbers(trip.destination)
+                    !onlyLettersAndSpaces(trip.destination)
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -193,8 +206,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               ></input>
@@ -206,14 +218,15 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 min={1}
                 id="people"
                 className="input-time"
+                data-tip data-for="botonTooltipBuddies"
                 placeholder="Travel buddies"
                 style={
                   trip.people < 1
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -224,8 +237,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               ></input>
@@ -234,30 +246,32 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
 
               <input
                 type="date"
+                name="date"
                 className="input-time"
+                min={disablePastDate()}
                 placeholder="Start"
+                data-tip data-for="botonTooltipStart"
                 style={
                   trip.start_of_the_trip == "" ||
-                  trip.start_of_the_trip > trip.end_of_the_trip
+                    trip.start_of_the_trip > trip.end_of_the_trip
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
-                  createTrip(
+                  onlyLettersAndSpaces(createTrip(
                     {
                       ...trip,
                       start_of_the_trip:
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
-                }
+                  )}
               ></input>
 
               {/* END OF THE TRIP */}
@@ -268,14 +282,15 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 required
                 className="input-time"
                 placeholder="End"
+                data-tip data-for="botonTooltipEnd"
                 style={
                   trip.start_of_the_trip > trip.end_of_the_trip ||
-                  trip.end_of_the_trip == ""
+                    trip.end_of_the_trip == ""
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -286,8 +301,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               ></input>
@@ -306,8 +320,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               >
@@ -323,19 +336,20 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               {/* COST */}
 
               <input
-                type="text"
+                type="number"
                 max={9999}
                 min={0}
                 id="cost"
                 className="input-time"
+                data-tip data-for="botonTooltipCost"
                 placeholder="Cost"
                 style={
                   specialCharacters(trip.cost)
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "4px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -346,8 +360,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                         e.target.value.charAt(0).toUpperCase() +
                         e.target.value.slice(1).toLowerCase(),
                     },
-                    setInfoError(false),
-                    setInfoCheck(false)
+                    setInfoError(false)
                   )
                 }
               ></input>
@@ -372,8 +385,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                           e.target.value.charAt(0).toUpperCase() +
                           e.target.value.slice(1).toLowerCase(),
                       },
-                      setInfoError(false),
-                      setInfoCheck(false)
+                      setInfoError(false)
                     )
                   }
                 ></textarea>
@@ -385,22 +397,26 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               </p>
             }
           </div>
-          <div className="modal-footer">
+          <div className="">
             <div className="save-footer">
+
               {/* SAVE BUTTON */}
 
               <button
-                className="save-button"
+                className="save-button-3"
                 onClick={() => {
                   if (
+                    trip.destination != "" &&
+                    onlyLettersAndSpaces(trip.destination) &&
+                    trip.start_of_the_trip != "" &&
+                    trip.end_of_the_trip != "" &&
                     trip.start_of_the_trip < trip.end_of_the_trip &&
-                    !specialCharacters(trip.destination) &&
-                    !numbers(trip.destination) &&
-                    !trip.destination == "" &&
-                    trip.people >= 1
+                    trip.people >= 1 &&
+                    trip.people != "" &&
+                    !specialCharacters(trip.cost)
                   ) {
-                    messageCheck();
-                    actions.createTrip(trip);
+                    actions.createTrip(trip),
+                      closeModal()
                   } else {
                     messageError();
                   }
@@ -410,60 +426,61 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               </button>
             </div>
           </div>
-          {infoCheck == true ? (
-            <div className="message-check">
-              <i className="icon-check fas fa-check-circle"></i>
-              <p>Changes saved</p>
-            </div>
-          ) : null}
 
-          {trip.people < 1 && trip.people != "" ? (
-            <div className="message-error">
-              <i className="icon-error fas fa-exclamation-circle"></i>
-              <p>At least one travel companion</p>
-            </div>
-          ) : null}
+          {trip.people == "" ?
+            <ReactTooltip id="botonTooltipBuddies"
+              type="error" className="tooltip-style">
+              The field is required.
+            </ReactTooltip> : trip.people < 1 ?
+              <ReactTooltip id="botonTooltipBuddies"
+                type="error" className="tooltip-style">
+                min one travel buddie.
+              </ReactTooltip> : null}
 
-          {trip.destination == "" ||
-          trip.start_of_the_trip.length == 0 ||
-          trip.end_of_the_trip.length == 0 ? (
-            <div className="message-error">
-              <i className="icon-error fas fa-exclamation-circle"></i>
-              <p>the field is required</p>
-            </div>
-          ) : null}
+          {trip.destination == "" ?
+            <ReactTooltip id="botonTooltipDestination"
+              type="error" className="tooltip-style">
+              The field is required.
+            </ReactTooltip> : !onlyLettersAndSpaces(trip.destination) ?
+              <ReactTooltip id="botonTooltipDestination"
+                type="error" className="tooltip-style">
+                Sorry, only letters (A-Z).
+              </ReactTooltip> : null}
 
-          {specialCharacters(trip.destination) ? (
-            <div className="message-error">
-              <i className="icon-error fas fa-exclamation-circle"></i>
-              <p>Only letters</p>
-            </div>
-          ) : null}
+          {trip.start_of_the_trip.length == "" ?
+            <ReactTooltip id="botonTooltipStart"
+              type="error" className="tooltip-style">
+              The field is required.
+            </ReactTooltip> : trip.start_of_the_trip > trip.end_of_the_trip ?
+              <ReactTooltip id="botonTooltipStart"
+                type="error" className="tooltip-style">
+                The dates do not match.
+              </ReactTooltip> : null}
 
-          {numbers(trip.destination) ? (
-            <div className="message-error">
-              <i className="icon-error fas fa-exclamation-circle"></i>
-              <p>Only letters 2</p>
-            </div>
-          ) : null}
+          {trip.end_of_the_trip.length == "" ?
+            <ReactTooltip id="botonTooltipEnd"
+              type="error" className="tooltip-style">
+              The field is required.
+            </ReactTooltip> : trip.start_of_the_trip > trip.end_of_the_trip ?
+              <ReactTooltip id="botonTooltipEnd"
+                type="error" className="tooltip-style">
+                The dates do not match.
+              </ReactTooltip> : null}
 
-          {trip.start_of_the_trip > trip.end_of_the_trip &&
-          trip.start_of_the_trip != "" &&
-          trip.end_of_the_trip != "" ? (
-            <div className="message-error">
-              <i className="icon-error fas fa-exclamation-circle"></i>
-              <p>the dates do not match</p>
-            </div>
-          ) : null}
+          {specialCharacters(trip.cost) ?
+            <ReactTooltip id="botonTooltipCost"
+              type="error" className="tooltip-style">
+              invalid field.
+            </ReactTooltip> : null}
 
           {infoError == true ? (
-            <div className="message-error">
+            <div className="message-error-1">
               <i className="icon-error2 fas fa-exclamation-circle"></i>
               <p>please write the fields correctly </p>
             </div>
           ) : null}
         </div>
       </div>
-    </Fragment>
+    </Fragment >
   );
 };

@@ -129,7 +129,6 @@ class MatchTrip(db.Model):
             "rejected": self.rejected,
             "user_id": self.user.id,
             "read": self.read
-
         }
 
 

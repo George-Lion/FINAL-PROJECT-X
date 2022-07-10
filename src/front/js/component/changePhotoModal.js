@@ -29,7 +29,7 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
     >
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="user-modal modal-content text-light">
-          <div className="modal-header">
+          <div className="photo-title">
             <h4 className="modal-title" id="staticBackdropLabel">
               Profile picture
             </h4>
@@ -61,26 +61,28 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
                     alt="img"
                   />
                 </div>
-                <div className="modal-bt">
-                  <label htmlFor="file" className="mx-auto">
-                    <>
-                      <div className="input-image">
-                        <input
-                          className="custom-file-input2"
-                          accept="image/*"
-                          type="file"
-                          onChange={imageChange}
-                        />
-                      </div>
-                    </>
+                <div className="image-upload">
+                  <label htmlFor="photo-input">
+                    <img
+                      className="photo-selected1"
+                      src="https://res.cloudinary.com/dmogh4y33/image/upload/v1656708631/camera-icon-circle-21_k0bqrq.png"
+                    />
+
                   </label>
+                  <input
+                    className=""
+                    accept="image/*"
+                    id="photo-input"
+                    type="file"
+                    onChange={imageChange}
+                  />
                 </div>
               </section>
             </div>
 
             {/* SAVE BUTTON */}
 
-            <div className="modal-footer">
+            <div className="button-footer">
               <button
                 className="save-changes"
                 onClick={() => {
