@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/changePhotoModal.css";
 
@@ -47,20 +47,27 @@ export const ChangePhotoModal = ({ closeModal, editUser, user }) => {
           </div>
           <div className="mt-3">
             <div className="row">
-
               {/*PROFILE PICTURE*/}
 
               <section className="user-pi">
                 <div className="modal-pi">
-                  <img className="modal-pic" src={selectedImage == undefined ? store.profile.profile_picture : URL.createObjectURL(selectedImage)} alt="img" />
+                  <img
+                    className="modal-pic"
+                    src={
+                      selectedImage == undefined
+                        ? store.profile.profile_picture
+                        : URL.createObjectURL(selectedImage)
+                    }
+                    alt="img"
+                  />
                 </div>
-
                 <div className="image-upload">
                   <label htmlFor="photo-input">
                     <img
                       className="photo-selected1"
                       src="https://res.cloudinary.com/dmogh4y33/image/upload/v1656708631/camera-icon-circle-21_k0bqrq.png"
                     />
+
                   </label>
                   <input
                     className=""

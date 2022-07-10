@@ -17,8 +17,6 @@ export const Login = () => {
     initialState();
   }, []);
 
-  //LOGIN 
-
   const loginUser = async () => {
     try {
       const resp = await fetch(store.url + "login", {

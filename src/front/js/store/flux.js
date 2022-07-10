@@ -356,9 +356,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(searchTerm),
           });
           const dataSearched = await resp.json();
-          setStore({ trips: dataSearched.trip });
+          setStore({
+            trips: dataSearched.trip.sort((a, b) => {
+              return (
+                new Date(a.start_of_the_trip) - new Date(b.start_of_the_trip)
+                //Invertir B y A para cambiar orden en el feed
+              );
+            }),
+          });
+          // setStore({ trips: dataSearched.trip });
         } catch (e) {
-          alert("ERROR2222");
+          alert("ERROR");
         }
       },
 

@@ -66,7 +66,10 @@ const Map = () => {
           <b className="travel-route">Travel route</b>
         </h3>
         <div className="display-map">
-          {store.trip ? (
+          {store.trip &&
+            store.trip.destination &&
+            store.user &&
+            store.user.city_of_residence ? (
             <GoogleMap
               zoom={13}
               center={{ lat, lng }}
@@ -80,7 +83,6 @@ const Map = () => {
                   }}
                 />
               )}
-
               <DirectionsService
                 options={DirectionsServiceOption}
                 callback={directionsCallback}
