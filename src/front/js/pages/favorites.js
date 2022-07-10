@@ -50,7 +50,8 @@ export const Favorites = () => {
                             {!e.likes.includes(store.user_id) ? (
                               <div className="favorite-li text-white">
                                 <i
-                                  className="fas fa-heart"
+                                  className="star far fa-star me-2"
+                                  type="button"
                                   onClick={() => {
                                     actions.changeFavorite(e.id, "favorites");
                                   }}
@@ -60,7 +61,8 @@ export const Favorites = () => {
                             ) : (
                               <div className="favorite-li fontprueba corazon-like text-white">
                                 <i
-                                  className="fas fa-heart text-danger"
+                                  className="star-2 fas fa-star text-warning"
+                                  type="button"
                                   onClick={() => {
                                     actions.changeFavorite(e.id, "favorites");
                                   }}
@@ -114,7 +116,7 @@ export const Favorites = () => {
                     })
                   ) : (
                     <h5 className="travel-title text-center text-white mt-4">
-                      No favorites
+                      No favorites.
                     </h5>
                   )}
                 </div>

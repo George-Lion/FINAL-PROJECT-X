@@ -418,11 +418,8 @@ def send_match():  # nombre de la función
 @jwt_required()
 def delete_Message():
     current_id = get_jwt_identity()
-    print(current_id)
     user = User.query.get(current_id)
-    print(user)
     body_message_id = request.json.get("id")
-    print(body_message_id)
     if user:
         match = MatchTrip.query.get(body_message_id)
         db.session.delete(match)

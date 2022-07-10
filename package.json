@@ -88,6 +88,7 @@
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^5.2.0",
 		"react-tooltip": "^4.2.21",
+		"react-tooltips": "^0.4.6",
 		"use-places-autocomplete": "^3.0.0"
 	}
 }
