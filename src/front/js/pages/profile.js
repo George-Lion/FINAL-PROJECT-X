@@ -53,11 +53,11 @@ export const Profile = () => {
                 }}
               >
                 <i className="fas fa-camera"></i>
-                <span>change photo</span>
+                <span>Change photo</span>
               </a>
 
               <label htmlFor="inputTag" className="label-style">
-                cover image <br />
+                Cover image <br />
                 <i className="fa fa-2x fa-camera"></i>
                 <input
                   id="inputTag"
@@ -219,7 +219,7 @@ export const Profile = () => {
                               display: "block",
                               backgroundImage:
                                 "url(" + e.destination_picture + ")",
-                              opacity: "0.9"
+                              opacity: "0.9",
                             }}
                           >
                             <div
@@ -275,7 +275,7 @@ export const Profile = () => {
                   })
                 ) : (
                   <h5 className="text-trips text-center text-dark mt-4">
-                    No Trips
+                    You don't have trips created yet.
                   </h5>
                 )}
               </div>

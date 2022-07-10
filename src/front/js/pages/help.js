@@ -1,11 +1,10 @@
-import React, { Fragment, useEffect, useContext, useState } from "react";
+import React, { Fragment, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/help.css";
 
 export const Help = () => {
   const { actions, store } = useContext(Context);
-  const [switchPanel, setSwitchPanel] = useState(false)
 
   useEffect(() => {
     actions.verify();
@@ -18,7 +17,7 @@ export const Help = () => {
           <section>
             <h3 className="text-center mb-4 pb-2 text-primary fw-bold">FAQ</h3>
             <p className="text-center mb-5">
-              Find the answers for the most frequently asked questions below
+              Find the answers for the most frequently asked questions below.
             </p>
 
             <div className="row">
@@ -38,7 +37,7 @@ export const Help = () => {
               <div className="col-md-6 col-lg-4 mb-4">
                 <h6 className="mb-3 text-primary">
                   <i className="fas fa-pen-alt text-primary pe-2"></i> Create a
-                  profile
+                  profile.
                 </h6>
                 <p>
                   First step? Completely fill out your Traveland profile! This
@@ -47,8 +46,7 @@ export const Help = () => {
                   complete profile is the best way to connect with people. Here
                   you can tell people if you're traveling and where. Be sure to
                   include photos. Don't have a profile yet?{" "}
-                  <Link to="/"
-                  >Sign Up Now</Link>
+                  <Link to="/">Sign Up Now</Link>
                 </p>
               </div>
 

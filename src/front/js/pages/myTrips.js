@@ -19,9 +19,11 @@ export const MyTrips = () => {
       <div className="footer-abajo">
         <div className="content-mytrips mt-5 pt-1">
           {store.userTrips && store.userTrips.length > 0 ? (
-            <h2 className="title-myTrips text-center mt-4">MY TRIPS</h2>
+            <h2 className="title-myTrips text-center mt-4">My trips</h2>
           ) : (
-            <h3 className="text-center text-white mt-4">No Trips</h3>
+            <h3 className="text-center text-white mt-4">
+              You don't have trips created.
+            </h3>
           )}
           <div className="box-mytrips">
             <div className="content-trips">

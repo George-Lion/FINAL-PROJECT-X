@@ -25,11 +25,10 @@ export const Message = () => {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
-    })
+    });
     const data = await response.json();
-    setNewMessage(data.messages)
-
-  }
+    setNewMessage(data.messages);
+  };
 
   const deleteMessage = async (id) => {
     try {
@@ -39,22 +38,26 @@ export const Message = () => {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
-        body: JSON.stringify({ "id": id })
+        body: JSON.stringify({ id: id }),
       });
       if (resp.ok) {
         await actions.getUserTrips();
         setConfirmDelete(false);
         actions.match();
       }
-    } catch (e) { }
+    } catch (e) {}
   };
   return (
     <Fragment>
       <div className="footer-abajo">
         <div className="message-box position-static d-block py-1 mt-5 mb-4">
-          {store.match && store.match.length > 0 ? (
+          {store.match && store.match.length == 1 ? (
             <h3 className="sms-title mt-3 mb-3 text-center text-white">
-              <b>{matchCount} Messages</b>
+              <b>{matchCount} message.</b>
+            </h3>
+          ) : store.match && store.match.length > 1 ? (
+            <h3 className="sms-title mt-3 mb-3 text-center text-white">
+              <b>{matchCount} messages.</b>
             </h3>
           ) : null}
           <div className="d-flex overflow-auto ">
@@ -71,15 +74,16 @@ export const Message = () => {
                             style={{ fontSize: "23px" }}
                             onClick={() => {
                               deleteMessage(e.id);
-                            }}></i>
+                            }}
+                          ></i>
                           <div
                             className="modal-content rounded-4 shadow"
                             style={
                               e.accepted
                                 ? { background: "#B1EBFF" }
                                 : e.rejected
-                                  ? { background: "#FF7A69" }
-                                  : { background: "white" }
+                                ? { background: "#FF7A69" }
+                                : { background: "white" }
                             }
                           >
                             <div className="text-center">
@@ -108,7 +112,7 @@ export const Message = () => {
                                 className="btn btn-lg  fs-6 text-decoration-none col-6 m-0 rounded-0 border-right"
                                 onClick={() => actions.acceptMatch(e)}
                               >
-                                <strong className="">accept request</strong>
+                                <strong className="">Accept request</strong>
                               </button>
                               <button
                                 type="button"
@@ -117,7 +121,7 @@ export const Message = () => {
                                   actions.rejectMatch(e);
                                 }}
                               >
-                                <strong className="">reject request</strong>
+                                <strong className="">Reject request</strong>
                               </button>
                             </div>
                           </div>
@@ -127,11 +131,12 @@ export const Message = () => {
                 ) : (
                   <div className="abajo">
                     <h4 className="sms-title text-center text-white mt-5">
-                      You have no messages
+                      You have no messages.
                     </h4>
                   </div>
                 )}
-                {newMessage.sort((a, b) => a.id - b.id)
+                {newMessage
+                  .sort((a, b) => a.id - b.id)
                   .map((e) => {
                     return (
                       <div key={e.id} className="mb-4" role="document">
@@ -140,15 +145,16 @@ export const Message = () => {
                           style={{ fontSize: "23px" }}
                           onClick={() => {
                             deleteMessage(e.id);
-                          }}></i>
+                          }}
+                        ></i>
                         <div
                           className="modal-content rounded-4 shadow"
                           style={
                             e.accepted
                               ? { background: "#B1EBFF" }
                               : e.rejected
-                                ? { background: "#FF7A69" }
-                                : { background: "white" }
+                              ? { background: "#FF7A69" }
+                              : { background: "white" }
                           }
                         >
                           <div className="text-center">
@@ -171,10 +177,9 @@ export const Message = () => {
                               {e.message}
                             </p>
                           </div>
-
                         </div>
                       </div>
-                    )
+                    );
                   })}
               </div>
             </div>
