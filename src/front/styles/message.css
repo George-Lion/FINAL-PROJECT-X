@@ -59,15 +59,15 @@
 }
 
 .mss-body {
-  height: 100px;
+  height: 140px;
 }
 
 .message-avatar {
   display: block;
-  width: 67px;
-  height: 67px;
-  bottom: 14px;
-  left: 10px;
+  width: 75px;
+  height: 75px;
+  bottom: 45px;
+  left: 5px;
   background-color: #d9dcf1;
   position: absolute;
   border-radius: 50%;
@@ -76,11 +76,18 @@
   box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
 }
 
+.color-changes {
+  width: 90px;
+  height: 120px;
+  border-radius: 20px;
+  background-color: red;
+}
+
 .u-name {
   display: inline;
   position: absolute;
   padding-top: 5px;
-  padding-left: 85px;
+  padding-left: 90px;
   left: 0;
   bottom: 50;
   margin: auto;
@@ -92,29 +99,34 @@
 }
 
 .u-request {
-  display: inline;
-  bottom: 118px;
-  left: 110px;
-  font-size: 15px;
-  font-weight: 500;
-  position: absolute;
-  overflow: hidden;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 700;
+  text-align: left;
+  padding-left: 90px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .text-message {
-  width: 260px;
-  padding-left: 30px;
-  padding-right: 10px;
-  height: 40px;
+  width: 255px;
+  padding-left: 35px;
+  height: 55px;
   left: 90px;
-  font-size: 14px;
-  margin: 0px 0px 10px 60px;
+  font-size: 12px;
+  margin: 0px 0px 10px 55px;
   text-align: left;
   background-color: transparent;
 }
 
 .div-delete {
-  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  height: 30px;
+}
+
+.margin-buttons {
+  margin-right: 20px;
 }
 
 .link-delete {
@@ -124,12 +136,16 @@
 
 .div-link {
   height: 30px;
+  color: #ffffff;
+  font-size: 1rem;
 }
 
 .delete-mss {
   z-index: 100;
-  padding: 5px;
-  color: red;
+  padding: 1px 3px 5px 3px;
+  font-size: 20px;
+  border: none;
+  background: transparent;
 }
 
 .delete-mss:hover {
@@ -143,7 +159,7 @@
   height: 30px;
 }
 
-.button-accept {
+/* .button-accept {
   position: absolute;
   z-index: 10;
   bottom: -25px;
@@ -157,3 +173,4 @@
   margin-left: 30px;
   font-size: 1.5rem;
 }
+ */

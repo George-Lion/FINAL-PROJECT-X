@@ -68,13 +68,13 @@ export const Message = () => {
                     .sort((a, b) => a.id - b.id)
                     .map((e) => {
                       return (
-                        <div key={e.id} className="mb-4" role="document">
+                        <div key={e.id} className="mb-3" role="document">
 
                           <div
                             className="mss-body box-f1 modal-content rounded-4 shadow"
                             style={
                               e.accepted
-                                ? { background: "#B1EBFF" }
+                                ? { background: "#94C973" }
                                 : e.rejected
                                   ? { background: "#FF7A69" }
                                   : { background: "white" }
@@ -85,7 +85,7 @@ export const Message = () => {
 
                                 <Link
                                   to={"/noEditProfile/" + e.user_id}
-                                  className="text-decoration-none text-dark"
+                                  className="text-decoration-none"
                                 >
                                 </Link>
                               </div>
@@ -97,43 +97,61 @@ export const Message = () => {
                                     src={e.profile_picture}
                                     alt="img"
                                   />
-                                  <p className="div-link u-name">{e.username} </p>
-
+                                  <p className="div-link u-name" style={
+                                    e.accepted
+                                      ? { color: "#130A0D" }
+                                      : e.rejected
+                                        ? { color: "#130A0D" }
+                                        : { color: "black" }
+                                  }>{e.username} </p>
                                 </Link>
-                                <i type="button"
-                                  className="delete-mss fas fa-times-circle d-flex justify-content-end mt-2 me-2"
-                                  style={{ fontSize: "23px" }}
-                                  onClick={() => {
-                                    deleteMessage(e.id);
-                                  }}
-                                ></i>
+                                <div className="margin-buttons">
+                                  <button
+                                    type="button"
+                                    className="delete-mss"
+                                    onClick={() => actions.acceptMatch(e)}
+                                  >
+                                    {e.accepted ? <i className="fas fa-check-circle text-light"></i> : <i className="fas fa-check-circle" style={{ color: "#7ABB64" }}></i>}
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="delete-mss"
+
+                                    onClick={() => {
+                                      actions.rejectMatch(e);
+                                      deleteMessage(e.id);
+                                    }}
+
+                                  >
+                                    {e.accepted ? <i className="fas fa-times-circle text-danger" style={{ background: "#ffffff", borderRadius: "50%" }}></i> : <i className="fas fa-times-circle" style={{ color: "#d20000" }}></i>}
+                                  </button>
+                                  {/* <i className="fas fa-trash"></i> */}
+                                </div>
                               </div>
-                              <h5 className="u-request mb-0">
+                              <p className="u-request" style={
+                                e.accepted
+                                  ? { color: "#130A0D" }
+                                  : e.rejected
+                                    ? { color: "#130A0D" }
+                                    : { color: "#130A0D" }
+                              }>
                                 {" "}
-                                Travel: {e.destination}
-                              </h5>
-                              <p className="text-message rounded  text-break text-dark">
+
+                                <i className="fas fa-map-marker-alt text-dark" style={{ marginRight: "3px" }}></i> {e.destination}
+                              </p>
+                              <p className="text-message rounded  text-break" style={
+                                e.accepted
+                                  ? { color: "#130A0D" }
+                                  : e.rejected
+                                    ? { color: "#130A0D" }
+                                    : { color: "#130A0D" }
+                              }>
                                 {e.message}
                               </p>
                             </div>
                             <div className="caja-botones">
                               <div className="flex-nowrap p-0">
-                                <button
-                                  type="button"
-                                  className="button-accept btn"
-                                  onClick={() => actions.acceptMatch(e)}
-                                >
-                                  <i className="fas fa-check-circle text-success"></i>
-                                </button>
-                                <button
-                                  type="button"
-                                  className="button-reject btn"
-                                  onClick={() => {
-                                    actions.rejectMatch(e);
-                                  }}
-                                >
-                                  <i class="fas fa-times-circle text-danger"></i>
-                                </button>
+
                               </div>
                             </div>
                           </div>

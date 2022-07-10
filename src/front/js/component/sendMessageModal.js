@@ -42,7 +42,7 @@ export const SendMessageModal = ({ closeModal, setMessage, message }) => {
 
                     <div className="modal-body m-2 ">
                         <div className="row text-center">
-                            <input className="text-message-1" type="text" placeholder="Message" maxLength={57} onChange={(e) =>
+                            <input className="text-message-1" type="text" placeholder="Message" maxLength={120} onChange={(e) =>
                                 setMessage(e.target.value)
                             }></input>
                         </div>

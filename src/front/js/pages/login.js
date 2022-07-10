@@ -122,16 +122,17 @@ export const Login = () => {
               <input
                 type="text"
                 className="inp-data"
+                maxLength={20}
                 data-tip
                 data-for="botonTooltipUsername"
                 placeholder="Username"
                 style={
                   user.username == "" || !onlyLettersAndNumbers(user.username)
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "3px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "3px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -149,13 +150,13 @@ export const Login = () => {
                 placeholder="Email"
                 style={
                   user.email == "" ||
-                  !emailIsValid(user.email) ||
-                  !emailInput(user.email)
+                    !emailIsValid(user.email) ||
+                    !emailInput(user.email)
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "3px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "3px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -174,10 +175,10 @@ export const Login = () => {
                 style={
                   user.password == ""
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "3px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "3px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
