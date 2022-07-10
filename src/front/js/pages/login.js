@@ -33,7 +33,6 @@ export const Login = () => {
         alert("Wrong email or password.");
       }
     } catch (e) {
-      console.log(e);
       alert("ERROR");
     }
   };
