@@ -176,6 +176,9 @@ def editTrip():
     body_imagen_5 = request.form.get("imagen_5", None)
     if body_imagen_5 == "" or body_imagen_5 == None:
         body_imagen_5 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
+    body_imagen_6 = request.form.get("imagen_6", None)
+    if body_imagen_6 == "" or body_imagen_6 == None:
+        body_imagen_6 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])
@@ -200,6 +203,10 @@ def editTrip():
         body_imagen_5 = cloudinary.uploader.upload(
             request.files['imagen_5'])
         trip.imagen_5 = body_imagen_5['secure_url']
+    if "imagen_6" in request.files:
+        body_imagen_6 = cloudinary.uploader.upload(
+            request.files['imagen_6'])
+        trip.imagen_6 = body_imagen_6['secure_url']
     trip.destination = body_destination
     trip.start_of_the_trip = body_start_of_the_trip
     trip.end_of_the_trip = body_end_of_the_trip
@@ -340,6 +347,7 @@ def create_trip():
     body_imagen_3 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
     body_imagen_4 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
     body_imagen_5 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
+    body_imagen_6 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])['secure_url']

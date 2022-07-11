@@ -414,8 +414,24 @@
 
 @media (max-width: 430px) {
   .information-bio {
-    width: 100%;
-    font-size: 0.9rem;
+    width: 95%;
+    font-size: 0.8rem;
     padding-top: 10px;
+  }
+
+  .user-profile .user-title {
+    font-size: 1.7rem;
+    margin-bottom: -1rem;
+  }
+
+  .user-profile .avatar-picture-profile {
+    width: 145px;
+    height: 145px;
+    bottom: -65px;
+  }
+
+  .information-box {
+    margin-top: 80px;
+    padding-bottom: 0px;
   }
 }

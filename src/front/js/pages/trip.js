@@ -448,6 +448,37 @@ export const Trip = () => {
                                     </div>
                                   </div>
                                 </div>
+
+                                {/* img 6 */}
+
+                                <div
+                                  className="pe-3"
+                                  style={{ width: "410px" }}
+                                >
+                                  <div
+                                    className="galery-img d-flex text-white align-items-end "
+                                    style={{
+                                      backgroundImage:
+                                        "url(" + store.trip.imagen_6 + ")",
+                                    }}
+                                  >
+                                    <div
+                                      className="d-flex flex-column text-white "
+                                      style={{
+                                        minHeight: "40px",
+                                        minWidth: "210px",
+                                        display: "block",
+                                      }}
+                                    >
+                                      <ul className="card-text-box list-unstyled ms-3">
+                                        <li className="mb-1">
+                                          <h2></h2>
+                                        </li>
+                                      </ul>
+                                      <div className="shadow-card-image"></div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>

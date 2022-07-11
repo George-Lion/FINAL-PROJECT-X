@@ -68,7 +68,8 @@ class Trip(db.Model):
     imagen_2 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")     
     imagen_3 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")       
     imagen_4 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")   
-    imagen_5 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")     
+    imagen_5 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png") 
+    imagen_6 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")    
     likes = db.relationship('User', secondary=likes, lazy='subquery',
                             backref=db.backref('users', lazy=True))
     trip_in_match = db.relationship("MatchTrip")
@@ -97,6 +98,7 @@ class Trip(db.Model):
             "imagen_3": self.imagen_3,
             "imagen_4": self.imagen_4,
             "imagen_5": self.imagen_5,
+            "imagen_6": self.imagen_6,
             "likes":  list(map(lambda like: like.id, self.likes)),
             "trip_in_match":  list(map(lambda trip: trip.serialize(), self.trip_in_match)),
         
