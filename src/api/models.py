@@ -118,9 +118,12 @@ class MatchTrip(db.Model):
                          nullable=True, default=False)
     rejected = db.Column(db.Boolean, unique=False,
                          nullable=True, default=False)
+    confirmed = db.Column(db.Boolean, unique=False,
+                         nullable=True, default=False)
 
     # aca el serialize me transforma toda la informacion de la base de datos, toda la instancia de clases en una libreria.
     def serialize(self):
+        user_of_trip = User.query.get(self.trip.user_id_of_trip_creator)
         return {
             "username": self.user.username,
             "profile_picture": self.user.profile_picture,
@@ -130,7 +133,10 @@ class MatchTrip(db.Model):
             "accepted": self.accepted,
             "rejected": self.rejected,
             "user_id": self.user.id,
-            "read": self.read
+            "user_picture": user_of_trip.profile_picture,
+            "user_name": user_of_trip.username,
+            "read": self.read,
+            "confirmed": self.confirmed
         }
 
 

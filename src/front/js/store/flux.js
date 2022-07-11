@@ -111,7 +111,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           let matches = [];
           for (let x = 0; x < data.trips.length; x++) {
             for (let i in data.trips[x].trip_in_match) {
-              matches.push(data.trips[x].trip_in_match[i]);
+              if (data.trips[x].trip_in_match[i].confirmed != true) {
+                matches.push(data.trips[x].trip_in_match[i]);
+              }
             }
           }
           setStore({

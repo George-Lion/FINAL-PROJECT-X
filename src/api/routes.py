@@ -428,6 +428,7 @@ def delete_Message():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     body_message_id = request.json.get("id")
+    print(body_message_id)
     if user:
         match = MatchTrip.query.get(body_message_id)
         db.session.delete(match)
@@ -444,11 +445,17 @@ def accept():  # nombre de la función
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     body_match_id = request.json.get("id")
-    if user:  # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
+    if user: # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
         match = MatchTrip.query.get(body_match_id)
         match.accepted = True
         match.rejected = False
         db.session.commit()
+        print(MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True).first())
+        print(MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True))
+        if MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True).first() is None:
+            confirmed = MatchTrip(user = match.user, trip = match.trip, confirmed=True, message="SI")
+            db.session.add(confirmed)
+            db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
         return jsonify({"send": True}), 200
     else:
@@ -466,6 +473,15 @@ def reject():  # nombre de la función
         match.rejected = True
         match.accepted = False
         db.session.commit()
+        message2 = MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True).first()
+        if message2 is None:
+            confirmed = MatchTrip(user = match.user, trip = match.trip, confirmed=True, message="NO")
+            db.session.add(confirmed)
+            db.session.commit()
+        else:
+            message2.message = "NO"
+            db.session.commit()
+            
         # si la condición se cumple retorna a la terminal de python send 200.
         return jsonify({"send": True}), 200
     else:
@@ -489,5 +505,5 @@ def read():
 def messageA():
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
-    messages = MatchTrip.query.filter(MatchTrip.user == user, MatchTrip.trip == None).all()
+    messages = MatchTrip.query.filter(MatchTrip.user == user, MatchTrip.confirmed == True).all()
     return jsonify({"messages": list(map(lambda x:x.serialize(), messages))}),200
