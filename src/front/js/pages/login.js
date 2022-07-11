@@ -11,6 +11,7 @@ export const Login = () => {
   const [user, setUser] = useState({});
   const [switchPanel, setSwitchPanel] = useState(false);
   const [infoError, setInfoError] = useState(false);
+  const [infoError2, setInfoError2] = useState(false);
 
   useEffect(() => {
     initialState();
@@ -23,14 +24,15 @@ export const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       });
-
       const data = await resp.json();
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        await actions.verify();
-        history.push("/feed");
+      if (emailIsValid(user.email)) {
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          await actions.verify();
+          history.push("/feed");
+        }
       } else {
-        alert("Wrong email or password.");
+        messageError2();
       }
     } catch (e) {
       alert("ERROR");
@@ -86,6 +88,10 @@ export const Login = () => {
     setInfoError(true);
   };
 
+  const messageError2 = () => {
+    setInfoError2(true);
+  };
+
   const initialState = () => {
     //set states to ""
     user.username = "";
@@ -122,16 +128,17 @@ export const Login = () => {
               <input
                 type="text"
                 className="inp-data"
+                maxLength={20}
                 data-tip
                 data-for="botonTooltipUsername"
                 placeholder="Username"
                 style={
                   user.username == "" || !onlyLettersAndNumbers(user.username)
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "3px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "3px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -149,13 +156,13 @@ export const Login = () => {
                 placeholder="Email"
                 style={
                   user.email == "" ||
-                  !emailIsValid(user.email) ||
-                  !emailInput(user.email)
+                    !emailIsValid(user.email) ||
+                    !emailInput(user.email)
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "3px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "3px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -174,10 +181,10 @@ export const Login = () => {
                 style={
                   user.password == ""
                     ? {
-                        borderStyle: "solid",
-                        borderWidth: "3px",
-                        borderColor: "#DB2C2C",
-                      }
+                      borderStyle: "solid",
+                      borderWidth: "3px",
+                      borderColor: "#DB2C2C",
+                    }
                     : null
                 }
                 onChange={(e) =>
@@ -230,6 +237,7 @@ export const Login = () => {
             </div>
           </div>
           <div className="form-container sign-in-container">
+
             {/*  SIGN IN FORM */}
 
             <div className="form-move">
@@ -246,9 +254,11 @@ export const Login = () => {
               <input
                 type="text"
                 className="inp-data"
+                data-tip
+                data-for="botonTooltipEmailIn"
                 placeholder="Email"
                 onChange={(e) => {
-                  setUser({ ...user, email: e.target.value.trim() });
+                  setUser({ ...user, email: e.target.value.trim() }), setInfoError2(false);
                 }}
               />
               <input
@@ -256,7 +266,7 @@ export const Login = () => {
                 className="inp-data"
                 placeholder="Password"
                 onChange={(e) => {
-                  setUser({ ...user, password: e.target.value.trim() });
+                  setUser({ ...user, password: e.target.value.trim() }), setInfoError2(false);
                 }}
               />
               <button
@@ -274,6 +284,14 @@ export const Login = () => {
               >
                 Sign In
               </button>
+              {infoError2 == true ? (
+                <div className="error-register">
+                  <i className="icon-error2 fas fa-exclamation-circle"></i>
+                  <p>Wrong email or password.</p>
+                </div>
+              ) : (
+                <div className="before-register"></div>
+              )}
             </div>
           </div>
           <div className="overlay-container">
@@ -336,6 +354,20 @@ export const Login = () => {
           </div>
         </div>
       </div>
+
+      {/*    SIGN IN CONDITIONALS */}
+
+      {!emailIsValid(user.email) ? (
+        <ReactTooltip
+          id="botonTooltipEmailIn"
+          type="warning"
+          className="tooltip-style"
+        >
+          Email example: jhon77@email.com
+        </ReactTooltip>
+      ) : null}
+
+      {/* SIGN UP CONDITIONALS */}
 
       {user.username == "" ? (
         <ReactTooltip

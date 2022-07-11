@@ -119,7 +119,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                 <input
                   className="input-username"
                   type="text"
-                  maxLength={25}
+                  maxLength={20}
                   defaultValue={store.user.username}
                   id="username"
                   name="Username"

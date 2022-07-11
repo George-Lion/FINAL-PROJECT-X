@@ -96,7 +96,7 @@ export const Trip = () => {
                         store.trip.user_id_of_trip_creator == store.user_id
                           ? "/profile/" + store.trip.user_id_of_trip_creator
                           : "/noEditProfile/" +
-                            store.trip.user_id_of_trip_creator
+                          store.trip.user_id_of_trip_creator
                       }
                     >
                       <img src={store.trip.profile_picture} alt="img" />
@@ -114,7 +114,7 @@ export const Trip = () => {
                       <ul className="list-position">
                         <li className="suin">
                           {store.trip.user_id_of_trip_creator !=
-                          store.user_id ? (
+                            store.user_id ? (
                             <button
                               type="button"
                               className="match-button color-9 "
@@ -137,9 +137,9 @@ export const Trip = () => {
                           type="button"
                           className={
                             store.trip.likes &&
-                            store.trip.likes.includes(store.user_id)
-                              ? "fas fa-star text-warning me-2"
-                              : "far fa-star me-2"
+                              store.trip.likes.includes(store.user_id)
+                              ? "star-3 fas fa-star text-warning me-2"
+                              : "star-3 far fa-star me-2"
                           }
                           onClick={() => {
                             actions.changeFavorite(store.trip.id, "trip");
@@ -200,8 +200,8 @@ export const Trip = () => {
                     <i className="icon-options fas fa-user-friends"></i>
                     {store.trip.trip_in_match
                       ? store.trip.trip_in_match.filter(
-                          (x) => x.accepted == true
-                        ).length
+                        (x) => x.accepted == true
+                      ).length
                       : 0}
                     /{store.trip.people}
                   </li>
@@ -270,7 +270,7 @@ export const Trip = () => {
                               </h3>
                             </li>
                             {store.user_id ==
-                            store.trip.user_id_of_trip_creator ? (
+                              store.trip.user_id_of_trip_creator ? (
                               <li>
                                 <div className="edit-galery">
                                   <button
@@ -429,6 +429,37 @@ export const Trip = () => {
                                     style={{
                                       backgroundImage:
                                         "url(" + store.trip.imagen_5 + ")",
+                                    }}
+                                  >
+                                    <div
+                                      className="d-flex flex-column text-white "
+                                      style={{
+                                        minHeight: "40px",
+                                        minWidth: "210px",
+                                        display: "block",
+                                      }}
+                                    >
+                                      <ul className="card-text-box list-unstyled ms-3">
+                                        <li className="mb-1">
+                                          <h2></h2>
+                                        </li>
+                                      </ul>
+                                      <div className="shadow-card-image"></div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* img 6 */}
+
+                                <div
+                                  className="pe-3"
+                                  style={{ width: "410px" }}
+                                >
+                                  <div
+                                    className="galery-img d-flex text-white align-items-end "
+                                    style={{
+                                      backgroundImage:
+                                        "url(" + store.trip.imagen_6 + ")",
                                     }}
                                   >
                                     <div

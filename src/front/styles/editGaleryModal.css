@@ -1,0 +1,217 @@
+.modal-galery {
+  border-radius: 20px;
+  background-color: #151d26;
+  font-family: "Rubik", sans-serif;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #7c7c7c;
+  width: 400px;
+  margin: auto;
+  padding: 0px 5px 5px 5px;
+}
+
+.modal-pi-galery {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.column-image {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-galery-1 {
+  margin: 20px 20px 0px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.size-pic {
+  width: 165px;
+  height: 100px;
+  border-radius: 20px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: #ffff;
+}
+
+.image-upload {
+  height: 10px;
+}
+
+.galery-selected1 {
+  height: 25px;
+  max-width: 27px;
+  top: 20px;
+  margin-left: 140px;
+  position: absolute;
+  z-index: 7;
+  border-radius: 50%;
+  border-color: white;
+  background-color: white;
+}
+
+.galery-selected1:active {
+  transform: scale(0.95);
+}
+
+.galery-selected1:focus {
+  outline: none;
+}
+
+.galery-selected1:hover {
+  background-color: #1498d1;
+}
+
+.galery-selected2 {
+  height: 25px;
+  max-width: 27px;
+  top: 20px;
+  margin-left: 140px;
+  position: absolute;
+  z-index: 7;
+  border-radius: 50%;
+  border-color: white;
+  background-color: white;
+}
+
+.galery-selected2:active {
+  transform: scale(0.95);
+}
+
+.galery-selected2:focus {
+  outline: none;
+}
+
+.galery-selected2:hover {
+  background-color: #1498d1;
+}
+
+.galery-selected3 {
+  height: 25px;
+  max-width: 27px;
+  top: 140px;
+  margin-left: 140px;
+  position: absolute;
+  z-index: 7;
+  border-radius: 50%;
+  border-color: white;
+  background-color: white;
+}
+
+.galery-selected3:active {
+  transform: scale(0.95);
+}
+
+.galery-selected3:focus {
+  outline: none;
+}
+
+.galery-selected3:hover {
+  background-color: #1498d1;
+}
+
+.galery-selected4 {
+  height: 25px;
+  max-width: 27px;
+  top: 140px;
+  margin-left: 140px;
+  position: absolute;
+  z-index: 7;
+  border-radius: 50%;
+  border-color: white;
+  background-color: white;
+}
+
+.galery-selected4:active {
+  transform: scale(0.95);
+}
+
+.galery-selected4:focus {
+  outline: none;
+}
+
+.galery-selected4:hover {
+  background-color: #1498d1;
+}
+
+.galery-selected5 {
+  height: 25px;
+  max-width: 27px;
+  top: 260px;
+  margin-left: 140px;
+  position: absolute;
+  z-index: 7;
+  border-radius: 50%;
+  border-color: white;
+  background-color: white;
+}
+
+.galery-selected5:active {
+  transform: scale(0.95);
+}
+
+.galery-selected5:focus {
+  outline: none;
+}
+
+.galery-selected5:hover {
+  background-color: #1498d1;
+}
+
+.galery-selected6 {
+  height: 25px;
+  max-width: 27px;
+  top: 260px;
+  margin-left: 140px;
+  position: absolute;
+  z-index: 7;
+  border-radius: 50%;
+  border-color: white;
+  background-color: white;
+}
+
+.galery-selected6:active {
+  transform: scale(0.95);
+}
+
+.galery-selected6:focus {
+  outline: none;
+}
+
+.galery-selected6:hover {
+  background-color: #1498d1;
+}
+
+.save-galery {
+  font-family: "Rubik", sans-serif;
+  border-radius: 20px;
+  border: 1px solid #2bc3ff;
+  background-color: #1c8dce;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 7px 38px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+.save-galery:active {
+  transform: scale(0.95);
+}
+
+.save-galery:focus {
+  outline: none;
+}
+
+.save-galery:hover {
+  background-color: #1498d1;
+}
+
+.close-modal-galery {
+  font-size: 25px;
+  color: white;
+  margin-bottom: 7px;
+}
