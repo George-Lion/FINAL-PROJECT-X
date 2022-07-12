@@ -44,17 +44,8 @@ export const Message = () => {
         body: JSON.stringify({ id: id }),
       });
       if (resp.ok) {
-<<<<<<< HEAD
-        console.log("1");
-        await actions.getUserTrips();
-        console.log("2");
-        console.log("3");
-        await getMessages();
-        console.log("4");
-=======
         await actions.getUserTrips();
         await getMessages();
->>>>>>> f870f662d773b4c94a37dce2cbbdbde5179184aa
       }
     } catch (e) {}
   };
@@ -157,14 +148,8 @@ export const Message = () => {
                                       ></i>
                                     )}
                                   </button>
-<<<<<<< HEAD
                                   {/* <i className="fas fa-trash"></i> */}{" "}
                                   {/* PARA BORRAR */}
-=======
-
-                                  {/* <i className="fas fa-trash"></i> */} {/* PARA BORRAR */}
-
->>>>>>> f870f662d773b4c94a37dce2cbbdbde5179184aa
                                 </div>
                               </div>
                               <p
@@ -280,14 +265,8 @@ export const Message = () => {
                                     ></i>
                                   )}
                                 </button>
-<<<<<<< HEAD
                                 {/* <i className="fas fa-trash"></i> */}{" "}
                                 {/* PARA BORRAR */}
-=======
-
-                                {/* PARA BORRAR */}
-
->>>>>>> f870f662d773b4c94a37dce2cbbdbde5179184aa
                               </div>
                             </div>
                             <p
@@ -321,12 +300,7 @@ export const Message = () => {
                             </p>
                           </div>
                           <div className="caja-botones">
-<<<<<<< HEAD
                             <div className="flex-nowrap p-0"></div>
-=======
-                            <div className="flex-nowrap p-0">
-                            </div>
->>>>>>> f870f662d773b4c94a37dce2cbbdbde5179184aa
                           </div>
                         </div>
                       </div>
