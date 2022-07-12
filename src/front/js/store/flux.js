@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       userProfiles: [],
       userTrips: [],
-      url: "https://traveland-trips-v1.herokuapp.com/api/",
+      url: "https://traveland-v2.herokuapp.com/api/",
       user_id: null,
       trips: [],
       logged: null,
