@@ -1,54 +1,116 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 
+p {
+  margin-bottom: 5px;
+}
+
 .logo {
-  width: 200px;
+  width: 180px;
 }
 
 .navbar-icon {
-  font-size: 30px;
+  font-size: 25px;
 }
 
-.nav-traveland {
-  background-color: #151d26;
+.nav-links {
+  font-weight: 900;
+  margin-left: 14px;
+  margin-bottom: 7px;
+  font-size: 1rem;
+}
+
+.nav-logout {
+  font-weight: 900;
+  margin-left: 30px;
+  font-size: 1rem;
+  color: #55b3df;
 }
 
 .link-title {
   font-family: "Montserrat", sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-weight: 900;
+  font-size: 1.2rem;
+
+  margin: 6px 0px 10px 13px;
 }
 
 .link-styles {
   font-family: "Montserrat", sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 .link-styles:hover {
-  color: black;
-  font-weight: 900;
-  font-size: 1rem;
+  color: #55b3df;
 }
 .dropdown-item {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  color: white;
+  padding-left: 30px;
+}
+
+.d-down {
+  min-width: 320px;
+  margin-right: 800px;
+  border-radius: 20px;
+  background-color: #151d26;
+  color: white;
+  border-bottom: 1px;
+  border-left: 1px;
+  border-right: 1px;
+  border-color: aliceblue;
+  box-shadow: rgba(170, 170, 170, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .dropdown-item:hover {
-  color: black;
+  color: rgb(174, 229, 243);
   font-weight: 700;
 }
 
 .dropdown-item:active {
-  color: black;
-  background-color: white;
+  color: rgb(174, 229, 243);
   font-weight: 700;
+}
+
+.ras {
+  margin-top: 10px;
+  font-size: 28px;
 }
 
 .ras:hover {
   color: rgb(131, 198, 224);
-  font-size: 33px;
+}
+
+.message-count {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  vertical-align: auto;
+  position: absolute;
+  margin-left: 5px;
+}
+
+.new-nav {
+  background-color: #151d26;
+}
+
+@media (max-width: 430px) {
+  .logo {
+    width: 130px;
+  }
+
+  .ras {
+    margin-top: 15px;
+    font-size: 20px;
+  }
 }

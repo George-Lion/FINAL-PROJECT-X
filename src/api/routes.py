@@ -58,7 +58,6 @@ def protected():
     else:
         return jsonify({"logged_in": False, "prueba": "prueba"}), 401
 
-
 @api.route("/user", methods=["GET"])
 @jwt_required()
 def getUser():
@@ -68,7 +67,6 @@ def getUser():
         return jsonify({"user": user.serialize()}), 200
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
-
 
 @api.route("/profile/<int:id>", methods=["GET"])
 @jwt_required()
@@ -81,7 +79,7 @@ def getProfile(id):
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
-#EDIT USER
+# EDIT USER
 
 @api.route("/user", methods=["PUT"])
 @jwt_required()
@@ -110,12 +108,10 @@ def editUser():
         body_banner_picture = cloudinary.uploader.upload(
             request.files['banner_picture'])
         user.banner_picture = body_banner_picture['secure_url']
-
     if "profile_picture" in request.files:
         body_profile_picture = cloudinary.uploader.upload(
             request.files['profile_picture'])
         user.profile_picture = body_profile_picture['secure_url']
-
     user.username = body_username
     user.firstname = body_firstname
     user.lastname = body_lastname
@@ -125,7 +121,7 @@ def editUser():
     db.session.commit()
     return jsonify({"edited": True, "user": user.serialize()}), 200
 
-#TRIP
+# TRIP
 
 @api.route("/trip/<int:trip_id>", methods=["GET"])
 @jwt_required()
@@ -137,7 +133,6 @@ def trip(trip_id):
         return jsonify({"error": "no trip"}), 400
 
 # EDIT A TRIP
-
 
 @api.route("/trip", methods=["PUT"])
 @jwt_required()
@@ -181,7 +176,9 @@ def editTrip():
     body_imagen_5 = request.form.get("imagen_5", None)
     if body_imagen_5 == "" or body_imagen_5 == None:
         body_imagen_5 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
-
+    body_imagen_6 = request.form.get("imagen_6", None)
+    if body_imagen_6 == "" or body_imagen_6 == None:
+        body_imagen_6 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])
@@ -206,7 +203,10 @@ def editTrip():
         body_imagen_5 = cloudinary.uploader.upload(
             request.files['imagen_5'])
         trip.imagen_5 = body_imagen_5['secure_url']
-
+    if "imagen_6" in request.files:
+        body_imagen_6 = cloudinary.uploader.upload(
+            request.files['imagen_6'])
+        trip.imagen_6 = body_imagen_6['secure_url']
     trip.destination = body_destination
     trip.start_of_the_trip = body_start_of_the_trip
     trip.end_of_the_trip = body_end_of_the_trip
@@ -217,8 +217,7 @@ def editTrip():
     db.session.commit()
     return jsonify({"edited": True, "trip": trip.serialize()}), 200
 
-
-#GET USER TRIPS    
+# GET USER TRIPS
 
 @api.route("/trips", methods=["GET"])
 @jwt_required()
@@ -230,7 +229,7 @@ def get_user_trips():
     else:
         return jsonify({"error": "Usuario no encontrado"}), 400
 
-#GET USER TRIP BY ID
+# GET USER TRIP BY ID
 
 @api.route("/trips/<int:id>", methods=["GET"])
 @jwt_required()
@@ -243,8 +242,7 @@ def get_user_trips_by_id(id):
 
 # DELETE A TRIP
 
-
-@api.route("/deleteTrip", methods=["DELETE"]) #ELIMINA EL TRIP
+@api.route("/deleteTrip", methods=["DELETE"])  # ELIMINA EL TRIP
 @jwt_required()
 def delete_trip():
     current_id = get_jwt_identity()
@@ -260,7 +258,38 @@ def delete_trip():
     else:
         return jsonify({"error": "Trip no eliminado"}), 400
 
-#ADD LIKE TRIP
+# DELETE A PROFILE
+
+@api.route("/deleteProfile", methods=["DELETE"])  # ELIMINA EL PERFIL
+@jwt_required()
+def delete_user():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    if user:
+        trips = Trip.query.filter_by(
+            user_id_of_trip_creator=current_id)
+        for trip in trips:
+            matches = MatchTrip.query.filter_by(trip_id=trip.id)
+            for match in matches:
+                db.session.delete(match)
+                db.session.commit()
+            trip.likes.clear()
+            db.session.commit()
+            db.session.delete(trip)
+            db.session.commit()
+        matches = MatchTrip.query.filter_by(user_id=current_id)
+        for match in matches:
+            db.session.delete(match)
+            db.session.commit()
+        user.likes.clear()
+        db.session.commit()
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({"deleted": True}), 200
+    else:
+        return jsonify({"error": "User no eliminado"}), 400
+
+# ADD LIKE TRIP
 
 @api.route("/tripLikes", methods=["POST"])
 @jwt_required()
@@ -285,10 +314,9 @@ def add_like_trip():
     else:
         return jsonify({"error": "error"}), 400
 
+# GET USER PROFILES
 
-#GET USER PROFILES
-
-@api.route("/user/profiles", methods=["GET"]) #DEVUELVE EL PERFIL DEL USUARIO
+@api.route("/user/profiles", methods=["GET"])  # DEVUELVE EL PERFIL DEL USUARIO
 @jwt_required()
 def get_user_profiles():
     current_id = get_jwt_identity()
@@ -301,7 +329,6 @@ def get_user_profiles():
         return jsonify({"error": "Usuario no encontrado"}), 400
 
 # CREATE A TRIP
-
 
 @api.route("/create/trip", methods=["POST"])
 @jwt_required()
@@ -320,10 +347,10 @@ def create_trip():
     body_imagen_3 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
     body_imagen_4 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
     body_imagen_5 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
+    body_imagen_6 = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png"  # NEW
     if "destination_picture" in request.files:
         body_destination_picture = cloudinary.uploader.upload(
             request.files['destination_picture'])['secure_url']
-
     if body_destination and body_start_of_the_trip and body_end_of_the_trip and body_people and body_transport and body_cost and body_destination_picture:
         new_trip = Trip(user_id_of_trip_creator=current_id, destination=body_destination, start_of_the_trip=body_start_of_the_trip, end_of_the_trip=body_end_of_the_trip,
                         people=body_people, transport=body_transport, text=body_text, cost=body_cost, destination_picture=body_destination_picture)
@@ -333,7 +360,7 @@ def create_trip():
     else:
         return jsonify({"created": False, "msg": "Falta información"}), 400
 
-#GET TRIPS
+# GET TRIPS
 
 @api.route("/allTrips", methods=["GET"])
 @jwt_required()
@@ -347,7 +374,7 @@ def get_trips():
     else:
         return jsonify({"error": "error"}), 400
 
-#GET TRIPS SEARCH
+# GET TRIPS SEARCH
 
 @api.route("/search", methods=["GET", "POST"])
 def get_trips_search():
@@ -364,7 +391,7 @@ def get_trips_search():
     destination_match = Trip.query.filter(*queries)
     return jsonify({"trip": list(map(lambda trip: trip.serialize(), destination_match))}), 200
 
-#SEND MATCH
+# SEND MATCH
 
 @api.route("/send/match", methods=["POST"])  # end point de metodo POST
 @jwt_required()
@@ -374,12 +401,15 @@ def send_match():  # nombre de la función
     body_trip_id = request.json.get("trip_id")
     body_message = request.json.get("message")
     trip = Trip.query.get(body_trip_id)
+    body_read = request.json.get("read")
     # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
     if user and trip and user.id != trip.user_id_of_trip_creator:
         if MatchTrip.query.filter_by(user=user).filter_by(trip=trip).first() is not None:
             return jsonify({"error": "ya existe"}), 420
-        if trip.people > len(list(filter(lambda x : x.accepted==True,trip.trip_in_match))):
-            match = MatchTrip(user=user, trip=trip, message=body_message)
+
+        if trip.people > len(list(filter(lambda x: x.accepted == True, trip.trip_in_match))):
+            match = MatchTrip(user=user, trip=trip,
+                              message=body_message, read=body_read)
             db.session.add(match)
             db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
@@ -390,7 +420,24 @@ def send_match():  # nombre de la función
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
 
-#ACCEPT
+#delete message
+
+@api.route("/deleteMessage", methods=["DELETE"])  # ELIMINA EL TRIP
+@jwt_required()
+def delete_Message():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    body_message_id = request.json.get("id")
+    print(body_message_id)
+    if user:
+        match = MatchTrip.query.get(body_message_id)
+        db.session.delete(match)
+        db.session.commit()
+        return jsonify({"deleted": True}), 200
+    else:
+        return jsonify({"error": "message no eliminado"}), 400
+
+# ACCEPT
 
 @api.route("/accept", methods=["POST"])  # end point de metodo POST
 @jwt_required()
@@ -398,12 +445,15 @@ def accept():  # nombre de la función
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     body_match_id = request.json.get("id")
-
-    if user:  # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
+    if user: # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
         match = MatchTrip.query.get(body_match_id)
         match.accepted = True
         match.rejected = False
         db.session.commit()
+        if MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True).first() is None:
+            confirmed = MatchTrip(user = match.user, trip = match.trip, confirmed=True, message="Congratulations, your request is accepted.")
+            db.session.add(confirmed)
+            db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
         return jsonify({"send": True}), 200
     else:
@@ -416,15 +466,42 @@ def reject():  # nombre de la función
     current_id = get_jwt_identity()
     user = User.query.get(current_id)
     body_match_id = request.json.get("id")
-
     if user:  # si user, trip y user.id son distintos de trip.user_id_of_trip_creator entonces ejecuta la siguiente linea.
         match = MatchTrip.query.get(body_match_id)
         match.rejected = True
         match.accepted = False
         db.session.commit()
+        message2 = MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True).first()
+        if message2 is None:
+            confirmed = MatchTrip(user = match.user, trip = match.trip, confirmed=True, message="Sorry, your request has been rejected.")
+            db.session.add(confirmed)
+            db.session.commit()
+        else:
+            message2.message = "Sorry, your request has been rejected."
+            db.session.commit()
+            
         # si la condición se cumple retorna a la terminal de python send 200.
         return jsonify({"send": True}), 200
     else:
         # si la condición no se cumple retorna a la terminal de python error 400.
         return jsonify({"error": "error"}), 400
 
+@api.route("/read", methods=["PUT"])
+@jwt_required()
+def read():
+    current_id = get_jwt_identity()
+    trips = Trip.query.filter_by(user_id_of_trip_creator=current_id)
+    for trip in trips:
+        for match in trip.trip_in_match:
+            match.read = True
+            db.session.commit()
+    return jsonify({"edited": True}), 200
+
+
+@api.route("/messageA", methods=["GET"])
+@jwt_required()
+def messageA():
+    current_id = get_jwt_identity()
+    user = User.query.get(current_id)
+    messages = MatchTrip.query.filter(MatchTrip.user == user, MatchTrip.confirmed == True).all()
+    return jsonify({"messages": list(map(lambda x:x.serialize(), messages))}),200

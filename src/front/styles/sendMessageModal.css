@@ -1,0 +1,57 @@
+.message-1 {
+  border-radius: 20px;
+  background-color: #151d26;
+  padding: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #7c7c7c;
+}
+
+.title-mss {
+  padding-left: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.send-box {
+  display: flex;
+  justify-content: center;
+}
+
+.close-photo {
+  font-size: 27px;
+  color: white;
+  margin-bottom: 7px;
+}
+
+.send-button {
+  font-family: "Rubik", sans-serif;
+  border-radius: 20px;
+  border: 1px solid #2bc3ff;
+  background-color: #1c8dce;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 7px 40px;
+  letter-spacing: 1px;
+  margin: auto;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+.text-message-1 {
+  height: 40px;
+  border-radius: 20px;
+}
+
+.send-button:active {
+  transform: scale(0.95);
+}
+
+.send-button:focus {
+  outline: none;
+}
+
+.send-button:hover {
+  background-color: #1498d1;
+}

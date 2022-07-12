@@ -9,7 +9,6 @@ likes = db.Table('like',
                      'trip.id'), primary_key=True)
                  )
 
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=True)
@@ -68,7 +67,8 @@ class Trip(db.Model):
     imagen_2 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")     
     imagen_3 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")       
     imagen_4 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")   
-    imagen_5 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")     
+    imagen_5 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png") 
+    imagen_6 = db.Column(db.String(300), unique=False, nullable=True, default="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png")    
     likes = db.relationship('User', secondary=likes, lazy='subquery',
                             backref=db.backref('users', lazy=True))
     trip_in_match = db.relationship("MatchTrip")
@@ -97,9 +97,10 @@ class Trip(db.Model):
             "imagen_3": self.imagen_3,
             "imagen_4": self.imagen_4,
             "imagen_5": self.imagen_5,
+            "imagen_6": self.imagen_6,
             "likes":  list(map(lambda like: like.id, self.likes)),
-            "trip_in_match":  list(map(lambda trip: trip.serialize(), self.trip_in_match))
-
+            "trip_in_match":  list(map(lambda trip: trip.serialize(), self.trip_in_match)),
+        
         }
 
 
@@ -110,13 +111,19 @@ class MatchTrip(db.Model):
     user = db.relationship("User")
     trip = db.relationship("Trip")
     message = db.Column(db.Text, unique=False, nullable=False)
+    read = db.Column(db.Boolean, unique=False,
+                         nullable=True, default=False)
     accepted = db.Column(db.Boolean, unique=False,
                          nullable=True, default=False)
     rejected = db.Column(db.Boolean, unique=False,
                          nullable=True, default=False)
+    confirmed = db.Column(db.Boolean, unique=False,
+                         nullable=True, default=False)
 
     # aca el serialize me transforma toda la informacion de la base de datos, toda la instancia de clases en una libreria.
+
     def serialize(self):
+        user_of_trip = User.query.get(self.trip.user_id_of_trip_creator)
         return {
             "username": self.user.username,
             "profile_picture": self.user.profile_picture,
@@ -125,8 +132,12 @@ class MatchTrip(db.Model):
             "message": self.message,
             "accepted": self.accepted,
             "rejected": self.rejected,
-            "user_id": self.user.id
-
+            "user_id": self.user.id,
+            "user_picture": user_of_trip.profile_picture,
+            "user_name": user_of_trip.username,
+            "read": self.read,
+            "confirmed": self.confirmed,
+            "user_id_of_trip_creator": self.trip.user_id_of_trip_creator,
         }
 
 

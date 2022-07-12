@@ -1,163 +1,327 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/createTripModal.css";
+import ReactTooltip from 'react-tooltip';
 
 export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
   const { store, actions } = useContext(Context);
+  const [infoError, setInfoError] = useState(false);
+  const [infoCheck, setInfoCheck] = useState(false);
+  const [selectedImage, setSelectedImage] = useState();
+  const special = [
+    "$",
+    "#",
+    "*",
+    "@",
+    "-",
+    "(",
+    ")",
+    "!",
+    "^",
+    "?",
+    "/",
+    "=",
+    "+",
+    "[",
+    "]",
+    ",",
+    "%",
+    "{",
+    "}",
+    "'",
+    '"',
+    "<",
+    ">",
+    "|",
+    "¨",
+    "`",
+    ":",
+    ";",
+    "¿",
+    "·",
+    "&",
+    "¡",
+  ];
+  const numberList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  const bannerChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      createTrip({ ...trip, destination_picture: e.target.files[0] }),
+        setSelectedImage(e.target.files[0]);
+    }
+  };
+
+  const messageError = () => {
+    setInfoError(true);
+    setInfoCheck(false);
+  };
+
+  const messageCheck = () => {
+    setInfoCheck(true);
+    setInfoError(false);
+  };
+
+  const specialCharacters = (element) => {
+    if (element) {
+      if (Array.isArray(special)) {
+        for (let value of special) {
+          for (let x of element) {
+            if (value == x) {
+              return true;
+            } else false;
+          }
+        }
+      } else {
+        return false;
+      }
+    }
+  };
+
+  const numbers = (element) => {
+    if (element) {
+      if (Array.isArray(numberList)) {
+        for (let value of numberList) {
+          for (let x of element) {
+            if (value == x) {
+              return true;
+            } else false;
+          }
+        }
+      } else {
+        return false;
+      }
+    }
+  };
+
+  const onlyLettersAndSpaces = (str) => {
+    return /^[A-Ñ-Za-ñ-z\s]*$/.test(str);
+  }
+
+  const deleteTripState = () => {
+    trip.destination = "";
+    trip.people = "";
+    trip.transport = "";
+    trip.start_of_the_trip = "";
+    trip.end_of_the_trip = "";
+    trip.cost = "";
+    trip.text = "";
+    trip.destination_picture = "";
+  };
+
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+  };
 
   return (
-    <div
-      className="modal fade show "
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabIndex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-modal="true"
-      style={{
-        display: "block",
-        backdropFilter: "brightness(20%)",
-      }}
-    >
-      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div className="modal-content bg-dark text-light">
-          <div className="modal-header ">
-            <h5 className="modal-title" id="staticBackdropLabel">
-              Create Trip
-            </h5>
-            {/* close buttom */}
-            <button
+    <Fragment>
+      <div
+        className="modal fade show"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-modal="true"
+        style={{
+          display: "block",
+          backdropFilter: "blur(3px) brightness(40%)",
+        }}
+      >
+        <div className="modal-box2">
+          <div className="content-head ">
+            <div className="section-title">
+              <h4>Create a trip</h4>
+            </div>
+
+            {/* CLOSE BUTTON */}
+
+            <i
               type="button"
-              className="btn-close bg-light"
+              className="close-button far fa-times-circle"
               aria-label="Close"
               onClick={() => {
+                deleteTripState();
                 closeModal();
               }}
-            ></button>
+            ></i>
           </div>
-
-          {/* BANNER */}
-
-          <div className="modal-body m-4">
-            <div className="row text-center">
-              <input
-                type="file"
-                className="custom-file-input3"
-                onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    destination_picture: e.target.files[0],
-                  })
+          <div className="content-body">
+            <div className="banner-box">
+              <img
+                className="modal-banner"
+                src={
+                  selectedImage == undefined
+                    ? "https://res.cloudinary.com/dmogh4y33/image/upload/v1656681829/d_hivrmb.jpg"
+                    : URL.createObjectURL(selectedImage)
                 }
+                alt="img"
               />
+            </div>
+            <div className="banner-x">
+              <div className="image-upload">
+                <label htmlFor="file-input">
+                  <img
+                    className="image-selected"
+                    src="https://res.cloudinary.com/dmogh4y33/image/upload/v1656708631/camera-icon-circle-21_k0bqrq.png"
+                  />
+                </label>
+                <input
+                  className=""
+                  accept="image/*"
+                  id="file-input"
+                  type="file"
+                  onChange={bannerChange}
+                />
+              </div>
             </div>
 
             {/* DESTINATION */}
 
-            <div className="row mb-2 mt-4">
-              <label htmlFor="place" className="col-6">
-                Destination
-              </label>
+            <div className="trip-first">
               <input
-                id="place"
-                className="col-5"
+                type="text"
+                className="input-time"
                 placeholder="Destination"
                 maxLength={25}
+                data-tip data-for="botonTooltipDestination"
+                style={
+                  trip.destination.length == "" ||
+                    !onlyLettersAndSpaces(trip.destination)
+                    ? {
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
+                    : null
+                }
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    destination:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  })
+                  createTrip(
+                    {
+                      ...trip,
+                      destination:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
+                    setInfoError(false)
+                  )
                 }
               ></input>
-            </div>
 
-            {/* START TRIP */}
+              {/* PEOPLE */}
 
-            <div className="row  mb-2">
-              <label htmlFor="startTrip" className="col-6">
-                Start of the trip
-              </label>
               <input
-                id="startTrip"
-                type="date"
-                className="col-5"
-                placeholder="Start"
+                type="number"
+                min={1}
+                id="people"
+                className="input-time"
+                data-tip data-for="botonTooltipBuddies"
+                placeholder="Travel buddies"
+                style={
+                  trip.people < 1
+                    ? {
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
+                    : null
+                }
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    start_of_the_trip:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  })
+                  createTrip(
+                    {
+                      ...trip,
+                      people:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
+                    setInfoError(false)
+                  )
                 }
               ></input>
-            </div>
 
-            {/* END TRIP */}
+              {/* START OF THE TRIP */}
 
-            <div className="row  mb-2">
-              <label htmlFor="endTrip" className="col-6">
-                End of the trip
-              </label>
+              <input
+                type="date"
+                name="date"
+                className="input-time"
+                min={disablePastDate()}
+                placeholder="Start"
+                data-tip data-for="botonTooltipStart"
+                style={
+                  trip.start_of_the_trip == "" ||
+                    trip.start_of_the_trip > trip.end_of_the_trip
+                    ? {
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
+                    : null
+                }
+                onChange={(e) =>
+                  onlyLettersAndSpaces(createTrip(
+                    {
+                      ...trip,
+                      start_of_the_trip:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
+                    setInfoError(false)
+                  )
+                  )}
+              ></input>
+
+              {/* END OF THE TRIP */}
+
               <input
                 id="endTrip"
                 type="date"
                 required
-                className="col-5"
+                className="input-time"
                 placeholder="End"
+                data-tip data-for="botonTooltipEnd"
+                style={
+                  trip.start_of_the_trip > trip.end_of_the_trip ||
+                    trip.end_of_the_trip == ""
+                    ? {
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
+                    : null
+                }
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    end_of_the_trip:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  })
+                  createTrip(
+                    {
+                      ...trip,
+                      end_of_the_trip:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
+                    setInfoError(false)
+                  )
                 }
               ></input>
-            </div>
 
-            {/* PEOPLE */}
+              {/* TRANSPORT */}
 
-            <div className="row  mb-2">
-              <label htmlFor="people" className="col-6">
-                Travel buddies
-              </label>
-              <input
-                type="number"
-                id="people"
-                className="col-5"
-                placeholder="Travel buddies"
-                onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    people:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  })
-                }
-              ></input>
-            </div>
-
-            {/* Transport */}
-
-            <div className="row  mb-2">
-              <label htmlFor="transport" className="col-6">
-                Transport
-              </label>
               <select
                 name="transporte"
-                className="col-5"
+                className="input-time"
                 placeholder="none"
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    transport:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  })
+                  createTrip(
+                    {
+                      ...trip,
+                      transport:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
+                    setInfoError(false)
+                  )
                 }
               >
                 <option>None</option>
@@ -168,70 +332,155 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                 <option>Bike</option>
                 <option>Motorcycle</option>
               </select>
-            </div>
 
-            {/* COST */}
+              {/* COST */}
 
-            <div className="row mb-4">
-              <label htmlFor="cost" className="col-6">
-                Cost
-              </label>
               <input
                 type="number"
-                max="9999"
+                max={9999}
+                min={0}
                 id="cost"
-                className="col-5"
+                className="input-time"
+                data-tip data-for="botonTooltipCost"
                 placeholder="Cost"
+                style={
+                  specialCharacters(trip.cost)
+                    ? {
+                      borderStyle: "solid",
+                      borderWidth: "2px",
+                      borderColor: "#DB2C2C",
+                    }
+                    : null
+                }
                 onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    cost:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  })
+                  createTrip(
+                    {
+                      ...trip,
+                      cost:
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1).toLowerCase(),
+                    },
+                    setInfoError(false)
+                  )
                 }
               ></input>
             </div>
 
-            {/* TEXT */}
+            {/* DESCRIPTION TRIP */}
 
-            <p>Description of the trip:</p>
-            <div className="input-group">
-              <textarea
-                name="contador"
-                id="contador"
-                className="form-control"
-                aria-label="With textarea"
-                maxLength={280}
-                placeholder="Text"
-                onChange={(e) =>
-                  createTrip({
-                    ...trip,
-                    text:
-                      e.target.value.charAt(0).toUpperCase() +
-                      e.target.value.slice(1).toLowerCase(),
-                  })
-                }
-              ></textarea>
+            <div className="section-text">
+              <div className="text-area2">
+                <textarea
+                  className="text-information "
+                  defaultValue={store.trip.text}
+                  rows="4"
+                  cols="50"
+                  placeholder="About me"
+                  maxLength={280}
+                  onChange={(e) =>
+                    createTrip(
+                      {
+                        ...trip,
+                        text:
+                          e.target.value.charAt(0).toUpperCase() +
+                          e.target.value.slice(1).toLowerCase(),
+                      },
+                      setInfoError(false)
+                    )
+                  }
+                ></textarea>
+              </div>
             </div>
-            <p>{trip.text ? trip.text.length : 0}/280</p>
+            {
+              <p className="counter-text">
+                {trip.text ? trip.text.length : 0}/280
+              </p>
+            }
+          </div>
+          <div className="">
+            <div className="save-footer">
+
+              {/* SAVE BUTTON */}
+
+              <button
+                className="save-button-3"
+                onClick={() => {
+                  if (
+                    trip.destination != "" &&
+                    onlyLettersAndSpaces(trip.destination) &&
+                    trip.start_of_the_trip != "" &&
+                    trip.end_of_the_trip != "" &&
+                    trip.start_of_the_trip < trip.end_of_the_trip &&
+                    trip.people >= 1 &&
+                    trip.people != "" &&
+                    !specialCharacters(trip.cost)
+                  ) {
+                    actions.createTrip(trip),
+                      closeModal()
+                  } else {
+                    messageError();
+                  }
+                }}
+              >
+                save
+              </button>
+            </div>
           </div>
 
-          {/* Save buttom */}
+          {trip.people == "" ?
+            <ReactTooltip id="botonTooltipBuddies"
+              type="error" className="tooltip-style">
+              The field is required.
+            </ReactTooltip> : trip.people < 1 ?
+              <ReactTooltip id="botonTooltipBuddies"
+                type="error" className="tooltip-style">
+                min one travel buddie.
+              </ReactTooltip> : null}
 
-          <div className="modal-footer">
-            <button
-              className="col-2 offset-1 btn btn-light"
-              onClick={() => {
-                actions.createTrip(trip);
-                closeModal();
-              }}
-            >
-              Save
-            </button>
-          </div>
+          {trip.destination == "" ?
+            <ReactTooltip id="botonTooltipDestination"
+              type="error" className="tooltip-style">
+              The field is required.
+            </ReactTooltip> : !onlyLettersAndSpaces(trip.destination) ?
+              <ReactTooltip id="botonTooltipDestination"
+                type="error" className="tooltip-style">
+                Sorry, only letters (A-Z).
+              </ReactTooltip> : null}
+
+          {trip.start_of_the_trip.length == "" ?
+            <ReactTooltip id="botonTooltipStart"
+              type="error" className="tooltip-style">
+              The field is required.
+            </ReactTooltip> : trip.start_of_the_trip > trip.end_of_the_trip ?
+              <ReactTooltip id="botonTooltipStart"
+                type="error" className="tooltip-style">
+                The dates do not match.
+              </ReactTooltip> : null}
+
+          {trip.end_of_the_trip.length == "" ?
+            <ReactTooltip id="botonTooltipEnd"
+              type="error" className="tooltip-style">
+              The field is required.
+            </ReactTooltip> : trip.start_of_the_trip > trip.end_of_the_trip ?
+              <ReactTooltip id="botonTooltipEnd"
+                type="error" className="tooltip-style">
+                The dates do not match.
+              </ReactTooltip> : null}
+
+          {specialCharacters(trip.cost) ?
+            <ReactTooltip id="botonTooltipCost"
+              type="error" className="tooltip-style">
+              invalid field.
+            </ReactTooltip> : null}
+
+          {infoError == true ? (
+            <div className="message-error-1">
+              <i className="icon-error2 fas fa-exclamation-circle"></i>
+              <p>please write the fields correctly </p>
+            </div>
+          ) : null}
         </div>
       </div>
-    </div>
+    </Fragment >
   );
 };
