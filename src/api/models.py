@@ -136,7 +136,8 @@ class MatchTrip(db.Model):
             "user_picture": user_of_trip.profile_picture,
             "user_name": user_of_trip.username,
             "read": self.read,
-            "confirmed": self.confirmed
+            "confirmed": self.confirmed,
+            "user_id_of_trip_creator": self.trip.user_id_of_trip_creator,
         }
 
 

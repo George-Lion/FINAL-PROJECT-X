@@ -87,9 +87,7 @@ export const Feed = () => {
           </nav>
         </div>
         <div className="container">
-
           <div className="cont-1">
-
             {store.trips.map((e) => {
               return (
                 <div className="feed-box" key={e.id}>
@@ -101,10 +99,10 @@ export const Feed = () => {
                       {moment(e.end_of_the_trip).format("LL")}
                     </div>
                     <div className="il-feed text-white">
-                      <i className="fas fa-user-friends"></i>  {e.trip_in_match
-                        ? e.trip_in_match.filter(
-                          (x) => x.accepted == true
-                        ).length
+                      <i className="fas fa-user-friends"></i>{" "}
+                      {e.trip_in_match
+                        ? e.trip_in_match.filter((x) => x.accepted == true)
+                            .length
                         : 0}
                       /{e.people}{" "}
                     </div>
@@ -135,7 +133,8 @@ export const Feed = () => {
 
                   {/*  INFORMATION */}
 
-                  <Link className="a-style"
+                  <Link
+                    className="a-style"
                     to={
                       e.user_id_of_trip_creator == store.user_id
                         ? "/profile/" + e.user_id_of_trip_creator
@@ -158,7 +157,7 @@ export const Feed = () => {
                       className="img-content position-relative"
                       style={{
                         backgroundImage: "url(" + e.destination_picture + ")",
-                        opacity: "0.9"
+                        opacity: "0.9",
                       }}
                     >
                       <div className="shadow1-image1"></div>
@@ -178,6 +177,6 @@ export const Feed = () => {
           </div>
         </div>
       </div>
-    </Fragment >
+    </Fragment>
   );
 };
