@@ -41,12 +41,8 @@ export const Message = () => {
         body: JSON.stringify({ id: id }),
       });
       if (resp.ok) {
-        console.log("1")
         await actions.getUserTrips();
-        console.log("2")
-        console.log("3")
         await getMessages();
-        console.log("4")
       }
     } catch (e) { }
   };
@@ -129,7 +125,9 @@ export const Message = () => {
                                   >
                                     {e.accepted ? <i className="fas fa-times-circle text-danger" style={{ background: "#ffffff", borderRadius: "50%" }}></i> : <i className="fas fa-times-circle" style={{ color: "#d20000" }}></i>}
                                   </button>
+
                                   {/* <i className="fas fa-trash"></i> */} {/* PARA BORRAR */}
+
                                 </div>
                               </div>
                               <p className="u-request" style={
@@ -169,17 +167,19 @@ export const Message = () => {
                     </h4>
                   </div>
                 )}
+
+                {/* REPLY MESSAGE */}
+
                 {newMessage
                   .sort((a, b) => a.id - b.id)
                   .map((e) => {
                     return (
                       <div key={e.id} className="mb-3" role="document">
-
                         <div
                           className="mss-body box-f1 modal-content rounded-4 shadow"
                           style={
-                            e.accepted
-                              ? { background: "#94C973" }
+                            e.confirmed
+                              ? { background: "#6CE1DD" }
                               : e.rejected
                                 ? { background: "#FF7A69" }
                                 : { background: "white" }
@@ -217,14 +217,15 @@ export const Message = () => {
                                   className="delete-mss"
 
                                   onClick={() => {
-                                    /* actions.rejectMatch(e); */
                                     deleteMessage(e.id);
                                   }}
 
                                 >
                                   {e.accepted ? <i className="fas fa-times-circle text-danger" style={{ background: "#ffffff", borderRadius: "50%" }}></i> : <i className="fas fa-times-circle" style={{ color: "#d20000" }}></i>}
                                 </button>
-                                {/* <i className="fas fa-trash"></i> */} {/* PARA BORRAR */}
+
+                                {/* PARA BORRAR */}
+
                               </div>
                             </div>
                             <p className="u-request" style={
@@ -250,7 +251,6 @@ export const Message = () => {
                           </div>
                           <div className="caja-botones">
                             <div className="flex-nowrap p-0">
-
                             </div>
                           </div>
                         </div>

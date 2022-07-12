@@ -450,10 +450,8 @@ def accept():  # nombre de la función
         match.accepted = True
         match.rejected = False
         db.session.commit()
-        print(MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True).first())
-        print(MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True))
         if MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True).first() is None:
-            confirmed = MatchTrip(user = match.user, trip = match.trip, confirmed=True, message="SI")
+            confirmed = MatchTrip(user = match.user, trip = match.trip, confirmed=True, message="Congratulations, your request is accepted.")
             db.session.add(confirmed)
             db.session.commit()
         # si la condición se cumple retorna a la terminal de python send 200.
@@ -475,11 +473,11 @@ def reject():  # nombre de la función
         db.session.commit()
         message2 = MatchTrip.query.filter(MatchTrip.user == match.user, MatchTrip.trip == match.trip, MatchTrip.confirmed == True).first()
         if message2 is None:
-            confirmed = MatchTrip(user = match.user, trip = match.trip, confirmed=True, message="NO")
+            confirmed = MatchTrip(user = match.user, trip = match.trip, confirmed=True, message="Sorry, your request has been rejected.")
             db.session.add(confirmed)
             db.session.commit()
         else:
-            message2.message = "NO"
+            message2.message = "Sorry, your request has been rejected."
             db.session.commit()
             
         # si la condición se cumple retorna a la terminal de python send 200.

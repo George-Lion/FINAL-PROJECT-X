@@ -53,7 +53,7 @@ export const Profile = () => {
                 }}
               >
                 <i className="fas fa-camera"></i>
-                <span>Change photo</span>
+                <span style={{ fontSize: "14px" }}>Change photo</span>
               </a>
 
               <label htmlFor="inputTag" className="label-style">

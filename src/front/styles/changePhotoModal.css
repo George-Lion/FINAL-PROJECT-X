@@ -1,5 +1,5 @@
 .user-modal {
-  width: 450px;
+  width: 350px;
   margin: auto;
   border-radius: 25px;
   background-color: #151d26;
@@ -31,7 +31,7 @@
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
-  padding: 10px 43px;
+  padding: 8px 35px;
   margin-top: 15px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -122,7 +122,9 @@
 }
 
 .photo-selected1 {
-  top: 200px;
+  max-width: 42px;
+  height: 42px;
+  top: 82px;
   margin-left: 160px;
   position: absolute;
   z-index: 7;

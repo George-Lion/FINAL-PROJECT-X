@@ -316,11 +316,13 @@
 }
 
 .image-selected {
-  top: 305px;
-  margin-left: 168px;
+  max-width: 42px;
+  height: 42px;
+  top: 193px;
+  margin-left: 335px;
   position: absolute;
   z-index: 7;
-  border-style: solid;
+
   border-radius: 50%;
   border-color: white;
   background-color: white;
