@@ -116,7 +116,7 @@ export const Login = () => {
 
             <div className="form-move" id="formSignUp">
               <div className="social-container"></div>
-              <h1
+              <h3
                 className="title-login"
                 style={{
                   fontWeight: "bold",
@@ -124,7 +124,7 @@ export const Login = () => {
                 }}
               >
                 Create an Account.
-              </h1>
+              </h3>
               <input
                 type="text"
                 className="inp-data"

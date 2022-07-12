@@ -29,7 +29,7 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
     >
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="banner-modal modal-content text-light">
-          <div className="modal-header">
+          <div className="banner-header">
             <h4 className="modal-title" id="staticBackdropLabel">
               Select a picture
             </h4>
@@ -54,20 +54,27 @@ export const ChangeBannerModal = ({ closeModal, editUser, user }) => {
 
               {/* COVER & PROFILE PICTURE*/}
 
-              <div className="content-cover mb-3">
-                <label className="">
-                  <input
-                    className="custom-file-input"
-                    type="file"
-                    onChange={imageChange}
+              <div className="image-upload">
+                <label htmlFor="photo-input">
+                  <img
+                    className="image-selected5"
+                    src="https://res.cloudinary.com/dmogh4y33/image/upload/v1656708631/camera-icon-circle-21_k0bqrq.png"
                   />
+
                 </label>
+                <input
+                  className=""
+                  accept="image/*"
+                  id="photo-input"
+                  type="file"
+                  onChange={imageChange}
+                />
               </div>
             </div>
 
             {/* SAVE BUTTON */}
 
-            <div className="modal-footer">
+            <div className="banner-footer">
               <button
                 className="save-picture"
                 onClick={() => {

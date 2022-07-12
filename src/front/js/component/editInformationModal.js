@@ -319,8 +319,8 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                 backdropFilter: "brightness(20%)",
               }}
             >
-              <div className="delete-modal modal-dialog">
-                <div className="trip-modal modal-content">
+              <div className="modal-dialog" style={{ marginTop: "16rem" }}>
+                <div className=" delete-modal modal-content" style={{ backgroundColor: "#151d26", marginTop: "0rem" }}>
                   <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
                       Are you sure you want to delete the profile?{" "}

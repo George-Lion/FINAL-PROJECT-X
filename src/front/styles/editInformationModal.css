@@ -245,13 +245,13 @@
 
 .delete-modal {
   background-color: #151d26;
-  border-radius: 20px;
+  border-radius: 2px;
   font-size: 1.2rem;
   font-family: "Rubik", sans-serif;
   border-width: 2px;
-  border-style: solid;
-  border-color: #db2c2c;
+  padding: 5px;
   color: white;
+  margin-top: 18rem;
 }
 
 .button-delete {

@@ -44,12 +44,17 @@ export const Message = () => {
         body: JSON.stringify({ id: id }),
       });
       if (resp.ok) {
+<<<<<<< HEAD
         console.log("1");
         await actions.getUserTrips();
         console.log("2");
         console.log("3");
         await getMessages();
         console.log("4");
+=======
+        await actions.getUserTrips();
+        await getMessages();
+>>>>>>> f870f662d773b4c94a37dce2cbbdbde5179184aa
       }
     } catch (e) {}
   };
@@ -152,8 +157,14 @@ export const Message = () => {
                                       ></i>
                                     )}
                                   </button>
+<<<<<<< HEAD
                                   {/* <i className="fas fa-trash"></i> */}{" "}
                                   {/* PARA BORRAR */}
+=======
+
+                                  {/* <i className="fas fa-trash"></i> */} {/* PARA BORRAR */}
+
+>>>>>>> f870f662d773b4c94a37dce2cbbdbde5179184aa
                                 </div>
                               </div>
                               <p
@@ -200,6 +211,9 @@ export const Message = () => {
                     </h4>
                   </div>
                 )}
+
+                {/* REPLY MESSAGE */}
+
                 {newMessage
                   .sort((a, b) => a.id - b.id)
                   .map((e) => {
@@ -208,8 +222,8 @@ export const Message = () => {
                         <div
                           className="mss-body box-f1 modal-content rounded-4 shadow"
                           style={
-                            e.accepted
-                              ? { background: "#94C973" }
+                            e.confirmed
+                              ? { background: "#6CE1DD" }
                               : e.rejected
                               ? { background: "#FF7A69" }
                               : { background: "white" }
@@ -248,7 +262,6 @@ export const Message = () => {
                                   type="button"
                                   className="delete-mss"
                                   onClick={() => {
-                                    /* actions.rejectMatch(e); */
                                     deleteMessage(e.id);
                                   }}
                                 >
@@ -267,8 +280,14 @@ export const Message = () => {
                                     ></i>
                                   )}
                                 </button>
+<<<<<<< HEAD
                                 {/* <i className="fas fa-trash"></i> */}{" "}
                                 {/* PARA BORRAR */}
+=======
+
+                                {/* PARA BORRAR */}
+
+>>>>>>> f870f662d773b4c94a37dce2cbbdbde5179184aa
                               </div>
                             </div>
                             <p
@@ -302,7 +321,12 @@ export const Message = () => {
                             </p>
                           </div>
                           <div className="caja-botones">
+<<<<<<< HEAD
                             <div className="flex-nowrap p-0"></div>
+=======
+                            <div className="flex-nowrap p-0">
+                            </div>
+>>>>>>> f870f662d773b4c94a37dce2cbbdbde5179184aa
                           </div>
                         </div>
                       </div>

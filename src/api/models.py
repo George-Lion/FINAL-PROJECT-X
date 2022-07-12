@@ -9,7 +9,6 @@ likes = db.Table('like',
                      'trip.id'), primary_key=True)
                  )
 
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=True)
@@ -122,6 +121,7 @@ class MatchTrip(db.Model):
                          nullable=True, default=False)
 
     # aca el serialize me transforma toda la informacion de la base de datos, toda la instancia de clases en una libreria.
+
     def serialize(self):
         user_of_trip = User.query.get(self.trip.user_id_of_trip_creator)
         return {
