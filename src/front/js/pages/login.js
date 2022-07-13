@@ -58,9 +58,9 @@ export const Login = () => {
 
       const data = await response.json();
       if (data.created) {
-        // formSignUp.reset(); //input reset
         initialState(); //state = ""
         setSwitchPanel(false); //Switch to the form panel to login
+
       } else {
         alert(error);
       }
@@ -99,6 +99,7 @@ export const Login = () => {
     user.password = "";
     user.firstname = "";
     user.lastname = "";
+
   };
 
   return (
@@ -112,9 +113,10 @@ export const Login = () => {
           id="container"
         >
           <div className="form-container sign-up-container">
+
             {/* SIGN UP FORM */}
 
-            <div className="form-move" id="formSignUp">
+            <div className="form-move" >
               <div className="social-container"></div>
               <h3
                 className="title-login"
@@ -126,6 +128,7 @@ export const Login = () => {
                 Create an Account.
               </h3>
               <input
+                id="formSignUp"
                 type="text"
                 className="inp-data"
                 maxLength={20}
@@ -143,7 +146,9 @@ export const Login = () => {
                 }
                 onChange={(e) =>
                   setUser(
-                    { ...user, username: e.target.value.trim() },
+                    {
+                      ...user, username: e.target.value.trim()
+                    },
                     setInfoError(false)
                   )
                 }

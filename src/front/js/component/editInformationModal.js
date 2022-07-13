@@ -236,8 +236,7 @@ export const EditInformationModal = ({ closeModal, editUser, user }) => {
                       {
                         ...user,
                         city_of_residence:
-                          e.target.value.charAt(0).toUpperCase() +
-                          e.target.value.slice(1).toLowerCase(),
+                          e.target.value.replace(/\b\w/g, l => l.toUpperCase()).trim()
                       },
                       setInfoError(false),
                       setInfoCheck(false)

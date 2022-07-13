@@ -189,7 +189,10 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                     : null
                 }
                 onChange={(e) =>
-                  editTrip({ ...trip, destination: e.target.value },
+                  editTrip({
+                    ...trip, destination: e.target.value.replace(/\b\w/g, l => l.toUpperCase()).trim()
+
+                  },
                     setInfoError(false)
                   )
                 }

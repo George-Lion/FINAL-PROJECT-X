@@ -300,8 +300,6 @@
 @media (max-width: 1680px) {
   .trip-user .avatar-trip {
     left: calc(51% - 105px);
-    width: 190px;
-    height: 190px;
   }
 
   .datos-like {
@@ -316,8 +314,6 @@
 
   .trip-user .avatar-trip {
     left: calc(51% - 105px);
-    width: 190px;
-    height: 190px;
   }
 
   .datos-like {
@@ -332,14 +328,12 @@
 @media (max-width: 1366px) {
   .trip-user .avatar-trip {
     left: calc(51% - 105px);
-    width: 190px;
-    height: 190px;
   }
 
-  .trip-user .avatar-trip:hover {
-    width: 192px;
-    height: 192px;
+  .trip-user .info-user {
+    font-size: 2.5rem;
   }
+
   .datos-like {
     width: 120px;
   }
@@ -361,22 +355,25 @@
   }
 }
 
+@media (max-width: 1150px) {
+  .trip-user .info-user {
+    font-size: 2.5rem;
+  }
+}
+
 /* RESOLUTION 1000px */
 
 @media (max-width: 1000px) {
   .trip-user .avatar-trip {
     left: calc(53% - 105px);
-    width: 160px;
-    height: 160px;
+  }
+
+  .trip-user .info-user {
+    font-size: 2.8rem;
   }
 
   .text-description {
     font-size: 0.9rem;
-  }
-
-  .trip-user .avatar-trip:hover {
-    width: 163px;
-    height: 163px;
   }
 
   .match-position {
@@ -430,13 +427,6 @@
 @media (max-width: 800px) {
   .trip-user .avatar-trip {
     left: calc(55% - 105px);
-    width: 160px;
-    height: 160px;
-  }
-
-  .trip-user .avatar-trip:hover {
-    width: 163px;
-    height: 163px;
   }
 }
 

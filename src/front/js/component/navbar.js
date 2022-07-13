@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import image from "./img/traveland.png";
@@ -6,6 +6,26 @@ import "../../styles/navbar.css";
 
 export const Navbar = () => {
   const { actions, store } = useContext(Context);
+  /*   const [newMessage, setNewMessage] = useState([]);
+  
+  
+    useEffect(() => {
+  
+      getMessages();
+    }, []);
+  
+    const getMessages = async () => {
+      const response = await fetch(store.url + "messageA", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      const data = await response.json();
+      setNewMessage(data.messages);
+      await actions.readMessages();
+    }; */
+
 
   return (
     <Fragment>
@@ -32,15 +52,17 @@ export const Navbar = () => {
                 ></i>
               </Link>
             </li>
+            {/*    {newMessage.length} */}
             <li className="">
               <Link to="/message" className="navbar-icon me-4 text-light ">
                 {" "}
                 {store.match &&
-                  store.match.length > 0 &&
+                  store.match.length > 0 && /* newMessage && */
                   store.match.filter((x) => x.read != true).length > 0 ? (
                   <div className="message-count">
                     {" "}
-                    {store.match.filter((x) => x.read != true).length}
+                    {store.match.filter((x) => x.read != true).length} {/* + newMessage.length */}
+
                   </div>
                 ) : null}
                 <i

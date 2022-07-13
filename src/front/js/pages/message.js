@@ -47,7 +47,7 @@ export const Message = () => {
         await actions.getUserTrips();
         await getMessages();
       }
-    } catch (e) {}
+    } catch (e) { }
   };
   return (
     <Fragment>
@@ -77,8 +77,8 @@ export const Message = () => {
                               e.accepted
                                 ? { background: "#94C973" }
                                 : e.rejected
-                                ? { background: "#FF7A69" }
-                                : { background: "white" }
+                                  ? { background: "#FF7A69" }
+                                  : { background: "white" }
                             }
                           >
                             <div className="text-center">
@@ -102,8 +102,8 @@ export const Message = () => {
                                       e.accepted
                                         ? { color: "#130A0D" }
                                         : e.rejected
-                                        ? { color: "#130A0D" }
-                                        : { color: "black" }
+                                          ? { color: "#130A0D" }
+                                          : { color: "black" }
                                     }
                                   >
                                     {e.username}{" "}
@@ -158,8 +158,8 @@ export const Message = () => {
                                   e.accepted
                                     ? { color: "#130A0D" }
                                     : e.rejected
-                                    ? { color: "#130A0D" }
-                                    : { color: "#130A0D" }
+                                      ? { color: "#130A0D" }
+                                      : { color: "#130A0D" }
                                 }
                               >
                                 {" "}
@@ -175,8 +175,8 @@ export const Message = () => {
                                   e.accepted
                                     ? { color: "#130A0D" }
                                     : e.rejected
-                                    ? { color: "#130A0D" }
-                                    : { color: "#130A0D" }
+                                      ? { color: "#130A0D" }
+                                      : { color: "#130A0D" }
                                 }
                               >
                                 {e.message}
@@ -210,20 +210,20 @@ export const Message = () => {
                             e.confirmed
                               ? { background: "#6CE1DD" }
                               : e.rejected
-                              ? { background: "#FF7A69" }
-                              : { background: "white" }
+                                ? { background: "#FF7A69" }
+                                : { background: "white" }
                           }
                         >
                           <div className="text-center">
                             <div>
                               <Link
-                                to={"/noEditProfile/" + e.user_id}
+                                to={"/noEditProfile/" + e.user_id_of_trip_creator}
                                 className="text-decoration-none"
                               ></Link>
                             </div>
 
                             <div className="div-delete">
-                              <Link to={"/noEditProfile/" + e.user_id}>
+                              <Link to={"/noEditProfile/" + e.user_id_of_trip_creator}>
                                 <img
                                   className="message-avatar"
                                   src={e.user_picture}
@@ -235,8 +235,8 @@ export const Message = () => {
                                     e.accepted
                                       ? { color: "#130A0D" }
                                       : e.rejected
-                                      ? { color: "#130A0D" }
-                                      : { color: "black" }
+                                        ? { color: "#130A0D" }
+                                        : { color: "black" }
                                   }
                                 >
                                   {e.user_name}{" "}
@@ -275,8 +275,8 @@ export const Message = () => {
                                 e.accepted
                                   ? { color: "#130A0D" }
                                   : e.rejected
-                                  ? { color: "#130A0D" }
-                                  : { color: "#130A0D" }
+                                    ? { color: "#130A0D" }
+                                    : { color: "#130A0D" }
                               }
                             >
                               {" "}
@@ -292,8 +292,8 @@ export const Message = () => {
                                 e.accepted
                                   ? { color: "#130A0D" }
                                   : e.rejected
-                                  ? { color: "#130A0D" }
-                                  : { color: "#130A0D" }
+                                    ? { color: "#130A0D" }
+                                    : { color: "#130A0D" }
                               }
                             >
                               {e.message}

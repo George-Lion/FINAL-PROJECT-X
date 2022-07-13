@@ -332,7 +332,7 @@
   }
 }
 
-/* RESOLUTION 780px */
+/* RESOLUTION 1000px */
 
 @media (max-width: 1000px) {
   .user-profile .content-profile {
@@ -340,7 +340,7 @@
     margin-bottom: 10px;
   }
   .user-profile .avatar-picture-profile {
-    left: calc(56% - 100px);
+    left: calc(53% - 100px);
     width: 150px;
     height: 150px;
   }
@@ -409,6 +409,24 @@
     width: 800px;
     justify-content: end;
     right: 5%;
+  }
+}
+
+@media (max-width: 900px) {
+  .user-profile .avatar-picture-profile {
+    left: calc(54% - 100px);
+  }
+}
+
+@media (max-width: 650px) {
+  .user-profile .avatar-picture-profile {
+    left: calc(55% - 100px);
+  }
+}
+
+@media (max-width: 500px) {
+  .user-profile .avatar-picture-profile {
+    left: calc(56% - 100px);
   }
 }
 

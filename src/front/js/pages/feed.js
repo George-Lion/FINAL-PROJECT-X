@@ -38,8 +38,7 @@ export const Feed = () => {
                     setSearchTerm({
                       ...searchTerm,
                       destination:
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase(),
+                        e.target.value.replace(/\b\w/g, l => l.toUpperCase()).trim()
                     });
                   }}
                 />
@@ -102,7 +101,7 @@ export const Feed = () => {
                       <i className="fas fa-user-friends"></i>{" "}
                       {e.trip_in_match
                         ? e.trip_in_match.filter((x) => x.accepted == true)
-                            .length
+                          .length
                         : 0}
                       /{e.people}{" "}
                     </div>

@@ -203,8 +203,7 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
                     {
                       ...trip,
                       destination:
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1).toLowerCase(),
+                        e.target.value.replace(/\b\w/g, l => l.toUpperCase()).trim()
                     },
                     setInfoError(false)
                   )
