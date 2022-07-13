@@ -56,6 +56,14 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
     }
   };
 
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+  };
+
   const messageError = () => {
     setInfoError(true);
     setInfoCheck(false);
@@ -228,6 +236,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
               <input
                 type="date"
                 className="input-time"
+                min={disablePastDate()}
                 defaultValue={store.trip.start_of_the_trip}
                 placeholder="Start"
                 style={
@@ -252,6 +261,7 @@ export const EditTripModal = ({ closeModal, editTrip, trip }) => {
                 type="date"
                 required
                 className="input-time"
+                min={disablePastDate()}
                 defaultValue={store.trip.end_of_the_trip}
                 placeholder="End"
                 style={

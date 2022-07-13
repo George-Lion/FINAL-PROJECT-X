@@ -61,6 +61,10 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
     setInfoError(false);
   };
 
+  const _onFocus = (e) => {
+    e.currentTarget.type = "date";
+  }
+
   const specialCharacters = (element) => {
     if (element) {
       if (Array.isArray(special)) {
@@ -244,11 +248,12 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
               {/* START OF THE TRIP */}
 
               <input
-                type="date"
+                type="text"
                 name="date"
                 className="input-time"
                 min={disablePastDate()}
-                placeholder="Start"
+                placeholder="Depart"
+                onFocus={_onFocus}
                 data-tip data-for="botonTooltipStart"
                 style={
                   trip.start_of_the_trip == "" ||
@@ -277,10 +282,12 @@ export const CreateTripModal = ({ closeModal, createTrip, trip }) => {
 
               <input
                 id="endTrip"
-                type="date"
+                type="text"
                 required
+                min={disablePastDate()}
                 className="input-time"
-                placeholder="End"
+                placeholder="Return"
+                onFocus={_onFocus}
                 data-tip data-for="botonTooltipEnd"
                 style={
                   trip.start_of_the_trip > trip.end_of_the_trip ||
