@@ -495,6 +495,12 @@ def read():
         for match in trip.trip_in_match:
             match.read = True
             db.session.commit()
+    user=User.query.get(current_id)
+    matches = MatchTrip.query.filter_by(user = user)
+    for match in matches:
+        match.read=True 
+        db.session.commit()
+    
     return jsonify({"edited": True}), 200
 
 

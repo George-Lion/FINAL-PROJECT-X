@@ -10,9 +10,6 @@ export const Message = () => {
   const [accept, setAccept] = useState(false);
   const [newMessage, setNewMessage] = useState([]);
 
-  let matchCount = 0;
-  matchCount = store.match.length;
-
   useEffect(() => {
     actions.verify();
   }, []);
@@ -53,19 +50,19 @@ export const Message = () => {
     <Fragment>
       <div className="footer-abajo">
         <div className="message-box position-static d-block py-1 mt-5 mb-4">
-          {store.match && store.match.length == 1 ? (
+          {(store.match && store.match.length == 1 && newMessage && newMessage.length == 0) || (newMessage && newMessage.length == 1 && store.match && store.match.length == 0) ? (
             <h3 className="sms-title mt-3 mb-3 text-center text-white">
-              <b>{matchCount} message.</b>
+              <b>1 message.</b>
             </h3>
-          ) : store.match && store.match.length > 1 ? (
+          ) : (store.match && store.match.length > 1) || (newMessage && newMessage.length > 1) ? (
             <h3 className="sms-title mt-3 mb-3 text-center text-white">
-              <b>{matchCount} messages.</b>
+              <b>{store.match.length + newMessage.length} messages.</b>
             </h3>
           ) : null}
           <div className="d-flex overflow-auto ">
             <div className="wrapper-message">
               <div className="container">
-                {store.match && store.match.length > 0 ? (
+                {(store.match && store.match.length > 0) || (newMessage && newMessage.length > 0) ? (
                   store.match
                     .sort((a, b) => a.id - b.id)
                     .map((e) => {

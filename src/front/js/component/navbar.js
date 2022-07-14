@@ -6,25 +6,26 @@ import "../../styles/navbar.css";
 
 export const Navbar = () => {
   const { actions, store } = useContext(Context);
-  /*   const [newMessage, setNewMessage] = useState([]);
-  
-  
-    useEffect(() => {
-  
-      getMessages();
-    }, []);
-  
-    const getMessages = async () => {
-      const response = await fetch(store.url + "messageA", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
-      const data = await response.json();
-      setNewMessage(data.messages);
-      await actions.readMessages();
-    }; */
+
+  /*  NEW  MESSAGE */
+  const [newMessage, setNewMessage] = useState([]);
+
+  useEffect(() => {
+
+    getMessages();
+  }, []);
+
+  const getMessages = async () => {
+    const response = await fetch(store.url + "messageA", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    const data = await response.json();
+    setNewMessage(data.messages);
+
+  };
 
 
   return (
@@ -52,19 +53,34 @@ export const Navbar = () => {
                 ></i>
               </Link>
             </li>
-            {/*    {newMessage.length} */}
+            {/*  {newMessage.length} */}
             <li className="">
-              <Link to="/message" className="navbar-icon me-4 text-light ">
+              <Link to="/message" className="navbar-icon me-4 text-light " onClick={async () => {
+                await actions.readMessages();
+                await getMessages();
+              }}>
                 {" "}
-                {store.match &&
-                  store.match.length > 0 && /* newMessage && */
-                  store.match.filter((x) => x.read != true).length > 0 ? (
+                {store.match && newMessage &&
+                  store.match.length > 0 &&
+                  store.match.filter((x) => x.read != true).length > 0 && newMessage.length > 0 ? (
                   <div className="message-count">
                     {" "}
-                    {store.match.filter((x) => x.read != true).length} {/* + newMessage.length */}
+                    {store.match.filter((x) => x.read != true).length + newMessage.length}
 
                   </div>
-                ) : null}
+                ) : store.match &&
+                  store.match.length > 0 &&
+                  store.match.filter((x) => x.read != true).length > 0 ? <div className="message-count">
+                  {" "}
+                  {store.match.filter((x) => x.read != true).length}
+
+                </div> : newMessage &&
+                  newMessage.length > 0 && newMessage.filter((x) => x.read != true).length > 0 ? (
+                  <div className="message-count">
+                    {" "}
+                    {newMessage.filter((x) => x.read != true).length}
+
+                  </div>) : null}
                 <i
                   className="ras fas fa-envelope"
                   onClick={() => actions.resetearTrip()}
